@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:supercalipso/services/navigation/navigation_bloc.dart';
 
 class CustomScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
@@ -10,12 +9,10 @@ class CustomScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationBlocStateListener(
-      child: Scaffold(
-        appBar: appBar,
-        body: body,
-        bottomNavigationBar: bottomNavigationBar,
-      ),
+    return Scaffold(
+      appBar: appBar,
+      body: body,
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }

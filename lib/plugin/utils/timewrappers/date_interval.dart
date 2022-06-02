@@ -30,7 +30,7 @@ class DateInterval with IntervalWrapper<Date> {
   }
 
   @override
-  String format() => start.format() + ' - ' + end.format();
+  String format() => '${start.format()} - ${end.format()}';
 
   Date operator [](int index) => start.increase(Duration(days: index)) as Date;
 

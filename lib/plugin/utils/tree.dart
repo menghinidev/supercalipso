@@ -7,12 +7,12 @@ class Tree<T> {
 
   static List<Tree<T>> fromFlat<T>(List<T> flatItems, int? Function(T node) parentKey, int Function(T node) getKey) {
     // ignore: prefer_for_elements_to_map_fromiterable
-    var _lookUp = Map<int, Tree<T>>.fromIterable(
+    var lookUp = Map<int, Tree<T>>.fromIterable(
       flatItems,
       key: (object) => getKey(object),
       value: (object) => Tree(value: object),
     );
-    return _generateTree<T>(_lookUp, parentKey, getKey, flatItems);
+    return _generateTree<T>(lookUp, parentKey, getKey, flatItems);
   }
 
   static List<Tree<T>> _generateTree<T>(

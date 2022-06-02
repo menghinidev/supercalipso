@@ -5,7 +5,7 @@ class CachedValue<T> {
   T? _value;
   late TimeStamp _latestUpdate;
 
-  CachedValue({T? initialValue}) : cacheLifetime = Duration(minutes: 5) {
+  CachedValue({T? initialValue}) : cacheLifetime = const Duration(minutes: 5) {
     _value = initialValue;
     _latestUpdate = TimeStamp.now();
   }

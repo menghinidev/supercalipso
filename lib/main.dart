@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supercalipso/presenter/pages/home/home_page.dart';
-import 'package:supercalipso/presenter/pages/login/login_page.dart';
+import 'package:supercalipso/bloc/auth/auth_bloc.dart';
+import 'package:supercalipso/bloc/auth/states.dart';
 import 'package:supercalipso/presenter/theme/theme_builder.dart';
 import 'package:supercalipso/services/navigation/navigation_bloc.dart';
+import 'package:supercalipso/services/navigation/routes.dart';
 
 void main() {
   runApp(const SuperCalipso());
@@ -19,27 +20,34 @@ class SuperCalipso extends StatefulWidget {
 
 class _SuperCalipsoState extends State<SuperCalipso> {
   late GoRouter router;
+  late AuthenticationBloc authBloc;
+  late NavigationBloc navigationBloc;
 
   @override
   void initState() {
     super.initState();
-    router = GoRouter(routes: [
-      GoRoute(
-        path: '/',
-        builder: (BuildContext context, GoRouterState state) => const LoginPage(),
-      ),
-      GoRoute(
-        path: '/home',
-        builder: (BuildContext context, GoRouterState state) => const HomePage(),
-      ),
-    ]);
+    authBloc = AuthenticationBloc();
+    router = GoRouter(
+      routes: [
+        AppRoutes.home,
+        AppRoutes.login,
+      ],
+      redirect: (state) {
+        if (!AppRoutes.unprotectedRoutes.contains(state.location) && authBloc.state is Unauthenticated) {
+          return '/login';
+        }
+        return null;
+      },
+    );
+    navigationBloc = NavigationBloc(router: router, authenticationBloc: authBloc);
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => NavigationBloc()),
+        BlocProvider.value(value: navigationBloc),
+        BlocProvider.value(value: authBloc),
       ],
       child: MaterialApp.router(
         title: 'SuperCalipso',

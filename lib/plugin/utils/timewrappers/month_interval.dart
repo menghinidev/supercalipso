@@ -29,7 +29,7 @@ class MonthInterval extends IntervalWrapper<Month> {
   Duration difference() => end.toDateTime().difference(start.toDateTime());
 
   @override
-  String format() => start.format() + ' - ' + end.format();
+  String format() => '${start.format()} - ${end.format()}';
 
   Iterator<Month> get iterator => MonthIntervalIterator(start: start, end: end);
 
