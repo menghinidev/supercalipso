@@ -10,4 +10,11 @@ class Dimensions {
   static const pageInsetsSize = 20.0;
 
   static const pageInsets = EdgeInsets.symmetric(horizontal: pageInsetsSize);
+
+  static const lowElevation = 2.0;
+}
+
+class Shapes {
+  static final lowRounded = RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.smallSize));
+  static final highRounded = RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.largeSize));
 }

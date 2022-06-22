@@ -5,3 +5,5 @@ class BlocStarted<T> extends BlocEvent {
 
   BlocStarted({this.startValue});
 }
+
+class BlocClosed extends BlocEvent {}
