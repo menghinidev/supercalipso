@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
-import 'package:supercalipso/presenter/components/button/simple_icon.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 import 'package:supercalipso/presenter/pages/profile/sections/header.dart';

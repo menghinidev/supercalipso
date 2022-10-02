@@ -3,7 +3,6 @@ import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/model/user/user.dart';
-import 'package:supercalipso/plugin/utils.dart';
 
 class MockValues {
   static final MockValues _singleton = MockValues._();

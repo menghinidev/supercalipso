@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supercalipso/data/model/user/user.dart';
-import 'package:supercalipso/plugin/utils.dart';
 
 part 'subscription.g.dart';
 part 'subscription.freezed.dart';
