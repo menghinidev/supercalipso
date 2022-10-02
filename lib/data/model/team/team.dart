@@ -1,21 +1,24 @@
-import 'package:supercalipso/data/model/team/invitation.dart';
-import 'package:supercalipso/data/model/team/subscription.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:supercalipso/data/model/team/invitation/invitation.dart';
+import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/user/user.dart';
-import 'package:supercalipso/plugin/utils/extensions/list_extensions.dart';
 
-class Team {
-  final String id;
-  final String name;
-  final List<TeamSubscription> subscriptions;
-  final List<TeamInvitation> invitations;
+part 'team.g.dart';
+part 'team.freezed.dart';
 
-  Team({
-    required this.id,
-    required this.name,
-    this.subscriptions = const <TeamSubscription>[],
-    this.invitations = const <TeamInvitation>[],
-  });
+@freezed
+class Team with _$Team {
+  const factory Team({
+    required String id,
+    required String name,
+    @Default(<TeamSubscription>[]) subscriptions,
+    @Default(<TeamInvitation>[]) invitations,
+  }) = _Team;
 
+  factory Team.fromJson(Map<String, Object?> json) => _$TeamFromJson(json);
+}
+
+extension TeamOperations on Team {
   bool hasUserSub({required String userId}) => subscriptions
       .where(
         (element) => element.subscribedUser.id == userId,
@@ -36,5 +39,5 @@ class Team {
         (element) => element.invitedUser.id == userId,
       );
 
-  List<SuperCalipsoUser> get enrolledUsers => subscriptions.map((e) => e.subscribedUser).toList();
+  List<User> get enrolledUsers => subscriptions.map((e) => e.subscribedUser).toList();
 }

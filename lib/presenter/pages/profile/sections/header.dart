@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:supercalipso/bloc/auth/auth_bloc.dart';
-import 'package:supercalipso/bloc/auth/states.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/data/model/user/user.dart';
-import 'package:supercalipso/plugin/bloc.dart';
+
 import 'package:supercalipso/presenter/components/avatar/custom_avatar.dart';
 import 'package:supercalipso/presenter/pages/profile/components/logout_button.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
@@ -40,38 +40,41 @@ class _ProfileHeaderState extends State<ProfileHeader> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocStateBuilder<AuthenticationBloc>(
-      stateBinders: [
-        BlocStateBuilderBinder<Authenticated>(
-          builder: (context, state) => SizedBox(
-            height: headerHeight == 0 ? 1 : headerHeight + (statusHeight * 1.5),
-            width: double.infinity,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: ProfileInfoHeader(key: headerKey, profile: state.user, bottomMargin: statusHeight),
+    return Consumer(builder: (context, ref, _) {
+      var auth = ref.watch(authChanges);
+      return auth.when(
+        data: (user) => user == null
+            ? Container()
+            : SizedBox(
+                height: headerHeight == 0 ? 1 : headerHeight + (statusHeight * 1.5),
+                width: double.infinity,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: ProfileInfoHeader(key: headerKey, profile: user, bottomMargin: statusHeight),
+                    ),
+                    Positioned(
+                      left: Dimensions.pageInsetsSize,
+                      right: Dimensions.pageInsetsSize,
+                      bottom: 0,
+                      child: LogoutButton(key: statusKey),
+                    ),
+                  ],
                 ),
-                Positioned(
-                  left: Dimensions.pageInsetsSize,
-                  right: Dimensions.pageInsetsSize,
-                  bottom: 0,
-                  child: LogoutButton(key: statusKey),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
+              ),
+        error: (_, stack) => Text('Error: $stack'),
+        loading: () => const CircularProgressIndicator(),
+      );
+    });
   }
 }
 
 class ProfileInfoHeader extends StatelessWidget {
-  final SuperCalipsoUser profile;
+  final User profile;
   final double bottomMargin;
 
   const ProfileInfoHeader({required this.profile, this.bottomMargin = 0, Key? key}) : super(key: key);

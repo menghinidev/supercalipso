@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:supercalipso/bloc/auth/auth_bloc.dart';
-import 'package:supercalipso/bloc/auth/events.dart';
-import 'package:supercalipso/plugin/bloc.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 
-class LogoutButton extends StatelessWidget with BlocRequester<AuthenticationBloc> {
+class LogoutButton extends ConsumerWidget {
   const LogoutButton({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: PrimaryElevatedButton(
         text: 'LOGOUT',
-        onTap: () => getBloc(context).add(Logout()),
+        onTap: () => ref.read(authProvider).logout(),
         color: Colors.lightGreen,
       ),
     );

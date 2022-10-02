@@ -4,7 +4,6 @@ import 'package:supercalipso/data/provider/local_storage_provider.dart';
 import 'package:supercalipso/data/provider/team_provider.dart';
 import 'package:supercalipso/data/reposotory/assets_repository.dart';
 import 'package:supercalipso/data/reposotory/team_repository.dart';
-import 'package:supercalipso/plugin/bloc.dart';
 
 class Installer {
   static final Installer _singleton = Installer._();
@@ -13,20 +12,13 @@ class Installer {
   Installer._();
 
   void launchStartPipeline() {
-    GetIt.instance.registerSingleton<ErrorManagerBloc>(ErrorManagerBloc());
     installDataProviders();
     installRepositories();
   }
 
   void installRepositories() {
-    GetIt.instance.registerSingleton<TeamRepository>(TeamRepository(
-      teamsDataProvider: get<TeamsProvider>(),
-      localStorage: get<LocalStorageProvider>(),
-    ));
-
-    GetIt.instance.registerSingleton<AssetsRepository>(AssetsRepository(
-      assetsProvider: get<AssetsProvider>(),
-    ));
+    GetIt.instance.registerSingleton<TeamRepository>(TeamRepository());
+    GetIt.instance.registerSingleton<AssetsRepository>(AssetsRepository());
   }
 
   void installDataProviders() {

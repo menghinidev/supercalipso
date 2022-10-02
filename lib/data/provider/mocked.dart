@@ -1,6 +1,6 @@
 import 'package:supercalipso/data/model/asset/asset.dart';
-import 'package:supercalipso/data/model/team/invitation.dart';
-import 'package:supercalipso/data/model/team/subscription.dart';
+import 'package:supercalipso/data/model/team/invitation/invitation.dart';
+import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/plugin/utils.dart';
@@ -9,9 +9,9 @@ class MockValues {
   static final MockValues _singleton = MockValues._();
   static MockValues get instance => _singleton;
 
-  final firstUser = SuperCalipsoUser(id: '1', name: 'Lu Cello', email: 'lorenzo@email.com');
-  final secondUser = SuperCalipsoUser(id: '2', name: 'Lu Cavallo', email: 'lucavallo@email.com');
-  final thirdUser = SuperCalipsoUser(id: '3', name: 'Lalli Gatore', email: 'lalligatore@email.com');
+  final firstUser = const User(id: '1', name: 'Lu Cello', email: 'lorenzo@email.com');
+  final secondUser = const User(id: '2', name: 'Lu Cavallo', email: 'lucavallo@email.com');
+  final thirdUser = const User(id: '3', name: 'Lalli Gatore', email: 'lalligatore@email.com');
   late List<TeamSubscription> teamSubs;
   late List<TeamInvitation> teamInvites;
   late List<Asset> assets;
@@ -21,11 +21,11 @@ class MockValues {
     teamSubs = [
       TeamSubscription(
         subscribedUser: firstUser,
-        joined: TimeStamp.now().decrease(const Duration(days: 30)) as TimeStamp,
+        joined: DateTime.now().subtract(const Duration(days: 30)),
       ),
       TeamSubscription(
         subscribedUser: thirdUser,
-        joined: TimeStamp.now().decrease(const Duration(days: 45)) as TimeStamp,
+        joined: DateTime.now().add(const Duration(days: 45)),
       ),
     ];
     teamInvites = [
@@ -33,7 +33,7 @@ class MockValues {
         invitationId: '1',
         invitedUser: secondUser,
         invitedBy: firstUser,
-        created: TimeStamp.now(),
+        created: DateTime.now(),
       ),
     ];
     assets = [

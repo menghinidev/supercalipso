@@ -15,8 +15,8 @@ class ProfilePage extends StatelessWidget {
         title: 'PROFILE',
         enableLeading: false,
         actions: [
-          PrimaryIconButton(icon: Icon(Icons.notifications), onTap: () => print('ciao')),
-          PrimaryIconButton(icon: Icon(Icons.settings), onTap: () => print('ciao')),
+          PrimaryIconButton(icon: const Icon(Icons.notifications), onTap: () => print('ciao')),
+          PrimaryIconButton(icon: const Icon(Icons.settings), onTap: () => print('ciao')),
         ],
       ),
       body: SingleChildScrollView(
