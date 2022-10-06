@@ -17,7 +17,6 @@ class HomePageRoute extends GoRoute {
           path: pagePath,
           builder: (context, state) => const HomePage(),
           routes: [
-            TeamsPageRoute(),
             ProfilePageRoute(),
           ],
         );
@@ -33,17 +32,6 @@ class LoginPageRoute extends GoRoute {
         );
 }
 
-class TeamsPageRoute extends GoRoute {
-  static const String pageName = 'teams';
-  static const String pagePath = '/$pageName';
-
-  TeamsPageRoute()
-      : super(
-          path: pageName,
-          builder: (context, state) => const HomePage(index: 1),
-        );
-}
-
 class ProfilePageRoute extends GoRoute {
   static const String pageName = 'profile';
   static const String pagePath = '/$pageName';
@@ -51,6 +39,6 @@ class ProfilePageRoute extends GoRoute {
   ProfilePageRoute()
       : super(
           path: pageName,
-          builder: (context, state) => const HomePage(index: 2),
+          builder: (context, state) => const HomePage(),
         );
 }

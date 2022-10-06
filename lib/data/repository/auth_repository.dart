@@ -1,27 +1,25 @@
 import 'dart:async';
+import 'package:rxdart/subjects.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/provider/mocked.dart';
 
 class AuthRepository {
-  final StreamController<User?> authStreamController;
+  final BehaviorSubject<User?> authStreamController;
   User? loggedUser;
 
-  AuthRepository() : authStreamController = StreamController<User?>();
+  AuthRepository() : authStreamController = BehaviorSubject<User?>();
 
   Future silentLogin() async {
-    await Future.delayed(const Duration(seconds: 2));
-
     var user = MockValues.instance.firstUser;
-    authStreamController.add(user);
     loggedUser = user;
+    authStreamController.add(user);
+    return Future.value();
   }
 
   Future explicitLogin({required String email, required String password}) async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    var user = MockValues.instance.firstUser;
-    authStreamController.add(user);
+    var user = MockValues.instance.users.firstWhere((element) => element.email == email);
     loggedUser = user;
+    authStreamController.add(user);
   }
 
   Future logout() async {
@@ -29,5 +27,5 @@ class AuthRepository {
     authStreamController.add(null);
   }
 
-  Stream<User?> get loggedUserChanges => authStreamController.stream.asBroadcastStream();
+  Stream<User?> get loggedUserChanges => authStreamController.stream;
 }

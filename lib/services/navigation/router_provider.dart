@@ -21,7 +21,8 @@ class RouterNotifier extends ChangeNotifier {
   late StreamSubscription authChangesSub;
 
   RouterNotifier(this.ref) {
-    authChangesSub = ref.read(authProvider).loggedUserChanges.listen((event) => notifyListeners());
+    var repo = ref.read(authProvider);
+    authChangesSub = repo.loggedUserChanges.listen((event) => notifyListeners());
   }
 
   String? redirectLogic(GoRouterState state) {

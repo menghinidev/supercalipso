@@ -9,14 +9,14 @@ import 'package:supercalipso/presenter/pages/profile/components/logout_button.da
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
-class ProfileHeader extends StatefulWidget {
+class ProfileHeader extends StatefulHookConsumerWidget {
   const ProfileHeader({Key? key}) : super(key: key);
 
   @override
-  State<ProfileHeader> createState() => _ProfileHeaderState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProfileHeaderState();
 }
 
-class _ProfileHeaderState extends State<ProfileHeader> {
+class _ProfileHeaderState extends ConsumerState<ProfileHeader> {
   final headerKey = GlobalKey();
   final statusKey = GlobalKey();
 
@@ -40,36 +40,39 @@ class _ProfileHeaderState extends State<ProfileHeader> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, ref, _) {
-      var auth = ref.watch(authChanges);
-      return auth.when(
-        data: (user) => user == null
-            ? Container()
-            : SizedBox(
-                height: headerHeight == 0 ? 1 : headerHeight + (statusHeight * 1.5),
-                width: double.infinity,
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: ProfileInfoHeader(key: headerKey, profile: user, bottomMargin: statusHeight),
-                    ),
-                    Positioned(
-                      left: Dimensions.pageInsetsSize,
-                      right: Dimensions.pageInsetsSize,
-                      bottom: 0,
-                      child: LogoutButton(key: statusKey),
-                    ),
-                  ],
-                ),
+    var auth = ref.watch(authChanges);
+    return auth.when(
+      data: (data) => data == null ? Container() : ProfileInfoHeader(profile: data),
+      error: (_, stack) => Text('Error: $stack'),
+      loading: () => const CircularProgressIndicator(),
+    );
+    return auth.when(
+      data: (user) => user == null
+          ? Container()
+          : SizedBox(
+              height: headerHeight == 0 ? 1 : headerHeight + (statusHeight * 1.5),
+              width: double.infinity,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: ProfileInfoHeader(key: headerKey, profile: user, bottomMargin: statusHeight),
+                  ),
+                  Positioned(
+                    left: Dimensions.pageInsetsSize,
+                    right: Dimensions.pageInsetsSize,
+                    bottom: 0,
+                    child: LogoutButton(key: statusKey),
+                  ),
+                ],
               ),
-        error: (_, stack) => Text('Error: $stack'),
-        loading: () => const CircularProgressIndicator(),
-      );
-    });
+            ),
+      error: (_, stack) => Text('Error: $stack'),
+      loading: () => const CircularProgressIndicator(),
+    );
   }
 }
 

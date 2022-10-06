@@ -21,6 +21,7 @@ TeamSubscription _$TeamSubscriptionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TeamSubscription {
   User get subscribedUser => throw _privateConstructorUsedError;
+  Team get team => throw _privateConstructorUsedError;
   DateTime get joined => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,9 +35,10 @@ abstract class $TeamSubscriptionCopyWith<$Res> {
   factory $TeamSubscriptionCopyWith(
           TeamSubscription value, $Res Function(TeamSubscription) then) =
       _$TeamSubscriptionCopyWithImpl<$Res>;
-  $Res call({User subscribedUser, DateTime joined});
+  $Res call({User subscribedUser, Team team, DateTime joined});
 
   $UserCopyWith<$Res> get subscribedUser;
+  $TeamCopyWith<$Res> get team;
 }
 
 /// @nodoc
@@ -51,6 +53,7 @@ class _$TeamSubscriptionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? subscribedUser = freezed,
+    Object? team = freezed,
     Object? joined = freezed,
   }) {
     return _then(_value.copyWith(
@@ -58,6 +61,10 @@ class _$TeamSubscriptionCopyWithImpl<$Res>
           ? _value.subscribedUser
           : subscribedUser // ignore: cast_nullable_to_non_nullable
               as User,
+      team: team == freezed
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as Team,
       joined: joined == freezed
           ? _value.joined
           : joined // ignore: cast_nullable_to_non_nullable
@@ -71,6 +78,13 @@ class _$TeamSubscriptionCopyWithImpl<$Res>
       return _then(_value.copyWith(subscribedUser: value));
     });
   }
+
+  @override
+  $TeamCopyWith<$Res> get team {
+    return $TeamCopyWith<$Res>(_value.team, (value) {
+      return _then(_value.copyWith(team: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -80,10 +94,12 @@ abstract class _$$_TeamSubscriptionCopyWith<$Res>
           _$_TeamSubscription value, $Res Function(_$_TeamSubscription) then) =
       __$$_TeamSubscriptionCopyWithImpl<$Res>;
   @override
-  $Res call({User subscribedUser, DateTime joined});
+  $Res call({User subscribedUser, Team team, DateTime joined});
 
   @override
   $UserCopyWith<$Res> get subscribedUser;
+  @override
+  $TeamCopyWith<$Res> get team;
 }
 
 /// @nodoc
@@ -100,6 +116,7 @@ class __$$_TeamSubscriptionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? subscribedUser = freezed,
+    Object? team = freezed,
     Object? joined = freezed,
   }) {
     return _then(_$_TeamSubscription(
@@ -107,6 +124,10 @@ class __$$_TeamSubscriptionCopyWithImpl<$Res>
           ? _value.subscribedUser
           : subscribedUser // ignore: cast_nullable_to_non_nullable
               as User,
+      team: team == freezed
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as Team,
       joined: joined == freezed
           ? _value.joined
           : joined // ignore: cast_nullable_to_non_nullable
@@ -119,7 +140,7 @@ class __$$_TeamSubscriptionCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TeamSubscription implements _TeamSubscription {
   const _$_TeamSubscription(
-      {required this.subscribedUser, required this.joined});
+      {required this.subscribedUser, required this.team, required this.joined});
 
   factory _$_TeamSubscription.fromJson(Map<String, dynamic> json) =>
       _$$_TeamSubscriptionFromJson(json);
@@ -127,11 +148,13 @@ class _$_TeamSubscription implements _TeamSubscription {
   @override
   final User subscribedUser;
   @override
+  final Team team;
+  @override
   final DateTime joined;
 
   @override
   String toString() {
-    return 'TeamSubscription(subscribedUser: $subscribedUser, joined: $joined)';
+    return 'TeamSubscription(subscribedUser: $subscribedUser, team: $team, joined: $joined)';
   }
 
   @override
@@ -141,6 +164,7 @@ class _$_TeamSubscription implements _TeamSubscription {
             other is _$_TeamSubscription &&
             const DeepCollectionEquality()
                 .equals(other.subscribedUser, subscribedUser) &&
+            const DeepCollectionEquality().equals(other.team, team) &&
             const DeepCollectionEquality().equals(other.joined, joined));
   }
 
@@ -149,6 +173,7 @@ class _$_TeamSubscription implements _TeamSubscription {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(subscribedUser),
+      const DeepCollectionEquality().hash(team),
       const DeepCollectionEquality().hash(joined));
 
   @JsonKey(ignore: true)
@@ -167,6 +192,7 @@ class _$_TeamSubscription implements _TeamSubscription {
 abstract class _TeamSubscription implements TeamSubscription {
   const factory _TeamSubscription(
       {required final User subscribedUser,
+      required final Team team,
       required final DateTime joined}) = _$_TeamSubscription;
 
   factory _TeamSubscription.fromJson(Map<String, dynamic> json) =
@@ -174,6 +200,8 @@ abstract class _TeamSubscription implements TeamSubscription {
 
   @override
   User get subscribedUser;
+  @override
+  Team get team;
   @override
   DateTime get joined;
   @override

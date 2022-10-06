@@ -22,7 +22,7 @@ class CustomTile extends StatelessWidget {
     return ListTile(
       leading: leading,
       title: Text(title),
-      subtitle: subtitle != null ? Text(subtitle!) : null,
+      subtitle: subtitle != null ? Text(subtitle!, maxLines: 1) : null,
       trailing: trailing,
       onTap: onTap,
       shape: Shapes.lowRounded,

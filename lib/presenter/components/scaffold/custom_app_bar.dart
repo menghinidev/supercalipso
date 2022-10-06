@@ -5,13 +5,15 @@ import 'package:supercalipso/presenter/theme/dimensions.dart';
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String? title;
   final List<Widget> actions;
-  final bool enableLeading;
+  final Widget? leading;
+  final bool implyLeading;
   final double borderHeight = 1;
 
   const CustomAppBar({
     this.title,
     this.actions = const <Widget>[],
-    this.enableLeading = true,
+    this.implyLeading = true,
+    this.leading,
     Key? key,
   }) : super(key: key);
 
@@ -27,7 +29,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 )
               : e)
           .toList(),
-      leading: enableLeading ? null : Container(),
+      leading: implyLeading ? null : leading ?? Container(),
       centerTitle: true,
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(borderHeight),

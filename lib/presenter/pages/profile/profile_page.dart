@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
@@ -12,16 +14,22 @@ class ProfilePage extends StatelessWidget {
     return CustomScaffold(
       appBar: CustomAppBar(
         title: 'PROFILE',
-        enableLeading: false,
+        implyLeading: false,
         actions: [
-          PrimaryIconButton(icon: const Icon(Icons.notifications), onTap: () => print('ciao')),
-          PrimaryIconButton(icon: const Icon(Icons.settings), onTap: () => print('ciao')),
+          Consumer(
+            builder: (context, ref, _) => PrimaryIconButton(
+              icon: const Icon(Icons.logout),
+              onTap: () => ref.read(authServiceProvider).logout(),
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const [ProfileHeader()],
+          children: const [
+            ProfileHeader(),
+          ],
         ),
       ),
     );

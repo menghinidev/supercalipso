@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
+import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 
-class LogoutButton extends ConsumerWidget {
+class LogoutButton extends HookConsumerWidget {
   const LogoutButton({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +12,7 @@ class LogoutButton extends ConsumerWidget {
     return Center(
       child: PrimaryElevatedButton(
         text: 'LOGOUT',
-        onTap: () => ref.read(authProvider).logout(),
+        onTap: () => ref.read(authServiceProvider).logout(),
         color: Colors.lightGreen,
       ),
     );

@@ -21,6 +21,7 @@ TeamInvitation _$TeamInvitationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TeamInvitation {
   String get invitationId => throw _privateConstructorUsedError;
+  Team get team => throw _privateConstructorUsedError;
   User get invitedUser => throw _privateConstructorUsedError;
   User get invitedBy => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
@@ -39,11 +40,13 @@ abstract class $TeamInvitationCopyWith<$Res> {
       _$TeamInvitationCopyWithImpl<$Res>;
   $Res call(
       {String invitationId,
+      Team team,
       User invitedUser,
       User invitedBy,
       DateTime created,
       TeamInvitationStatus status});
 
+  $TeamCopyWith<$Res> get team;
   $UserCopyWith<$Res> get invitedUser;
   $UserCopyWith<$Res> get invitedBy;
 }
@@ -60,6 +63,7 @@ class _$TeamInvitationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? invitationId = freezed,
+    Object? team = freezed,
     Object? invitedUser = freezed,
     Object? invitedBy = freezed,
     Object? created = freezed,
@@ -70,6 +74,10 @@ class _$TeamInvitationCopyWithImpl<$Res>
           ? _value.invitationId
           : invitationId // ignore: cast_nullable_to_non_nullable
               as String,
+      team: team == freezed
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as Team,
       invitedUser: invitedUser == freezed
           ? _value.invitedUser
           : invitedUser // ignore: cast_nullable_to_non_nullable
@@ -87,6 +95,13 @@ class _$TeamInvitationCopyWithImpl<$Res>
           : status // ignore: cast_nullable_to_non_nullable
               as TeamInvitationStatus,
     ));
+  }
+
+  @override
+  $TeamCopyWith<$Res> get team {
+    return $TeamCopyWith<$Res>(_value.team, (value) {
+      return _then(_value.copyWith(team: value));
+    });
   }
 
   @override
@@ -113,11 +128,14 @@ abstract class _$$_TeamInvitationCopyWith<$Res>
   @override
   $Res call(
       {String invitationId,
+      Team team,
       User invitedUser,
       User invitedBy,
       DateTime created,
       TeamInvitationStatus status});
 
+  @override
+  $TeamCopyWith<$Res> get team;
   @override
   $UserCopyWith<$Res> get invitedUser;
   @override
@@ -138,6 +156,7 @@ class __$$_TeamInvitationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? invitationId = freezed,
+    Object? team = freezed,
     Object? invitedUser = freezed,
     Object? invitedBy = freezed,
     Object? created = freezed,
@@ -148,6 +167,10 @@ class __$$_TeamInvitationCopyWithImpl<$Res>
           ? _value.invitationId
           : invitationId // ignore: cast_nullable_to_non_nullable
               as String,
+      team: team == freezed
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as Team,
       invitedUser: invitedUser == freezed
           ? _value.invitedUser
           : invitedUser // ignore: cast_nullable_to_non_nullable
@@ -173,6 +196,7 @@ class __$$_TeamInvitationCopyWithImpl<$Res>
 class _$_TeamInvitation implements _TeamInvitation {
   const _$_TeamInvitation(
       {required this.invitationId,
+      required this.team,
       required this.invitedUser,
       required this.invitedBy,
       required this.created,
@@ -183,6 +207,8 @@ class _$_TeamInvitation implements _TeamInvitation {
 
   @override
   final String invitationId;
+  @override
+  final Team team;
   @override
   final User invitedUser;
   @override
@@ -195,7 +221,7 @@ class _$_TeamInvitation implements _TeamInvitation {
 
   @override
   String toString() {
-    return 'TeamInvitation(invitationId: $invitationId, invitedUser: $invitedUser, invitedBy: $invitedBy, created: $created, status: $status)';
+    return 'TeamInvitation(invitationId: $invitationId, team: $team, invitedUser: $invitedUser, invitedBy: $invitedBy, created: $created, status: $status)';
   }
 
   @override
@@ -205,6 +231,7 @@ class _$_TeamInvitation implements _TeamInvitation {
             other is _$_TeamInvitation &&
             const DeepCollectionEquality()
                 .equals(other.invitationId, invitationId) &&
+            const DeepCollectionEquality().equals(other.team, team) &&
             const DeepCollectionEquality()
                 .equals(other.invitedUser, invitedUser) &&
             const DeepCollectionEquality().equals(other.invitedBy, invitedBy) &&
@@ -217,6 +244,7 @@ class _$_TeamInvitation implements _TeamInvitation {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(invitationId),
+      const DeepCollectionEquality().hash(team),
       const DeepCollectionEquality().hash(invitedUser),
       const DeepCollectionEquality().hash(invitedBy),
       const DeepCollectionEquality().hash(created),
@@ -238,6 +266,7 @@ class _$_TeamInvitation implements _TeamInvitation {
 abstract class _TeamInvitation implements TeamInvitation {
   const factory _TeamInvitation(
       {required final String invitationId,
+      required final Team team,
       required final User invitedUser,
       required final User invitedBy,
       required final DateTime created,
@@ -248,6 +277,8 @@ abstract class _TeamInvitation implements TeamInvitation {
 
   @override
   String get invitationId;
+  @override
+  Team get team;
   @override
   User get invitedUser;
   @override

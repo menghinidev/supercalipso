@@ -22,8 +22,9 @@ Team _$TeamFromJson(Map<String, dynamic> json) {
 mixin _$Team {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  dynamic get subscriptions => throw _privateConstructorUsedError;
-  dynamic get invitations => throw _privateConstructorUsedError;
+  List<TeamSubscription> get subscriptions =>
+      throw _privateConstructorUsedError;
+  List<TeamInvitation> get invitations => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,10 @@ abstract class $TeamCopyWith<$Res> {
   factory $TeamCopyWith(Team value, $Res Function(Team) then) =
       _$TeamCopyWithImpl<$Res>;
   $Res call(
-      {String id, String name, dynamic subscriptions, dynamic invitations});
+      {String id,
+      String name,
+      List<TeamSubscription> subscriptions,
+      List<TeamInvitation> invitations});
 }
 
 /// @nodoc
@@ -65,11 +69,11 @@ class _$TeamCopyWithImpl<$Res> implements $TeamCopyWith<$Res> {
       subscriptions: subscriptions == freezed
           ? _value.subscriptions
           : subscriptions // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<TeamSubscription>,
       invitations: invitations == freezed
           ? _value.invitations
           : invitations // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<TeamInvitation>,
     ));
   }
 }
@@ -80,7 +84,10 @@ abstract class _$$_TeamCopyWith<$Res> implements $TeamCopyWith<$Res> {
       __$$_TeamCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id, String name, dynamic subscriptions, dynamic invitations});
+      {String id,
+      String name,
+      List<TeamSubscription> subscriptions,
+      List<TeamInvitation> invitations});
 }
 
 /// @nodoc
@@ -108,21 +115,29 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      subscriptions:
-          subscriptions == freezed ? _value.subscriptions : subscriptions,
-      invitations: invitations == freezed ? _value.invitations : invitations,
+      subscriptions: subscriptions == freezed
+          ? _value._subscriptions
+          : subscriptions // ignore: cast_nullable_to_non_nullable
+              as List<TeamSubscription>,
+      invitations: invitations == freezed
+          ? _value._invitations
+          : invitations // ignore: cast_nullable_to_non_nullable
+              as List<TeamInvitation>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Team implements _Team {
+class _$_Team extends _Team {
   const _$_Team(
       {required this.id,
       required this.name,
-      this.subscriptions = const <TeamSubscription>[],
-      this.invitations = const <TeamInvitation>[]});
+      final List<TeamSubscription> subscriptions = const <TeamSubscription>[],
+      final List<TeamInvitation> invitations = const <TeamInvitation>[]})
+      : _subscriptions = subscriptions,
+        _invitations = invitations,
+        super._();
 
   factory _$_Team.fromJson(Map<String, dynamic> json) => _$$_TeamFromJson(json);
 
@@ -130,12 +145,21 @@ class _$_Team implements _Team {
   final String id;
   @override
   final String name;
+  final List<TeamSubscription> _subscriptions;
   @override
   @JsonKey()
-  final dynamic subscriptions;
+  List<TeamSubscription> get subscriptions {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_subscriptions);
+  }
+
+  final List<TeamInvitation> _invitations;
   @override
   @JsonKey()
-  final dynamic invitations;
+  List<TeamInvitation> get invitations {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invitations);
+  }
 
   @override
   String toString() {
@@ -150,9 +174,9 @@ class _$_Team implements _Team {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
-                .equals(other.subscriptions, subscriptions) &&
+                .equals(other._subscriptions, _subscriptions) &&
             const DeepCollectionEquality()
-                .equals(other.invitations, invitations));
+                .equals(other._invitations, _invitations));
   }
 
   @JsonKey(ignore: true)
@@ -161,8 +185,8 @@ class _$_Team implements _Team {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(subscriptions),
-      const DeepCollectionEquality().hash(invitations));
+      const DeepCollectionEquality().hash(_subscriptions),
+      const DeepCollectionEquality().hash(_invitations));
 
   @JsonKey(ignore: true)
   @override
@@ -177,12 +201,13 @@ class _$_Team implements _Team {
   }
 }
 
-abstract class _Team implements Team {
+abstract class _Team extends Team {
   const factory _Team(
       {required final String id,
       required final String name,
-      final dynamic subscriptions,
-      final dynamic invitations}) = _$_Team;
+      final List<TeamSubscription> subscriptions,
+      final List<TeamInvitation> invitations}) = _$_Team;
+  const _Team._() : super._();
 
   factory _Team.fromJson(Map<String, dynamic> json) = _$_Team.fromJson;
 
@@ -191,9 +216,9 @@ abstract class _Team implements Team {
   @override
   String get name;
   @override
-  dynamic get subscriptions;
+  List<TeamSubscription> get subscriptions;
   @override
-  dynamic get invitations;
+  List<TeamInvitation> get invitations;
   @override
   @JsonKey(ignore: true)
   _$$_TeamCopyWith<_$_Team> get copyWith => throw _privateConstructorUsedError;
