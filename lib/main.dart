@@ -8,6 +8,8 @@ import 'package:supercalipso/presenter/theme/theme_builder.dart';
 import 'package:supercalipso/services/installer.dart';
 import 'package:supercalipso/services/navigation/router_provider.dart';
 
+import 'services/localization/date_formatting_localization_delegate.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Installer.instance.launchStartPipeline();
@@ -40,30 +42,11 @@ class _SuperCalipsoState extends ConsumerState<SuperCalipso> {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
-        DateFormatterLocalizationDelegate(),
+        DateFormatterLocalizationDelegate.instance,
       ],
       debugShowCheckedModeBanner: false,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
     );
   }
-}
-
-class DateFormatterLocalizationDelegate extends LocalizationsDelegate {
-  final dateFormattingSupportedLocale = const [Locale('it', 'IT'), Locale('en', 'US')];
-
-  @override
-  bool isSupported(Locale locale) {
-    var languages = dateFormattingSupportedLocale.map((e) => e.languageCode);
-    return languages.contains(locale.languageCode);
-  }
-
-  @override
-  Future load(Locale locale) async {
-    Intl.systemLocale = locale.languageCode;
-    return Future.value();
-  }
-
-  @override
-  bool shouldReload(covariant LocalizationsDelegate old) => false;
 }
