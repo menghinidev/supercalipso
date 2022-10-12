@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.supercalipso">
+    package="dev.menghini.supercalipso">
    <application
         android:label="SuperCalipso"
         android:name="${applicationName}"
