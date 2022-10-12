@@ -11,7 +11,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: Dimensions.lowElevation,
-      shape: Shapes.lowRounded.copyWith(side: BorderSide(color: color)),
+      shape: Shapes.lowRoundedBorder.copyWith(side: BorderSide(color: color)),
       margin: EdgeInsets.zero,
       color: color,
       shadowColor: color,

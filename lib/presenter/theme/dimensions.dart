@@ -9,16 +9,23 @@ class Dimensions {
 
   static const pageInsetsSize = 20.0;
 
-  static const pageInsets = EdgeInsets.symmetric(horizontal: pageInsetsSize);
-  static EdgeInsets get pageInsetsWithTop => pageInsets.copyWith(top: pageInsetsSize);
+  static const hPageInsets = EdgeInsets.symmetric(horizontal: pageInsetsSize);
+  static const pageInsets = EdgeInsets.all(pageInsetsSize);
+  static EdgeInsets get pageInsetsWithBottom => hPageInsets.copyWith(bottom: pageInsetsSize);
+  static EdgeInsets get pageInsetsWithTop => hPageInsets.copyWith(top: pageInsetsSize);
   static EdgeInsets get mHsTPadding => const EdgeInsets.symmetric(horizontal: mediumSize).copyWith(top: smallSize);
   static EdgeInsets get mHsBPadding => const EdgeInsets.symmetric(horizontal: mediumSize).copyWith(bottom: smallSize);
   static EdgeInsets get mVPadding => const EdgeInsets.symmetric(vertical: Dimensions.mediumSize);
+  static EdgeInsets get sVPadding => const EdgeInsets.symmetric(vertical: Dimensions.smallSize);
   static EdgeInsets get allMPadding => const EdgeInsets.all(Dimensions.mediumSize);
+  static EdgeInsets get allSPadding => const EdgeInsets.all(Dimensions.smallSize);
   static const lowElevation = 2.0;
 }
 
 class Shapes {
-  static final lowRounded = RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.smallSize));
-  static final highRounded = RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.largeSize));
+  static final lowRoundedBorder = RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.smallSize));
+  static final highRoundedBorder = RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.largeSize));
+  static BorderRadius get buttonBorderRadius => BorderRadius.circular(29.0);
+  static BorderRadius get smallRadius => BorderRadius.circular(8.0);
+  static BorderRadius get containerRadius => BorderRadius.circular(6.0);
 }

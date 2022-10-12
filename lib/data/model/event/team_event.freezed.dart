@@ -169,14 +169,15 @@ class __$$_TeamEventCopyWithImpl<$Res> extends _$TeamEventCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TeamEvent implements _TeamEvent {
+class _$_TeamEvent extends _TeamEvent {
   const _$_TeamEvent(
       {required this.eventId,
       required this.name,
       required this.startTime,
       this.description,
       required this.team,
-      this.duration = Duration.zero});
+      this.duration = Duration.zero})
+      : super._();
 
   factory _$_TeamEvent.fromJson(Map<String, dynamic> json) =>
       _$$_TeamEventFromJson(json);
@@ -238,7 +239,7 @@ class _$_TeamEvent implements _TeamEvent {
   }
 }
 
-abstract class _TeamEvent implements TeamEvent {
+abstract class _TeamEvent extends TeamEvent {
   const factory _TeamEvent(
       {required final String eventId,
       required final String name,
@@ -246,6 +247,7 @@ abstract class _TeamEvent implements TeamEvent {
       final String? description,
       required final Team team,
       final Duration? duration}) = _$_TeamEvent;
+  const _TeamEvent._() : super._();
 
   factory _TeamEvent.fromJson(Map<String, dynamic> json) =
       _$_TeamEvent.fromJson;

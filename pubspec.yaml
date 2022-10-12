@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter 
   dio: ^4.0.6
   logging: ^1.0.2
   intl: ^0.17.0
@@ -47,6 +49,8 @@ dependencies:
   sliver_tools: ^0.2.8
   rxdart: ^0.27.5
   uuid: ^3.0.6
+  dropdown_button2: ^1.4.0
+  flutter_typeahead: ^4.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:supercalipso/data/model/event/team_event.dart';
+import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
@@ -18,6 +19,7 @@ class MockValues with IdentifierFactory {
   late List<TeamInvitation> teamInvites;
   late List<Team> teams;
   late List<TeamEvent> events;
+  late List<Note> notes;
 
   MockValues._() {
     firstUser = const User(id: '1', name: 'Lu Cello', email: 'lorenzo@email.com');
@@ -27,6 +29,7 @@ class MockValues with IdentifierFactory {
     teamSubs = <TeamSubscription>[];
     teamInvites = <TeamInvitation>[];
     events = <TeamEvent>[];
+    notes = <Note>[];
     var initialTeam = Team(id: createID(), name: 'Tim', subscriptions: teamSubs, invitations: teamInvites);
     teams = [initialTeam];
     teamSubs.addAll([

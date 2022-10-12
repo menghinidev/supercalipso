@@ -7,6 +7,6 @@ class LoadingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isSliver) return const SliverToBoxAdapter(child: CircularProgressIndicator());
-    return const CircularProgressIndicator();
+    return const Center(child: CircularProgressIndicator());
   }
 }

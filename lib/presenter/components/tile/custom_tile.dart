@@ -25,7 +25,7 @@ class CustomTile extends StatelessWidget {
       subtitle: subtitle != null ? Text(subtitle!, maxLines: 1) : null,
       trailing: trailing,
       onTap: onTap,
-      shape: Shapes.lowRounded,
+      shape: Shapes.lowRoundedBorder,
       contentPadding: EdgeInsets.zero,
     );
   }

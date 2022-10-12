@@ -28,8 +28,10 @@ class LoginPage extends HookConsumerWidget {
                       padding: EdgeInsets.only(bottom: Dimensions.hugeSize),
                       child: SuperCalipsoBrand(),
                     ),
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         PrimaryElevatedButton(
                           onTap: () => ref

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,6 +13,7 @@ var routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     routes: [AppRoutes.home, AppRoutes.login],
     refreshListenable: routerNotifer,
+    debugLogDiagnostics: kDebugMode,
     redirect: routerNotifer.redirectLogic,
   );
 });

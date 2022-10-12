@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/team/team_provider.dart';
+import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/presenter/components/card/custom_card.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
@@ -16,30 +17,22 @@ class FrequentTeamsList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var teams = ref.watch(teamsChangesProvider);
-    return teams.when(
-      data: (value) => SliverToBoxAdapter(
-        child: CardSection(
-          title: 'Team frequenti',
-          body: EmptyDataWidget(
-            emptyCondition: value.isEmpty,
-            emptyPlaceholder: Text(
-              'Non hai nessuna iscrizione',
-              style: Theme.of(context).textTheme.caption,
-            ),
-            child: ListView.separated(
-              itemCount: value.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) => FrequentTeamAvatar(team: value[index]),
-              separatorBuilder: (context, index) => const SizedBox(width: Dimensions.mediumSize),
-            ),
+    return teams.onValue(
+      builder: (data) => CardSection(
+        title: 'Team frequenti',
+        body: EmptyDataWidgetBuilder(
+          emptyCondition: () => data.isEmpty,
+          placeholderBuilder: (context) => Text(
+            'Non hai nessuna iscrizione',
+            style: Theme.of(context).textTheme.caption,
           ),
-        ),
-      ),
-      error: (error, stackTrace) => Text(error.toString()),
-      loading: () => const SliverToBoxAdapter(
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: LoadingList(),
+          builder: (context) => ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: data.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) => TeamTile(team: data[index]),
+            separatorBuilder: (context, index) => const SizedBox(width: Dimensions.mediumSize),
+          ),
         ),
       ),
     );

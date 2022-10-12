@@ -14,7 +14,11 @@ final teamEventsChangesProvider = StreamProvider.family<List<TeamEvent>, String>
   return ref.watch(eventRepositoryProvider).getTeamEventsChanges(teamId: id);
 });
 
-final latestEventsChangesProvider = StreamProvider.autoDispose<List<TeamEvent>>((ref) {
+final teamEventChangesProvider = StreamProvider.family<TeamEvent, String>((ref, id) {
+  return ref.watch(eventRepositoryProvider).getEventChanges(eventId: id);
+});
+
+final latestEventsChangesProvider = StreamProvider<List<TeamEvent>>((ref) {
   var repo = ref.watch(authProvider);
   ref.watch(teamsChangesProvider);
   return ref

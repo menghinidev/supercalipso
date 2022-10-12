@@ -46,33 +46,6 @@ class _ProfileHeaderState extends ConsumerState<ProfileHeader> {
       error: (_, stack) => Text('Error: $stack'),
       loading: () => const CircularProgressIndicator(),
     );
-    return auth.when(
-      data: (user) => user == null
-          ? Container()
-          : SizedBox(
-              height: headerHeight == 0 ? 1 : headerHeight + (statusHeight * 1.5),
-              width: double.infinity,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: ProfileInfoHeader(key: headerKey, profile: user, bottomMargin: statusHeight),
-                  ),
-                  Positioned(
-                    left: Dimensions.pageInsetsSize,
-                    right: Dimensions.pageInsetsSize,
-                    bottom: 0,
-                    child: LogoutButton(key: statusKey),
-                  ),
-                ],
-              ),
-            ),
-      error: (_, stack) => Text('Error: $stack'),
-      loading: () => const CircularProgressIndicator(),
-    );
   }
 }
 

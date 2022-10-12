@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
@@ -20,9 +21,8 @@ class TeamRepository {
   Stream<List<Team>> get teamsChanges => teamsController.stream;
   Stream<List<TeamInvitation>> get invitationsChanges => teamsInvitationsController.stream;
 
-  Stream<Team> teamChanges(String teamId) => teamsChanges
-      .where((event) => event.getWhere((element) => element.id == teamId) != null)
-      .map((event) => event.getWhere((element) => element.id == teamId)!);
+  Stream<Team> teamChanges(String teamId) =>
+      teamsController.stream.mapNotNull((event) => event.getWhere((element) => element.id == teamId));
 
   Future<Response<List<Team>>> getUserTeams({required String userId}) async {
     var subs = await teamsDataProvider.readUserTeamsSubscriptions(userId: userId);
@@ -40,8 +40,9 @@ class TeamRepository {
   }
 
   Future<Response<List<TeamInvitation>>> getUserTeamInvitations({required String userId}) async {
-    var invites = await teamsDataProvider.readUserTeamsInvitations(userId: userId);
-    return invites.ifSuccess((payload) => teamsInvitationsController.add(payload!));
+    return await teamsDataProvider
+        .readUserTeamsInvitations(userId: userId)
+        .ifSuccess((payload) => teamsInvitationsController.add(payload!));
   }
 
   Future<Response> replyToTeamInvitation({

@@ -1,10 +1,12 @@
 import 'package:get_it/get_it.dart';
 import 'package:supercalipso/data/provider/event_provider.dart';
 import 'package:supercalipso/data/provider/local_storage_provider.dart';
+import 'package:supercalipso/data/provider/note_provider.dart';
 import 'package:supercalipso/data/provider/team_provider.dart';
 import 'package:supercalipso/data/provider/user_provider.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/event_repository.dart';
+import 'package:supercalipso/data/repository/note_repository.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
 import 'package:supercalipso/data/repository/user_repository.dart';
 
@@ -24,6 +26,7 @@ class Installer {
     GetIt.instance.registerSingleton<TeamRepository>(TeamRepository());
     GetIt.instance.registerSingleton<UserRepository>(UserRepository());
     GetIt.instance.registerSingleton<EventRepository>(EventRepository());
+    GetIt.instance.registerSingleton<NoteRepository>(NoteRepository());
   }
 
   void installDataProviders() {
@@ -31,6 +34,7 @@ class Installer {
     GetIt.instance.registerSingleton<TeamsProvider>(TeamsProvider());
     GetIt.instance.registerSingleton<UserProvider>(UserProvider());
     GetIt.instance.registerSingleton<TeamEventProvider>(TeamEventProvider());
+    GetIt.instance.registerSingleton<NoteProvider>(NoteProvider());
   }
 
   void installService<T extends Object>(T instance) => GetIt.instance.registerSingleton<T>(instance);

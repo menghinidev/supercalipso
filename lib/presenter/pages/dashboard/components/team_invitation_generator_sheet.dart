@@ -14,7 +14,7 @@ class TeamInvitationGeneratorSheet extends HookConsumerWidget {
   const TeamInvitationGeneratorSheet({Key? key, required this.teamId}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var team = ref.watch(teamProvider(teamId));
+    var team = ref.watch(teamChangesProvider(teamId));
     var controller = useTextEditingController();
     return CustomBottomSheet(
       builder: (context) => Column(
@@ -50,7 +50,7 @@ class TeamInvitationGeneratorSheet extends HookConsumerWidget {
                 onTap: () {
                   ref.read(teamServiceProvider).inviteUserToTeam(
                         email: controller.text,
-                        teamId: data.payload!.id,
+                        teamId: data.id,
                       );
                   Navigator.pop(context);
                 },

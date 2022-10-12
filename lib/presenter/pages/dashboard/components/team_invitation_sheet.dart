@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/team/team_provider.dart';
+import 'package:supercalipso/bloc/team/team_service.dart';
+import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_sheet.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
 import 'package:supercalipso/presenter/components/common/loading_list.dart';
@@ -29,18 +31,18 @@ class TeamInvitationBottomSheet extends HookConsumerWidget {
             child: Padding(
               padding: Dimensions.mHsTPadding,
               child: invitations.when(
-                data: (value) => EmptyDataWidget(
-                  emptyCondition: value.isEmpty,
-                  emptyPlaceholder: const Text('No pendinig invitations'),
-                  child: ListView.separated(
+                data: (value) => EmptyDataWidgetBuilder(
+                  emptyCondition: () => value.isEmpty,
+                  placeholderBuilder: (context) => const Text('No pendinig invitations'),
+                  builder: (context) => ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) => TeamInvitationTile(invitation: value[index]),
                     separatorBuilder: (context, index) => const SizedBox(height: Dimensions.smallSize),
                     itemCount: value.length,
                   ),
                 ),
-                error: (_, __) => Text(_.toString()),
-                loading: () => const Center(child: LoadingList()),
+                error: (error, stackTrace) => Text('Error'),
+                loading: () => Text('Loading'),
               ),
             ),
           ),
