@@ -8,7 +8,7 @@
 PRODUCT_NAME = supercalipso
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.supercalipso
+PRODUCT_BUNDLE_IDENTIFIER = dev.menghini.supercalipso
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
