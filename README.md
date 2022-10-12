@@ -1,16 +1,19 @@
-# supercalipso
+# SuperCalipso
 
-A new Flutter project.
+An open source project showing my usage of Riverpod applied to a layered app architecture.
 
-## Getting Started
+## Pages structure
 
-This project is a starting point for a Flutter application.
+TBD
 
-A few resources to get you started if this is your first Flutter project:
+## Navigation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+TBD
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Application layer
+
+## Model layer
+
+## Repository layer
+
+## DataSource layer

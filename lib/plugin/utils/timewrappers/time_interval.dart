@@ -36,7 +36,7 @@ class TimeInterval with IntervalWrapper<Time> {
   }
 
   @override
-  String format() => start.format() + ' - ' + end.format();
+  String format() => '${start.format()} - ${end.format()}';
 
   bool isValid() => start.isBefore(end);
 

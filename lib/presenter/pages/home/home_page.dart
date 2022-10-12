@@ -1,33 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supercalipso/plugin/bloc.dart';
-import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
-import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
-import 'package:supercalipso/presenter/pages/login/login_page.dart';
-import 'package:supercalipso/services/navigation/navigation_bloc.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/presenter/pages/dashboard/dashboard_page.dart';
+import 'package:supercalipso/presenter/pages/profile/profile_page.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/routes.dart';
 
-class HomePage extends StatelessWidget with BlocRequester {
+class HomePage extends HookConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
+  final pages = const [Dashboard(), ProfilePage()];
 
   @override
-  Widget build(BuildContext context) {
-    return CustomScaffold(
-      appBar: CustomAppBar(title: 'SuperCalipso'),
-      body: Center(
-        child: TextButton(
-          onPressed: () => getAnyBloc<NavigationBloc>(context).add(
-            GoTo(pageBuilder: (context) => context.go('/')),
+  Widget build(BuildContext context, WidgetRef ref) {
+    var router = ref.watch(routerProvider);
+    var pageController = usePageController(initialPage: getIndex(router));
+    return Column(
+      children: [
+        Expanded(
+          child: PageView(
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: pages,
           ),
-          child: const Text('BACK TO LOGIN'),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
-          BottomNavigationBarItem(icon: Icon(Icons.people_alt_outlined), label: 'TEAMS'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'PROFILE'),
-        ],
-      ),
+        BottomNavigationBar(
+          currentIndex: getIndex(router),
+          onTap: (index) => _navigateToIndex(index, router),
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'PROFILE'),
+          ],
+        ),
+      ],
     );
+  }
+
+  int getIndex(GoRouter router) {
+    if (router.location == HomePageRoute.pagePath) return 0;
+    return 1;
+  }
+
+  void _navigateToIndex(int index, GoRouter router) {
+    late String path;
+    if (index == 0) path = HomePageRoute.pagePath;
+    if (index == 1) path = ProfilePageRoute.pagePath;
+    router.go(path);
   }
 }

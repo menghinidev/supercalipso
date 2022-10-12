@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({Key? key}) : super(key: key);
+  final Widget child;
+  final Color color;
+
+  const CustomCard({required this.child, this.color = Colors.white, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Card();
+    return Card(
+      elevation: Dimensions.lowElevation,
+      shape: Shapes.lowRoundedBorder.copyWith(side: BorderSide(color: color)),
+      margin: EdgeInsets.zero,
+      color: color,
+      shadowColor: color,
+      child: child,
+    );
   }
 }
