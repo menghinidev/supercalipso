@@ -51,6 +51,8 @@ dependencies:
   uuid: ^3.0.6
   dropdown_button2: ^1.4.0
   flutter_typeahead: ^4.0.0
+  flutter_launcher_icons: ^0.10.0
+  flutter_native_splash: ^2.2.11
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +68,19 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_icons:
+  android: "supercalipso"
+  ios: true
+  image_path: "assets/images/supercalipso.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  adaptive_icon_foreground: "assets/images/supercalipso.png"
+  adaptive_icon_background: "#000000"
+  web:
+    generate: true
+    background_color: "#000000"
+    theme_color: "#000000"
+
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -75,9 +90,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/supercalipso.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
