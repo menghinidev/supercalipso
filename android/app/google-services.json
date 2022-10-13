@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "445953411314",
+    "project_id": "supercalipso-8ac63",
+    "storage_bucket": "supercalipso-8ac63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445953411314:android:3eb13cba19dbb21b19286b",
+        "android_client_info": {
+          "package_name": "dev.menghini.supercalipso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445953411314-6sp6b746i6a60st2thteafj1pt263nls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.menghini.supercalipso",
+            "certificate_hash": "3561dd294a73c2ec3bf7a24a0c5be6d3f5326f84"
+          }
+        },
+        {
+          "client_id": "445953411314-lm0so462hfkoj7kf8agn2b15j11e5ni7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.menghini.supercalipso",
+            "certificate_hash": "f7f620d11ad8acd19b3729183832ba56d67be5a3"
+          }
+        },
+        {
+          "client_id": "445953411314-vnaps2hnef8kr4s65s87a4rfvfrfkuau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCacUM-In4Wd9SNNJLgMofkBdBQ1yFPbZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445953411314-vnaps2hnef8kr4s65s87a4rfvfrfkuau.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "445953411314-n4j7nln3d3c8f3on8elr286v5d8up8ls.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.menghini.supercalipso"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

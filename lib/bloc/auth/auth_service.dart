@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/event/event_provider.dart';
@@ -23,10 +25,23 @@ class AuthService {
 
   Future silentLogin() => authRepository.silentLogin();
 
-  Future explicitLogin({required String email, required String password}) => authRepository.explicitLogin(
-        email: email,
-        password: password,
-      );
+  Future loginWithGoogle() async {
+    final googleUser = await GoogleSignIn(scopes: [
+      'email',
+      'profile',
+    ]).signIn();
+
+    final googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    // Once signed in, return the UserCredential
+    var firebaseUser = await FirebaseAuth.instance.signInWithCredential(credential);
+    return await authRepository.explicitLogin(email: firebaseUser.user!.email!, password: 'password');
+  }
 
   Future logout() async {
     await authRepository.logout();

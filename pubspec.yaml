@@ -53,6 +53,10 @@ dependencies:
   flutter_typeahead: ^4.0.0
   flutter_launcher_icons: ^0.10.0
   flutter_native_splash: ^2.2.11
+  firebase_core: ^1.24.0
+  flutter_signin_button: ^2.0.0
+  firebase_auth: ^3.11.2
+  google_sign_in: ^5.4.2
 
 dev_dependencies:
   flutter_test:
