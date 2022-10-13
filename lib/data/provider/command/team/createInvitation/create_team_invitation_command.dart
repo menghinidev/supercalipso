@@ -12,6 +12,7 @@ class CreateTeamInvitationCommand with _$CreateTeamInvitationCommand {
     required String invitedByUserId,
     required String teamId,
     required DateTime createdAt,
+    required String status,
   }) = _CreateTeamInvitationCommand;
 
   factory CreateTeamInvitationCommand.fromJson(Map<String, dynamic> json) =>

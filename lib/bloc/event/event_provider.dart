@@ -19,10 +19,6 @@ final teamEventChangesProvider = StreamProvider.family<TeamEvent, String>((ref, 
 });
 
 final latestEventsChangesProvider = StreamProvider<List<TeamEvent>>((ref) {
-  var repo = ref.watch(authProvider);
   ref.watch(teamsChangesProvider);
-  return ref
-      .watch(eventRepositoryProvider)
-      .eventsChanges
-      .map((event) => event.where((element) => element.team.hasUserSub(userId: repo.loggedUser!.uid)).toList());
+  return ref.watch(eventRepositoryProvider).eventsChanges;
 });

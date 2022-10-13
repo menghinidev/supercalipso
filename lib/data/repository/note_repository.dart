@@ -1,7 +1,6 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/provider/api/note/i_note_data_source.dart';
-import 'package:supercalipso/data/provider/api/note/mocked_data_source.dart';
 import 'package:supercalipso/data/provider/command/note/createNote/create_note_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
@@ -12,9 +11,9 @@ class NoteRepository {
 
   Stream<List<Note>> get notesChanges => controller.stream;
   Stream<List<Note>> getTeamNotesChanges({required String teamId}) =>
-      notesChanges.map((event) => event.where((element) => element.team.id == teamId).toList());
+      notesChanges.map((event) => event.where((element) => element.teamId == teamId).toList());
   Stream<Note> getNoteChanges({required String noteId}) =>
-      controller.stream.mapNotNull((event) => event.getWhere((element) => element.noteId == noteId));
+      controller.stream.mapNotNull((event) => event.getWhere((element) => element.id == noteId));
 
   Future<Response<List<Note>>> getTeamNotes({required String teamId}) async {
     return await dataProvider.readTeamNotes(teamId: teamId);
@@ -45,6 +44,6 @@ class NoteRepository {
     var note = noteResponse.payload!;
     return await dataProvider
         .deleteNote(noteId: noteId)
-        .ifSuccess((payload) => getUserNotes(userId: note.modifiedBy.uid));
+        .ifSuccess((payload) => getUserNotes(userId: note.modifiedByUserId));
   }
 }

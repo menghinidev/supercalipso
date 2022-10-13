@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:supercalipso/data/model/team/team.dart';
 
 part 'team_event.g.dart';
 part 'team_event.freezed.dart';
@@ -8,11 +7,11 @@ part 'team_event.freezed.dart';
 class TeamEvent with _$TeamEvent {
   const TeamEvent._();
   const factory TeamEvent({
-    required final String eventId,
+    required final String id,
     required final String name,
     required final DateTime startTime,
     final String? description,
-    required final Team team,
+    required final String teamId,
     @Default(Duration.zero) final Duration? duration,
   }) = _TeamEvent;
 

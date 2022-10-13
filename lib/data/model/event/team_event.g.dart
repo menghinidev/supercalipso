@@ -7,11 +7,11 @@ part of 'team_event.dart';
 // **************************************************************************
 
 _$_TeamEvent _$$_TeamEventFromJson(Map<String, dynamic> json) => _$_TeamEvent(
-      eventId: json['eventId'] as String,
+      id: json['id'] as String,
       name: json['name'] as String,
       startTime: DateTime.parse(json['startTime'] as String),
       description: json['description'] as String?,
-      team: Team.fromJson(json['team'] as Map<String, dynamic>),
+      teamId: json['teamId'] as String,
       duration: json['duration'] == null
           ? Duration.zero
           : Duration(microseconds: json['duration'] as int),
@@ -19,10 +19,10 @@ _$_TeamEvent _$$_TeamEventFromJson(Map<String, dynamic> json) => _$_TeamEvent(
 
 Map<String, dynamic> _$$_TeamEventToJson(_$_TeamEvent instance) =>
     <String, dynamic>{
-      'eventId': instance.eventId,
+      'id': instance.id,
       'name': instance.name,
       'startTime': instance.startTime.toIso8601String(),
       'description': instance.description,
-      'team': instance.team,
+      'teamId': instance.teamId,
       'duration': instance.duration?.inMicroseconds,
     };

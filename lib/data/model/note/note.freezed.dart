@@ -20,12 +20,12 @@ Note _$NoteFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Note {
-  String get noteId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  User get modifiedBy => throw _privateConstructorUsedError;
+  String get modifiedByUserId => throw _privateConstructorUsedError;
   DateTime get lastUpdate => throw _privateConstructorUsedError;
-  Team get team => throw _privateConstructorUsedError;
+  String get teamId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,15 +37,12 @@ abstract class $NoteCopyWith<$Res> {
   factory $NoteCopyWith(Note value, $Res Function(Note) then) =
       _$NoteCopyWithImpl<$Res>;
   $Res call(
-      {String noteId,
+      {String id,
       String title,
       String? description,
-      User modifiedBy,
+      String modifiedByUserId,
       DateTime lastUpdate,
-      Team team});
-
-  $UserCopyWith<$Res> get modifiedBy;
-  $TeamCopyWith<$Res> get team;
+      String teamId});
 }
 
 /// @nodoc
@@ -58,17 +55,17 @@ class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? noteId = freezed,
+    Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
-    Object? modifiedBy = freezed,
+    Object? modifiedByUserId = freezed,
     Object? lastUpdate = freezed,
-    Object? team = freezed,
+    Object? teamId = freezed,
   }) {
     return _then(_value.copyWith(
-      noteId: noteId == freezed
-          ? _value.noteId
-          : noteId // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: title == freezed
           ? _value.title
@@ -78,33 +75,19 @@ class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      modifiedBy: modifiedBy == freezed
-          ? _value.modifiedBy
-          : modifiedBy // ignore: cast_nullable_to_non_nullable
-              as User,
+      modifiedByUserId: modifiedByUserId == freezed
+          ? _value.modifiedByUserId
+          : modifiedByUserId // ignore: cast_nullable_to_non_nullable
+              as String,
       lastUpdate: lastUpdate == freezed
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      team: team == freezed
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as Team,
+      teamId: teamId == freezed
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
-  }
-
-  @override
-  $UserCopyWith<$Res> get modifiedBy {
-    return $UserCopyWith<$Res>(_value.modifiedBy, (value) {
-      return _then(_value.copyWith(modifiedBy: value));
-    });
-  }
-
-  @override
-  $TeamCopyWith<$Res> get team {
-    return $TeamCopyWith<$Res>(_value.team, (value) {
-      return _then(_value.copyWith(team: value));
-    });
   }
 }
 
@@ -114,17 +97,12 @@ abstract class _$$_NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
       __$$_NoteCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String noteId,
+      {String id,
       String title,
       String? description,
-      User modifiedBy,
+      String modifiedByUserId,
       DateTime lastUpdate,
-      Team team});
-
-  @override
-  $UserCopyWith<$Res> get modifiedBy;
-  @override
-  $TeamCopyWith<$Res> get team;
+      String teamId});
 }
 
 /// @nodoc
@@ -138,17 +116,17 @@ class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? noteId = freezed,
+    Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
-    Object? modifiedBy = freezed,
+    Object? modifiedByUserId = freezed,
     Object? lastUpdate = freezed,
-    Object? team = freezed,
+    Object? teamId = freezed,
   }) {
     return _then(_$_Note(
-      noteId: noteId == freezed
-          ? _value.noteId
-          : noteId // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: title == freezed
           ? _value.title
@@ -158,18 +136,18 @@ class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      modifiedBy: modifiedBy == freezed
-          ? _value.modifiedBy
-          : modifiedBy // ignore: cast_nullable_to_non_nullable
-              as User,
+      modifiedByUserId: modifiedByUserId == freezed
+          ? _value.modifiedByUserId
+          : modifiedByUserId // ignore: cast_nullable_to_non_nullable
+              as String,
       lastUpdate: lastUpdate == freezed
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      team: team == freezed
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as Team,
+      teamId: teamId == freezed
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -178,32 +156,32 @@ class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Note extends _Note {
   const _$_Note(
-      {required this.noteId,
+      {required this.id,
       required this.title,
       this.description,
-      required this.modifiedBy,
+      required this.modifiedByUserId,
       required this.lastUpdate,
-      required this.team})
+      required this.teamId})
       : super._();
 
   factory _$_Note.fromJson(Map<String, dynamic> json) => _$$_NoteFromJson(json);
 
   @override
-  final String noteId;
+  final String id;
   @override
   final String title;
   @override
   final String? description;
   @override
-  final User modifiedBy;
+  final String modifiedByUserId;
   @override
   final DateTime lastUpdate;
   @override
-  final Team team;
+  final String teamId;
 
   @override
   String toString() {
-    return 'Note(noteId: $noteId, title: $title, description: $description, modifiedBy: $modifiedBy, lastUpdate: $lastUpdate, team: $team)';
+    return 'Note(id: $id, title: $title, description: $description, modifiedByUserId: $modifiedByUserId, lastUpdate: $lastUpdate, teamId: $teamId)';
   }
 
   @override
@@ -211,27 +189,27 @@ class _$_Note extends _Note {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Note &&
-            const DeepCollectionEquality().equals(other.noteId, noteId) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality()
-                .equals(other.modifiedBy, modifiedBy) &&
+                .equals(other.modifiedByUserId, modifiedByUserId) &&
             const DeepCollectionEquality()
                 .equals(other.lastUpdate, lastUpdate) &&
-            const DeepCollectionEquality().equals(other.team, team));
+            const DeepCollectionEquality().equals(other.teamId, teamId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(noteId),
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(modifiedBy),
+      const DeepCollectionEquality().hash(modifiedByUserId),
       const DeepCollectionEquality().hash(lastUpdate),
-      const DeepCollectionEquality().hash(team));
+      const DeepCollectionEquality().hash(teamId));
 
   @JsonKey(ignore: true)
   @override
@@ -248,28 +226,28 @@ class _$_Note extends _Note {
 
 abstract class _Note extends Note {
   const factory _Note(
-      {required final String noteId,
+      {required final String id,
       required final String title,
       final String? description,
-      required final User modifiedBy,
+      required final String modifiedByUserId,
       required final DateTime lastUpdate,
-      required final Team team}) = _$_Note;
+      required final String teamId}) = _$_Note;
   const _Note._() : super._();
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$_Note.fromJson;
 
   @override
-  String get noteId;
+  String get id;
   @override
   String get title;
   @override
   String? get description;
   @override
-  User get modifiedBy;
+  String get modifiedByUserId;
   @override
   DateTime get lastUpdate;
   @override
-  Team get team;
+  String get teamId;
   @override
   @JsonKey(ignore: true)
   _$$_NoteCopyWith<_$_Note> get copyWith => throw _privateConstructorUsedError;

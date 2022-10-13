@@ -34,18 +34,20 @@ class MockValues with IdentifierFactory {
     teams = [initialTeam];
     teamSubs.addAll([
       TeamSubscription(
-        team: initialTeam,
-        subscribedUser: secondUser,
+        id: createID(),
+        teamId: initialTeam.id,
+        subscribedUserId: secondUser.uid,
         joined: DateTime.now().subtract(const Duration(days: 45)),
       ),
     ]);
     teamInvites.addAll([
       TeamInvitation(
-        invitationId: createID(),
-        team: initialTeam,
-        invitedUser: firstUser,
-        invitedBy: secondUser,
+        id: createID(),
+        teamId: initialTeam.id,
+        invitedUserId: firstUser.uid,
+        invitedByUserId: secondUser.uid,
         created: DateTime.now(),
+        status: TeamInvitationStatus.unknown,
       ),
     ]);
   }

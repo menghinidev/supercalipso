@@ -13,10 +13,10 @@ class EventRepository {
   Stream<List<TeamEvent>> get eventsChanges => controller.stream;
 
   Stream<List<TeamEvent>> getTeamEventsChanges({required String teamId}) =>
-      controller.stream.map((event) => event.where((element) => element.team.id == teamId).toList());
+      controller.stream.map((event) => event.where((element) => element.teamId == teamId).toList());
 
   Stream<TeamEvent> getEventChanges({required String eventId}) =>
-      controller.stream.mapNotNull((event) => event.getWhere((element) => element.eventId == eventId));
+      controller.stream.mapNotNull((event) => event.getWhere((element) => element.id == eventId));
 
   Future<Response<List<TeamEvent>>> getTeamEvents({required String teamId}) async {
     var events = await provider.readTeamEvents(teamId: teamId);

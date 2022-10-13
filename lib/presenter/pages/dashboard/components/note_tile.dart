@@ -34,7 +34,7 @@ class NoteTile extends HookConsumerWidget {
                 ),
               ),
               SimpleIconButton(
-                onTap: () => ref.read(noteRepoProvider).deleteNote(noteId: note.noteId),
+                onTap: () => ref.read(noteRepoProvider).deleteNote(noteId: note.id),
                 icon: const Icon(Icons.delete),
               ),
             ],

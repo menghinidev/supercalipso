@@ -17,9 +17,9 @@ class EventTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var team = ref.watch(teamChangesProvider(event.team.id));
+    var team = ref.watch(teamChangesProvider(event.teamId));
     return GestureDetector(
-      onTap: () => ref.read(routerProvider).go(EventPageRoute.createPath(event.eventId)),
+      onTap: () => ref.read(routerProvider).go(EventPageRoute.createPath(event.id)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -49,7 +49,7 @@ class EventTile extends HookConsumerWidget {
                 ActionChip(
                   elevation: Dimensions.lowElevation,
                   avatar: const Icon(Icons.people_outline_outlined),
-                  onPressed: () => ref.read(routerProvider).go(TeamPageRoute.createPath(event.team.id)),
+                  onPressed: () => ref.read(routerProvider).go(TeamPageRoute.createPath(event.teamId)),
                   label: team.onValue(
                     builder: (data) => Text(
                       data.name,

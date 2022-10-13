@@ -23,10 +23,12 @@ class TeamTile extends HookConsumerWidget {
         leading: CircleAvatar(child: Text(team.name[0])),
         title: team.name,
         onTap: () => ref.read(routerProvider).go(TeamPageRoute.createPath(team.id)),
-        subtitle: team.subscriptions.fold(
+        subtitle:
+            'Users' /* team.subscriptions.fold(
           '',
           (p, e) => p!.isEmpty ? e.subscribedUser.displayName : '$p, ${e.subscribedUser.displayName}',
-        ),
+        ) */
+        ,
         trailing: PopupMenuButton<String>(
           position: PopupMenuPosition.under,
           shape: Shapes.lowRoundedBorder,

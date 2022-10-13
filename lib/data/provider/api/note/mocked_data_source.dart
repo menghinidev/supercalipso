@@ -7,19 +7,20 @@ class NoteMockedDataSource with IdentifierFactory {
   var mocked = MockValues.instance;
 
   Future<Response<List<Note>>> readTeamNotes({required String teamId}) async {
-    var notes = mocked.notes.where((element) => element.team.id == teamId).toList();
+    var notes = mocked.notes.where((element) => element.teamId == teamId).toList();
     return Future.value(Responses.success(notes));
   }
 
   Future<Response<List<Note>>> readUserNotes({required String userId}) async {
     var user = mocked.users.getWhere((element) => element.uid == userId);
     if (user == null) return Responses.failure([]);
-    var notes = mocked.notes.where((element) => element.team.hasUserSub(userId: userId)).toList();
+    var userTeamIds = mocked.teams.where((element) => element.hasUserSub(userId: userId)).map((e) => e.id).toList();
+    var notes = mocked.notes.where((element) => userTeamIds.contains(element.teamId)).toList();
     return Future.value(Responses.success(notes));
   }
 
   Future<Response<Note>> readNote({required String noteId}) async {
-    var note = mocked.notes.getWhere((element) => element.noteId == noteId);
+    var note = mocked.notes.getWhere((element) => element.id == noteId);
     if (note == null) return Responses.failure([]);
     return Future.value(Responses.success(note));
   }
@@ -35,12 +36,12 @@ class NoteMockedDataSource with IdentifierFactory {
     var team = mocked.teams.getWhere((element) => element.id == teamId);
     if (team == null) return Responses.failure([]);
     var newNote = Note(
-      noteId: createID(),
+      id: createID(),
       title: title,
       description: content,
       lastUpdate: DateTime.now(),
-      modifiedBy: user,
-      team: team,
+      modifiedByUserId: user.uid,
+      teamId: team.id,
     );
     mocked.notes.add(newNote);
     return Future.value(Responses.success(null));
@@ -54,15 +55,15 @@ class NoteMockedDataSource with IdentifierFactory {
   }) async {
     var user = mocked.users.getWhere((element) => element.uid == modifiedByUserId);
     if (user == null) return Responses.failure([]);
-    var note = mocked.notes.getWhere((element) => element.noteId == noteId);
+    var note = mocked.notes.getWhere((element) => element.id == noteId);
     if (note == null) return Responses.failure([]);
     var newNote = note.copyWith(
-      noteId: note.noteId,
+      id: note.id,
       title: title ?? note.title,
       description: content ?? note.description,
       lastUpdate: DateTime.now(),
-      modifiedBy: user,
-      team: note.team,
+      modifiedByUserId: user.uid,
+      teamId: note.teamId,
     );
     mocked.notes.remove(note);
     mocked.notes.add(newNote);
@@ -70,7 +71,7 @@ class NoteMockedDataSource with IdentifierFactory {
   }
 
   Future<Response> deleteNote({required String noteId}) async {
-    mocked.notes.removeWhere((element) => element.noteId == noteId);
+    mocked.notes.removeWhere((element) => element.id == noteId);
     return Future.value(Responses.success(null));
   }
 }

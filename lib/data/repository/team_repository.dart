@@ -5,7 +5,6 @@ import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
-import 'package:supercalipso/data/provider/api/team/mocked_data_source.dart';
 import 'package:supercalipso/data/provider/command/team/createInvitation/create_team_invitation_command.dart';
 import 'package:supercalipso/data/provider/command/team/replyToInvitation/replayto_invitation_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
@@ -30,7 +29,7 @@ class TeamRepository {
     var subs = await teamsDataProvider.readUserTeamsSubscriptions(userId: userId);
     var teams = await subs.flatAndCollectAsync<Team, TeamSubscription>(
       subs.payload!,
-      (source) => teamsDataProvider.readTeam(teamId: source.team.id),
+      (source) => teamsDataProvider.readTeam(teamId: source.teamId),
     );
     teams.ifSuccess((payload) => teamsController.add(payload!));
     return teams;
@@ -52,7 +51,7 @@ class TeamRepository {
     required String teamInvitationId,
     required String userId,
   }) async {
-    var command = ReplayToInvitationCommand(invitationId: teamInvitationId, status: status.name);
+    var command = ReplyToInvitationCommand(invitationId: teamInvitationId, status: status.name);
     return await teamsDataProvider
         .replyTeamInvitation(command: command)
         .ifSuccessAsync((payload) => getUserTeamInvitations(userId: userId))
@@ -69,6 +68,7 @@ class TeamRepository {
       invitedByUserId: ownerUserId,
       teamId: teamId,
       createdAt: DateTime.now(),
+      status: TeamInvitationStatus.unknown.name,
     );
     return await teamsDataProvider
         .createTeamInvitation(command: command)

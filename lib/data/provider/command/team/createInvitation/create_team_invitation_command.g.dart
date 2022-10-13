@@ -13,6 +13,7 @@ _$_CreateTeamInvitationCommand _$$_CreateTeamInvitationCommandFromJson(
       invitedByUserId: json['invitedByUserId'] as String,
       teamId: json['teamId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
+      status: json['status'] as String,
     );
 
 Map<String, dynamic> _$$_CreateTeamInvitationCommandToJson(
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$_CreateTeamInvitationCommandToJson(
       'invitedByUserId': instance.invitedByUserId,
       'teamId': instance.teamId,
       'createdAt': instance.createdAt.toIso8601String(),
+      'status': instance.status,
     };

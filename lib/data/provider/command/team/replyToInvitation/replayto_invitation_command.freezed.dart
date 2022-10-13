@@ -14,38 +14,38 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ReplayToInvitationCommand _$ReplayToInvitationCommandFromJson(
+ReplyToInvitationCommand _$ReplyToInvitationCommandFromJson(
     Map<String, dynamic> json) {
-  return _ReplayToInvitationCommand.fromJson(json);
+  return _ReplyToInvitationCommand.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ReplayToInvitationCommand {
+mixin _$ReplyToInvitationCommand {
   String get invitationId => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ReplayToInvitationCommandCopyWith<ReplayToInvitationCommand> get copyWith =>
+  $ReplyToInvitationCommandCopyWith<ReplyToInvitationCommand> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReplayToInvitationCommandCopyWith<$Res> {
-  factory $ReplayToInvitationCommandCopyWith(ReplayToInvitationCommand value,
-          $Res Function(ReplayToInvitationCommand) then) =
-      _$ReplayToInvitationCommandCopyWithImpl<$Res>;
+abstract class $ReplyToInvitationCommandCopyWith<$Res> {
+  factory $ReplyToInvitationCommandCopyWith(ReplyToInvitationCommand value,
+          $Res Function(ReplyToInvitationCommand) then) =
+      _$ReplyToInvitationCommandCopyWithImpl<$Res>;
   $Res call({String invitationId, String status});
 }
 
 /// @nodoc
-class _$ReplayToInvitationCommandCopyWithImpl<$Res>
-    implements $ReplayToInvitationCommandCopyWith<$Res> {
-  _$ReplayToInvitationCommandCopyWithImpl(this._value, this._then);
+class _$ReplyToInvitationCommandCopyWithImpl<$Res>
+    implements $ReplyToInvitationCommandCopyWith<$Res> {
+  _$ReplyToInvitationCommandCopyWithImpl(this._value, this._then);
 
-  final ReplayToInvitationCommand _value;
+  final ReplyToInvitationCommand _value;
   // ignore: unused_field
-  final $Res Function(ReplayToInvitationCommand) _then;
+  final $Res Function(ReplyToInvitationCommand) _then;
 
   @override
   $Res call({
@@ -66,35 +66,34 @@ class _$ReplayToInvitationCommandCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_ReplayToInvitationCommandCopyWith<$Res>
-    implements $ReplayToInvitationCommandCopyWith<$Res> {
-  factory _$$_ReplayToInvitationCommandCopyWith(
-          _$_ReplayToInvitationCommand value,
-          $Res Function(_$_ReplayToInvitationCommand) then) =
-      __$$_ReplayToInvitationCommandCopyWithImpl<$Res>;
+abstract class _$$_ReplyToInvitationCommandCopyWith<$Res>
+    implements $ReplyToInvitationCommandCopyWith<$Res> {
+  factory _$$_ReplyToInvitationCommandCopyWith(
+          _$_ReplyToInvitationCommand value,
+          $Res Function(_$_ReplyToInvitationCommand) then) =
+      __$$_ReplyToInvitationCommandCopyWithImpl<$Res>;
   @override
   $Res call({String invitationId, String status});
 }
 
 /// @nodoc
-class __$$_ReplayToInvitationCommandCopyWithImpl<$Res>
-    extends _$ReplayToInvitationCommandCopyWithImpl<$Res>
-    implements _$$_ReplayToInvitationCommandCopyWith<$Res> {
-  __$$_ReplayToInvitationCommandCopyWithImpl(
-      _$_ReplayToInvitationCommand _value,
-      $Res Function(_$_ReplayToInvitationCommand) _then)
-      : super(_value, (v) => _then(v as _$_ReplayToInvitationCommand));
+class __$$_ReplyToInvitationCommandCopyWithImpl<$Res>
+    extends _$ReplyToInvitationCommandCopyWithImpl<$Res>
+    implements _$$_ReplyToInvitationCommandCopyWith<$Res> {
+  __$$_ReplyToInvitationCommandCopyWithImpl(_$_ReplyToInvitationCommand _value,
+      $Res Function(_$_ReplyToInvitationCommand) _then)
+      : super(_value, (v) => _then(v as _$_ReplyToInvitationCommand));
 
   @override
-  _$_ReplayToInvitationCommand get _value =>
-      super._value as _$_ReplayToInvitationCommand;
+  _$_ReplyToInvitationCommand get _value =>
+      super._value as _$_ReplyToInvitationCommand;
 
   @override
   $Res call({
     Object? invitationId = freezed,
     Object? status = freezed,
   }) {
-    return _then(_$_ReplayToInvitationCommand(
+    return _then(_$_ReplyToInvitationCommand(
       invitationId: invitationId == freezed
           ? _value.invitationId
           : invitationId // ignore: cast_nullable_to_non_nullable
@@ -109,12 +108,13 @@ class __$$_ReplayToInvitationCommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReplayToInvitationCommand implements _ReplayToInvitationCommand {
-  const _$_ReplayToInvitationCommand(
-      {required this.invitationId, required this.status});
+class _$_ReplyToInvitationCommand extends _ReplyToInvitationCommand {
+  const _$_ReplyToInvitationCommand(
+      {required this.invitationId, required this.status})
+      : super._();
 
-  factory _$_ReplayToInvitationCommand.fromJson(Map<String, dynamic> json) =>
-      _$$_ReplayToInvitationCommandFromJson(json);
+  factory _$_ReplyToInvitationCommand.fromJson(Map<String, dynamic> json) =>
+      _$$_ReplyToInvitationCommandFromJson(json);
 
   @override
   final String invitationId;
@@ -123,14 +123,14 @@ class _$_ReplayToInvitationCommand implements _ReplayToInvitationCommand {
 
   @override
   String toString() {
-    return 'ReplayToInvitationCommand(invitationId: $invitationId, status: $status)';
+    return 'ReplyToInvitationCommand(invitationId: $invitationId, status: $status)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReplayToInvitationCommand &&
+            other is _$_ReplyToInvitationCommand &&
             const DeepCollectionEquality()
                 .equals(other.invitationId, invitationId) &&
             const DeepCollectionEquality().equals(other.status, status));
@@ -145,25 +145,26 @@ class _$_ReplayToInvitationCommand implements _ReplayToInvitationCommand {
 
   @JsonKey(ignore: true)
   @override
-  _$$_ReplayToInvitationCommandCopyWith<_$_ReplayToInvitationCommand>
-      get copyWith => __$$_ReplayToInvitationCommandCopyWithImpl<
-          _$_ReplayToInvitationCommand>(this, _$identity);
+  _$$_ReplyToInvitationCommandCopyWith<_$_ReplyToInvitationCommand>
+      get copyWith => __$$_ReplyToInvitationCommandCopyWithImpl<
+          _$_ReplyToInvitationCommand>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReplayToInvitationCommandToJson(
+    return _$$_ReplyToInvitationCommandToJson(
       this,
     );
   }
 }
 
-abstract class _ReplayToInvitationCommand implements ReplayToInvitationCommand {
-  const factory _ReplayToInvitationCommand(
+abstract class _ReplyToInvitationCommand extends ReplyToInvitationCommand {
+  const factory _ReplyToInvitationCommand(
       {required final String invitationId,
-      required final String status}) = _$_ReplayToInvitationCommand;
+      required final String status}) = _$_ReplyToInvitationCommand;
+  const _ReplyToInvitationCommand._() : super._();
 
-  factory _ReplayToInvitationCommand.fromJson(Map<String, dynamic> json) =
-      _$_ReplayToInvitationCommand.fromJson;
+  factory _ReplyToInvitationCommand.fromJson(Map<String, dynamic> json) =
+      _$_ReplyToInvitationCommand.fromJson;
 
   @override
   String get invitationId;
@@ -171,6 +172,6 @@ abstract class _ReplayToInvitationCommand implements ReplayToInvitationCommand {
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$_ReplayToInvitationCommandCopyWith<_$_ReplayToInvitationCommand>
+  _$$_ReplyToInvitationCommandCopyWith<_$_ReplyToInvitationCommand>
       get copyWith => throw _privateConstructorUsedError;
 }

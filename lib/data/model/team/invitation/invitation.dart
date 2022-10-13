@@ -1,17 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/data/model/user/user.dart';
-
 part 'invitation.freezed.dart';
 part 'invitation.g.dart';
 
 @freezed
 class TeamInvitation with _$TeamInvitation {
   const factory TeamInvitation({
-    required final String invitationId,
-    required final Team team,
-    required final User invitedUser,
-    required final User invitedBy,
+    required final String id,
+    required final String teamId,
+    required final String invitedUserId,
+    required final String invitedByUserId,
     required final DateTime created,
     @Default(TeamInvitationStatus.unknown) TeamInvitationStatus status,
   }) = _TeamInvitation;

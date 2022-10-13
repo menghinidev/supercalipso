@@ -14,7 +14,7 @@ class TeamInvitationTile extends HookConsumerWidget {
   const TeamInvitationTile({Key? key, required this.invitation}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var team = ref.watch(teamProvider(invitation.team.id));
+    var team = ref.watch(teamProvider(invitation.teamId));
     return team.onValue(
       builder: (data) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +35,7 @@ class TeamInvitationTile extends HookConsumerWidget {
                   TextSpan(
                     children: [
                       TextSpan(text: 'Invited by: ', style: Theme.of(context).textTheme.titleSmall),
-                      TextSpan(text: invitation.invitedBy.displayName),
+                      TextSpan(text: invitation.invitedByUserId),
                     ],
                   ),
                 ),
@@ -64,6 +64,6 @@ class TeamInvitationTile extends HookConsumerWidget {
 
   reply(WidgetRef ref, TeamInvitationStatus status) => ref.read(teamServiceProvider).replyTeamInvitation(
         status: status,
-        teamInvitationId: invitation.invitationId,
+        teamInvitationId: invitation.id,
       );
 }

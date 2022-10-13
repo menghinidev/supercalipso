@@ -8,15 +8,16 @@ part of 'subscription.dart';
 
 _$_TeamSubscription _$$_TeamSubscriptionFromJson(Map<String, dynamic> json) =>
     _$_TeamSubscription(
-      subscribedUser:
-          User.fromJson(json['subscribedUser'] as Map<String, dynamic>),
-      team: Team.fromJson(json['team'] as Map<String, dynamic>),
+      id: json['id'] as String,
+      subscribedUserId: json['subscribedUserId'] as String,
+      teamId: json['teamId'] as String,
       joined: DateTime.parse(json['joined'] as String),
     );
 
 Map<String, dynamic> _$$_TeamSubscriptionToJson(_$_TeamSubscription instance) =>
     <String, dynamic>{
-      'subscribedUser': instance.subscribedUser,
-      'team': instance.team,
+      'id': instance.id,
+      'subscribedUserId': instance.subscribedUserId,
+      'teamId': instance.teamId,
       'joined': instance.joined.toIso8601String(),
     };

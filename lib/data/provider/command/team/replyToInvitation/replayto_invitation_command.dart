@@ -4,11 +4,12 @@ part 'replayto_invitation_command.freezed.dart';
 part 'replayto_invitation_command.g.dart';
 
 @freezed
-class ReplayToInvitationCommand with _$ReplayToInvitationCommand {
-  const factory ReplayToInvitationCommand({
+class ReplyToInvitationCommand with _$ReplyToInvitationCommand {
+  const ReplyToInvitationCommand._();
+  const factory ReplyToInvitationCommand({
     required String invitationId,
     required String status,
-  }) = _ReplayToInvitationCommand;
+  }) = _ReplyToInvitationCommand;
 
-  factory ReplayToInvitationCommand.fromJson(Map<String, dynamic> json) => _$ReplayToInvitationCommandFromJson(json);
+  factory ReplyToInvitationCommand.fromJson(Map<String, dynamic> json) => _$ReplyToInvitationCommandFromJson(json);
 }

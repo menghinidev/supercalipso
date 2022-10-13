@@ -20,11 +20,11 @@ TeamEvent _$TeamEventFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TeamEvent {
-  String get eventId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   DateTime get startTime => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  Team get team => throw _privateConstructorUsedError;
+  String get teamId => throw _privateConstructorUsedError;
   Duration? get duration => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,14 +38,12 @@ abstract class $TeamEventCopyWith<$Res> {
   factory $TeamEventCopyWith(TeamEvent value, $Res Function(TeamEvent) then) =
       _$TeamEventCopyWithImpl<$Res>;
   $Res call(
-      {String eventId,
+      {String id,
       String name,
       DateTime startTime,
       String? description,
-      Team team,
+      String teamId,
       Duration? duration});
-
-  $TeamCopyWith<$Res> get team;
 }
 
 /// @nodoc
@@ -58,17 +56,17 @@ class _$TeamEventCopyWithImpl<$Res> implements $TeamEventCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? eventId = freezed,
+    Object? id = freezed,
     Object? name = freezed,
     Object? startTime = freezed,
     Object? description = freezed,
-    Object? team = freezed,
+    Object? teamId = freezed,
     Object? duration = freezed,
   }) {
     return _then(_value.copyWith(
-      eventId: eventId == freezed
-          ? _value.eventId
-          : eventId // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -82,22 +80,15 @@ class _$TeamEventCopyWithImpl<$Res> implements $TeamEventCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      team: team == freezed
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as Team,
+      teamId: teamId == freezed
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as String,
       duration: duration == freezed
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration?,
     ));
-  }
-
-  @override
-  $TeamCopyWith<$Res> get team {
-    return $TeamCopyWith<$Res>(_value.team, (value) {
-      return _then(_value.copyWith(team: value));
-    });
   }
 }
 
@@ -108,15 +99,12 @@ abstract class _$$_TeamEventCopyWith<$Res> implements $TeamEventCopyWith<$Res> {
       __$$_TeamEventCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String eventId,
+      {String id,
       String name,
       DateTime startTime,
       String? description,
-      Team team,
+      String teamId,
       Duration? duration});
-
-  @override
-  $TeamCopyWith<$Res> get team;
 }
 
 /// @nodoc
@@ -131,17 +119,17 @@ class __$$_TeamEventCopyWithImpl<$Res> extends _$TeamEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? eventId = freezed,
+    Object? id = freezed,
     Object? name = freezed,
     Object? startTime = freezed,
     Object? description = freezed,
-    Object? team = freezed,
+    Object? teamId = freezed,
     Object? duration = freezed,
   }) {
     return _then(_$_TeamEvent(
-      eventId: eventId == freezed
-          ? _value.eventId
-          : eventId // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -155,10 +143,10 @@ class __$$_TeamEventCopyWithImpl<$Res> extends _$TeamEventCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      team: team == freezed
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as Team,
+      teamId: teamId == freezed
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as String,
       duration: duration == freezed
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -171,11 +159,11 @@ class __$$_TeamEventCopyWithImpl<$Res> extends _$TeamEventCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TeamEvent extends _TeamEvent {
   const _$_TeamEvent(
-      {required this.eventId,
+      {required this.id,
       required this.name,
       required this.startTime,
       this.description,
-      required this.team,
+      required this.teamId,
       this.duration = Duration.zero})
       : super._();
 
@@ -183,7 +171,7 @@ class _$_TeamEvent extends _TeamEvent {
       _$$_TeamEventFromJson(json);
 
   @override
-  final String eventId;
+  final String id;
   @override
   final String name;
   @override
@@ -191,14 +179,14 @@ class _$_TeamEvent extends _TeamEvent {
   @override
   final String? description;
   @override
-  final Team team;
+  final String teamId;
   @override
   @JsonKey()
   final Duration? duration;
 
   @override
   String toString() {
-    return 'TeamEvent(eventId: $eventId, name: $name, startTime: $startTime, description: $description, team: $team, duration: $duration)';
+    return 'TeamEvent(id: $id, name: $name, startTime: $startTime, description: $description, teamId: $teamId, duration: $duration)';
   }
 
   @override
@@ -206,12 +194,12 @@ class _$_TeamEvent extends _TeamEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TeamEvent &&
-            const DeepCollectionEquality().equals(other.eventId, eventId) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.team, team) &&
+            const DeepCollectionEquality().equals(other.teamId, teamId) &&
             const DeepCollectionEquality().equals(other.duration, duration));
   }
 
@@ -219,11 +207,11 @@ class _$_TeamEvent extends _TeamEvent {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(eventId),
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(startTime),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(team),
+      const DeepCollectionEquality().hash(teamId),
       const DeepCollectionEquality().hash(duration));
 
   @JsonKey(ignore: true)
@@ -241,11 +229,11 @@ class _$_TeamEvent extends _TeamEvent {
 
 abstract class _TeamEvent extends TeamEvent {
   const factory _TeamEvent(
-      {required final String eventId,
+      {required final String id,
       required final String name,
       required final DateTime startTime,
       final String? description,
-      required final Team team,
+      required final String teamId,
       final Duration? duration}) = _$_TeamEvent;
   const _TeamEvent._() : super._();
 
@@ -253,7 +241,7 @@ abstract class _TeamEvent extends TeamEvent {
       _$_TeamEvent.fromJson;
 
   @override
-  String get eventId;
+  String get id;
   @override
   String get name;
   @override
@@ -261,7 +249,7 @@ abstract class _TeamEvent extends TeamEvent {
   @override
   String? get description;
   @override
-  Team get team;
+  String get teamId;
   @override
   Duration? get duration;
   @override

@@ -25,6 +25,7 @@ mixin _$CreateTeamInvitationCommand {
   String get invitedByUserId => throw _privateConstructorUsedError;
   String get teamId => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $CreateTeamInvitationCommandCopyWith<$Res> {
       {String invitedUserId,
       String invitedByUserId,
       String teamId,
-      DateTime createdAt});
+      DateTime createdAt,
+      String status});
 }
 
 /// @nodoc
@@ -60,6 +62,7 @@ class _$CreateTeamInvitationCommandCopyWithImpl<$Res>
     Object? invitedByUserId = freezed,
     Object? teamId = freezed,
     Object? createdAt = freezed,
+    Object? status = freezed,
   }) {
     return _then(_value.copyWith(
       invitedUserId: invitedUserId == freezed
@@ -78,6 +81,10 @@ class _$CreateTeamInvitationCommandCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -94,7 +101,8 @@ abstract class _$$_CreateTeamInvitationCommandCopyWith<$Res>
       {String invitedUserId,
       String invitedByUserId,
       String teamId,
-      DateTime createdAt});
+      DateTime createdAt,
+      String status});
 }
 
 /// @nodoc
@@ -116,6 +124,7 @@ class __$$_CreateTeamInvitationCommandCopyWithImpl<$Res>
     Object? invitedByUserId = freezed,
     Object? teamId = freezed,
     Object? createdAt = freezed,
+    Object? status = freezed,
   }) {
     return _then(_$_CreateTeamInvitationCommand(
       invitedUserId: invitedUserId == freezed
@@ -134,6 +143,10 @@ class __$$_CreateTeamInvitationCommandCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -145,7 +158,8 @@ class _$_CreateTeamInvitationCommand extends _CreateTeamInvitationCommand {
       {required this.invitedUserId,
       required this.invitedByUserId,
       required this.teamId,
-      required this.createdAt})
+      required this.createdAt,
+      required this.status})
       : super._();
 
   factory _$_CreateTeamInvitationCommand.fromJson(Map<String, dynamic> json) =>
@@ -159,10 +173,12 @@ class _$_CreateTeamInvitationCommand extends _CreateTeamInvitationCommand {
   final String teamId;
   @override
   final DateTime createdAt;
+  @override
+  final String status;
 
   @override
   String toString() {
-    return 'CreateTeamInvitationCommand(invitedUserId: $invitedUserId, invitedByUserId: $invitedByUserId, teamId: $teamId, createdAt: $createdAt)';
+    return 'CreateTeamInvitationCommand(invitedUserId: $invitedUserId, invitedByUserId: $invitedByUserId, teamId: $teamId, createdAt: $createdAt, status: $status)';
   }
 
   @override
@@ -175,7 +191,8 @@ class _$_CreateTeamInvitationCommand extends _CreateTeamInvitationCommand {
             const DeepCollectionEquality()
                 .equals(other.invitedByUserId, invitedByUserId) &&
             const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt));
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.status, status));
   }
 
   @JsonKey(ignore: true)
@@ -185,7 +202,8 @@ class _$_CreateTeamInvitationCommand extends _CreateTeamInvitationCommand {
       const DeepCollectionEquality().hash(invitedUserId),
       const DeepCollectionEquality().hash(invitedByUserId),
       const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(createdAt));
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
   @override
@@ -207,7 +225,8 @@ abstract class _CreateTeamInvitationCommand
       {required final String invitedUserId,
       required final String invitedByUserId,
       required final String teamId,
-      required final DateTime createdAt}) = _$_CreateTeamInvitationCommand;
+      required final DateTime createdAt,
+      required final String status}) = _$_CreateTeamInvitationCommand;
   const _CreateTeamInvitationCommand._() : super._();
 
   factory _CreateTeamInvitationCommand.fromJson(Map<String, dynamic> json) =
@@ -221,6 +240,8 @@ abstract class _CreateTeamInvitationCommand
   String get teamId;
   @override
   DateTime get createdAt;
+  @override
+  String get status;
   @override
   @JsonKey(ignore: true)
   _$$_CreateTeamInvitationCommandCopyWith<_$_CreateTeamInvitationCommand>
