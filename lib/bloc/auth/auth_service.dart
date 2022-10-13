@@ -21,19 +21,23 @@ class AuthService {
   final TeamRepository teamRepository;
   final EventRepository eventRepository;
 
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'profile',
+    ],
+  );
+
   AuthService({required this.authRepository, required this.teamRepository, required this.eventRepository});
 
   Future silentLogin() async {
     var uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid == null) return Future.value();
+    if (uid == null) return await authRepository.logout();
     return await authRepository.silentLogin(uid: uid);
   }
 
   Future loginWithGoogle() async {
-    final googleUser = await GoogleSignIn(scopes: [
-      'email',
-      'profile',
-    ]).signIn();
+    final googleUser = await googleSignIn.signIn();
     final googleAuth = await googleUser?.authentication;
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
@@ -45,6 +49,7 @@ class AuthService {
 
   Future logout() async {
     await FirebaseAuth.instance.signOut();
+    await googleSignIn.disconnect();
     return await authRepository.logout();
   }
 }

@@ -8,3 +8,10 @@ class User with _$User {
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 }
+
+extension UserListExtension on Iterable<User> {
+  String concatNames() => fold(
+        '',
+        (p, e) => p.isEmpty ? e.displayName : '$p, ${e.displayName}',
+      );
+}

@@ -45,6 +45,11 @@ class AuthRepository {
     return user;
   }
 
+  Future<Response<User>> getUserById({required String id}) async {
+    var user = await dataSource.getUserByUserId(userId: id);
+    return user;
+  }
+
   Future logout() async {
     loggedUser = null;
     authStreamController.add(null);

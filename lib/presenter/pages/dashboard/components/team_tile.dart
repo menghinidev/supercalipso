@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/bloc/team/team_service.dart';
+import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/data/model/team/team.dart';
+import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/presenter/components/icon/custom_icon.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
 import 'package:supercalipso/presenter/pages/dashboard/components/event_generator_sheet.dart';
@@ -17,18 +20,14 @@ class TeamTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var users = ref.watch(teamMembersProvider(team.id));
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 200),
       child: CustomTile(
         leading: CircleAvatar(child: Text(team.name[0])),
         title: team.name,
         onTap: () => ref.read(routerProvider).go(TeamPageRoute.createPath(team.id)),
-        subtitle:
-            'Users' /* team.subscriptions.fold(
-          '',
-          (p, e) => p!.isEmpty ? e.subscribedUser.displayName : '$p, ${e.subscribedUser.displayName}',
-        ) */
-        ,
+        subtitle: users.onDefault(builder: (data) => data.concatNames(), defaultValue: ''),
         trailing: PopupMenuButton<String>(
           position: PopupMenuPosition.under,
           shape: Shapes.lowRoundedBorder,

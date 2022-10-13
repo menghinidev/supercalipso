@@ -85,4 +85,12 @@ class TeamFirestoreDataSource extends ITeamDataSource {
     await teamOwnerSubDocument.set(sub.toJson());
     return Responses.success(null);
   }
+
+  @override
+  Future<Response<List<TeamSubscription>>> readTeamSubscriptions({required String teamId}) async {
+    var collection = firestore.collection(FirestoreCollections.subscriptions).where('teamId', isEqualTo: teamId);
+    var data = await collection.get();
+    var mappedSubs = data.docs.map((e) => TeamSubscription.fromJson(e.data())).toList();
+    return Responses.success(mappedSubs);
+  }
 }

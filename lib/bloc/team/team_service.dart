@@ -6,7 +6,9 @@ import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
+import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
+import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/data/repository/note_repository.dart';
@@ -24,6 +26,10 @@ final teamInvitationsProvider = FutureProvider<Response<List<TeamInvitation>>>((
   return ref.watch(teamServiceProvider).getTeamsInvitations();
 });
 
+final teamMembersProvider = FutureProvider.family<List<User>, String>((ref, id) async {
+  return ref.watch(teamServiceProvider).getTeamMembers(teamId: id);
+});
+
 class TeamService {
   final TeamRepository teamRepository;
   final EventRepository eventRepository;
@@ -36,6 +42,17 @@ class TeamService {
     required this.eventRepository,
     required this.noteRepository,
   });
+
+  Future<List<User>> getTeamMembers({required String teamId}) async {
+    var userId = authRepository.loggedUser?.uid;
+    if (userId == null) return Future.error('error');
+    var team = await teamRepository.getTeamSubscriptions(teamId: teamId);
+    var users = await team.flatAndCollectAsync<User, TeamSubscription>(
+      team.payload!,
+      (source) => authRepository.getUserById(id: source.subscribedUserId),
+    );
+    return users.isError ? Future.error('error') : Future.value(users.payload!);
+  }
 
   Future<Response<List<Team>>> getUserTeams() async {
     var userId = authRepository.loggedUser?.uid;

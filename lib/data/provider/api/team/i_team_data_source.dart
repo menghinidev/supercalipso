@@ -8,6 +8,7 @@ import 'package:supercalipso/plugin/utils.dart';
 
 abstract class ITeamDataSource {
   Future<Response<List<TeamSubscription>>> readUserTeamsSubscriptions({required String userId});
+  Future<Response<List<TeamSubscription>>> readTeamSubscriptions({required String teamId});
   Future<Response<List<TeamInvitation>>> readUserTeamsInvitations({required String userId});
   Future<Response> replyTeamInvitation({required ReplyToInvitationCommand command});
   Future<Response<Team>> readTeam({required String teamId});

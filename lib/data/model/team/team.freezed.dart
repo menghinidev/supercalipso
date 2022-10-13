@@ -22,9 +22,6 @@ Team _$TeamFromJson(Map<String, dynamic> json) {
 mixin _$Team {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<TeamSubscription> get subscriptions =>
-      throw _privateConstructorUsedError;
-  List<TeamInvitation> get invitations => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,11 +32,7 @@ mixin _$Team {
 abstract class $TeamCopyWith<$Res> {
   factory $TeamCopyWith(Team value, $Res Function(Team) then) =
       _$TeamCopyWithImpl<$Res>;
-  $Res call(
-      {String id,
-      String name,
-      List<TeamSubscription> subscriptions,
-      List<TeamInvitation> invitations});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -54,8 +47,6 @@ class _$TeamCopyWithImpl<$Res> implements $TeamCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? subscriptions = freezed,
-    Object? invitations = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -66,14 +57,6 @@ class _$TeamCopyWithImpl<$Res> implements $TeamCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      subscriptions: subscriptions == freezed
-          ? _value.subscriptions
-          : subscriptions // ignore: cast_nullable_to_non_nullable
-              as List<TeamSubscription>,
-      invitations: invitations == freezed
-          ? _value.invitations
-          : invitations // ignore: cast_nullable_to_non_nullable
-              as List<TeamInvitation>,
     ));
   }
 }
@@ -83,11 +66,7 @@ abstract class _$$_TeamCopyWith<$Res> implements $TeamCopyWith<$Res> {
   factory _$$_TeamCopyWith(_$_Team value, $Res Function(_$_Team) then) =
       __$$_TeamCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String id,
-      String name,
-      List<TeamSubscription> subscriptions,
-      List<TeamInvitation> invitations});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -103,8 +82,6 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? subscriptions = freezed,
-    Object? invitations = freezed,
   }) {
     return _then(_$_Team(
       id: id == freezed
@@ -115,14 +92,6 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      subscriptions: subscriptions == freezed
-          ? _value._subscriptions
-          : subscriptions // ignore: cast_nullable_to_non_nullable
-              as List<TeamSubscription>,
-      invitations: invitations == freezed
-          ? _value._invitations
-          : invitations // ignore: cast_nullable_to_non_nullable
-              as List<TeamInvitation>,
     ));
   }
 }
@@ -130,14 +99,7 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Team extends _Team {
-  const _$_Team(
-      {required this.id,
-      required this.name,
-      final List<TeamSubscription> subscriptions = const <TeamSubscription>[],
-      final List<TeamInvitation> invitations = const <TeamInvitation>[]})
-      : _subscriptions = subscriptions,
-        _invitations = invitations,
-        super._();
+  const _$_Team({required this.id, required this.name}) : super._();
 
   factory _$_Team.fromJson(Map<String, dynamic> json) => _$$_TeamFromJson(json);
 
@@ -145,25 +107,10 @@ class _$_Team extends _Team {
   final String id;
   @override
   final String name;
-  final List<TeamSubscription> _subscriptions;
-  @override
-  @JsonKey()
-  List<TeamSubscription> get subscriptions {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subscriptions);
-  }
-
-  final List<TeamInvitation> _invitations;
-  @override
-  @JsonKey()
-  List<TeamInvitation> get invitations {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_invitations);
-  }
 
   @override
   String toString() {
-    return 'Team(id: $id, name: $name, subscriptions: $subscriptions, invitations: $invitations)';
+    return 'Team(id: $id, name: $name)';
   }
 
   @override
@@ -172,11 +119,7 @@ class _$_Team extends _Team {
         (other.runtimeType == runtimeType &&
             other is _$_Team &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other._subscriptions, _subscriptions) &&
-            const DeepCollectionEquality()
-                .equals(other._invitations, _invitations));
+            const DeepCollectionEquality().equals(other.name, name));
   }
 
   @JsonKey(ignore: true)
@@ -184,9 +127,7 @@ class _$_Team extends _Team {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(_subscriptions),
-      const DeepCollectionEquality().hash(_invitations));
+      const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
@@ -202,11 +143,8 @@ class _$_Team extends _Team {
 }
 
 abstract class _Team extends Team {
-  const factory _Team(
-      {required final String id,
-      required final String name,
-      final List<TeamSubscription> subscriptions,
-      final List<TeamInvitation> invitations}) = _$_Team;
+  const factory _Team({required final String id, required final String name}) =
+      _$_Team;
   const _Team._() : super._();
 
   factory _Team.fromJson(Map<String, dynamic> json) = _$_Team.fromJson;
@@ -215,10 +153,6 @@ abstract class _Team extends Team {
   String get id;
   @override
   String get name;
-  @override
-  List<TeamSubscription> get subscriptions;
-  @override
-  List<TeamInvitation> get invitations;
   @override
   @JsonKey(ignore: true)
   _$$_TeamCopyWith<_$_Team> get copyWith => throw _privateConstructorUsedError;

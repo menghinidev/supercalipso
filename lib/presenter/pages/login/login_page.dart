@@ -17,23 +17,21 @@ class LoginPage extends HookConsumerWidget {
     return CustomScaffold(
       body: Center(
         child: loggingState.onValue(
-          builder: (user) => user != null
-              ? Container()
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: Dimensions.hugeSize),
-                      child: SuperCalipsoBrand(),
-                    ),
-                    SignInButton(
-                      Buttons.Google,
-                      shape: Shapes.lowRoundedBorder,
-                      onPressed: () => ref.read(authServiceProvider).loginWithGoogle(),
-                    ),
-                  ],
-                ),
+          builder: (user) => Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(bottom: Dimensions.hugeSize),
+                child: SuperCalipsoBrand(),
+              ),
+              SignInButton(
+                Buttons.Google,
+                shape: Shapes.lowRoundedBorder,
+                onPressed: () => ref.read(authServiceProvider).loginWithGoogle(),
+              ),
+            ],
+          ),
         ),
       ),
     );

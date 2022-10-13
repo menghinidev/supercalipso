@@ -14,7 +14,8 @@ class NoteMockedDataSource with IdentifierFactory {
   Future<Response<List<Note>>> readUserNotes({required String userId}) async {
     var user = mocked.users.getWhere((element) => element.uid == userId);
     if (user == null) return Responses.failure([]);
-    var userTeamIds = mocked.teams.where((element) => element.hasUserSub(userId: userId)).map((e) => e.id).toList();
+    var userTeamIds =
+        mocked.teamSubs.where((element) => element.subscribedUserId == userId).map((e) => e.teamId).toList();
     var notes = mocked.notes.where((element) => userTeamIds.contains(element.teamId)).toList();
     return Future.value(Responses.success(notes));
   }

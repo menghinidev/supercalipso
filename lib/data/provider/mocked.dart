@@ -30,7 +30,7 @@ class MockValues with IdentifierFactory {
     teamInvites = <TeamInvitation>[];
     events = <TeamEvent>[];
     notes = <Note>[];
-    var initialTeam = Team(id: createID(), name: 'Tim', subscriptions: teamSubs, invitations: teamInvites);
+    var initialTeam = Team(id: createID(), name: 'Tim');
     teams = [initialTeam];
     teamSubs.addAll([
       TeamSubscription(

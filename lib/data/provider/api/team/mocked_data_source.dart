@@ -73,4 +73,10 @@ class TeamMockedDataSource extends ITeamDataSource {
     // TODO: implement createTeam
     throw UnimplementedError();
   }
+
+  @override
+  Future<Response<List<TeamSubscription>>> readTeamSubscriptions({required String teamId}) {
+    // TODO: implement readTeamSubscriptions
+    throw UnimplementedError();
+  }
 }
