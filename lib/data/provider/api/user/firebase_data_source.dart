@@ -10,9 +10,9 @@ class UserFirestoreDataSource extends IUserDataSource {
 
   @override
   Future<Response<User>> getUserByUserId({required String userId}) async {
-    var user = await firestore.collection(FirestoreCollections.users).doc(userId).get();
-    if (!user.exists) return Responses.failure([]);
-    return Responses.success(User.fromJson(user.data()!));
+    var user = await firestore.collection(FirestoreCollections.users).where('uid', isEqualTo: userId).get();
+    if (user.docs.isEmpty) return Responses.failure([]);
+    return Responses.success(User.fromJson(user.docs.first.data()));
   }
 
   @override

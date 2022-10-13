@@ -49,6 +49,7 @@ class NoteFirestoreDataSource extends INoteDataSource {
         .collection(FirestoreCollections.subscriptions)
         .where('subscribedUserId', isEqualTo: userId)
         .get();
+    if (subscriptions.docs.isEmpty) return Responses.success(<Note>[]);
     var teamIds = subscriptions.docs.map((e) => TeamSubscription.fromJson(e.data())).map((e) => e.teamId).toList();
     var notes = await firestore.collection(FirestoreCollections.notes).where('teamId', whereIn: teamIds).get();
     return Responses.success(notes.docs.map((e) => Note.fromJson(e.data())).toList());

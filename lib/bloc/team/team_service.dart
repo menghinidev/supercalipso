@@ -51,10 +51,7 @@ class TeamService {
     return response;
   }
 
-  Future<Response> replyTeamInvitation({
-    required TeamInvitationStatus status,
-    required String teamInvitationId,
-  }) async {
+  Future<Response> replyTeamInvitation({required TeamInvitationStatus status, required String teamInvitationId}) async {
     var userId = authRepository.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
     var response = await teamRepository.replyToTeamInvitation(
@@ -84,5 +81,11 @@ class TeamService {
           teamId: teamId,
         ));
     return response;
+  }
+
+  Future<Response> createTeam({required String name}) async {
+    var userId = authRepository.loggedUser?.uid;
+    if (userId == null) return Responses.failure([]);
+    return await teamRepository.createTeam(name: name, userId: userId);
   }
 }

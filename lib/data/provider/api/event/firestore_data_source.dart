@@ -38,6 +38,7 @@ class TeamEventFirestoreSource extends IEventDataSource {
         .collection(FirestoreCollections.subscriptions)
         .where('subscribedUserId', isEqualTo: userId)
         .get();
+    if (userSubs.docs.isEmpty) return Responses.success(<TeamEvent>[]);
     var mappedUserSubs = userSubs.docs.map((e) => TeamSubscription.fromJson(e.data())).toList();
     var events = await firestore
         .collection(FirestoreCollections.events)
