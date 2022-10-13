@@ -6,7 +6,7 @@ import 'package:supercalipso/data/provider/mocked.dart';
 import 'package:supercalipso/plugin/utils/extensions/list_extensions.dart';
 import 'package:supercalipso/plugin/utils/response.dart';
 
-class TeamEventProvider extends IEventDataSource with IdentifierFactory {
+class EventMockedDataSource extends IEventDataSource with IdentifierFactory {
   final mocked = MockValues.instance;
 
   @override

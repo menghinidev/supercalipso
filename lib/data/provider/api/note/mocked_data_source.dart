@@ -3,7 +3,7 @@ import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/provider/mocked.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
-class NoteProvider with IdentifierFactory {
+class NoteMockedDataSource with IdentifierFactory {
   var mocked = MockValues.instance;
 
   Future<Response<List<Note>>> readTeamNotes({required String teamId}) async {

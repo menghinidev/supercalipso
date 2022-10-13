@@ -1,14 +1,14 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/data/provider/api/event/mocked_data_source.dart';
+import 'package:supercalipso/data/provider/api/event/i_event_data_source.dart';
 import 'package:supercalipso/data/provider/command/event/create/create_event.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
 class EventRepository {
   final controller = BehaviorSubject<List<TeamEvent>>();
-  final provider = Installer.instance.get<TeamEventProvider>();
+  final provider = Installer.instance.get<IEventDataSource>();
 
   Stream<List<TeamEvent>> get eventsChanges => controller.stream;
 

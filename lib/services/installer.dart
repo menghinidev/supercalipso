@@ -1,9 +1,15 @@
 import 'package:get_it/get_it.dart';
+import 'package:supercalipso/data/provider/api/event/firestore_data_source.dart';
+import 'package:supercalipso/data/provider/api/event/i_event_data_source.dart';
 import 'package:supercalipso/data/provider/api/event/mocked_data_source.dart';
+import 'package:supercalipso/data/provider/api/note/firestore_data_source.dart';
+import 'package:supercalipso/data/provider/api/note/i_note_data_source.dart';
+import 'package:supercalipso/data/provider/api/team/firestore_data_source.dart';
+import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
 import 'package:supercalipso/data/provider/api/user/firebase_data_source.dart';
 import 'package:supercalipso/data/provider/api/user/i_user_data_source.dart';
-import 'package:supercalipso/data/provider/api/note/note_provider.dart';
-import 'package:supercalipso/data/provider/api/team/team_provider.dart';
+import 'package:supercalipso/data/provider/api/note/mocked_data_source.dart';
+import 'package:supercalipso/data/provider/api/team/mocked_data_source.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/data/repository/note_repository.dart';
@@ -28,10 +34,10 @@ class Installer {
   }
 
   void installDataProviders() {
-    GetIt.instance.registerSingleton<TeamsProvider>(TeamsProvider());
-    GetIt.instance.registerSingleton<TeamEventProvider>(TeamEventProvider());
-    GetIt.instance.registerSingleton<NoteProvider>(NoteProvider());
-    GetIt.instance.registerSingleton<IUserDataSource>(UserFirebaseDataSource());
+    GetIt.instance.registerSingleton<IUserDataSource>(UserFirestoreDataSource());
+    GetIt.instance.registerSingleton<ITeamDataSource>(TeamFirestoreDataSource());
+    GetIt.instance.registerSingleton<IEventDataSource>(TeamEventFirestoreSource());
+    GetIt.instance.registerSingleton<INoteDataSource>(NoteFirestoreDataSource());
   }
 
   void installService<T extends Object>(T instance) => GetIt.instance.registerSingleton<T>(instance);

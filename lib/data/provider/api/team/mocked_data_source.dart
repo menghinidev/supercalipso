@@ -3,26 +3,32 @@ import 'dart:math';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
+import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
+import 'package:supercalipso/data/provider/command/team/createInvitation/create_team_invitation_command.dart';
+import 'package:supercalipso/data/provider/command/team/replyToInvitation/replayto_invitation_command.dart';
 import 'package:supercalipso/data/provider/mocked.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
-class TeamsProvider {
+class TeamMockedDataSource extends ITeamDataSource {
   var mocked = MockValues.instance;
 
+  @override
   Future<Response<List<TeamSubscription>>> readUserTeamsSubscriptions({required String userId}) {
     var teams = mocked.teamSubs.where((element) => element.subscribedUser.uid == userId).toList();
     return Future.value(Responses.success(teams));
   }
 
+  @override
   Future<Response<List<TeamInvitation>>> readUserTeamsInvitations({required String userId}) {
     var invites = mocked.teamInvites.where((element) => element.invitedUser.uid == userId).toList();
     return Future.value(Responses.success(invites));
   }
 
-  Future<Response> replyTeamInvitation({required String invitationId, required String newStatus}) {
-    var invitation = mocked.teamInvites.getWhere((element) => element.invitationId == invitationId);
+  @override
+  Future<Response> replyTeamInvitation({required ReplayToInvitationCommand command}) {
+    var invitation = mocked.teamInvites.getWhere((element) => element.invitationId == command.invitationId);
     if (invitation == null) return Future.value(Responses.failure([]));
-    var status = TeamInvitationStatus.fromString(newStatus);
+    var status = TeamInvitationStatus.fromString(command.status);
     var user = invitation.invitedUser;
     mocked.teamInvites.remove(invitation);
     invitation = invitation.copyWith(status: status);
@@ -37,21 +43,19 @@ class TeamsProvider {
     return Future.value(Responses.success(null));
   }
 
+  @override
   Future<Response<Team>> readTeam({required String teamId}) async {
     var team = mocked.teams.getWhere((element) => element.id == teamId);
     if (team == null) return Future.value(Responses.failure([]));
     return Future.value(Responses.success(team));
   }
 
-  Future<Response> createTeamInvitation({
-    required String invitedUserId,
-    required String teamOwnerId,
-    required String teamId,
-  }) {
+  @override
+  Future<Response> createTeamInvitation({required CreateTeamInvitationCommand command}) {
     var invitations = MockValues.instance.teamInvites;
-    var invitedUser = MockValues.instance.users.getWhere((element) => element.uid == invitedUserId);
-    var ownerUser = MockValues.instance.users.getWhere((element) => element.uid == teamOwnerId);
-    var team = MockValues.instance.teams.getWhere((element) => element.id == teamId);
+    var invitedUser = MockValues.instance.users.getWhere((element) => element.uid == command.invitedUserId);
+    var ownerUser = MockValues.instance.users.getWhere((element) => element.uid == command.invitedByUserId);
+    var team = MockValues.instance.teams.getWhere((element) => element.id == command.teamId);
     var newInvite = TeamInvitation(
       team: team!,
       invitationId: Random().nextInt(2000).toString(),

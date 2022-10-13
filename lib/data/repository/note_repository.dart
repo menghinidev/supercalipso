@@ -1,11 +1,13 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/note/note.dart';
-import 'package:supercalipso/data/provider/api/note/note_provider.dart';
+import 'package:supercalipso/data/provider/api/note/i_note_data_source.dart';
+import 'package:supercalipso/data/provider/api/note/mocked_data_source.dart';
+import 'package:supercalipso/data/provider/command/note/createNote/create_note_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
 class NoteRepository {
-  var dataProvider = Installer.instance.get<NoteProvider>();
+  var dataProvider = Installer.instance.get<INoteDataSource>();
   var controller = BehaviorSubject<List<Note>>();
 
   Stream<List<Note>> get notesChanges => controller.stream;
@@ -28,14 +30,13 @@ class NoteRepository {
     required String title,
     required String content,
   }) async {
-    return await dataProvider
-        .createTeamNote(
-          teamId: teamId,
-          title: title,
-          content: content,
-          modifiedByUserId: userId,
-        )
-        .ifSuccess((payload) => getUserNotes(userId: userId));
+    var command = CreateNoteCommand(
+      teamId: teamId,
+      title: title,
+      content: content,
+      modifiedByUserId: userId,
+    );
+    return await dataProvider.createNote(command: command).ifSuccess((payload) => getUserNotes(userId: userId));
   }
 
   Future<Response> deleteNote({required String noteId}) async {

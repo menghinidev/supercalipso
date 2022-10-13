@@ -4,14 +4,17 @@ import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/data/provider/api/team/team_provider.dart';
+import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
+import 'package:supercalipso/data/provider/api/team/mocked_data_source.dart';
+import 'package:supercalipso/data/provider/command/team/createInvitation/create_team_invitation_command.dart';
+import 'package:supercalipso/data/provider/command/team/replyToInvitation/replayto_invitation_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
 class TeamRepository {
   final BehaviorSubject<List<Team>> teamsController;
   final BehaviorSubject<List<TeamInvitation>> teamsInvitationsController;
-  final teamsDataProvider = Installer.instance.get<TeamsProvider>();
+  final teamsDataProvider = Installer.instance.get<ITeamDataSource>();
 
   TeamRepository()
       : teamsController = BehaviorSubject<List<Team>>(),
@@ -49,8 +52,9 @@ class TeamRepository {
     required String teamInvitationId,
     required String userId,
   }) async {
+    var command = ReplayToInvitationCommand(invitationId: teamInvitationId, status: status.name);
     return await teamsDataProvider
-        .replyTeamInvitation(invitationId: teamInvitationId, newStatus: status.name)
+        .replyTeamInvitation(command: command)
         .ifSuccessAsync((payload) => getUserTeamInvitations(userId: userId))
         .ifSuccessAsync((payload) => getUserTeams(userId: userId));
   }
@@ -60,8 +64,14 @@ class TeamRepository {
     required String ownerUserId,
     required String teamId,
   }) async {
+    var command = CreateTeamInvitationCommand(
+      invitedUserId: invitedUserId,
+      invitedByUserId: ownerUserId,
+      teamId: teamId,
+      createdAt: DateTime.now(),
+    );
     return await teamsDataProvider
-        .createTeamInvitation(invitedUserId: invitedUserId, teamOwnerId: ownerUserId, teamId: teamId)
+        .createTeamInvitation(command: command)
         .ifSuccessAsync((payload) => getUserTeams(userId: ownerUserId));
   }
 }
