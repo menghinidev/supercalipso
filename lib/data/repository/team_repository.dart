@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
-import 'package:rxdart/subjects.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/data/provider/team_provider.dart';
+import 'package:supercalipso/data/provider/api/team/team_provider.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
-import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class ThemeBuilder {
   static ThemeData buildTheme(BuildContext context) => ThemeData(

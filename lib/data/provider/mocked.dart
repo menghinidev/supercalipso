@@ -22,9 +22,9 @@ class MockValues with IdentifierFactory {
   late List<Note> notes;
 
   MockValues._() {
-    firstUser = const User(id: '1', name: 'Lu Cello', email: 'lorenzo@email.com');
-    secondUser = const User(id: '2', name: 'Lu Cavallo', email: 'lucavallo@email.com');
-    thirdUser = const User(id: '3', name: 'Lalli Gatore', email: 'lalligatore@email.com');
+    firstUser = const User(uid: '1', displayName: 'Lu Cello', email: 'lorenzo@email.com');
+    secondUser = const User(uid: '2', displayName: 'Lu Cavallo', email: 'lucavallo@email.com');
+    thirdUser = const User(uid: '3', displayName: 'Lalli Gatore', email: 'lalligatore@email.com');
     users = [firstUser, secondUser, thirdUser];
     teamSubs = <TeamSubscription>[];
     teamInvites = <TeamInvitation>[];

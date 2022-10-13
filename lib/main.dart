@@ -1,11 +1,9 @@
-import 'dart:collection';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
+import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/firebase_options.dart';
 import 'package:supercalipso/presenter/theme/theme_builder.dart';
 import 'package:supercalipso/services/installer.dart';
@@ -13,8 +11,8 @@ import 'package:supercalipso/services/navigation/router_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Installer.instance.launchStartPipeline();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Installer.instance.launchStartPipeline();
   runApp(const ProviderScope(child: SuperCalipso()));
 }
 
@@ -29,7 +27,7 @@ class _SuperCalipsoState extends ConsumerState<SuperCalipso> {
   @override
   void initState() {
     super.initState();
-    ref.read(authProvider).silentLogin();
+    ref.read(authServiceProvider).silentLogin();
   }
 
   @override

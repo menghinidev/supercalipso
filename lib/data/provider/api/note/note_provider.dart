@@ -12,7 +12,7 @@ class NoteProvider with IdentifierFactory {
   }
 
   Future<Response<List<Note>>> readUserNotes({required String userId}) async {
-    var user = mocked.users.getWhere((element) => element.id == userId);
+    var user = mocked.users.getWhere((element) => element.uid == userId);
     if (user == null) return Responses.failure([]);
     var notes = mocked.notes.where((element) => element.team.hasUserSub(userId: userId)).toList();
     return Future.value(Responses.success(notes));
@@ -30,7 +30,7 @@ class NoteProvider with IdentifierFactory {
     required String content,
     required String modifiedByUserId,
   }) async {
-    var user = mocked.users.getWhere((element) => element.id == modifiedByUserId);
+    var user = mocked.users.getWhere((element) => element.uid == modifiedByUserId);
     if (user == null) return Responses.failure([]);
     var team = mocked.teams.getWhere((element) => element.id == teamId);
     if (team == null) return Responses.failure([]);
@@ -52,7 +52,7 @@ class NoteProvider with IdentifierFactory {
     String? content,
     required String modifiedByUserId,
   }) async {
-    var user = mocked.users.getWhere((element) => element.id == modifiedByUserId);
+    var user = mocked.users.getWhere((element) => element.uid == modifiedByUserId);
     if (user == null) return Responses.failure([]);
     var note = mocked.notes.getWhere((element) => element.noteId == noteId);
     if (note == null) return Responses.failure([]);

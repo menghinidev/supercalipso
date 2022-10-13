@@ -3,9 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/data/model/user/user.dart';
-
 import 'package:supercalipso/presenter/components/avatar/custom_avatar.dart';
-import 'package:supercalipso/presenter/pages/profile/components/logout_button.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
@@ -65,12 +63,12 @@ class ProfileInfoHeader extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(Dimensions.largeSize),
             alignment: Alignment.center,
-            child: CustomAvatar(name: profile.name, radius: 40.0),
+            child: CustomAvatar(name: profile.displayName, radius: 40.0),
           ),
           Padding(
             padding: EdgeInsets.only(bottom: Dimensions.mediumSize + bottomMargin),
             child: Text(
-              profile.name,
+              profile.displayName,
               style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white),
             ),
           ),

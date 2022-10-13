@@ -19,7 +19,7 @@ class CustomBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomSheet(
-      onClosing: onClosing ?? () => print('Closing'),
+      onClosing: onClosing ?? () {},
       enableDrag: false,
       elevation: elevation ?? 20,
       backgroundColor: backgroundColor ?? Colors.white,

@@ -1,6 +1,5 @@
 library utils;
 
-export 'utils/cache/cache_value.dart';
 export 'utils/error/error_details.dart';
 export 'utils/extensions/list_extensions.dart';
 

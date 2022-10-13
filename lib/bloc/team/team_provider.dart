@@ -2,7 +2,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
-import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
 /// Repo

@@ -22,23 +22,23 @@ class Team with _$Team {
 extension TeamOperations on Team {
   bool hasUserSub({required String userId}) => subscriptions
       .where(
-        (element) => element.subscribedUser.id == userId,
+        (element) => element.subscribedUser.uid == userId,
       )
       .isNotEmpty;
 
   bool hasUserInvite({required String userId}) => invitations
       .where(
-        (element) => element.invitedUser.id == userId,
+        (element) => element.invitedUser.uid == userId,
       )
       .isNotEmpty;
 
   TeamSubscription? getUserSub({required String userId}) {
-    var res = subscriptions.where((element) => element.subscribedUser.id == userId);
+    var res = subscriptions.where((element) => element.subscribedUser.uid == userId);
     return res.isEmpty ? null : res.first;
   }
 
   TeamInvitation? getUserInvite({required String userId}) {
-    var res = invitations.where((element) => element.invitedUser.id == userId);
+    var res = invitations.where((element) => element.invitedUser.uid == userId);
     return res.isEmpty ? null : res.first;
   }
 

@@ -19,7 +19,7 @@ class NoteService {
   NoteService({required this.authRepo, required this.noteRepo});
 
   Future<Response> getUserNotes() async {
-    var userId = authRepo.loggedUser?.id;
+    var userId = authRepo.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
     return await noteRepo.getUserNotes(userId: userId);
   }
@@ -29,7 +29,7 @@ class NoteService {
     required String title,
     String? content,
   }) async {
-    var userId = authRepo.loggedUser?.id;
+    var userId = authRepo.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
     return await noteRepo.createNote(
       teamId: teamId,

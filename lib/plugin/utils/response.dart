@@ -53,12 +53,12 @@ class Responses {
 }
 
 abstract class Response<T> {
-  bool get isError => errors.isNotEmpty;
+  bool get isError => errors != null;
 
   T? get payload;
-  List<ErrorDetails> get errors;
+  List<ErrorDetails>? get errors;
 
-  bool hasError(int code) => errors.getWhere((element) => element.id == code) != null;
+  bool hasError(int code) => errors != null && errors!.getWhere((element) => element.id == code) != null;
 
   Response<B> map<B>(B Function(T? t) mapper);
 
@@ -90,7 +90,7 @@ class _Success<T> extends Response<T> {
   _Success({T? payload}) : _payload = payload;
 
   @override
-  List<ErrorDetails> get errors => [];
+  List<ErrorDetails>? get errors => null;
 
   @override
   T? get payload => _payload;
@@ -204,67 +204,6 @@ class _Failure<T> extends Response<T> {
       Future.value(_Failure(errors: errors));
 }
 
-class _Terminator<T> extends Response<T> {
-  final Response response;
-  _Terminator({required this.response});
-
-  @override
-  List<ErrorDetails> get errors => response.errors;
-
-  @override
-  Response<B> flatMap<B>(Response<B> Function(T t) mapper) => _Terminator<B>(response: response);
-
-  @override
-  Future<Response<B>> flatMapAsync<B>(Future<Response<B>> Function(T t) mapper) => Future.value(
-        _Terminator<B>(response: response),
-      );
-
-  @override
-  Response<T> ifError(Function(T payload) callback, {int? specificError}) => this;
-
-  @override
-  Future<Response<T>> ifErrorAsync(
-    Future Function(T payload) callback, {
-    int? specificError,
-  }) =>
-      Future.value(this);
-
-  @override
-  Response<T> ifSuccess(Function(T payload) callback) => this;
-
-  @override
-  Future<Response<T>> ifSuccessAsync(Future Function(T payload) callback) => Future.value(this);
-
-  @override
-  Response<B> map<B>(B Function(T t) mapper) => _Terminator<B>(response: response);
-
-  @override
-  Future<Response<B>> mapAsync<B>(Future<B> Function(T t) mapper) => Future.value(_Terminator<B>(response: response));
-
-  @override
-  T get payload => response.payload;
-
-  @override
-  Response<List<B>> flatAndCollect<B, X>(Iterable<X> source, Response<B> Function(X source) mapper) =>
-      _Terminator<List<B>>(response: response);
-
-  @override
-  Future<Response<List<B>>> flatAndCollectAsync<B, X>(
-          Iterable<X> source, Future<Response<B>> Function(X source) mapper) =>
-      Future.value(_Terminator<List<B>>(response: response));
-}
-
-extension ResponseTerminator<T> on Response<T> {
-  Response<T> ifErrorTerminate({int? code}) {
-    if (!isError) return this;
-    if (code == null) return _Terminator<T>(response: this);
-    if (hasError(code)) return _Terminator<T>(response: this);
-    return this;
-  }
-
-  Response<T> ifSuccessTerminate() => !isError ? _Terminator<T>(response: this) : this;
-}
-
 extension FutureResponseExtension<B> on Future<Response<B>> {
   Future<Response<T>> mapToResponse<T>(T Function(B? payload) mapper) async {
     var res = await this;
@@ -276,11 +215,6 @@ extension FutureResponseExtension<B> on Future<Response<B>> {
     return res.ifError(callback, specificError: specificError);
   }
 
-  Future<Response<B>> ifErrorTerminate(Function(B? payload) callback, {int? specificError}) async {
-    var res = await this;
-    return res.ifError(callback, specificError: specificError).ifErrorTerminate(code: specificError);
-  }
-
   Future<Response<B>> ifErrorAsync(Future Function(B? payload) callback, {int? specificError}) async {
     var res = await this;
     return res.ifErrorAsync(callback, specificError: specificError);
@@ -289,11 +223,6 @@ extension FutureResponseExtension<B> on Future<Response<B>> {
   Future<Response<B>> ifSuccess(Function(B? payload) callback) async {
     var res = await this;
     return res.ifSuccess(callback);
-  }
-
-  Future<Response<B>> ifSuccessTerminate(Function(B? payload) callback) async {
-    var res = await this;
-    return res.ifSuccess(callback).ifSuccessTerminate();
   }
 
   Future<Response<B>> ifSuccessAsync(Future Function(B? payload) callback) async {
@@ -321,7 +250,7 @@ extension FutureResponseExtension<B> on Future<Response<B>> {
     Response<T> Function(X source) mapper,
   ) async {
     var res = await this;
-    if (res.isError) return Responses.failure<List<T>>(res.errors);
+    if (res.isError) return Responses.failure<List<T>>(res.errors!);
     var response = Responses.success<List<T>>([]);
     for (var id in source) {
       response = response.flatMap((tab) => mapper(id).map((t) => tab!.appendInPlace(t!)));

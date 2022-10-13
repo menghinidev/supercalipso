@@ -1,6 +1,6 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/note/note.dart';
-import 'package:supercalipso/data/provider/note_provider.dart';
+import 'package:supercalipso/data/provider/api/note/note_provider.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
@@ -44,6 +44,6 @@ class NoteRepository {
     var note = noteResponse.payload!;
     return await dataProvider
         .deleteNote(noteId: noteId)
-        .ifSuccess((payload) => getUserNotes(userId: note.modifiedBy.id));
+        .ifSuccess((payload) => getUserNotes(userId: note.modifiedBy.uid));
   }
 }

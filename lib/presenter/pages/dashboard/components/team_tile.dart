@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/event/event_service.dart';
 import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/presenter/components/icon/custom_icon.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
@@ -26,7 +25,7 @@ class TeamTile extends HookConsumerWidget {
         onTap: () => ref.read(routerProvider).go(TeamPageRoute.createPath(team.id)),
         subtitle: team.subscriptions.fold(
           '',
-          (p, e) => p!.isEmpty ? e.subscribedUser.name : '$p, ${e.subscribedUser.name}',
+          (p, e) => p!.isEmpty ? e.subscribedUser.displayName : '$p, ${e.subscribedUser.displayName}',
         ),
         trailing: PopupMenuButton<String>(
           position: PopupMenuPosition.under,

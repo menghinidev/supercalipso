@@ -10,12 +10,12 @@ class TeamsProvider {
   var mocked = MockValues.instance;
 
   Future<Response<List<TeamSubscription>>> readUserTeamsSubscriptions({required String userId}) {
-    var teams = mocked.teamSubs.where((element) => element.subscribedUser.id == userId).toList();
+    var teams = mocked.teamSubs.where((element) => element.subscribedUser.uid == userId).toList();
     return Future.value(Responses.success(teams));
   }
 
   Future<Response<List<TeamInvitation>>> readUserTeamsInvitations({required String userId}) {
-    var invites = mocked.teamInvites.where((element) => element.invitedUser.id == userId).toList();
+    var invites = mocked.teamInvites.where((element) => element.invitedUser.uid == userId).toList();
     return Future.value(Responses.success(invites));
   }
 
@@ -49,8 +49,8 @@ class TeamsProvider {
     required String teamId,
   }) {
     var invitations = MockValues.instance.teamInvites;
-    var invitedUser = MockValues.instance.users.getWhere((element) => element.id == invitedUserId);
-    var ownerUser = MockValues.instance.users.getWhere((element) => element.id == teamOwnerId);
+    var invitedUser = MockValues.instance.users.getWhere((element) => element.uid == invitedUserId);
+    var ownerUser = MockValues.instance.users.getWhere((element) => element.uid == teamOwnerId);
     var team = MockValues.instance.teams.getWhere((element) => element.id == teamId);
     var newInvite = TeamInvitation(
       team: team!,

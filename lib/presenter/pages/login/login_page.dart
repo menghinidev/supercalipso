@@ -4,9 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/bloc/utils.dart';
-
-import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
-import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 import 'package:supercalipso/presenter/components/supercalipso_brand.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';

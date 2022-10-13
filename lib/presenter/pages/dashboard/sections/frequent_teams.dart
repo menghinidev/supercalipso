@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/bloc/utils.dart';
-import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/presenter/components/card/custom_card.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
-import 'package:supercalipso/presenter/components/common/loading_list.dart';
-import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
 import 'package:supercalipso/presenter/pages/dashboard/components/team_tile.dart';
 import 'package:supercalipso/presenter/pages/dashboard/sections/card_section.dart';
-import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class FrequentTeamsList extends HookConsumerWidget {

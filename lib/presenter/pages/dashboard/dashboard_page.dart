@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/event/event_service.dart';
-import 'package:supercalipso/bloc/note/note_provider.dart';
 import 'package:supercalipso/bloc/note/note_service.dart';
-import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/bloc/team/team_service.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/presenter/components/form/keyboard_focus_wrapper.dart';

@@ -1,7 +1,8 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/data/provider/event_provider.dart';
+import 'package:supercalipso/data/provider/api/event/mocked_data_source.dart';
+import 'package:supercalipso/data/provider/command/event/create/create_event.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
@@ -34,13 +35,14 @@ class EventRepository {
     Duration? duration,
     String? description,
   }) async {
-    var event = await provider.createTeamEvent(
-      team: team,
+    var command = CreateEventCommand(
+      teamId: team.id,
       name: name,
       startTime: startTime,
-      duration: duration,
+      duration: duration ?? Duration.zero,
       description: description,
     );
+    var event = await provider.createTeamEvent(command: command);
     return await event.flatMapAsync((t) => getTeamEvents(teamId: team.id));
   }
 }

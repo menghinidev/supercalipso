@@ -35,7 +35,7 @@ class TeamInvitationTile extends HookConsumerWidget {
                   TextSpan(
                     children: [
                       TextSpan(text: 'Invited by: ', style: Theme.of(context).textTheme.titleSmall),
-                      TextSpan(text: invitation.invitedBy.name),
+                      TextSpan(text: invitation.invitedBy.displayName),
                     ],
                   ),
                 ),

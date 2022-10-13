@@ -23,27 +23,28 @@ class AuthService {
 
   AuthService({required this.authRepository, required this.teamRepository, required this.eventRepository});
 
-  Future silentLogin() => authRepository.silentLogin();
+  Future silentLogin() async {
+    var uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return Future.value();
+    return await authRepository.silentLogin(uid: uid);
+  }
 
   Future loginWithGoogle() async {
     final googleUser = await GoogleSignIn(scopes: [
       'email',
       'profile',
     ]).signIn();
-
     final googleAuth = await googleUser?.authentication;
-
-    // Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    // Once signed in, return the UserCredential
     var firebaseUser = await FirebaseAuth.instance.signInWithCredential(credential);
-    return await authRepository.explicitLogin(email: firebaseUser.user!.email!, password: 'password');
+    return await authRepository.firebaseLogin(credentials: firebaseUser);
   }
 
   Future logout() async {
-    await authRepository.logout();
+    await FirebaseAuth.instance.signOut();
+    return await authRepository.logout();
   }
 }

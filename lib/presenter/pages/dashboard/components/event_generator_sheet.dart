@@ -6,7 +6,6 @@ import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_sheet.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
-import 'package:supercalipso/presenter/components/form/basic_text_field.dart';
 import 'package:supercalipso/presenter/components/form/custom_text_field.dart';
 import 'package:supercalipso/presenter/components/form/validators.dart';
 import 'package:supercalipso/presenter/components/picker/date_formfield_picker.dart';
