@@ -21,6 +21,7 @@ CreateTeamCommand _$CreateTeamCommandFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CreateTeamCommand {
   String get name => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $CreateTeamCommandCopyWith<$Res> {
   factory $CreateTeamCommandCopyWith(
           CreateTeamCommand value, $Res Function(CreateTeamCommand) then) =
       _$CreateTeamCommandCopyWithImpl<$Res>;
-  $Res call({String name});
+  $Res call({String name, String userId});
 }
 
 /// @nodoc
@@ -48,11 +49,16 @@ class _$CreateTeamCommandCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -65,7 +71,7 @@ abstract class _$$_CreateTeamCommandCopyWith<$Res>
           $Res Function(_$_CreateTeamCommand) then) =
       __$$_CreateTeamCommandCopyWithImpl<$Res>;
   @override
-  $Res call({String name});
+  $Res call({String name, String userId});
 }
 
 /// @nodoc
@@ -82,11 +88,16 @@ class __$$_CreateTeamCommandCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_$_CreateTeamCommand(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -95,17 +106,20 @@ class __$$_CreateTeamCommandCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CreateTeamCommand extends _CreateTeamCommand {
-  const _$_CreateTeamCommand({required this.name}) : super._();
+  const _$_CreateTeamCommand({required this.name, required this.userId})
+      : super._();
 
   factory _$_CreateTeamCommand.fromJson(Map<String, dynamic> json) =>
       _$$_CreateTeamCommandFromJson(json);
 
   @override
   final String name;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'CreateTeamCommand(name: $name)';
+    return 'CreateTeamCommand(name: $name, userId: $userId)';
   }
 
   @override
@@ -113,13 +127,16 @@ class _$_CreateTeamCommand extends _CreateTeamCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CreateTeamCommand &&
-            const DeepCollectionEquality().equals(other.name, name));
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.userId, userId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(userId));
 
   @JsonKey(ignore: true)
   @override
@@ -136,8 +153,9 @@ class _$_CreateTeamCommand extends _CreateTeamCommand {
 }
 
 abstract class _CreateTeamCommand extends CreateTeamCommand {
-  const factory _CreateTeamCommand({required final String name}) =
-      _$_CreateTeamCommand;
+  const factory _CreateTeamCommand(
+      {required final String name,
+      required final String userId}) = _$_CreateTeamCommand;
   const _CreateTeamCommand._() : super._();
 
   factory _CreateTeamCommand.fromJson(Map<String, dynamic> json) =
@@ -145,6 +163,8 @@ abstract class _CreateTeamCommand extends CreateTeamCommand {
 
   @override
   String get name;
+  @override
+  String get userId;
   @override
   @JsonKey(ignore: true)
   _$$_CreateTeamCommandCopyWith<_$_CreateTeamCommand> get copyWith =>

@@ -6,6 +6,7 @@ import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
 import 'package:supercalipso/data/provider/command/team/createInvitation/create_team_invitation_command.dart';
+import 'package:supercalipso/data/provider/command/team/createTeam/create_team_command.dart';
 import 'package:supercalipso/data/provider/command/team/replyToInvitation/replayto_invitation_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
@@ -38,6 +39,11 @@ class TeamRepository {
   Future<Response<Team>> getTeam({required String teamId}) async {
     var teams = await teamsDataProvider.readTeam(teamId: teamId);
     return teams;
+  }
+
+  Future<Response> createTeam({required String name, required String userId}) async {
+    var response = await teamsDataProvider.createTeam(command: CreateTeamCommand(name: name, userId: userId));
+    return await response.ifSuccessAsync((payload) => getUserTeams(userId: userId));
   }
 
   Future<Response<List<TeamInvitation>>> getUserTeamInvitations({required String userId}) async {

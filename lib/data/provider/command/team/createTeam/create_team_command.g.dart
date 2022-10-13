@@ -9,10 +9,12 @@ part of 'create_team_command.dart';
 _$_CreateTeamCommand _$$_CreateTeamCommandFromJson(Map<String, dynamic> json) =>
     _$_CreateTeamCommand(
       name: json['name'] as String,
+      userId: json['userId'] as String,
     );
 
 Map<String, dynamic> _$$_CreateTeamCommandToJson(
         _$_CreateTeamCommand instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'userId': instance.userId,
     };

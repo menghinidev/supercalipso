@@ -75,6 +75,14 @@ class TeamFirestoreDataSource extends ITeamDataSource {
     var document = firestore.collection(FirestoreCollections.teams).doc();
     var team = Team(id: document.id, name: command.name);
     await document.set(team.toJson());
+    var teamOwnerSubDocument = firestore.collection(FirestoreCollections.subscriptions).doc();
+    var sub = TeamSubscription(
+      id: teamOwnerSubDocument.id,
+      subscribedUserId: command.userId,
+      teamId: document.id,
+      joined: DateTime.now(),
+    );
+    await teamOwnerSubDocument.set(sub.toJson());
     return Responses.success(null);
   }
 }
