@@ -5,7 +5,7 @@ import 'package:supercalipso/presenter/theme/colors.dart';
 
 class ThemeBuilder {
   static ThemeData buildTheme(BuildContext context) => ThemeData(
-        textTheme: GoogleFonts.openSansTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme),
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           elevation: 0.0,
