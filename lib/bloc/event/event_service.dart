@@ -23,20 +23,19 @@ class EventService {
   EventService({required this.authRepository, required this.eventRepository, required this.teamRepository});
 
   Future<Response> createEvent({
+    required String teamId,
     required String name,
     required DateTime startTime,
-    required String teamId,
     Duration? duration,
     String? description,
   }) async {
-    var team = await teamRepository.getTeam(teamId: teamId);
-    return await team.flatMapAsync((t) => eventRepository.createEvent(
-          team: t!,
-          name: name,
-          startTime: startTime,
-          duration: duration,
-          description: description,
-        ));
+    return await eventRepository.createEvent(
+      teamId: teamId,
+      name: name,
+      startTime: startTime,
+      duration: duration,
+      description: description,
+    );
   }
 
   Future<Response> getUserEvents() async {

@@ -4,6 +4,7 @@ import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/provider/api/constants.dart';
 import 'package:supercalipso/data/provider/api/note/i_note_data_source.dart';
 import 'package:supercalipso/data/provider/command/note/createNote/create_note_command.dart';
+import 'package:supercalipso/data/provider/command/note/updateNote/update_note_command.dart';
 import 'package:supercalipso/plugin/utils/response.dart';
 
 class NoteFirestoreDataSource extends INoteDataSource {
@@ -28,6 +29,21 @@ class NoteFirestoreDataSource extends INoteDataSource {
   Future<Response> deleteNote({required String noteId}) async {
     await firestore.collection(FirestoreCollections.notes).doc(noteId).delete();
     return Responses.success(null);
+  }
+
+  @override
+  Future<Response<Note>> updateNote({required UpdateNoteCommand command}) async {
+    var document = firestore.collection(FirestoreCollections.notes).doc(command.noteId);
+    var note = Note.fromJson((await document.get()).data()!);
+    var updated = note.copyWith(
+      modifiedByUserId: command.modifiedByUserId,
+      teamId: command.teamId,
+      title: command.title ?? note.title,
+      description: command.content ?? note.description,
+      lastUpdate: DateTime.now(),
+    );
+    await document.update(updated.toJson());
+    return Responses.success(updated);
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/provider/api/note/i_note_data_source.dart';
 import 'package:supercalipso/data/provider/command/note/createNote/create_note_command.dart';
+import 'package:supercalipso/data/provider/command/note/updateNote/update_note_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
@@ -36,6 +37,23 @@ class NoteRepository {
       modifiedByUserId: userId,
     );
     return await dataProvider.createNote(command: command).ifSuccess((payload) => getUserNotes(userId: userId));
+  }
+
+  Future<Response> updateNote({
+    required String noteId,
+    required String userId,
+    required String teamId,
+    String? title,
+    String? content,
+  }) async {
+    var command = UpdateNoteCommand(
+      noteId: noteId,
+      modifiedByUserId: userId,
+      teamId: teamId,
+      content: content,
+      title: title,
+    );
+    return await dataProvider.updateNote(command: command).ifSuccess((payload) => getUserNotes(userId: userId));
   }
 
   Future<Response> deleteNote({required String noteId}) async {
