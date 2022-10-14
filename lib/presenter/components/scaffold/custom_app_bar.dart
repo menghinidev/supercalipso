@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:supercalipso/presenter/pages/profile/components/profile_avatar.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+/* class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String? title;
   final List<Widget> actions;
   final Widget? leading;
@@ -34,10 +35,43 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(borderHeight),
         child: Container(
-          color: AppColors.lightBlueBackground,
+          color: AppColors.blue,
           height: borderHeight,
         ),
       ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+} */
+
+class FlatAppBar extends StatelessWidget with PreferredSizeWidget {
+  final String? title;
+  final List<Widget> actions;
+  final bool showProfileAvatar;
+
+  const FlatAppBar({this.title, this.actions = const <Widget>[], this.showProfileAvatar = true, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(title ?? ''),
+      actions: [
+        ...actions.map((e) => Padding(
+              padding: const EdgeInsets.only(right: Dimensions.smallSize),
+              child: e,
+            )),
+        showProfileAvatar
+            ? const Padding(
+                padding: EdgeInsets.only(right: Dimensions.pageInsetsSize),
+                child: ProfileAvatar(),
+              )
+            : Container(),
+      ],
+      automaticallyImplyLeading: false,
+      centerTitle: false,
     );
   }
 

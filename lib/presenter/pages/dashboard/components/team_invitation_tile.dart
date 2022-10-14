@@ -47,7 +47,7 @@ class TeamInvitationTile extends HookConsumerWidget {
               children: [
                 PrimaryOutlinedButton(
                   onTap: () => reply(ref, TeamInvitationStatus.accepted),
-                  backgroudColor: AppColors.confirmColor,
+                  backgroudColor: AppColors.green,
                   text: 'Accept',
                 ),
                 const SizedBox(width: Dimensions.smallSize),

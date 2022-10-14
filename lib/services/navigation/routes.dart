@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supercalipso/presenter/pages/event/event_page.dart';
+import 'package:supercalipso/presenter/pages/events/events_page.dart';
 import 'package:supercalipso/presenter/pages/home/home_page.dart';
 import 'package:supercalipso/presenter/pages/login/login_page.dart';
+import 'package:supercalipso/presenter/pages/tasks/tasks_page.dart';
 import 'package:supercalipso/presenter/pages/team/team_page.dart';
 
 class AppRoutes {
@@ -31,8 +32,9 @@ class HomePageRoute extends GoRoute {
           pageBuilder: (context, state) => BasePageTransitionBuilder(child: const HomePage()),
           routes: [
             ProfilePageRoute(),
-            EventPageRoute(),
+            EventsPageRoute(),
             TeamPageRoute(),
+            TasksPageRoute(),
           ],
         );
 }
@@ -58,17 +60,30 @@ class ProfilePageRoute extends GoRoute {
         );
 }
 
-class EventPageRoute extends GoRoute {
-  static const String pageName = 'event';
+class EventsPageRoute extends GoRoute {
+  static const String pageName = 'events';
   static const String pagePath = '/$pageName';
 
   static String createPath(String eventId) => '$pagePath/$eventId';
 
-  EventPageRoute()
+  EventsPageRoute()
       : super(
-          path: '$pageName/:id',
+          path: pageName,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
-            child: EventPage(eventId: state.params['id'] as String),
+            child: const HomePage(),
+          ),
+        );
+}
+
+class TasksPageRoute extends GoRoute {
+  static const String pageName = 'tasks';
+  static const String pagePath = '/$pageName';
+
+  TasksPageRoute()
+      : super(
+          path: pageName,
+          pageBuilder: (context, state) => BasePageTransitionBuilder(
+            child: const HomePage(),
           ),
         );
 }

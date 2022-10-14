@@ -23,7 +23,7 @@ class TeamTile extends HookConsumerWidget {
     var users = ref.watch(teamMembersProvider(team.id));
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 200),
-      child: CustomTile(
+      child: BaseTile(
         leading: CircleAvatar(child: Text(team.name[0])),
         title: team.name,
         onTap: () => ref.read(routerProvider).go(TeamPageRoute.createPath(team.id)),
@@ -38,7 +38,7 @@ class TeamTile extends HookConsumerWidget {
                 context: context,
                 builder: (_) => TeamInvitationGeneratorSheet(teamId: team.id),
               ),
-              child: const CustomTile(
+              child: const BaseTile(
                 title: 'Invite',
                 leading: CustomIcon(icon: Icons.person_add_outlined),
               ),
@@ -49,7 +49,7 @@ class TeamTile extends HookConsumerWidget {
                 context: context,
                 builder: (_) => EventGeneratorSheet(teamId: team.id),
               ),
-              child: const CustomTile(
+              child: const BaseTile(
                 title: 'Create Event',
                 leading: CustomIcon(icon: Icons.event_available_outlined),
               ),
@@ -60,7 +60,7 @@ class TeamTile extends HookConsumerWidget {
                 context: context,
                 builder: (_) => NoteGeneratorBottomSheet(teamId: team.id),
               ),
-              child: const CustomTile(
+              child: const BaseTile(
                 title: 'Create Note',
                 leading: CustomIcon(icon: Icons.note_add_outlined),
               ),

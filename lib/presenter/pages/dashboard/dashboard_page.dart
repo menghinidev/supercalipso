@@ -11,6 +11,8 @@ import 'package:supercalipso/presenter/pages/dashboard/components/team_invitatio
 import 'package:supercalipso/presenter/pages/dashboard/sections/frequent_teams.dart';
 import 'package:supercalipso/presenter/pages/dashboard/sections/latest_events.dart';
 import 'package:supercalipso/presenter/pages/dashboard/sections/pinned_notes.dart';
+import 'package:supercalipso/presenter/pages/events/sections/events_list.dart';
+import 'package:supercalipso/presenter/pages/tasks/section/task_list.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class Dashboard extends StatefulHookConsumerWidget {
@@ -36,9 +38,8 @@ class _DashboardState extends ConsumerState<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: const CustomAppBar(
-        title: 'DASHBOARD',
-        implyLeading: false,
+      appBar: const FlatAppBar(
+        title: 'House Feed',
         actions: [TeamInvitationIcon()],
       ),
       body: RefreshIndicator(
@@ -53,15 +54,11 @@ class _DashboardState extends ConsumerState<Dashboard> {
             slivers: [
               SliverPadding(
                 padding: Dimensions.pageInsetsWithTop,
-                sliver: const SliverToBoxAdapter(child: FrequentTeamsList()),
-              ),
-              SliverPadding(
-                padding: Dimensions.pageInsetsWithTop,
-                sliver: const SliverToBoxAdapter(child: LatestEvents()),
+                sliver: const SliverToBoxAdapter(child: EventsList()),
               ),
               const SliverPadding(
                 padding: Dimensions.pageInsets,
-                sliver: SliverToBoxAdapter(child: PinnedNotesSection()),
+                sliver: SliverToBoxAdapter(child: TaskList()),
               ),
             ],
           ),

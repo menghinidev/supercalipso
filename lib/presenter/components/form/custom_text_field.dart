@@ -55,7 +55,7 @@ class CustomTextField extends StatelessWidget with FormFieldProperties {
                   trailing: trailing,
                   leading: leading,
                 )
-                .copyWith(hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.coolGrey10)),
+                .copyWith(hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.grey)),
       ),
     );
   }

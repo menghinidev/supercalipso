@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/event/event_provider.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/event_tile.dart';
+import 'package:supercalipso/presenter/pages/events/components/event_tile.dart';
 import 'package:supercalipso/presenter/pages/dashboard/sections/card_section.dart';
 
 class LatestEvents extends HookConsumerWidget {

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+import 'package:collection/collection.dart';
 part 'team_event.g.dart';
 part 'team_event.freezed.dart';
 
@@ -21,4 +21,11 @@ class TeamEvent with _$TeamEvent {
 extension TeamEventProperties on TeamEvent {
   DateTime? get endTime => duration != null ? startTime.add(duration!) : null;
   bool get isDayEvent => duration == null && startTime.hour == 0;
+  DateTime get day => DateTime.utc(startTime.year, startTime.month, startTime.day);
+}
+
+extension TeamEventList on List<TeamEvent> {
+  Map<DateTime, List<TeamEvent>> groupByDay() {
+    return groupListsBy<DateTime>((element) => element.startTime);
+  }
 }

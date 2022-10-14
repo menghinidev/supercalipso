@@ -25,5 +25,5 @@ class AppColors {
   static const grey = Color(0xFF9aa0a3);
   static const greyLighter = Color(0xFFbfc5c7);
   static const whiteDarker = Color(0xFFe5e5e5);
-  static const white = Color(0xFFf5f7f9);
+  static const white = Colors.white;
 }

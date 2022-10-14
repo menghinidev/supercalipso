@@ -18,7 +18,7 @@ class NoteTile extends HookConsumerWidget {
       padding: Dimensions.mHsBPadding,
       decoration: BoxDecoration(
         borderRadius: Shapes.containerRadius,
-        color: AppColors.lightBlueBackground,
+        color: AppColors.blue,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

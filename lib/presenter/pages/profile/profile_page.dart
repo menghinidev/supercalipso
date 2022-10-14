@@ -15,9 +15,8 @@ class ProfilePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomScaffold(
-      appBar: CustomAppBar(
-        title: 'PROFILE',
-        implyLeading: false,
+      appBar: FlatAppBar(
+        title: 'Profile',
         actions: [
           PrimaryIconButton(
             icon: const Icon(Icons.logout),
