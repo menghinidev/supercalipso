@@ -10,9 +10,8 @@ class NoteRepository {
   var dataProvider = Installer.instance.get<INoteDataSource>();
   var controller = BehaviorSubject<List<Note>>();
 
-  Stream<List<Note>> get notesChanges => controller.stream;
   Stream<List<Note>> getTeamNotesChanges({required String teamId}) =>
-      notesChanges.map((event) => event.where((element) => element.teamId == teamId).toList());
+      controller.stream.map((event) => event.where((element) => element.teamId == teamId).toList());
   Stream<Note> getNoteChanges({required String noteId}) =>
       controller.stream.mapNotNull((event) => event.getWhere((element) => element.id == noteId));
 

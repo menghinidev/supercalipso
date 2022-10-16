@@ -11,13 +11,12 @@ import 'package:supercalipso/presenter/components/form/validators.dart';
 import 'package:supercalipso/presenter/components/picker/date_formfield_picker.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
-final eventBuilderProvider =
-    StateNotifierProvider.family.autoDispose<EventGeneratorNotifier, EventBuilder, String>((ref, id) {
-  return EventGeneratorNotifier(teamId: id);
+final eventBuilderProvider = StateNotifierProvider.autoDispose<EventGeneratorNotifier, EventBuilder>((ref) {
+  return EventGeneratorNotifier();
 });
 
 class EventGeneratorNotifier extends StateNotifier<EventBuilder> {
-  EventGeneratorNotifier({required String teamId}) : super(EventBuilder(teamId: teamId));
+  EventGeneratorNotifier() : super(const EventBuilder());
 
   setName(String name) => state = state.copyWith(name: name);
   setStartTime(DateTime time) => state = state.copyWith(startTime: time);
@@ -26,15 +25,13 @@ class EventGeneratorNotifier extends StateNotifier<EventBuilder> {
 }
 
 class EventGeneratorSheet extends HookConsumerWidget {
-  final String teamId;
-
-  const EventGeneratorSheet({Key? key, required this.teamId}) : super(key: key);
+  const EventGeneratorSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var nameController = useTextEditingController();
     var descriptionController = useTextEditingController();
-    var builder = ref.watch(eventBuilderProvider(teamId));
+    var builder = ref.watch(eventBuilderProvider);
     return CustomBottomSheet(
       builder: (context) => SingleChildScrollView(
         child: Column(
@@ -70,8 +67,7 @@ class EventGeneratorSheet extends HookConsumerWidget {
                     padding: const EdgeInsets.only(top: Dimensions.smallSize),
                     child: DayFormFieldPicker(
                       label: 'Select Date',
-                      onSelected: (date) =>
-                          ref.read(eventBuilderProvider(teamId).notifier).setStartTime(date.toDateTime()),
+                      onSelected: (date) => ref.read(eventBuilderProvider.notifier).setStartTime(date.toDateTime()),
                     ),
                   ),
                 ],
@@ -94,11 +90,11 @@ class EventGeneratorSheet extends HookConsumerWidget {
                                 var actualTime = builder.startTime;
                                 actualTime!.add(Duration(hours: value.hour, minutes: value.minute));
                                 var duration = actualTime.difference(builder.startTime!);
-                                ref.read(eventBuilderProvider(teamId).notifier).setDuration(duration: duration);
+                                ref.read(eventBuilderProvider.notifier).setDuration(duration: duration);
                               },
                             );
                           } else {
-                            ref.read(eventBuilderProvider(teamId).notifier).setDuration();
+                            ref.read(eventBuilderProvider.notifier).setDuration();
                           }
                         }
                       : null,
@@ -122,7 +118,6 @@ class EventGeneratorSheet extends HookConsumerWidget {
                           startTime: builder.startTime!,
                           duration: builder.duration,
                           description: descriptionController.text,
-                          teamId: teamId,
                         )
                         .then((value) => Navigator.pop(context)),
               ),

@@ -26,7 +26,7 @@ class TeamPageChipBar extends StatelessWidget {
               label: const Text('Create Event'),
               onPressed: () => showBottomSheet(
                 context: context,
-                builder: (context) => EventGeneratorSheet(teamId: team.id),
+                builder: (context) => const EventGeneratorSheet(),
               ),
             ),
             ActionChip(

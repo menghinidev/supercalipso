@@ -13,5 +13,5 @@ abstract class ITeamDataSource {
   Future<Response> replyTeamInvitation({required ReplyToInvitationCommand command});
   Future<Response<Team>> readTeam({required String teamId});
   Future<Response> createTeamInvitation({required CreateTeamInvitationCommand command});
-  Future<Response> createTeam({required CreateTeamCommand command});
+  Future<Response<Team>> createTeam({required CreateTeamCommand command});
 }

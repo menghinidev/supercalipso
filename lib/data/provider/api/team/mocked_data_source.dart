@@ -71,14 +71,23 @@ class TeamMockedDataSource extends ITeamDataSource with IdentifierFactory {
   }
 
   @override
-  Future<Response> createTeam({required CreateTeamCommand command}) {
-    // TODO: implement createTeam
-    throw UnimplementedError();
+  Future<Response<Team>> createTeam({required CreateTeamCommand command}) {
+    var team = Team(id: createID(), name: command.name);
+    mocked.teams.add(team);
+    var sub = TeamSubscription(
+      id: createID(),
+      joined: DateTime.now(),
+      subscribedUserId: command.userId,
+      teamId: team.id,
+    );
+    mocked.teamSubs.add(sub);
+    return Future.value(Responses.success(team));
   }
 
   @override
   Future<Response<List<TeamSubscription>>> readTeamSubscriptions({required String teamId}) {
-    // TODO: implement readTeamSubscriptions
-    throw UnimplementedError();
+    return Future.value(Responses.success(
+      mocked.teamSubs.where((element) => element.teamId == teamId).toList(),
+    ));
   }
 }

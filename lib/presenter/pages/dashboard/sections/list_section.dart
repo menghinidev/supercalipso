@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class BaseListSection<T> extends StatelessWidget {
   final String title;
+  final List<Widget> actions;
   final List<T> items;
   final Widget Function(T) builder;
 
@@ -12,6 +14,7 @@ class BaseListSection<T> extends StatelessWidget {
     required this.title,
     required this.items,
     required this.builder,
+    this.actions = const <Widget>[],
   });
 
   @override
@@ -21,9 +24,18 @@ class BaseListSection<T> extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: Dimensions.smallSize),
-          child: Text(
-            title,
-            style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.bold),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+              ...actions,
+            ],
           ),
         ),
         EmptyDataWidgetBuilder(

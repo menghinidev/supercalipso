@@ -1,31 +1,29 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/note/note_provider.dart';
-import 'package:supercalipso/bloc/team/team_service.dart';
+import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/note_repository.dart';
+import 'package:supercalipso/data/repository/team_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
 final noteServiceProvider = Provider<NoteService>((ref) {
   return NoteService(
     authRepo: ref.watch(authProvider),
+    teamRepo: ref.watch(teamRepoProvider),
     noteRepo: ref.watch(noteRepoProvider),
   );
 });
 
-final notesProvider = StreamProvider<List<Note>>((ref) {
-  ref.watch(currentTeamChangesProvider);
-  return ref.watch(noteRepoProvider).notesChanges;
-});
-
 class NoteService {
   final AuthRepository authRepo;
+  final TeamRepository teamRepo;
   final NoteRepository noteRepo;
 
-  NoteService({required this.authRepo, required this.noteRepo});
+  NoteService({required this.authRepo, required this.noteRepo, required this.teamRepo});
 
-  Future<Response> getUserNotes() async {
+  Future<Response> askUserNotes() async {
     var userId = authRepo.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
     return await noteRepo.getUserNotes(userId: userId);
@@ -44,5 +42,11 @@ class NoteService {
       title: title,
       content: content ?? '',
     );
+  }
+
+  Stream<List<Note>> get loggedTeamNotes {
+    var currentTeamId = teamRepo.loggedTeamId;
+    if (currentTeamId == null) return Stream.value(<Note>[]);
+    return noteRepo.getTeamNotesChanges(teamId: currentTeamId);
   }
 }

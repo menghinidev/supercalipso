@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/presenter/components/avatar/custom_avatar.dart';
+import 'package:supercalipso/presenter/pages/profile/components/profile_avatar.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
@@ -63,7 +64,7 @@ class ProfileInfoHeader extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(Dimensions.largeSize),
             alignment: Alignment.center,
-            child: CustomAvatar(name: profile.displayName, radius: 40.0),
+            child: ProfileAvatar(imageURL: profile.imageURL, size: 40.0),
           ),
           Padding(
             padding: EdgeInsets.only(bottom: Dimensions.mediumSize + bottomMargin),

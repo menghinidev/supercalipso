@@ -13,20 +13,20 @@ import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
 class TeamRepository {
-  final BehaviorSubject<List<Team>> teamsController;
+  final BehaviorSubject<List<Team>> enrolledTeamsController;
   final BehaviorSubject<List<TeamInvitation>> teamsInvitationsController;
   final teamsDataProvider = Installer.instance.get<ITeamDataSource>();
   String? loggedTeamId;
 
   TeamRepository()
-      : teamsController = BehaviorSubject<List<Team>>(),
+      : enrolledTeamsController = BehaviorSubject<List<Team>>(),
         teamsInvitationsController = BehaviorSubject<List<TeamInvitation>>();
 
-  Stream<List<Team>> get enrolledTeams => teamsController.stream;
+  Stream<List<Team>> get enrolledTeams => enrolledTeamsController.stream;
   Stream<List<TeamInvitation>> get invitationsChanges => teamsInvitationsController.stream;
 
   Stream<Team> get currentTeam =>
-      teamsController.stream.mapNotNull((event) => event.getWhere((element) => element.id == loggedTeamId));
+      enrolledTeamsController.stream.mapNotNull((event) => event.getWhere((element) => element.id == loggedTeamId));
 
   Future<Response<List<Team>>> getUserTeams({required String userId}) async {
     var subs = await teamsDataProvider.readUserTeamsSubscriptions(userId: userId);
@@ -34,7 +34,7 @@ class TeamRepository {
       subs.payload!,
       (source) => teamsDataProvider.readTeam(teamId: source.teamId),
     );
-    teams.ifSuccess((payload) => teamsController.add(payload!));
+    teams.ifSuccess((payload) => enrolledTeamsController.add(payload!));
     return teams;
   }
 
@@ -43,7 +43,12 @@ class TeamRepository {
     return teams.isError ? Future.error('error') : Future.value(teams.payload!);
   }
 
-  Future<Response> createTeam({required String name, required String userId}) async {
+  Future loginWithTeam({required String teamId, required String userId}) async {
+    loggedTeamId = teamId;
+    return await getUserTeams(userId: userId);
+  }
+
+  Future<Response<Team>> createTeam({required String name, required String userId}) async {
     var response = await teamsDataProvider.createTeam(command: CreateTeamCommand(name: name, userId: userId));
     return await response.ifSuccessAsync((payload) => getUserTeams(userId: userId));
   }

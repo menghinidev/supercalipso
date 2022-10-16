@@ -7,6 +7,7 @@ import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
+import 'package:supercalipso/plugin/utils.dart';
 
 final authServiceProvider = Provider<AuthService>((ref) {
   return AuthService(
@@ -30,9 +31,9 @@ class AuthService {
 
   AuthService({required this.authRepository, required this.teamRepository, required this.eventRepository});
 
-  Future silentLogin() async {
+  Future<Response> silentLogin() async {
     var uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid == null) return await authRepository.logout();
+    if (uid == null) return Future.value(Responses.failure([]));
     return await authRepository.silentLogin(uid: uid);
   }
 

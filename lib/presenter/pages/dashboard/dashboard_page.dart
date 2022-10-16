@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/event/event_service.dart';
 import 'package:supercalipso/bloc/note/note_service.dart';
-import 'package:supercalipso/bloc/team/team_service.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/presenter/components/form/keyboard_focus_wrapper.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
@@ -25,8 +24,8 @@ class _DashboardState extends ConsumerState<Dashboard> {
     super.initState();
     var eventsService = ref.read(eventServiceProvider);
     var notesService = ref.read(noteServiceProvider);
-    eventsService.getUserEvents();
-    notesService.getUserNotes();
+    eventsService.askUserEvents();
+    notesService.askUserNotes();
   }
 
   @override
@@ -38,12 +37,12 @@ class _DashboardState extends ConsumerState<Dashboard> {
       ),
       body: RefreshIndicator(
         onRefresh: () => Future.wait<Response>([
-          ref.read(eventServiceProvider).getUserEvents(),
-          ref.read(noteServiceProvider).getUserNotes(),
+          ref.read(eventServiceProvider).askUserEvents(),
+          ref.read(noteServiceProvider).askUserNotes(),
         ]),
         child: KeyboardFocusWrapper(
           child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             child: Column(
               children: [
                 Padding(

@@ -14,12 +14,12 @@ class AuthRepository {
 
   AuthRepository() : authStreamController = BehaviorSubject<User?>();
 
-  Future silentLogin({required String uid}) async {
+  Future<Response> silentLogin({required String uid}) async {
     var user = await dataSource.getUserByUserId(userId: uid);
     user.ifSuccess((payload) => loggedUser = payload);
     user.ifSuccess((payload) => authStreamController.add(loggedUser));
     user.ifError((payload) => authStreamController.add(null));
-    return Future.value();
+    return user;
   }
 
   Future firebaseLogin({required firebase.UserCredential credentials}) async {
@@ -33,6 +33,7 @@ class AuthRepository {
         uid: firebaseUser.uid,
         displayName: firebaseUser.displayName!,
         email: firebaseUser.email!,
+        imageURL: firebaseUser.photoURL,
       ),
     );
     createdUser.ifSuccess((payload) => loggedUser = payload);

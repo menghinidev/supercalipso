@@ -11,6 +11,7 @@ class RegisterUserCommand with _$RegisterUserCommand {
     required String uid,
     required String displayName,
     required String email,
+    String? imageURL,
   }) = _RegisterUserCommand;
 
   factory RegisterUserCommand.fromJson(Map<String, dynamic> json) => _$RegisterUserCommandFromJson(json);

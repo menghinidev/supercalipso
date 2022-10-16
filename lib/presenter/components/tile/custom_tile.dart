@@ -61,11 +61,12 @@ class CustomTile extends StatelessWidget {
             children: [
               if (leading != null)
                 Padding(
-                  padding: Dimensions.allSPadding,
+                  padding: Dimensions.mHsVPadding,
                   child: CustomTileLeading(leading: leading!),
                 ),
               Expanded(
                 child: Container(
+                  alignment: Alignment.centerLeft,
                   padding: Dimensions.mVPadding,
                   child: CustomTileBody(title: title, subtitle: subtitle),
                 ),

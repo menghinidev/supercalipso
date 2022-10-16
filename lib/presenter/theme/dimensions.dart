@@ -15,6 +15,10 @@ class Dimensions {
   static EdgeInsets get pageInsetsWithTop => hPageInsets.copyWith(top: pageInsetsSize);
   static EdgeInsets get mHsTPadding => const EdgeInsets.symmetric(horizontal: mediumSize).copyWith(top: smallSize);
   static EdgeInsets get mHsBPadding => const EdgeInsets.symmetric(horizontal: mediumSize).copyWith(bottom: smallSize);
+  static EdgeInsets get mHsVPadding => const EdgeInsets.symmetric(horizontal: mediumSize).copyWith(
+        bottom: smallSize,
+        top: smallSize,
+      );
   static EdgeInsets get mVPadding => const EdgeInsets.symmetric(vertical: Dimensions.mediumSize);
   static EdgeInsets get sVPadding => const EdgeInsets.symmetric(vertical: Dimensions.smallSize);
   static EdgeInsets get allMPadding => const EdgeInsets.all(Dimensions.mediumSize);

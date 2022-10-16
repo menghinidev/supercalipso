@@ -71,7 +71,7 @@ class TeamFirestoreDataSource extends ITeamDataSource {
   }
 
   @override
-  Future<Response> createTeam({required CreateTeamCommand command}) async {
+  Future<Response<Team>> createTeam({required CreateTeamCommand command}) async {
     var document = firestore.collection(FirestoreCollections.teams).doc();
     var team = Team(id: document.id, name: command.name);
     await document.set(team.toJson());
@@ -83,7 +83,7 @@ class TeamFirestoreDataSource extends ITeamDataSource {
       joined: DateTime.now().toUtc(),
     );
     await teamOwnerSubDocument.set(sub.toJson());
-    return Responses.success(null);
+    return Responses.success(team);
   }
 
   @override

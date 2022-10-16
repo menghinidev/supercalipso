@@ -9,6 +9,7 @@ import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
 import 'package:supercalipso/presenter/pages/events/components/event_generator_sheet.dart';
 import 'package:supercalipso/presenter/pages/notes/components/note_generator_sheet.dart';
 import 'package:supercalipso/presenter/pages/profile/components/team_invitation_generator_sheet.dart';
+import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 import 'package:supercalipso/services/navigation/router_provider.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
@@ -27,10 +28,13 @@ class TeamTile extends HookConsumerWidget {
         leading: CircleAvatar(child: Text(team.name[0])),
         title: team.name,
         onTap: () => ref.read(routerProvider).push(TeamPageRoute.createPath(team.id)),
-        subtitle: Text(
-          users.onDefault(builder: (data) => data.concatNames() + data.concatNames(), defaultValue: ''),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        subtitle: users.onValue(
+          builder: (data) => Text(
+            users.onDefault(builder: (data) => data.concatNames(), defaultValue: ''),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.grey),
+          ),
         ),
         trailing: PopupMenuButton<String>(
           position: PopupMenuPosition.under,
@@ -51,7 +55,7 @@ class TeamTile extends HookConsumerWidget {
               value: 'Create Event',
               onTap: () => showBottomSheet(
                 context: context,
-                builder: (_) => EventGeneratorSheet(teamId: team.id),
+                builder: (_) => const EventGeneratorSheet(),
               ),
               child: const BaseTile(
                 title: 'Create Event',

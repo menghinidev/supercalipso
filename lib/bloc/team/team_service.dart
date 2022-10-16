@@ -113,6 +113,25 @@ class TeamService {
   Future<Response> createTeam({required String name}) async {
     var userId = authRepository.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
-    return await teamRepository.createTeam(name: name, userId: userId);
+    return await teamRepository
+        .createTeam(name: name, userId: userId)
+        .ifSuccessAsync((payload) => loginWithTeam(teamId: payload!.id));
+  }
+
+  Future<Response> loginWithTeam({required String teamId}) async {
+    var userId = authRepository.loggedUser?.uid;
+    if (userId == null) return Responses.failure([]);
+    await teamRepository.loginWithTeam(teamId: teamId, userId: userId);
+    return Responses.success(null);
+  }
+
+  Future<Response> silentloginWithTeam() async {
+    var userId = authRepository.loggedUser?.uid;
+    if (userId == null) return Responses.failure([]);
+    var teams = await teamRepository.getUserTeams(userId: userId);
+    if (teams.isError || teams.payload!.isEmpty) return Responses.failure([]);
+    var firstTeamId = teams.payload!.first.id;
+    await teamRepository.loginWithTeam(teamId: firstTeamId, userId: userId);
+    return Responses.success(null);
   }
 }
