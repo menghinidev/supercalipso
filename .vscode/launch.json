@@ -23,7 +23,11 @@
             "name": "supercalipso (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "toolArgs": [
+                "--dart-define",
+                "USE_MOCKED_DATA_SOURCE=false"
+            ]
         }
     ]
 }

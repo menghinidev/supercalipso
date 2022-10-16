@@ -51,9 +51,10 @@ class AuthRepository {
     return user;
   }
 
-  Future logout() async {
+  Future<Response> logout() async {
     loggedUser = null;
     authStreamController.add(null);
+    return Responses.success(null);
   }
 
   Stream<User?> get loggedUserChanges => authStreamController.stream;

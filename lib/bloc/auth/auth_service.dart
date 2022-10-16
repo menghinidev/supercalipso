@@ -29,11 +29,15 @@ class AuthService {
     ],
   );
 
-  AuthService({required this.authRepository, required this.teamRepository, required this.eventRepository});
+  AuthService({
+    required this.authRepository,
+    required this.teamRepository,
+    required this.eventRepository,
+  });
 
   Future<Response> silentLogin() async {
     var uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid == null) return Future.value(Responses.failure([]));
+    if (uid == null) return await authRepository.logout();
     return await authRepository.silentLogin(uid: uid);
   }
 
@@ -44,7 +48,8 @@ class AuthService {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    var firebaseUser = await FirebaseAuth.instance.signInWithCredential(credential);
+    var firebaseUser =
+        await FirebaseAuth.instance.signInWithCredential(credential);
     return await authRepository.firebaseLogin(credentials: firebaseUser);
   }
 
