@@ -39,6 +39,7 @@ class EventRepository {
     required String teamId,
     required String name,
     required DateTime startTime,
+    required String userId,
     Duration? duration,
     String? description,
   }) async {
@@ -48,6 +49,7 @@ class EventRepository {
       startTime: startTime,
       duration: duration ?? Duration.zero,
       description: description,
+      createdByUserId: userId,
     );
     var event = await provider.createTeamEvent(command: command);
     return await event.flatMapAsync((t) => getTeamEvents(teamId: teamId));

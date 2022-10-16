@@ -4,7 +4,7 @@ import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_sheet.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/team_invitation_tile.dart';
+import 'package:supercalipso/presenter/pages/profile/components/team_invitation_tile.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class TeamInvitationBottomSheet extends HookConsumerWidget {

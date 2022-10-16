@@ -37,31 +37,42 @@ class CustomTile extends StatelessWidget {
   final Widget? subtitle;
   final Widget? leading;
   final Widget? trailing;
+  final Function()? onTap;
 
-  const CustomTile({super.key, required this.title, this.subtitle, this.leading, this.trailing});
+  const CustomTile({
+    super.key,
+    required this.title,
+    this.subtitle,
+    this.leading,
+    this.trailing,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      color: AppColors.white,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 75),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (leading != null)
-              Padding(
-                padding: Dimensions.allSPadding,
-                child: CustomTileLeading(leading: leading!),
+    return InkWell(
+      onTap: onTap,
+      child: CustomCard(
+        color: AppColors.white,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 75),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (leading != null)
+                Padding(
+                  padding: Dimensions.allSPadding,
+                  child: CustomTileLeading(leading: leading!),
+                ),
+              Expanded(
+                child: Container(
+                  padding: Dimensions.mVPadding,
+                  child: CustomTileBody(title: title, subtitle: subtitle),
+                ),
               ),
-            Expanded(
-              child: Container(
-                padding: Dimensions.mVPadding,
-                child: CustomTileBody(title: title, subtitle: subtitle),
-              ),
-            ),
-            if (trailing != null) trailing!,
-          ],
+              if (trailing != null) trailing!,
+            ],
+          ),
         ),
       ),
     );

@@ -35,6 +35,8 @@ class EventMockedDataSource extends IEventDataSource with IdentifierFactory {
       duration: command.duration,
       description: command.description,
       teamId: team.id,
+      createdByUserId: command.createdByUserId,
+      lastUpdate: DateTime.now().toUtc(),
     );
     mocked.events.add(event);
     return Future.value(Responses.success(event));
@@ -42,19 +44,28 @@ class EventMockedDataSource extends IEventDataSource with IdentifierFactory {
 
   @override
   Future<Response> deleteTeamEvent({required String eventId}) {
-    // TODO: implement deleteTeamEvent
-    throw UnimplementedError();
+    mocked.events.removeWhere((element) => element.id == eventId);
+    return Future.value(Responses.success(null));
   }
 
   @override
-  Future<Response<TeamEvent>> updateTeamEvent({required UpdateEventCommand command}) {
-    // TODO: implement updateTeamEvent
-    throw UnimplementedError();
+  Future<Response<TeamEvent>> updateTeamEvent({required UpdateEventCommand command}) async {
+    var event = mocked.events.getWhere((element) => element.id == command.eventId);
+    if (event == null) return Responses.failure([]);
+    var updated = event.copyWith(
+      description: command.description ?? event.description,
+      duration: command.duration ?? event.duration,
+      name: command.title ?? event.name,
+      startTime: command.startTime ?? event.startTime,
+      lastUpdate: DateTime.now().toUtc(),
+    );
+    mocked.events.removeWhere((element) => element.id == command.eventId);
+    mocked.events.add(updated);
+    return Responses.success(updated);
   }
 
   @override
   Future<Response<TeamEvent>> readTeamEvent({required String eventId}) {
-    // TODO: implement readTeamEvent
-    throw UnimplementedError();
+    return Future.value(Responses.success(mocked.events.getWhere((element) => element.id == eventId)));
   }
 }

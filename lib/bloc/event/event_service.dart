@@ -29,12 +29,15 @@ class EventService {
     Duration? duration,
     String? description,
   }) async {
+    var userId = authRepository.loggedUser?.uid;
+    if (userId == null) return Responses.failure([]);
     return await eventRepository.createEvent(
       teamId: teamId,
       name: name,
       startTime: startTime,
       duration: duration,
       description: description,
+      userId: userId,
     );
   }
 

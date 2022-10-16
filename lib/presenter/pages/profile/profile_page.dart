@@ -5,6 +5,7 @@ import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
+import 'package:supercalipso/presenter/pages/profile/sections/enrolled_teams.dart';
 import 'package:supercalipso/presenter/pages/profile/sections/header.dart';
 import 'package:supercalipso/presenter/pages/profile/sections/team_generator_bottom_sheet.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
@@ -17,6 +18,8 @@ class ProfilePage extends HookConsumerWidget {
     return CustomScaffold(
       appBar: FlatAppBar(
         title: 'Profile',
+        leading: const BackButton(),
+        showProfileAvatar: false,
         actions: [
           PrimaryIconButton(
             icon: const Icon(Icons.logout),
@@ -31,15 +34,7 @@ class ProfilePage extends HookConsumerWidget {
             const ProfileHeader(),
             Padding(
               padding: Dimensions.pageInsetsWithTop,
-              child: Builder(builder: (context) {
-                return PrimaryElevatedButton(
-                  onTap: () => showBottomSheet(
-                    context: context,
-                    builder: (context) => const TeamGeneratorBottomSheet(),
-                  ),
-                  text: 'Create new team',
-                );
-              }),
+              child: const TeamsList(),
             ),
           ],
         ),

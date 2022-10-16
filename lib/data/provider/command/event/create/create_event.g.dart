@@ -13,6 +13,7 @@ _$_CreateEventCommand _$$_CreateEventCommandFromJson(
       name: json['name'] as String,
       startTime: DateTime.parse(json['startTime'] as String),
       duration: Duration(microseconds: json['duration'] as int),
+      createdByUserId: json['createdByUserId'] as String,
       description: json['description'] as String?,
     );
 
@@ -23,5 +24,6 @@ Map<String, dynamic> _$$_CreateEventCommandToJson(
       'name': instance.name,
       'startTime': instance.startTime.toIso8601String(),
       'duration': instance.duration.inMicroseconds,
+      'createdByUserId': instance.createdByUserId,
       'description': instance.description,
     };

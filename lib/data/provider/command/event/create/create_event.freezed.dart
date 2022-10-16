@@ -24,6 +24,7 @@ mixin _$CreateEventCommand {
   String get name => throw _privateConstructorUsedError;
   DateTime get startTime => throw _privateConstructorUsedError;
   Duration get duration => throw _privateConstructorUsedError;
+  String get createdByUserId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $CreateEventCommandCopyWith<$Res> {
       String name,
       DateTime startTime,
       Duration duration,
+      String createdByUserId,
       String? description});
 }
 
@@ -60,6 +62,7 @@ class _$CreateEventCommandCopyWithImpl<$Res>
     Object? name = freezed,
     Object? startTime = freezed,
     Object? duration = freezed,
+    Object? createdByUserId = freezed,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
@@ -79,6 +82,10 @@ class _$CreateEventCommandCopyWithImpl<$Res>
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      createdByUserId: createdByUserId == freezed
+          ? _value.createdByUserId
+          : createdByUserId // ignore: cast_nullable_to_non_nullable
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -99,6 +106,7 @@ abstract class _$$_CreateEventCommandCopyWith<$Res>
       String name,
       DateTime startTime,
       Duration duration,
+      String createdByUserId,
       String? description});
 }
 
@@ -119,6 +127,7 @@ class __$$_CreateEventCommandCopyWithImpl<$Res>
     Object? name = freezed,
     Object? startTime = freezed,
     Object? duration = freezed,
+    Object? createdByUserId = freezed,
     Object? description = freezed,
   }) {
     return _then(_$_CreateEventCommand(
@@ -138,6 +147,10 @@ class __$$_CreateEventCommandCopyWithImpl<$Res>
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      createdByUserId: createdByUserId == freezed
+          ? _value.createdByUserId
+          : createdByUserId // ignore: cast_nullable_to_non_nullable
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -155,6 +168,7 @@ class _$_CreateEventCommand extends _CreateEventCommand
       required this.name,
       required this.startTime,
       required this.duration,
+      required this.createdByUserId,
       this.description})
       : super._();
 
@@ -170,11 +184,13 @@ class _$_CreateEventCommand extends _CreateEventCommand
   @override
   final Duration duration;
   @override
+  final String createdByUserId;
+  @override
   final String? description;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CreateEventCommand(teamId: $teamId, name: $name, startTime: $startTime, duration: $duration, description: $description)';
+    return 'CreateEventCommand(teamId: $teamId, name: $name, startTime: $startTime, duration: $duration, createdByUserId: $createdByUserId, description: $description)';
   }
 
   @override
@@ -186,6 +202,7 @@ class _$_CreateEventCommand extends _CreateEventCommand
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('startTime', startTime))
       ..add(DiagnosticsProperty('duration', duration))
+      ..add(DiagnosticsProperty('createdByUserId', createdByUserId))
       ..add(DiagnosticsProperty('description', description));
   }
 
@@ -199,6 +216,8 @@ class _$_CreateEventCommand extends _CreateEventCommand
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
             const DeepCollectionEquality().equals(other.duration, duration) &&
             const DeepCollectionEquality()
+                .equals(other.createdByUserId, createdByUserId) &&
+            const DeepCollectionEquality()
                 .equals(other.description, description));
   }
 
@@ -210,6 +229,7 @@ class _$_CreateEventCommand extends _CreateEventCommand
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(startTime),
       const DeepCollectionEquality().hash(duration),
+      const DeepCollectionEquality().hash(createdByUserId),
       const DeepCollectionEquality().hash(description));
 
   @JsonKey(ignore: true)
@@ -232,6 +252,7 @@ abstract class _CreateEventCommand extends CreateEventCommand {
       required final String name,
       required final DateTime startTime,
       required final Duration duration,
+      required final String createdByUserId,
       final String? description}) = _$_CreateEventCommand;
   const _CreateEventCommand._() : super._();
 
@@ -246,6 +267,8 @@ abstract class _CreateEventCommand extends CreateEventCommand {
   DateTime get startTime;
   @override
   Duration get duration;
+  @override
+  String get createdByUserId;
   @override
   String? get description;
   @override

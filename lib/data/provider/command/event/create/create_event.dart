@@ -13,6 +13,7 @@ class CreateEventCommand with _$CreateEventCommand {
     required String name,
     required DateTime startTime,
     required Duration duration,
+    required String createdByUserId,
     String? description,
   }) = _CreateEventCommand;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/event_generator_sheet.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/note_generator_sheet.dart';
+import 'package:supercalipso/presenter/pages/events/components/event_generator_sheet.dart';
+import 'package:supercalipso/presenter/pages/notes/components/note_generator_sheet.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class TeamPageChipBar extends StatelessWidget {

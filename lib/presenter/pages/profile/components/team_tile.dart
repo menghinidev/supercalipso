@@ -6,9 +6,9 @@ import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/presenter/components/icon/custom_icon.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/event_generator_sheet.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/note_generator_sheet.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/team_invitation_generator_sheet.dart';
+import 'package:supercalipso/presenter/pages/events/components/event_generator_sheet.dart';
+import 'package:supercalipso/presenter/pages/notes/components/note_generator_sheet.dart';
+import 'package:supercalipso/presenter/pages/profile/components/team_invitation_generator_sheet.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 import 'package:supercalipso/services/navigation/router_provider.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
@@ -23,11 +23,15 @@ class TeamTile extends HookConsumerWidget {
     var users = ref.watch(teamMembersProvider(team.id));
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 200),
-      child: BaseTile(
+      child: CustomTile(
         leading: CircleAvatar(child: Text(team.name[0])),
         title: team.name,
-        onTap: () => ref.read(routerProvider).go(TeamPageRoute.createPath(team.id)),
-        subtitle: users.onDefault(builder: (data) => data.concatNames(), defaultValue: ''),
+        onTap: () => ref.read(routerProvider).push(TeamPageRoute.createPath(team.id)),
+        subtitle: Text(
+          users.onDefault(builder: (data) => data.concatNames() + data.concatNames(), defaultValue: ''),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         trailing: PopupMenuButton<String>(
           position: PopupMenuPosition.under,
           shape: Shapes.lowRoundedBorder,

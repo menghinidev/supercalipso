@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:supercalipso/bloc/auth/auth_service.dart';
+import 'package:supercalipso/bloc/startup/startup_service.dart';
 import 'package:supercalipso/firebase_options.dart';
 import 'package:supercalipso/presenter/theme/theme_builder.dart';
 import 'package:supercalipso/services/installer.dart';
@@ -27,7 +28,7 @@ class _SuperCalipsoState extends ConsumerState<SuperCalipso> {
   @override
   void initState() {
     super.initState();
-    ref.read(authServiceProvider).silentLogin();
+    ref.read(startupServiceProvider).start();
   }
 
   @override

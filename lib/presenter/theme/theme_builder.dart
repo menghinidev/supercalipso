@@ -8,8 +8,11 @@ class ThemeBuilder {
         textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           elevation: 0.0,
+          type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          selectedIconTheme: const IconThemeData(color: AppColors.black),
+          unselectedIconTheme: const IconThemeData(color: AppColors.grey),
           unselectedLabelStyle: GoogleFonts.openSansTextTheme(Theme.of(context).textTheme).bodyText2,
           selectedLabelStyle: GoogleFonts.openSansTextTheme(Theme.of(context).textTheme).bodyText1,
         ),

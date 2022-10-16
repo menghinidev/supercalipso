@@ -7,12 +7,14 @@ part 'team_event.freezed.dart';
 class TeamEvent with _$TeamEvent {
   const TeamEvent._();
   const factory TeamEvent({
-    required final String id,
-    required final String name,
-    required final DateTime startTime,
-    final String? description,
-    required final String teamId,
-    @Default(Duration.zero) final Duration? duration,
+    required String id,
+    required String name,
+    required DateTime startTime,
+    required String teamId,
+    required String createdByUserId,
+    required DateTime lastUpdate,
+    String? description,
+    @Default(Duration.zero) Duration? duration,
   }) = _TeamEvent;
 
   factory TeamEvent.fromJson(Map<String, Object?> json) => _$TeamEventFromJson(json);

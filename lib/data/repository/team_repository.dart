@@ -16,16 +16,17 @@ class TeamRepository {
   final BehaviorSubject<List<Team>> teamsController;
   final BehaviorSubject<List<TeamInvitation>> teamsInvitationsController;
   final teamsDataProvider = Installer.instance.get<ITeamDataSource>();
+  String? loggedTeamId;
 
   TeamRepository()
       : teamsController = BehaviorSubject<List<Team>>(),
         teamsInvitationsController = BehaviorSubject<List<TeamInvitation>>();
 
-  Stream<List<Team>> get teamsChanges => teamsController.stream;
+  Stream<List<Team>> get enrolledTeams => teamsController.stream;
   Stream<List<TeamInvitation>> get invitationsChanges => teamsInvitationsController.stream;
 
-  Stream<Team> teamChanges(String teamId) =>
-      teamsController.stream.mapNotNull((event) => event.getWhere((element) => element.id == teamId));
+  Stream<Team> get currentTeam =>
+      teamsController.stream.mapNotNull((event) => event.getWhere((element) => element.id == loggedTeamId));
 
   Future<Response<List<Team>>> getUserTeams({required String userId}) async {
     var subs = await teamsDataProvider.readUserTeamsSubscriptions(userId: userId);
@@ -37,9 +38,9 @@ class TeamRepository {
     return teams;
   }
 
-  Future<Response<Team>> getTeam({required String teamId}) async {
+  Future<Team> getTeam({required String teamId}) async {
     var teams = await teamsDataProvider.readTeam(teamId: teamId);
-    return teams;
+    return teams.isError ? Future.error('error') : Future.value(teams.payload!);
   }
 
   Future<Response> createTeam({required String name, required String userId}) async {
@@ -74,7 +75,7 @@ class TeamRepository {
       invitedUserId: invitedUserId,
       invitedByUserId: ownerUserId,
       teamId: teamId,
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toUtc(),
       status: TeamInvitationStatus.unknown.name,
     );
     return await teamsDataProvider

@@ -5,7 +5,7 @@ import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/event_generator_sheet.dart';
+import 'package:supercalipso/presenter/pages/events/components/event_generator_sheet.dart';
 import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dart';
 import 'package:supercalipso/presenter/pages/events/components/event_tile.dart';
 import 'package:supercalipso/presenter/pages/events/sections/events_list.dart';

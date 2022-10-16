@@ -37,7 +37,7 @@ class TeamFirestoreDataSource extends ITeamDataSource {
     var subscriptionDocument = firestore.collection(FirestoreCollections.subscriptions).doc();
     var sub = TeamSubscription(
       id: subscriptionDocument.id,
-      joined: DateTime.now(),
+      joined: DateTime.now().toUtc(),
       subscribedUserId: updatedInvitation.invitedUserId,
       teamId: updatedInvitation.teamId,
     );
@@ -80,7 +80,7 @@ class TeamFirestoreDataSource extends ITeamDataSource {
       id: teamOwnerSubDocument.id,
       subscribedUserId: command.userId,
       teamId: document.id,
-      joined: DateTime.now(),
+      joined: DateTime.now().toUtc(),
     );
     await teamOwnerSubDocument.set(sub.toJson());
     return Responses.success(null);

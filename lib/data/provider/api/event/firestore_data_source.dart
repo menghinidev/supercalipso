@@ -7,7 +7,7 @@ import 'package:supercalipso/data/provider/command/event/update/update_event_com
 import 'package:supercalipso/plugin/utils/response.dart';
 import 'package:supercalipso/data/provider/command/event/create/create_event.dart';
 
-class TeamEventFirestoreSource extends IEventDataSource {
+class TeamEventFirestoreDataSource extends IEventDataSource {
   final firestore = FirebaseFirestore.instance;
 
   @override
@@ -20,6 +20,8 @@ class TeamEventFirestoreSource extends IEventDataSource {
       teamId: command.teamId,
       description: command.description,
       duration: command.duration,
+      createdByUserId: command.createdByUserId,
+      lastUpdate: DateTime.now().toUtc(),
     );
     await document.set(event.toJson());
     return Responses.success(event);

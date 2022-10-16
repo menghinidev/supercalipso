@@ -48,7 +48,7 @@ class NoteMockedDataSource extends INoteDataSource with IdentifierFactory {
       id: createID(),
       title: command.title,
       description: command.content,
-      lastUpdate: DateTime.now(),
+      lastUpdate: DateTime.now().toUtc(),
       modifiedByUserId: user.uid,
       teamId: team.id,
     );
@@ -66,7 +66,7 @@ class NoteMockedDataSource extends INoteDataSource with IdentifierFactory {
       id: note.id,
       title: command.title ?? note.title,
       description: command.content ?? note.description,
-      lastUpdate: DateTime.now(),
+      lastUpdate: DateTime.now().toUtc(),
       modifiedByUserId: user.uid,
       teamId: note.teamId,
     );

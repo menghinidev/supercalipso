@@ -30,6 +30,14 @@ final teamMembersProvider = FutureProvider.family<List<User>, String>((ref, id) 
   return ref.watch(teamServiceProvider).getTeamMembers(teamId: id);
 });
 
+final currentTeamChangesProvider = StreamProvider<Team>((ref) {
+  return ref.watch(teamRepoProvider).currentTeam;
+});
+
+final teamProvider = FutureProvider.family<Team, String>((ref, id) async {
+  return ref.watch(teamRepoProvider).getTeam(teamId: id);
+});
+
 class TeamService {
   final TeamRepository teamRepository;
   final EventRepository eventRepository;
@@ -42,6 +50,8 @@ class TeamService {
     required this.eventRepository,
     required this.noteRepository,
   });
+
+  Future switchToTeamSession({required String teamId}) async {}
 
   Future<List<User>> getTeamMembers({required String teamId}) async {
     var userId = authRepository.loggedUser?.uid;
