@@ -50,7 +50,7 @@ class TeamInvitationGeneratorSheet extends HookConsumerWidget {
                 onTap: () {
                   ref.read(teamServiceProvider).inviteUserToTeam(
                         email: controller.text,
-                        teamId: data.id,
+                        teamId: data!.id,
                       );
                   Navigator.pop(context);
                 },

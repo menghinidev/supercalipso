@@ -18,6 +18,7 @@ class AppRoutes {
   static final events = EventsPageRoute();
   static final team = TeamPageRoute();
   static final tasks = TasksPageRoute();
+  static final task = TaskPageRoute();
   static final notes = NotesPageRoute();
   static final expenses = ExpensesPageRoute();
   static final event = EventPageRoute();

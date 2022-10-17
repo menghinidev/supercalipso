@@ -34,7 +34,7 @@ final teamMembersProvider = FutureProvider.family<List<User>, String>((ref, id) 
   return ref.watch(teamServiceProvider).getTeamMembers(teamId: id);
 });
 
-final currentTeamChangesProvider = StreamProvider<Team>((ref) {
+final currentTeamChangesProvider = StreamProvider<Team?>((ref) {
   return ref.watch(teamRepoProvider).currentTeam;
 });
 
@@ -137,7 +137,7 @@ class TeamService {
     var userId = authRepository.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
     var teams = await teamRepository.getUserTeams(userId: userId);
-    if (teams.isError || teams.payload!.isEmpty) return Responses.failure([]);
+    if (teams.isError || teams.payload!.isEmpty) return await teamRepository.logoutFromTeam();
     var firstTeamId = teams.payload!.first.id;
     await teamRepository.loginWithTeam(teamId: firstTeamId, userId: userId);
     return Responses.success(null);

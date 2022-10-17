@@ -6,6 +6,9 @@ import 'package:supercalipso/data/provider/api/event/mocked_data_source.dart';
 import 'package:supercalipso/data/provider/api/note/firestore_data_source.dart';
 import 'package:supercalipso/data/provider/api/note/i_note_data_source.dart';
 import 'package:supercalipso/data/provider/api/note/mocked_data_source.dart';
+import 'package:supercalipso/data/provider/api/task/firestore_data_source.dart';
+import 'package:supercalipso/data/provider/api/task/i_task_data_source.dart';
+import 'package:supercalipso/data/provider/api/task/mocked_data_source.dart';
 import 'package:supercalipso/data/provider/api/team/firestore_data_source.dart';
 import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
 import 'package:supercalipso/data/provider/api/team/mocked_data_source.dart';
@@ -15,6 +18,7 @@ import 'package:supercalipso/data/provider/api/user/mocked_data_souce.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/data/repository/note_repository.dart';
+import 'package:supercalipso/data/repository/task_repository.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
 
 class Installer {
@@ -33,6 +37,7 @@ class Installer {
     GetIt.instance.registerSingleton<TeamRepository>(TeamRepository());
     GetIt.instance.registerSingleton<EventRepository>(EventRepository());
     GetIt.instance.registerSingleton<NoteRepository>(NoteRepository());
+    GetIt.instance.registerSingleton<TaskRepository>(TaskRepository());
   }
 
   void installDataProviders() {
@@ -51,6 +56,10 @@ class Installer {
     GetIt.instance.registerSingleton<INoteDataSource>(onMockedData(
       onMockedData: () => NoteMockedDataSource(),
       onTestValue: () => NoteFirestoreDataSource(),
+    ));
+    GetIt.instance.registerSingleton<ITaskDataSource>(onMockedData(
+      onMockedData: () => MockedTaskDataSource(),
+      onTestValue: () => TaskFirestoreDataSource(),
     ));
   }
 

@@ -25,8 +25,8 @@ class TeamRepository {
   Stream<List<Team>> get enrolledTeams => enrolledTeamsController.stream;
   Stream<List<TeamInvitation>> get invitationsChanges => teamsInvitationsController.stream;
 
-  Stream<Team> get currentTeam =>
-      enrolledTeamsController.stream.mapNotNull((event) => event.getWhere((element) => element.id == loggedTeamId));
+  Stream<Team?> get currentTeam =>
+      enrolledTeamsController.stream.map((event) => event.getWhere((element) => element.id == loggedTeamId));
 
   Future<Response<List<Team>>> getUserTeams({required String userId}) async {
     var subs = await teamsDataProvider.readUserTeamsSubscriptions(userId: userId);
@@ -90,5 +90,10 @@ class TeamRepository {
 
   Future<Response<List<TeamSubscription>>> getTeamSubscriptions({required String teamId}) async {
     return await teamsDataProvider.readTeamSubscriptions(teamId: teamId);
+  }
+
+  Future<Response> logoutFromTeam() {
+    enrolledTeamsController.add(<Team>[]);
+    return Future.value(Responses.success(null));
   }
 }
