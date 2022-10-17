@@ -44,14 +44,7 @@ class NoteMockedDataSource extends INoteDataSource with IdentifierFactory {
     if (user == null) return Responses.failure([]);
     var team = mocked.teams.getWhere((element) => element.id == command.teamId);
     if (team == null) return Responses.failure([]);
-    var newNote = Note(
-      id: createID(),
-      title: command.title,
-      description: command.content,
-      lastUpdate: DateTime.now().toUtc(),
-      modifiedByUserId: user.uid,
-      teamId: team.id,
-    );
+    var newNote = command.createNoteDTO(createID());
     mocked.notes.add(newNote);
     return Future.value(Responses.success(null));
   }

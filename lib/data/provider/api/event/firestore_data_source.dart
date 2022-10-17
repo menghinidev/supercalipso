@@ -13,17 +13,7 @@ class TeamEventFirestoreDataSource extends IEventDataSource {
   @override
   Future<Response<TeamEvent>> createTeamEvent({required CreateEventCommand command}) async {
     var document = firestore.collection(FirestoreCollections.events).doc();
-    var event = TeamEvent(
-      id: document.id,
-      name: command.name,
-      startTime: command.startTime,
-      endTime: command.endTime,
-      description: command.description,
-      teamId: command.teamId,
-      createdByUserId: command.createdByUserId,
-      lastUpdate: DateTime.now().toUtc(),
-      iconName: command.iconName,
-    );
+    var event = command.createEventDTO(document.id);
     await document.set(event.toJson());
     return Responses.success(event);
   }
@@ -39,14 +29,7 @@ class TeamEventFirestoreDataSource extends IEventDataSource {
   Future<Response<TeamEvent>> updateTeamEvent({required UpdateEventCommand command}) async {
     var document = firestore.collection(FirestoreCollections.events).doc(command.eventId);
     var event = TeamEvent.fromJson((await document.get()).data()!);
-    var newEvent = event.copyWith(
-      description: command.description ?? event.description,
-      endTime: command.endTime ?? event.endTime,
-      name: command.title ?? event.name,
-      startTime: command.startTime ?? event.startTime,
-      iconName: command.iconName,
-      lastUpdate: DateTime.now().toUtc(),
-    );
+    var newEvent = command.createEventDTO(event);
     await document.update(newEvent.toJson());
     return Responses.success(newEvent);
   }
