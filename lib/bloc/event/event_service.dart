@@ -26,8 +26,9 @@ class EventService {
   Future<Response> createEvent({
     required String name,
     required DateTime startTime,
-    Duration? duration,
+    DateTime? endTime,
     String? description,
+    String? iconName,
   }) async {
     var userId = authRepository.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
@@ -37,9 +38,32 @@ class EventService {
       teamId: teamId,
       name: name,
       startTime: startTime,
-      duration: duration,
+      endTime: endTime,
       description: description,
       userId: userId,
+      iconName: iconName,
+    );
+  }
+
+  Future<Response> updateEvent({
+    required String eventId,
+    String? name,
+    DateTime? startTime,
+    DateTime? endTime,
+    String? description,
+    String? iconName,
+  }) async {
+    var userId = authRepository.loggedUser?.uid;
+    if (userId == null) return Responses.failure([]);
+    var teamId = teamRepository.loggedTeamId;
+    if (teamId == null) return Responses.failure([]);
+    return await eventRepository.updateEvent(
+      eventId: eventId,
+      description: description,
+      endTime: endTime,
+      name: name,
+      startTime: startTime,
+      iconName: iconName,
     );
   }
 

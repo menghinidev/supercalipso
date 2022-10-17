@@ -9,11 +9,13 @@ class DateFormFieldPicker extends HookWidget {
   final Date? initialValue;
   final Function(Date) onSelected;
   final DateInterval? validInterval;
+  final bool readOnly;
 
   const DateFormFieldPicker({
     required this.onSelected,
     this.initialValue,
     this.label = 'Select Date',
+    this.readOnly = false,
     this.validInterval,
     super.key,
   });
@@ -27,12 +29,13 @@ class DateFormFieldPicker extends HookWidget {
   Widget build(BuildContext context) {
     var controller = useTextEditingController(text: initialValue?.format());
     return GestureDetector(
-      onTap: () => openDatePicker(context, controller),
+      onTap: readOnly ? null : () => openDatePicker(context, controller),
       child: AbsorbPointer(
         child: CustomTextField(
           controller: controller,
           validator: (value) => FormValidators.nonEmptyValidator(value, context),
           label: label,
+          enabled: !readOnly,
           trailing: const Icon(Icons.calendar_month),
         ),
       ),

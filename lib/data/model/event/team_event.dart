@@ -13,17 +13,17 @@ class TeamEvent with _$TeamEvent {
     required String teamId,
     required String createdByUserId,
     required DateTime lastUpdate,
+    DateTime? endTime,
     String? description,
-    @Default(Duration.zero) Duration? duration,
+    String? iconName,
   }) = _TeamEvent;
 
   factory TeamEvent.fromJson(Map<String, Object?> json) => _$TeamEventFromJson(json);
 }
 
 extension TeamEventProperties on TeamEvent {
-  DateTime? get endTime => duration != null ? startTime.add(duration!) : null;
-  bool get isDayEvent => duration == null && startTime.hour == 0;
-  DateTime get day => DateTime.utc(startTime.year, startTime.month, startTime.day);
+  bool get isDayEvent => startTime.hour == 0 && endTime == null;
+  DateTime get startDay => DateTime.utc(startTime.year, startTime.month, startTime.day);
 }
 
 extension TeamEventList on List<TeamEvent> {

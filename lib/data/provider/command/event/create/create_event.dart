@@ -12,9 +12,10 @@ class CreateEventCommand with _$CreateEventCommand {
     required String teamId,
     required String name,
     required DateTime startTime,
-    required Duration duration,
     required String createdByUserId,
     String? description,
+    String? iconName,
+    DateTime? endTime,
   }) = _CreateEventCommand;
 
   factory CreateEventCommand.fromJson(Map<String, Object?> json) => _$CreateEventCommandFromJson(json);

@@ -6,6 +6,7 @@ class CustomScaffold extends StatelessWidget {
   final Widget body;
   final Widget? drawer;
   final Widget? fab;
+  final bool? resizeOnKeyboard;
 
   const CustomScaffold({
     required this.body,
@@ -13,6 +14,7 @@ class CustomScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.drawer,
     this.fab,
+    this.resizeOnKeyboard,
     Key? key,
   }) : super(key: key);
 
@@ -24,6 +26,7 @@ class CustomScaffold extends StatelessWidget {
       body: body,
       floatingActionButton: fab,
       bottomNavigationBar: bottomNavigationBar,
+      resizeToAvoidBottomInset: resizeOnKeyboard,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/event/event_provider.dart';
@@ -14,12 +15,15 @@ import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/data/repository/note_repository.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/routes.dart';
 
 var teamServiceProvider = Provider<TeamService>((ref) => TeamService(
       teamRepository: ref.watch(teamRepoProvider),
       authRepository: ref.watch(authProvider),
       eventRepository: ref.watch(eventRepositoryProvider),
       noteRepository: ref.watch(noteRepoProvider),
+      router: ref.watch(routerProvider),
     ));
 
 final teamInvitationsProvider = FutureProvider<Response<List<TeamInvitation>>>((ref) async {
@@ -43,12 +47,14 @@ class TeamService {
   final EventRepository eventRepository;
   final AuthRepository authRepository;
   final NoteRepository noteRepository;
+  final GoRouter router;
 
   TeamService({
     required this.teamRepository,
     required this.authRepository,
     required this.eventRepository,
     required this.noteRepository,
+    required this.router,
   });
 
   Future switchToTeamSession({required String teamId}) async {}
@@ -115,14 +121,16 @@ class TeamService {
     if (userId == null) return Responses.failure([]);
     return await teamRepository
         .createTeam(name: name, userId: userId)
-        .ifSuccessAsync((payload) => loginWithTeam(teamId: payload!.id));
+        .ifSuccessAsync((payload) => loginWithTeam(teamId: payload!.id))
+        .ifSuccess((payload) => eventRepository.getTeamEvents(teamId: payload!.id))
+        .ifSuccess((payload) => noteRepository.getTeamNotes(teamId: payload!.id))
+        .ifSuccess((payload) => router.go(HomePageRoute.pagePath));
   }
 
   Future<Response> loginWithTeam({required String teamId}) async {
     var userId = authRepository.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
-    await teamRepository.loginWithTeam(teamId: teamId, userId: userId);
-    return Responses.success(null);
+    return await teamRepository.loginWithTeam(teamId: teamId, userId: userId);
   }
 
   Future<Response> silentloginWithTeam() async {

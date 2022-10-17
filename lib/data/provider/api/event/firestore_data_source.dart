@@ -19,7 +19,7 @@ class TeamEventFirestoreDataSource extends IEventDataSource {
       startTime: command.startTime,
       teamId: command.teamId,
       description: command.description,
-      duration: command.duration,
+      endTime: command.endTime,
       createdByUserId: command.createdByUserId,
       lastUpdate: DateTime.now().toUtc(),
     );
@@ -41,7 +41,7 @@ class TeamEventFirestoreDataSource extends IEventDataSource {
     var newEvent = event.copyWith(
       name: command.title ?? event.name,
       description: command.description ?? event.description,
-      duration: command.duration ?? event.duration,
+      endTime: command.endTime ?? event.endTime,
       startTime: command.startTime ?? event.startTime,
     );
     await document.update(newEvent.toJson());

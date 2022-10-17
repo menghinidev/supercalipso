@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supercalipso/data/model/event/team_event.dart';
+import 'package:supercalipso/presenter/pages/event/event_page.dart';
 import 'package:supercalipso/presenter/pages/events/events_page.dart';
 import 'package:supercalipso/presenter/pages/home/home_page.dart';
 import 'package:supercalipso/presenter/pages/login/login_page.dart';
@@ -16,6 +18,7 @@ class AppRoutes {
   static final tasks = TasksPageRoute();
   static final notes = NotesPageRoute();
   static final expenses = ExpensesPageRoute();
+  static final event = EventPageRoute();
 
   static final unprotectedRoutes = [login.path];
 }
@@ -70,6 +73,19 @@ class EventsPageRoute extends GoRoute {
           path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: const HomePage(),
+          ),
+        );
+}
+
+class EventPageRoute extends GoRoute {
+  static const String pageName = 'event';
+  static const String pagePath = '/$pageName';
+
+  EventPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => BasePageTransitionBuilder(
+            child: EventPage(event: state.extra as TeamEvent?),
           ),
         );
 }

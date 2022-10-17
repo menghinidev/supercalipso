@@ -13,10 +13,11 @@ _$_TeamEvent _$$_TeamEventFromJson(Map<String, dynamic> json) => _$_TeamEvent(
       teamId: json['teamId'] as String,
       createdByUserId: json['createdByUserId'] as String,
       lastUpdate: DateTime.parse(json['lastUpdate'] as String),
+      endTime: json['endTime'] == null
+          ? null
+          : DateTime.parse(json['endTime'] as String),
       description: json['description'] as String?,
-      duration: json['duration'] == null
-          ? Duration.zero
-          : Duration(microseconds: json['duration'] as int),
+      iconName: json['iconName'] as String?,
     );
 
 Map<String, dynamic> _$$_TeamEventToJson(_$_TeamEvent instance) =>
@@ -27,6 +28,7 @@ Map<String, dynamic> _$$_TeamEventToJson(_$_TeamEvent instance) =>
       'teamId': instance.teamId,
       'createdByUserId': instance.createdByUserId,
       'lastUpdate': instance.lastUpdate.toIso8601String(),
+      'endTime': instance.endTime?.toIso8601String(),
       'description': instance.description,
-      'duration': instance.duration?.inMicroseconds,
+      'iconName': instance.iconName,
     };

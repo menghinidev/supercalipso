@@ -11,7 +11,7 @@ class EventMockedDataSource extends IEventDataSource with IdentifierFactory {
 
   @override
   Future<Response<List<TeamEvent>>> readTeamEvents({required String teamId}) async {
-    var events = mocked.events.where((element) => element.id == teamId).toList();
+    var events = mocked.events.where((element) => element.teamId == teamId).toList();
     return Future.value(Responses.success(events));
   }
 
@@ -32,11 +32,12 @@ class EventMockedDataSource extends IEventDataSource with IdentifierFactory {
       id: createID(),
       name: command.name,
       startTime: command.startTime,
-      duration: command.duration,
+      endTime: command.endTime,
       description: command.description,
       teamId: team.id,
       createdByUserId: command.createdByUserId,
       lastUpdate: DateTime.now().toUtc(),
+      iconName: command.iconName,
     );
     mocked.events.add(event);
     return Future.value(Responses.success(event));
@@ -54,9 +55,10 @@ class EventMockedDataSource extends IEventDataSource with IdentifierFactory {
     if (event == null) return Responses.failure([]);
     var updated = event.copyWith(
       description: command.description ?? event.description,
-      duration: command.duration ?? event.duration,
+      endTime: command.endTime ?? event.endTime,
       name: command.title ?? event.name,
       startTime: command.startTime ?? event.startTime,
+      iconName: command.iconName,
       lastUpdate: DateTime.now().toUtc(),
     );
     mocked.events.removeWhere((element) => element.id == command.eventId);

@@ -40,16 +40,18 @@ class EventRepository {
     required String name,
     required DateTime startTime,
     required String userId,
-    Duration? duration,
+    DateTime? endTime,
     String? description,
+    String? iconName,
   }) async {
     var command = CreateEventCommand(
       teamId: teamId,
       name: name,
       startTime: startTime,
-      duration: duration ?? Duration.zero,
+      endTime: endTime,
       description: description,
       createdByUserId: userId,
+      iconName: iconName,
     );
     var event = await provider.createTeamEvent(command: command);
     return await event.flatMapAsync((t) => getTeamEvents(teamId: teamId));
@@ -59,15 +61,17 @@ class EventRepository {
     required String eventId,
     String? name,
     DateTime? startTime,
-    Duration? duration,
+    DateTime? endTime,
     String? description,
+    String? iconName,
   }) async {
     var command = UpdateEventCommand(
       eventId: eventId,
       title: name,
       startTime: startTime,
-      duration: duration ?? Duration.zero,
+      endTime: endTime,
       description: description,
+      iconName: iconName,
     );
     var event = await provider.updateTeamEvent(command: command);
     return await event.flatMapAsync((t) => getTeamEvents(teamId: t!.teamId));

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 

@@ -5,11 +5,12 @@ part 'event_builder.freezed.dart';
 @freezed
 class EventBuilder with _$EventBuilder {
   const factory EventBuilder({
-    final String? teamId,
-    final String? name,
-    final String? description,
-    final DateTime? startTime,
-    final Duration? duration,
+    String? teamId,
+    String? name,
+    String? description,
+    DateTime? startTime,
+    DateTime? endTime,
+    String? iconName,
   }) = _EventBuilder;
 }
 

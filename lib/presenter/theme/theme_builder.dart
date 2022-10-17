@@ -24,5 +24,6 @@ class ThemeBuilder {
           titleTextStyle: Theme.of(context).textTheme.headline5,
         ),
         scaffoldBackgroundColor: AppColors.white,
+        colorSchemeSeed: AppColors.pink,
       );
 }

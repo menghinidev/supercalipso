@@ -20,7 +20,8 @@ mixin _$EventBuilder {
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get startTime => throw _privateConstructorUsedError;
-  Duration? get duration => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  String? get iconName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EventBuilderCopyWith<EventBuilder> get copyWith =>
@@ -37,7 +38,8 @@ abstract class $EventBuilderCopyWith<$Res> {
       String? name,
       String? description,
       DateTime? startTime,
-      Duration? duration});
+      DateTime? endTime,
+      String? iconName});
 }
 
 /// @nodoc
@@ -54,7 +56,8 @@ class _$EventBuilderCopyWithImpl<$Res> implements $EventBuilderCopyWith<$Res> {
     Object? name = freezed,
     Object? description = freezed,
     Object? startTime = freezed,
-    Object? duration = freezed,
+    Object? endTime = freezed,
+    Object? iconName = freezed,
   }) {
     return _then(_value.copyWith(
       teamId: teamId == freezed
@@ -73,10 +76,14 @@ class _$EventBuilderCopyWithImpl<$Res> implements $EventBuilderCopyWith<$Res> {
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -93,7 +100,8 @@ abstract class _$$_EventBuilderCopyWith<$Res>
       String? name,
       String? description,
       DateTime? startTime,
-      Duration? duration});
+      DateTime? endTime,
+      String? iconName});
 }
 
 /// @nodoc
@@ -113,7 +121,8 @@ class __$$_EventBuilderCopyWithImpl<$Res>
     Object? name = freezed,
     Object? description = freezed,
     Object? startTime = freezed,
-    Object? duration = freezed,
+    Object? endTime = freezed,
+    Object? iconName = freezed,
   }) {
     return _then(_$_EventBuilder(
       teamId: teamId == freezed
@@ -132,10 +141,14 @@ class __$$_EventBuilderCopyWithImpl<$Res>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -148,7 +161,8 @@ class _$_EventBuilder implements _EventBuilder {
       this.name,
       this.description,
       this.startTime,
-      this.duration});
+      this.endTime,
+      this.iconName});
 
   @override
   final String? teamId;
@@ -159,11 +173,13 @@ class _$_EventBuilder implements _EventBuilder {
   @override
   final DateTime? startTime;
   @override
-  final Duration? duration;
+  final DateTime? endTime;
+  @override
+  final String? iconName;
 
   @override
   String toString() {
-    return 'EventBuilder(teamId: $teamId, name: $name, description: $description, startTime: $startTime, duration: $duration)';
+    return 'EventBuilder(teamId: $teamId, name: $name, description: $description, startTime: $startTime, endTime: $endTime, iconName: $iconName)';
   }
 
   @override
@@ -176,7 +192,8 @@ class _$_EventBuilder implements _EventBuilder {
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.duration, duration));
+            const DeepCollectionEquality().equals(other.endTime, endTime) &&
+            const DeepCollectionEquality().equals(other.iconName, iconName));
   }
 
   @override
@@ -186,7 +203,8 @@ class _$_EventBuilder implements _EventBuilder {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(duration));
+      const DeepCollectionEquality().hash(endTime),
+      const DeepCollectionEquality().hash(iconName));
 
   @JsonKey(ignore: true)
   @override
@@ -200,7 +218,8 @@ abstract class _EventBuilder implements EventBuilder {
       final String? name,
       final String? description,
       final DateTime? startTime,
-      final Duration? duration}) = _$_EventBuilder;
+      final DateTime? endTime,
+      final String? iconName}) = _$_EventBuilder;
 
   @override
   String? get teamId;
@@ -211,7 +230,9 @@ abstract class _EventBuilder implements EventBuilder {
   @override
   DateTime? get startTime;
   @override
-  Duration? get duration;
+  DateTime? get endTime;
+  @override
+  String? get iconName;
   @override
   @JsonKey(ignore: true)
   _$$_EventBuilderCopyWith<_$_EventBuilder> get copyWith =>

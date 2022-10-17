@@ -22,12 +22,12 @@ class AuthRepository {
     return user;
   }
 
-  Future firebaseLogin({required firebase.UserCredential credentials}) async {
+  Future<Response> firebaseLogin({required firebase.UserCredential credentials}) async {
     var firebaseUser = credentials.user!;
     var user = await dataSource.getUserByUserId(userId: firebaseUser.uid);
     user.ifSuccess((payload) => loggedUser = payload);
     user.ifSuccess((payload) => authStreamController.add(loggedUser));
-    if (!user.isError) return Future.value();
+    if (!user.isError) return user;
     var createdUser = await dataSource.registerUser(
       command: RegisterUserCommand(
         uid: firebaseUser.uid,
@@ -38,7 +38,7 @@ class AuthRepository {
     );
     createdUser.ifSuccess((payload) => loggedUser = payload);
     createdUser.ifSuccess((payload) => authStreamController.add(loggedUser));
-    return Future.value();
+    return createdUser;
   }
 
   Future<Response<User>> getUserByEmail({required String email}) async {

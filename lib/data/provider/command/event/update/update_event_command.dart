@@ -10,7 +10,8 @@ class UpdateEventCommand with _$UpdateEventCommand {
     String? title,
     String? description,
     DateTime? startTime,
-    Duration? duration,
+    DateTime? endTime,
+    String? iconName,
   }) = _UpdateEventCommand;
 
   factory UpdateEventCommand.fromJson(Map<String, dynamic> json) => _$UpdateEventCommandFromJson(json);

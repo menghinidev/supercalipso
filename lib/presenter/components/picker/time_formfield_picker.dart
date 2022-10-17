@@ -8,11 +8,13 @@ class TimeFormFieldPicker extends HookWidget {
   final String label;
   final Time? initialValue;
   final Function(Time) onSelected;
+  final bool isReadOnly;
 
   const TimeFormFieldPicker({
     required this.onSelected,
     this.initialValue,
     this.label = 'Select Time',
+    this.isReadOnly = false,
     super.key,
   });
 
@@ -20,12 +22,13 @@ class TimeFormFieldPicker extends HookWidget {
   Widget build(BuildContext context) {
     var controller = useTextEditingController(text: initialValue?.format());
     return GestureDetector(
-      onTap: () => openTimePicker(context, controller),
+      onTap: isReadOnly ? null : () => openTimePicker(context, controller),
       child: AbsorbPointer(
         child: CustomTextField(
           controller: controller,
           validator: (value) => FormValidators.nonEmptyValidator(value, context),
           label: label,
+          enabled: !isReadOnly,
           trailing: const Icon(Icons.access_time_rounded),
         ),
       ),

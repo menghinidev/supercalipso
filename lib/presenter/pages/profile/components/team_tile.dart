@@ -6,7 +6,6 @@ import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/presenter/components/icon/custom_icon.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
-import 'package:supercalipso/presenter/pages/events/components/event_generator_sheet.dart';
 import 'package:supercalipso/presenter/pages/notes/components/note_generator_sheet.dart';
 import 'package:supercalipso/presenter/pages/profile/components/team_invitation_generator_sheet.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
@@ -49,28 +48,6 @@ class TeamTile extends HookConsumerWidget {
               child: const BaseTile(
                 title: 'Invite',
                 leading: CustomIcon(icon: Icons.person_add_outlined),
-              ),
-            ),
-            PopupMenuItem(
-              value: 'Create Event',
-              onTap: () => showBottomSheet(
-                context: context,
-                builder: (_) => const EventGeneratorSheet(),
-              ),
-              child: const BaseTile(
-                title: 'Create Event',
-                leading: CustomIcon(icon: Icons.event_available_outlined),
-              ),
-            ),
-            PopupMenuItem(
-              value: 'Create Note',
-              onTap: () => showBottomSheet(
-                context: context,
-                builder: (_) => NoteGeneratorBottomSheet(teamId: team.id),
-              ),
-              child: const BaseTile(
-                title: 'Create Note',
-                leading: CustomIcon(icon: Icons.note_add_outlined),
               ),
             ),
           ],
