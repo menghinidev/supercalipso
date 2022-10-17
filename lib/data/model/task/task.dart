@@ -9,9 +9,9 @@ class Task with _$Task {
   factory Task({
     required String id,
     required String title,
-    required String assignedUserId,
     required String teamId,
-    required DateTime lastStatusUpdate,
+    DateTime? deadline,
+    String? assignedUserId,
     String? iconName,
     @Default(TaskStatus.todo) TaskStatus status,
   }) = _Task;

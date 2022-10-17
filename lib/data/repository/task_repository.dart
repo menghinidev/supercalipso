@@ -21,22 +21,36 @@ class TaskRepository {
 
   Future<Response> createTask({
     required String teamId,
-    required String assignedUserId,
     required String title,
-    required String content,
+    DateTime? deadline,
+    String? iconName,
+    String? assignedUserId,
   }) async {
-    var command = CreateTaskCommand();
+    var command = CreateTaskCommand(
+      teamId: teamId,
+      title: title,
+      assignedUserId: assignedUserId,
+      deadline: deadline,
+      iconName: iconName,
+    );
     return await dataProvider.createTask(command: command).ifSuccess((payload) => getTeamTasks(teamId: teamId));
   }
 
   Future<Response> updateTask({
     required String taskId,
-    required String userId,
     required String teamId,
+    String? assignedUserId,
     String? title,
-    String? content,
+    DateTime? deadline,
+    String? iconName,
   }) async {
-    var command = UpdateTaskCommand();
+    var command = UpdateTaskCommand(
+      taskId: taskId,
+      title: title,
+      assignedUserId: assignedUserId,
+      deadline: deadline,
+      iconName: iconName,
+    );
     return await dataProvider.updateTask(command: command).ifSuccess((payload) => getTeamTasks(teamId: teamId));
   }
 

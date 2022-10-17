@@ -3,20 +3,18 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/plugin/utils/extensions/list_extensions.dart';
 import 'package:supercalipso/presenter/components/card/custom_card.dart';
-import 'package:supercalipso/presenter/components/form/basic_text_field.dart';
 import 'package:supercalipso/presenter/components/form/custom_text_field.dart';
 import 'package:supercalipso/presenter/components/form/validators.dart';
-import 'package:supercalipso/presenter/pages/event/controller/event_page_controller.dart';
-import 'package:supercalipso/presenter/pages/event/controller/event_page_state.dart';
-import 'package:supercalipso/presenter/theme/colors.dart';
+import 'package:supercalipso/presenter/pages/event/sections/name_section.dart';
+import 'package:supercalipso/presenter/pages/task/controller/task_page_state.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
-class EventNameSection extends HookConsumerWidget with EventIconDataFactory {
-  final EventPageState state;
+class TaskNameSection extends HookConsumerWidget with EventIconDataFactory {
+  final TaskPageState state;
   final Function(String?) onNameChanged;
   final Function(String) onIconNameChanged;
 
-  EventNameSection({
+  TaskNameSection({
     super.key,
     required this.state,
     required this.onNameChanged,
@@ -28,8 +26,8 @@ class EventNameSection extends HookConsumerWidget with EventIconDataFactory {
     var nameController = useTextEditingController(
       text: state.on(
         defaultValue: () => '',
-        onReading: (state) => state.event.name,
-        onEditing: (state) => state.builder.name,
+        onReading: (state) => state.task.title,
+        onEditing: (state) => state.builder.title,
       ),
     );
     return CustomCard(
@@ -48,14 +46,14 @@ class EventNameSection extends HookConsumerWidget with EventIconDataFactory {
                 spacing: Dimensions.mediumSize,
                 runSpacing: Dimensions.smallSize,
                 children: [
-                  ...EventIconDataFactory.availableIcons.map(
+                  ...TaskIconDataFactory.availableIcons.map(
                     (e) => NamedIcon(
                       icon: e,
                       onSelected: state.on(defaultValue: () => null, onEditing: (state) => onIconNameChanged),
                       isSelected: state.on(
                         defaultValue: () => false,
                         onEditing: (state) => state.builder.iconName == e.name,
-                        onReading: (state) => state.event.iconName == e.name,
+                        onReading: (state) => state.task.iconName == e.name,
                       ),
                     ),
                   ),
@@ -64,7 +62,7 @@ class EventNameSection extends HookConsumerWidget with EventIconDataFactory {
             ),
             CustomTextField(
               controller: nameController,
-              label: 'Event name',
+              label: 'Task name',
               onChanged: onNameChanged,
               enabled: state.on(defaultValue: () => true, onReading: (_) => false),
               validator: (value) => FormValidators.nonEmptyValidator(value, context),
@@ -76,41 +74,7 @@ class EventNameSection extends HookConsumerWidget with EventIconDataFactory {
   }
 }
 
-class NamedIcon extends StatelessWidget {
-  final bool isSelected;
-  final NamedIconData icon;
-  final Function(String)? onSelected;
-
-  const NamedIcon({super.key, required this.icon, this.onSelected, this.isSelected = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: Dimensions.allSPadding,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: isSelected ? AppColors.blue : Colors.transparent),
-      ),
-      child: GestureDetector(
-        onTap: onSelected != null ? () => onSelected!(icon.name) : null,
-        child: Icon(
-          icon.icon,
-          size: 36.0,
-          color: isSelected ? AppColors.blue : AppColors.black,
-        ),
-      ),
-    );
-  }
-}
-
-class NamedIconData {
-  final String name;
-  final IconData icon;
-
-  const NamedIconData(this.name, this.icon);
-}
-
-class EventIconDataFactory {
+class TaskIconDataFactory {
   static const availableIcons = [
     NamedIconData('calendar', Icons.calendar_month_sharp),
     NamedIconData('grill', Icons.outdoor_grill),

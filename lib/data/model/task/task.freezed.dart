@@ -22,9 +22,9 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 mixin _$Task {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get assignedUserId => throw _privateConstructorUsedError;
   String get teamId => throw _privateConstructorUsedError;
-  DateTime get lastStatusUpdate => throw _privateConstructorUsedError;
+  DateTime? get deadline => throw _privateConstructorUsedError;
+  String? get assignedUserId => throw _privateConstructorUsedError;
   String? get iconName => throw _privateConstructorUsedError;
   TaskStatus get status => throw _privateConstructorUsedError;
 
@@ -40,9 +40,9 @@ abstract class $TaskCopyWith<$Res> {
   $Res call(
       {String id,
       String title,
-      String assignedUserId,
       String teamId,
-      DateTime lastStatusUpdate,
+      DateTime? deadline,
+      String? assignedUserId,
       String? iconName,
       TaskStatus status});
 }
@@ -59,9 +59,9 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
-    Object? assignedUserId = freezed,
     Object? teamId = freezed,
-    Object? lastStatusUpdate = freezed,
+    Object? deadline = freezed,
+    Object? assignedUserId = freezed,
     Object? iconName = freezed,
     Object? status = freezed,
   }) {
@@ -74,18 +74,18 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      assignedUserId: assignedUserId == freezed
-          ? _value.assignedUserId
-          : assignedUserId // ignore: cast_nullable_to_non_nullable
-              as String,
       teamId: teamId == freezed
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      lastStatusUpdate: lastStatusUpdate == freezed
-          ? _value.lastStatusUpdate
-          : lastStatusUpdate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      deadline: deadline == freezed
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      assignedUserId: assignedUserId == freezed
+          ? _value.assignedUserId
+          : assignedUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
       iconName: iconName == freezed
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
@@ -106,9 +106,9 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   $Res call(
       {String id,
       String title,
-      String assignedUserId,
       String teamId,
-      DateTime lastStatusUpdate,
+      DateTime? deadline,
+      String? assignedUserId,
       String? iconName,
       TaskStatus status});
 }
@@ -126,9 +126,9 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
-    Object? assignedUserId = freezed,
     Object? teamId = freezed,
-    Object? lastStatusUpdate = freezed,
+    Object? deadline = freezed,
+    Object? assignedUserId = freezed,
     Object? iconName = freezed,
     Object? status = freezed,
   }) {
@@ -141,18 +141,18 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      assignedUserId: assignedUserId == freezed
-          ? _value.assignedUserId
-          : assignedUserId // ignore: cast_nullable_to_non_nullable
-              as String,
       teamId: teamId == freezed
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      lastStatusUpdate: lastStatusUpdate == freezed
-          ? _value.lastStatusUpdate
-          : lastStatusUpdate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      deadline: deadline == freezed
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      assignedUserId: assignedUserId == freezed
+          ? _value.assignedUserId
+          : assignedUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
       iconName: iconName == freezed
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
@@ -171,9 +171,9 @@ class _$_Task extends _Task {
   _$_Task(
       {required this.id,
       required this.title,
-      required this.assignedUserId,
       required this.teamId,
-      required this.lastStatusUpdate,
+      this.deadline,
+      this.assignedUserId,
       this.iconName,
       this.status = TaskStatus.todo})
       : super._();
@@ -185,11 +185,11 @@ class _$_Task extends _Task {
   @override
   final String title;
   @override
-  final String assignedUserId;
-  @override
   final String teamId;
   @override
-  final DateTime lastStatusUpdate;
+  final DateTime? deadline;
+  @override
+  final String? assignedUserId;
   @override
   final String? iconName;
   @override
@@ -198,7 +198,7 @@ class _$_Task extends _Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, assignedUserId: $assignedUserId, teamId: $teamId, lastStatusUpdate: $lastStatusUpdate, iconName: $iconName, status: $status)';
+    return 'Task(id: $id, title: $title, teamId: $teamId, deadline: $deadline, assignedUserId: $assignedUserId, iconName: $iconName, status: $status)';
   }
 
   @override
@@ -208,11 +208,10 @@ class _$_Task extends _Task {
             other is _$_Task &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.teamId, teamId) &&
+            const DeepCollectionEquality().equals(other.deadline, deadline) &&
             const DeepCollectionEquality()
                 .equals(other.assignedUserId, assignedUserId) &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality()
-                .equals(other.lastStatusUpdate, lastStatusUpdate) &&
             const DeepCollectionEquality().equals(other.iconName, iconName) &&
             const DeepCollectionEquality().equals(other.status, status));
   }
@@ -223,9 +222,9 @@ class _$_Task extends _Task {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(assignedUserId),
       const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(lastStatusUpdate),
+      const DeepCollectionEquality().hash(deadline),
+      const DeepCollectionEquality().hash(assignedUserId),
       const DeepCollectionEquality().hash(iconName),
       const DeepCollectionEquality().hash(status));
 
@@ -246,9 +245,9 @@ abstract class _Task extends Task {
   factory _Task(
       {required final String id,
       required final String title,
-      required final String assignedUserId,
       required final String teamId,
-      required final DateTime lastStatusUpdate,
+      final DateTime? deadline,
+      final String? assignedUserId,
       final String? iconName,
       final TaskStatus status}) = _$_Task;
   _Task._() : super._();
@@ -260,11 +259,11 @@ abstract class _Task extends Task {
   @override
   String get title;
   @override
-  String get assignedUserId;
-  @override
   String get teamId;
   @override
-  DateTime get lastStatusUpdate;
+  DateTime? get deadline;
+  @override
+  String? get assignedUserId;
   @override
   String? get iconName;
   @override

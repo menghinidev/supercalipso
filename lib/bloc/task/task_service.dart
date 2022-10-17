@@ -27,8 +27,21 @@ class TaskService {
     required this.teamRepository,
   });
 
-  Future<Response> createTask() async {
-    return Responses.success(null);
+  Future<Response> createTask({
+    required String title,
+    String? iconName,
+    DateTime? deadline,
+    String? assignedUserId,
+  }) async {
+    var teamId = teamRepository.loggedTeamId;
+    if (teamId == null) return Responses.failure([]);
+    return await taskRepository.createTask(
+      teamId: teamId,
+      title: title,
+      assignedUserId: assignedUserId,
+      iconName: iconName,
+      deadline: deadline,
+    );
   }
 
   Future<Response> askTeamTasks() async {

@@ -9,9 +9,11 @@ part of 'task.dart';
 _$_Task _$$_TaskFromJson(Map<String, dynamic> json) => _$_Task(
       id: json['id'] as String,
       title: json['title'] as String,
-      assignedUserId: json['assignedUserId'] as String,
       teamId: json['teamId'] as String,
-      lastStatusUpdate: DateTime.parse(json['lastStatusUpdate'] as String),
+      deadline: json['deadline'] == null
+          ? null
+          : DateTime.parse(json['deadline'] as String),
+      assignedUserId: json['assignedUserId'] as String?,
       iconName: json['iconName'] as String?,
       status: $enumDecodeNullable(_$TaskStatusEnumMap, json['status']) ??
           TaskStatus.todo,
@@ -20,9 +22,9 @@ _$_Task _$$_TaskFromJson(Map<String, dynamic> json) => _$_Task(
 Map<String, dynamic> _$$_TaskToJson(_$_Task instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'assignedUserId': instance.assignedUserId,
       'teamId': instance.teamId,
-      'lastStatusUpdate': instance.lastStatusUpdate.toIso8601String(),
+      'deadline': instance.deadline?.toIso8601String(),
+      'assignedUserId': instance.assignedUserId,
       'iconName': instance.iconName,
       'status': _$TaskStatusEnumMap[instance.status]!,
     };

@@ -1,10 +1,19 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/data/model/task/builder/task_builder.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_memento.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_state.dart';
+
+final taskPageControllerProvider =
+    StateNotifierProvider.family.autoDispose<TaskPageControllerNotifier, TaskPageState, Task?>((ref, task) {
+  return TaskPageControllerNotifier(
+    authRepo: ref.watch(authProvider),
+    initialTask: task,
+  );
+});
 
 class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
   final Task? initialTask;
@@ -28,8 +37,36 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
       state = EditingTaskPageState(builder: TaskBuilder());
       return Future.value();
     }
-    var users = await authRepo.getUserById(id: initialTask!.assignedUserId);
+    if (initialTask?.assignedUserId == null) {
+      state = ConsultingTaskPageState(task: initialTask!);
+      return Future.value();
+    }
+    var users = await authRepo.getUserById(id: initialTask!.assignedUserId!);
     return users.ifSuccess((payload) => state = ConsultingTaskPageState(assignedUsers: [payload!], task: initialTask!));
+  }
+
+  editTaskTitle(String? title) {
+    var actualState = state;
+    if (actualState is EditingTaskPageState) {
+      var newState = EditingTaskPageState(builder: actualState.builder.copyWith(title: title));
+      __saveStep(newState);
+    }
+  }
+
+  editTaskDeadline(DateTime? deadline) {
+    var actualState = state;
+    if (actualState is EditingTaskPageState) {
+      var newState = EditingTaskPageState(builder: actualState.builder.copyWith(deadline: deadline));
+      __saveStep(newState);
+    }
+  }
+
+  editIcon(String? iconName) {
+    var actualState = state;
+    if (actualState is EditingTaskPageState) {
+      var newState = EditingTaskPageState(builder: actualState.builder.copyWith(iconName: iconName));
+      __saveStep(newState);
+    }
   }
 
   switchToEdit() {

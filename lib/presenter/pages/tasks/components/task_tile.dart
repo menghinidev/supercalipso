@@ -19,10 +19,9 @@ class TaskTile extends HookConsumerWidget with DateFormatter {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var user = ref.watch(getUserByIdProvider(task.assignedUserId));
     return CustomTile(
       title: task.title,
-      subtitle: user.onValue(builder: (data) => TaskTileSubtitle(user: data)),
+      subtitle: task.assignedUserId == null ? null : TaskTileSubtitle(userId: task.assignedUserId!),
       leading: Icon(EventIconDataFactory.getIcon(task.iconName)),
       trailing: ActionTileTrailing(
         color: AppColors.green,
@@ -33,18 +32,21 @@ class TaskTile extends HookConsumerWidget with DateFormatter {
   }
 }
 
-class TaskTileSubtitle extends StatelessWidget with DateFormatter {
-  final User user;
+class TaskTileSubtitle extends HookConsumerWidget with DateFormatter {
+  final String userId;
 
-  const TaskTileSubtitle({super.key, required this.user});
+  const TaskTileSubtitle({super.key, required this.userId});
 
   @override
-  Widget build(BuildContext context) {
-    return Text(
-      user.displayName,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      style: Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.grey),
+  Widget build(BuildContext context, WidgetRef ref) {
+    var user = ref.watch(getUserByIdProvider(userId));
+    return user.onValue(
+      builder: (data) => Text(
+        data.displayName,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.grey),
+      ),
     );
   }
 }

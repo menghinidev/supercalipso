@@ -68,14 +68,6 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
     }
   }
 
-  editEventDescription(String? description) {
-    var actualState = state;
-    if (actualState is EditingEventPageState) {
-      var newState = EditingEventPageState(builder: actualState.builder.copyWith(description: description));
-      __saveStep(newState);
-    }
-  }
-
   editEventStartDate(DateTime start) {
     var actualState = state;
     if (actualState is EditingEventPageState) {
