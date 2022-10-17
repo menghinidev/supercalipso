@@ -34,7 +34,9 @@ class RouterNotifier extends ChangeNotifier {
 
   RouterNotifier(this.ref) {
     var repo = ref.read(authProvider);
-    authChangesSub = repo.loggedUserChanges.listen((event) => notifyListeners());
+    authChangesSub = repo.loggedUserChanges.listen((event) {
+      if (event == null) notifyListeners();
+    });
     loggedTeamChangesSub = ref.read(teamRepoProvider).currentTeam.listen((event) {
       notifyListeners();
       loggedTeamChangesSub.cancel();

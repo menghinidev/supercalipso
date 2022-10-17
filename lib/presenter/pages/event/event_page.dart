@@ -17,8 +17,9 @@ import 'package:supercalipso/presenter/pages/event/sections/name_section.dart';
 import 'package:supercalipso/presenter/pages/event/sections/time_section.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
+import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
 
-class EventPage extends HookConsumerWidget {
+class EventPage extends HookConsumerWidget with DateFormatter {
   final TeamEvent? event;
 
   const EventPage({super.key, this.event});
@@ -49,59 +50,96 @@ class EventPage extends HookConsumerWidget {
         ),
         body: Padding(
           padding: Dimensions.pageInsets,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              EventNameSection(
-                state: state,
-                onIconNameChanged: (name) => getNotifier(ref).editIcon(name),
-                onNameChanged: (name) => getNotifier(ref).editEventName(name ?? ''),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: Dimensions.mediumSize),
-                child: TimeEventSection(
+          child: state.on(
+            defaultValue: () => Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                EventNameSection(
                   state: state,
-                  onStartTimeChanged: (start) => getNotifier(ref).editEventStartTime(start),
-                  onEndTimeChanged: (end) => getNotifier(ref).editEventEndTime(end),
-                  onStartDateChanged: (start) => getNotifier(ref).editEventStartDate(start),
-                  onEndDateChanged: (end) => getNotifier(ref).editEventEndDate(end),
+                  onIconNameChanged: (name) => getNotifier(ref).editIcon(name),
+                  onNameChanged: (name) => getNotifier(ref).editEventName(name ?? ''),
                 ),
-              ),
-              Expanded(
-                child: state.on(
+                Padding(
+                  padding: const EdgeInsets.only(top: Dimensions.mediumSize),
+                  child: TimeEventSection(
+                    state: state,
+                    onStartTimeChanged: (start) => getNotifier(ref).editEventStartTime(start),
+                    onEndTimeChanged: (end) => getNotifier(ref).editEventEndTime(end),
+                    onStartDateChanged: (start) => getNotifier(ref).editEventStartDate(start),
+                    onEndDateChanged: (end) => getNotifier(ref).editEventEndDate(end),
+                  ),
+                ),
+                state.on(
                   defaultValue: () => Container(),
-                  onEditing: (state) => Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
+                  onReading: (state) => Padding(
+                    padding: const EdgeInsets.only(top: Dimensions.mediumSize),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Expanded(child: PrimaryTextButton(text: 'Close')),
-                        Expanded(
-                          child: PrimaryElevatedButton(
-                            text: 'Save Event',
-                            onTap: state.builder.canBuild
-                                ? () => getNotifier(ref).submit().then((value) => Navigator.maybePop(context))
-                                : null,
+                        RichText(
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.grey),
+                            children: [
+                              const TextSpan(text: 'Last Update: '),
+                              TextSpan(text: formatDateAndTime(state.event.lastUpdate)),
+                            ],
                           ),
                         ),
+                        if (state.creator != null)
+                          RichText(
+                            text: TextSpan(
+                              style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.grey),
+                              children: [
+                                const TextSpan(text: 'Created by: '),
+                                TextSpan(text: state.creator!.displayName),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   ),
-                  onReading: (state) => Align(
-                    alignment: Alignment.bottomRight,
-                    child: PrimaryElevatedButton(
-                      text: 'Delete',
-                      color: Colors.red,
-                      onTap: () => ref
-                          .read(eventRepositoryProvider)
-                          .deleteEvent(eventId: state.event.id)
-                          .then((value) => Navigator.maybePop(context)),
+                ),
+                Expanded(
+                  child: state.on(
+                    defaultValue: () => Container(),
+                    onEditing: (state) => Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: PrimaryTextButton(
+                              text: 'Discard Changes',
+                              onTap: () => getNotifier(ref).discard(),
+                            ),
+                          ),
+                          Expanded(
+                            child: PrimaryElevatedButton(
+                              text: 'Save Event',
+                              onTap: state.builder.canBuild
+                                  ? () => getNotifier(ref).submit().then((value) => Navigator.maybePop(context))
+                                  : null,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onReading: (state) => Align(
+                      alignment: Alignment.bottomRight,
+                      child: PrimaryElevatedButton(
+                        text: 'Delete',
+                        color: Colors.red,
+                        onTap: () => ref
+                            .read(eventRepositoryProvider)
+                            .deleteEvent(eventId: state.event.id)
+                            .then((value) => Navigator.maybePop(context)),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

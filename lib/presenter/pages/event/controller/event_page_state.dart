@@ -1,10 +1,11 @@
 import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
+import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
 abstract class EventPageState {
-  static EventPageState create(TeamEvent? initialEvent) {
-    if (initialEvent != null) return ConsultingEventPageState(event: initialEvent);
+  static EventPageState create(TeamEvent? initialEvent, User? creator) {
+    if (initialEvent != null) return ConsultingEventPageState(event: initialEvent, creator: creator);
     return EditingEventPageState(
       builder: EventBuilder(
         description: initialEvent?.description,
@@ -18,6 +19,8 @@ abstract class EventPageState {
   }
 }
 
+class LoadingEventPageState extends EventPageState {}
+
 class EditingEventPageState extends EventPageState {
   final EventBuilder builder;
 
@@ -26,8 +29,9 @@ class EditingEventPageState extends EventPageState {
 
 class ConsultingEventPageState extends EventPageState {
   final TeamEvent event;
+  final User? creator;
 
-  ConsultingEventPageState({required this.event});
+  ConsultingEventPageState({required this.event, this.creator});
 
   EditingEventPageState switchToEdit() => EditingEventPageState(
         builder: EventBuilder(

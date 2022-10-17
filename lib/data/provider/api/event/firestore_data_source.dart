@@ -17,11 +17,12 @@ class TeamEventFirestoreDataSource extends IEventDataSource {
       id: document.id,
       name: command.name,
       startTime: command.startTime,
-      teamId: command.teamId,
-      description: command.description,
       endTime: command.endTime,
+      description: command.description,
+      teamId: command.teamId,
       createdByUserId: command.createdByUserId,
       lastUpdate: DateTime.now().toUtc(),
+      iconName: command.iconName,
     );
     await document.set(event.toJson());
     return Responses.success(event);
@@ -39,10 +40,12 @@ class TeamEventFirestoreDataSource extends IEventDataSource {
     var document = firestore.collection(FirestoreCollections.events).doc(command.eventId);
     var event = TeamEvent.fromJson((await document.get()).data()!);
     var newEvent = event.copyWith(
-      name: command.title ?? event.name,
       description: command.description ?? event.description,
       endTime: command.endTime ?? event.endTime,
+      name: command.title ?? event.name,
       startTime: command.startTime ?? event.startTime,
+      iconName: command.iconName,
+      lastUpdate: DateTime.now().toUtc(),
     );
     await document.update(newEvent.toJson());
     return Responses.success(newEvent);

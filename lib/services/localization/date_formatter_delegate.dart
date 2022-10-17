@@ -23,5 +23,8 @@ class DateFormatterLocalizationDelegate extends LocalizationsDelegate {
 mixin DateFormatter {
   String formatDate(DateTime datetime) => DateFormat.yMd().format(datetime);
   String formatTime(DateTime datetime) => DateFormat.Hm().format(datetime);
-  String formatDateAndTime(DateTime datetime) => DateFormat.MMMd().add_Hm().format(datetime);
+  String formatDateAndTime(DateTime datetime) {
+    if (datetime.hour == 0 && datetime.minute == 0) return DateFormat.MMMd().format(datetime);
+    return DateFormat.MMMd().add_Hm().format(datetime);
+  }
 }
