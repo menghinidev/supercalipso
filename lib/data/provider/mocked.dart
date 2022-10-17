@@ -1,5 +1,6 @@
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/note/note.dart';
+import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
@@ -16,6 +17,7 @@ class MockValues with IdentifierFactory {
   final teams = <Team>[];
   final events = <TeamEvent>[];
   final notes = <Note>[];
+  final tasks = <Task>[];
 
   MockValues._();
 }

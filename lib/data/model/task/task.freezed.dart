@@ -25,7 +25,7 @@ mixin _$Task {
   String get assignedUserId => throw _privateConstructorUsedError;
   String get teamId => throw _privateConstructorUsedError;
   DateTime get lastStatusUpdate => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  String? get iconName => throw _privateConstructorUsedError;
   TaskStatus get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $TaskCopyWith<$Res> {
       String assignedUserId,
       String teamId,
       DateTime lastStatusUpdate,
-      String? description,
+      String? iconName,
       TaskStatus status});
 }
 
@@ -62,7 +62,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
     Object? assignedUserId = freezed,
     Object? teamId = freezed,
     Object? lastStatusUpdate = freezed,
-    Object? description = freezed,
+    Object? iconName = freezed,
     Object? status = freezed,
   }) {
     return _then(_value.copyWith(
@@ -86,9 +86,9 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.lastStatusUpdate
           : lastStatusUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
       status: status == freezed
           ? _value.status
@@ -109,7 +109,7 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       String assignedUserId,
       String teamId,
       DateTime lastStatusUpdate,
-      String? description,
+      String? iconName,
       TaskStatus status});
 }
 
@@ -129,7 +129,7 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object? assignedUserId = freezed,
     Object? teamId = freezed,
     Object? lastStatusUpdate = freezed,
-    Object? description = freezed,
+    Object? iconName = freezed,
     Object? status = freezed,
   }) {
     return _then(_$_Task(
@@ -153,9 +153,9 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.lastStatusUpdate
           : lastStatusUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
       status: status == freezed
           ? _value.status
@@ -167,15 +167,16 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Task implements _Task {
+class _$_Task extends _Task {
   _$_Task(
       {required this.id,
       required this.title,
       required this.assignedUserId,
       required this.teamId,
       required this.lastStatusUpdate,
-      this.description,
-      this.status = TaskStatus.todo});
+      this.iconName,
+      this.status = TaskStatus.todo})
+      : super._();
 
   factory _$_Task.fromJson(Map<String, dynamic> json) => _$$_TaskFromJson(json);
 
@@ -190,14 +191,14 @@ class _$_Task implements _Task {
   @override
   final DateTime lastStatusUpdate;
   @override
-  final String? description;
+  final String? iconName;
   @override
   @JsonKey()
   final TaskStatus status;
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, assignedUserId: $assignedUserId, teamId: $teamId, lastStatusUpdate: $lastStatusUpdate, description: $description, status: $status)';
+    return 'Task(id: $id, title: $title, assignedUserId: $assignedUserId, teamId: $teamId, lastStatusUpdate: $lastStatusUpdate, iconName: $iconName, status: $status)';
   }
 
   @override
@@ -212,8 +213,7 @@ class _$_Task implements _Task {
             const DeepCollectionEquality().equals(other.teamId, teamId) &&
             const DeepCollectionEquality()
                 .equals(other.lastStatusUpdate, lastStatusUpdate) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.iconName, iconName) &&
             const DeepCollectionEquality().equals(other.status, status));
   }
 
@@ -226,7 +226,7 @@ class _$_Task implements _Task {
       const DeepCollectionEquality().hash(assignedUserId),
       const DeepCollectionEquality().hash(teamId),
       const DeepCollectionEquality().hash(lastStatusUpdate),
-      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(iconName),
       const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
@@ -242,15 +242,16 @@ class _$_Task implements _Task {
   }
 }
 
-abstract class _Task implements Task {
+abstract class _Task extends Task {
   factory _Task(
       {required final String id,
       required final String title,
       required final String assignedUserId,
       required final String teamId,
       required final DateTime lastStatusUpdate,
-      final String? description,
+      final String? iconName,
       final TaskStatus status}) = _$_Task;
+  _Task._() : super._();
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
 
@@ -265,7 +266,7 @@ abstract class _Task implements Task {
   @override
   DateTime get lastStatusUpdate;
   @override
-  String? get description;
+  String? get iconName;
   @override
   TaskStatus get status;
   @override

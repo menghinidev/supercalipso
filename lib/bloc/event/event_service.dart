@@ -67,10 +67,10 @@ class EventService {
     );
   }
 
-  Future<Response> askUserEvents() async {
-    var userId = authRepository.loggedUser?.uid;
-    if (userId == null) return Responses.failure([]);
-    return await eventRepository.getUserEvents(userId: userId);
+  Future<Response> askTeamEvents() async {
+    var teamId = teamRepository.loggedTeamId;
+    if (teamId == null) return Responses.failure([]);
+    return await eventRepository.getTeamEvents(teamId: teamId);
   }
 
   Stream<List<TeamEvent>> get loggedTeamEvents {

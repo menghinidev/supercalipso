@@ -19,10 +19,6 @@ class NoteRepository {
     return await dataProvider.readTeamNotes(teamId: teamId);
   }
 
-  Future<Response<List<Note>>> getUserNotes({required String userId}) async {
-    return await dataProvider.readUserNotes(userId: userId).ifSuccess((payload) => controller.add(payload!));
-  }
-
   Future<Response> createNote({
     required String teamId,
     required String userId,
@@ -35,7 +31,7 @@ class NoteRepository {
       content: content,
       modifiedByUserId: userId,
     );
-    return await dataProvider.createNote(command: command).ifSuccess((payload) => getUserNotes(userId: userId));
+    return await dataProvider.createNote(command: command).ifSuccess((payload) => getTeamNotes(teamId: teamId));
   }
 
   Future<Response> updateNote({
@@ -52,15 +48,13 @@ class NoteRepository {
       content: content,
       title: title,
     );
-    return await dataProvider.updateNote(command: command).ifSuccess((payload) => getUserNotes(userId: userId));
+    return await dataProvider.updateNote(command: command).ifSuccess((payload) => getTeamNotes(teamId: teamId));
   }
 
   Future<Response> deleteNote({required String noteId}) async {
     var noteResponse = await dataProvider.readNote(noteId: noteId);
     if (noteResponse.isError) return noteResponse;
     var note = noteResponse.payload!;
-    return await dataProvider
-        .deleteNote(noteId: noteId)
-        .ifSuccess((payload) => getUserNotes(userId: note.modifiedByUserId));
+    return await dataProvider.deleteNote(noteId: noteId).ifSuccess((payload) => getTeamNotes(teamId: note.teamId));
   }
 }

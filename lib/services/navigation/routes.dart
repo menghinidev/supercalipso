@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
+import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/presenter/pages/event/event_page.dart';
 import 'package:supercalipso/presenter/pages/events/events_page.dart';
 import 'package:supercalipso/presenter/pages/home/home_page.dart';
 import 'package:supercalipso/presenter/pages/login/login_page.dart';
 import 'package:supercalipso/presenter/pages/profile/profile_page.dart';
+import 'package:supercalipso/presenter/pages/task/task_page.dart';
 import 'package:supercalipso/presenter/pages/tasks/tasks_page.dart';
 import 'package:supercalipso/presenter/pages/team/team_page.dart';
 
@@ -99,6 +101,19 @@ class TasksPageRoute extends GoRoute {
           path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: const HomePage(),
+          ),
+        );
+}
+
+class TaskPageRoute extends GoRoute {
+  static const String pageName = 'task';
+  static const String pagePath = '/$pageName';
+
+  TaskPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => BasePageTransitionBuilder(
+            child: TaskPage(task: state.extra as Task?),
           ),
         );
 }

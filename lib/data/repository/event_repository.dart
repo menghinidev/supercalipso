@@ -26,11 +26,6 @@ class EventRepository {
     return events.ifSuccess((payload) => controller.add(payload!));
   }
 
-  Future<Response<List<TeamEvent>>> getUserEvents({required String userId}) async {
-    var events = await provider.readUserEvents(userId: userId);
-    return events.ifSuccess((payload) => controller.add(payload!));
-  }
-
   Future<Response<TeamEvent>> getEvent({required String id}) async {
     return await provider.readTeamEvent(eventId: id);
   }

@@ -12,7 +12,7 @@ _$_Task _$$_TaskFromJson(Map<String, dynamic> json) => _$_Task(
       assignedUserId: json['assignedUserId'] as String,
       teamId: json['teamId'] as String,
       lastStatusUpdate: DateTime.parse(json['lastStatusUpdate'] as String),
-      description: json['description'] as String?,
+      iconName: json['iconName'] as String?,
       status: $enumDecodeNullable(_$TaskStatusEnumMap, json['status']) ??
           TaskStatus.todo,
     );
@@ -23,12 +23,11 @@ Map<String, dynamic> _$$_TaskToJson(_$_Task instance) => <String, dynamic>{
       'assignedUserId': instance.assignedUserId,
       'teamId': instance.teamId,
       'lastStatusUpdate': instance.lastStatusUpdate.toIso8601String(),
-      'description': instance.description,
+      'iconName': instance.iconName,
       'status': _$TaskStatusEnumMap[instance.status]!,
     };
 
 const _$TaskStatusEnumMap = {
   TaskStatus.todo: 'todo',
-  TaskStatus.doing: 'doing',
   TaskStatus.done: 'done',
 };

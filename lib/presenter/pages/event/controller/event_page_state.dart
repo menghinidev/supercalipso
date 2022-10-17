@@ -19,8 +19,6 @@ abstract class EventPageState {
   }
 }
 
-class LoadingEventPageState extends EventPageState {}
-
 class EditingEventPageState extends EventPageState {
   final EventBuilder builder;
 

@@ -23,10 +23,10 @@ class NoteService {
 
   NoteService({required this.authRepo, required this.noteRepo, required this.teamRepo});
 
-  Future<Response> askUserNotes() async {
-    var userId = authRepo.loggedUser?.uid;
-    if (userId == null) return Responses.failure([]);
-    return await noteRepo.getUserNotes(userId: userId);
+  Future<Response> askTeamNotes() async {
+    var teamId = teamRepo.loggedTeamId;
+    if (teamId == null) return Responses.failure([]);
+    return await noteRepo.getTeamNotes(teamId: teamId);
   }
 
   Future<Response> createNote({
