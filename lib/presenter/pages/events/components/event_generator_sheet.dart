@@ -3,12 +3,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/event/event_service.dart';
 import 'package:supercalipso/data/model/event/builder/event_builder.dart';
+import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_sheet.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/form/custom_text_field.dart';
 import 'package:supercalipso/presenter/components/form/validators.dart';
 import 'package:supercalipso/presenter/components/picker/date_formfield_picker.dart';
+import 'package:supercalipso/presenter/components/picker/time_formfield_picker.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 final eventBuilderProvider = StateNotifierProvider.autoDispose<EventGeneratorNotifier, EventBuilder>((ref) {
@@ -19,7 +21,10 @@ class EventGeneratorNotifier extends StateNotifier<EventBuilder> {
   EventGeneratorNotifier() : super(const EventBuilder());
 
   setName(String name) => state = state.copyWith(name: name);
-  setStartTime(DateTime time) => state = state.copyWith(startTime: time);
+  setDate(DateTime date) => state = state.copyWith(startTime: date);
+  setTime(DateTime time) => state = state.copyWith(
+      startTime:
+          DateTime.utc(state.startTime!.year, state.startTime!.month, state.startTime!.day, time.hour, time.minute));
   setDuration({Duration? duration}) => state = state.copyWith(duration: duration);
   setDescription(String description) => state = state.copyWith(description: description);
 }
@@ -65,53 +70,39 @@ class EventGeneratorSheet extends HookConsumerWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: Dimensions.smallSize),
-                    child: DayFormFieldPicker(
-                      label: 'Select Date',
-                      onSelected: (date) => ref.read(eventBuilderProvider.notifier).setStartTime(date.toDateTime()),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: DateFormFieldPicker(
+                            label: 'Select Date',
+                            onSelected: (date) => ref.read(eventBuilderProvider.notifier).setDate(date.toDateTime()),
+                            validInterval: DateInterval(
+                              start: Date.today(),
+                              end: Date.today().increase(const Duration(days: 365)) as Date,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: Dimensions.smallSize),
+                        Expanded(
+                          flex: 2,
+                          child: TimeFormFieldPicker(
+                            label: 'Select Time',
+                            onSelected: (time) => ref.read(eventBuilderProvider.notifier).setTime(time.toDateTime()),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Switch(
-                  value: builder.duration != null,
-                  onChanged: builder.startTime != null
-                      ? (isOn) {
-                          if (isOn) {
-                            showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay.now(),
-                            ).then(
-                              (value) {
-                                if (value == null) return Future.value();
-                                var actualTime = builder.startTime;
-                                actualTime!.add(Duration(hours: value.hour, minutes: value.minute));
-                                var duration = actualTime.difference(builder.startTime!);
-                                ref.read(eventBuilderProvider.notifier).setDuration(duration: duration);
-                              },
-                            );
-                          } else {
-                            ref.read(eventBuilderProvider.notifier).setDuration();
-                          }
-                        }
-                      : null,
-                ),
-                Text(
-                  'Has specific time',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ],
-            ),
             Padding(
               padding: Dimensions.allMPadding,
               child: PrimaryElevatedButton(
                 text: 'Create Event',
-                onTap: builder.startTime == null
-                    ? null
-                    : () => ref
+                onTap: builder.canBuild
+                    ? () => ref
                         .read(eventServiceProvider)
                         .createEvent(
                           name: nameController.text,
@@ -119,7 +110,8 @@ class EventGeneratorSheet extends HookConsumerWidget {
                           duration: builder.duration,
                           description: descriptionController.text,
                         )
-                        .then((value) => Navigator.pop(context)),
+                        .then((value) => Navigator.pop(context))
+                    : null,
               ),
             ),
           ],

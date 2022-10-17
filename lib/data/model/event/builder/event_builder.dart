@@ -12,3 +12,7 @@ class EventBuilder with _$EventBuilder {
     final Duration? duration,
   }) = _EventBuilder;
 }
+
+extension EventBuilderFeatures on EventBuilder {
+  bool get canBuild => startTime != null && name != null;
+}
