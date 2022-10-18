@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/event/event_service.dart';
@@ -5,14 +7,21 @@ import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
+import 'package:supercalipso/plugin/utils.dart';
+import 'package:supercalipso/presenter/components/dialog/confirm_dialog.dart';
+import 'package:supercalipso/presenter/components/dialog/custom_dialog.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_memento.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_state.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
 
 final eventPageControllerProvider =
     StateNotifierProvider.family.autoDispose<EventPageNotifier, EventPageState, TeamEvent?>((ref, event) {
   return EventPageNotifier(
     eventService: ref.watch(eventServiceProvider),
     authRepo: ref.watch(authProvider),
+    dialogService: ref.watch(dialogServiceProvider),
+    router: ref.watch(routerProvider),
     initialEvent: event,
   );
 });
@@ -21,12 +30,16 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
   final TeamEvent? initialEvent;
   final User? creator;
   final EventService eventService;
+  final DialogService dialogService;
+  final GoRouter router;
   final AuthRepository authRepo;
   late EventPageMementoStateOriginator originator;
   late EventPageMementoStateCaretaker caretaker;
 
   EventPageNotifier({
     required this.eventService,
+    required this.dialogService,
+    required this.router,
     required this.authRepo,
     this.creator,
     this.initialEvent,
@@ -120,24 +133,51 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
     if (actualState is EditingEventPageState) {
       var isNew = initialEvent == null;
       if (isNew) {
-        return eventService.createEvent(
-          name: actualState.builder.name!,
-          startTime: actualState.builder.startTime!,
-          description: actualState.builder.description,
-          endTime: actualState.builder.endTime,
-          iconName: actualState.builder.iconName,
-        );
+        return eventService
+            .createEvent(
+              name: actualState.builder.name!,
+              startTime: actualState.builder.startTime!,
+              description: actualState.builder.description,
+              endTime: actualState.builder.endTime,
+              iconName: actualState.builder.iconName,
+            )
+            .ifSuccess(
+              (payload) => dialogService.showDialog(
+                dialog: const ConfirmDialog(
+                  title: 'Confirm',
+                  textBody: 'This event will be available inside your Team',
+                ),
+                onDone: () => router.pop(),
+              ),
+            );
       } else {
-        return eventService.updateEvent(
-          eventId: initialEvent!.id,
-          name: actualState.builder.name,
-          startTime: actualState.builder.startTime,
-          description: actualState.builder.description,
-          endTime: actualState.builder.endTime,
-          iconName: actualState.builder.iconName,
-        );
+        return eventService
+            .updateEvent(
+              eventId: initialEvent!.id,
+              name: actualState.builder.name,
+              startTime: actualState.builder.startTime,
+              description: actualState.builder.description,
+              endTime: actualState.builder.endTime,
+              iconName: actualState.builder.iconName,
+            )
+            .ifSuccess((payload) => dialogService.showDialog());
       }
     }
+  }
+
+  Future delete() async {
+    var id = state.on(defaultValue: () => null, onReading: (state) => state.event.id);
+    if (id == null) return Future.value();
+    var response = await eventService.deleteEvent(eventId: id);
+    response.ifSuccess(
+      (payload) => dialogService.showDialog(
+        dialog: const ConfirmDialog(
+          title: 'Are you sure',
+          textBody: 'This event will be deleted',
+        ),
+        onDone: () => router.pop(),
+      ),
+    );
   }
 
   __saveStep(EventPageState newState) {

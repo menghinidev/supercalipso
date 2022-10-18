@@ -26,8 +26,8 @@ class _DialogManagerState extends State<DialogManager> {
     return widget.child;
   }
 
-  void _showDialog(BuildContext context, {Widget Function()? customBuilder}) {
-    showDialog(
+  Future _showDialog(BuildContext context, {Widget Function()? customBuilder}) {
+    return showDialog(
       context: context,
       builder: (context) => customBuilder != null ? customBuilder() : const AboutDialog(),
     ).then(

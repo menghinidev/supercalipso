@@ -67,6 +67,8 @@ class EventService {
     );
   }
 
+  Future<Response> deleteEvent({required String eventId}) => eventRepository.deleteEvent(eventId: eventId);
+
   Future<Response> askTeamEvents() async {
     var teamId = teamRepository.loggedTeamId;
     if (teamId == null) return Responses.failure([]);

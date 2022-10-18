@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/presenter/pages/event/event_page.dart';
@@ -8,6 +9,8 @@ import 'package:supercalipso/presenter/pages/login/login_page.dart';
 import 'package:supercalipso/presenter/pages/profile/profile_page.dart';
 import 'package:supercalipso/presenter/pages/task/task_page.dart';
 import 'package:supercalipso/presenter/pages/team/team_page.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_manager.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
 
 class AppRoutes {
   static final home = HomePageRoute();
@@ -29,7 +32,12 @@ class BasePageTransitionBuilder<T> extends CustomTransitionPage<T> {
       : super(
           transitionsBuilder: (context, primary, secondary, child) => FadeTransition(
             opacity: primary,
-            child: child,
+            child: Consumer(
+              builder: (context, ref, _) => DialogManager(
+                service: ref.watch(dialogServiceProvider),
+                child: child,
+              ),
+            ),
           ),
         );
 }

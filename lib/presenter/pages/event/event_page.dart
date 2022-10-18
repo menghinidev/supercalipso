@@ -86,9 +86,7 @@ class EventPage extends HookConsumerWidget with DateFormatter {
                           Expanded(
                             child: PrimaryElevatedButton(
                               text: 'Save Event',
-                              onTap: state.builder.canBuild
-                                  ? () => getNotifier(ref).submit().then((value) => Navigator.maybePop(context))
-                                  : null,
+                              onTap: state.builder.canBuild ? () => getNotifier(ref).submit() : null,
                             ),
                           ),
                         ],
@@ -99,10 +97,7 @@ class EventPage extends HookConsumerWidget with DateFormatter {
                       child: PrimaryElevatedButton(
                         text: 'Delete',
                         color: Colors.red,
-                        onTap: () => ref
-                            .read(eventRepositoryProvider)
-                            .deleteEvent(eventId: state.event.id)
-                            .then((value) => Navigator.maybePop(context)),
+                        onTap: () => getNotifier(ref).delete(),
                       ),
                     ),
                   ),

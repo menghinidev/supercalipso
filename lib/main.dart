@@ -49,10 +49,6 @@ class _SuperCalipsoState extends ConsumerState<SuperCalipso> {
       debugShowCheckedModeBanner: false,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
-      builder: (context, child) => DialogManager(
-        service: ref.watch(dialogServiceProvider),
-        child: child!,
-      ),
     );
   }
 }
