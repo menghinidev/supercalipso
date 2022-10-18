@@ -25,7 +25,7 @@ class TeamRepository {
   Stream<List<TeamInvitation>> get invitationsChanges => teamsInvitationsController.stream;
 
   Stream<Team?> get currentTeam =>
-      enrolledTeamsController.stream.map((event) => event.getWhere((element) => element.id == loggedTeamId));
+      enrolledTeamsController.stream.map((event) => event.getWhere((element) => element.id == loggedTeamId)).distinct();
 
   Future<Response<List<Team>>> getUserTeams({required String userId}) async {
     var subs = await teamsDataProvider.readUserTeamsSubscriptions(userId: userId);

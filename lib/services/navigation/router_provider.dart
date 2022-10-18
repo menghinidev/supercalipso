@@ -40,7 +40,6 @@ class RouterNotifier extends ChangeNotifier {
     });
     loggedTeamChangesSub = ref.read(teamRepoProvider).currentTeam.listen((event) {
       notifyListeners();
-      loggedTeamChangesSub.cancel();
     });
   }
 

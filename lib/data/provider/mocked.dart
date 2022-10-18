@@ -11,7 +11,9 @@ class MockValues with IdentifierFactory {
   static final MockValues _singleton = MockValues._();
   static MockValues get instance => _singleton;
 
-  final users = <User>[];
+  final users = <User>[
+    const User(uid: 'testid', displayName: 'Nome Utente', email: 'utente@utente.com'),
+  ];
   final teamSubs = <TeamSubscription>[];
   final teamInvites = <TeamInvitation>[];
   final teams = <Team>[];

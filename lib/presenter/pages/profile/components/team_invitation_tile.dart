@@ -20,60 +20,19 @@ class TeamInvitationTile extends HookConsumerWidget {
       builder: (data) => CustomTile(
         title: data.name,
         subtitle: UserNameTileSubtitle(userId: invitation.invitedByUserId),
+        leading: const Icon(Icons.person_add_alt, color: AppColors.black),
         trailing: invitation.onStatus(
           () => ActionTileTrailing(
             color: AppColors.green,
             onTap: () => reply(ref, TeamInvitationStatus.accepted),
-            child: const Icon(Icons.add),
+            child: const Icon(Icons.add, color: AppColors.white),
           ),
           onAccepted: () => const ActionTileTrailing(
             color: AppColors.blueDarker,
             child: Icon(Icons.done_all_outlined),
           ),
         ),
-      ), /* Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(text: 'Invitation for: ', style: Theme.of(context).textTheme.titleSmall),
-                      TextSpan(text: data.name),
-                    ],
-                  ),
-                ),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(text: 'Invited by: ', style: Theme.of(context).textTheme.titleSmall),
-                      TextSpan(text: invitation.invitedByUserId),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (invitation.status == TeamInvitationStatus.unknown)
-            Row(
-              children: [
-                PrimaryOutlinedButton(
-                  onTap: () => reply(ref, TeamInvitationStatus.accepted),
-                  backgroudColor: AppColors.green,
-                  text: 'Accept',
-                ),
-                const SizedBox(width: Dimensions.smallSize),
-                PrimaryOutlinedButton(
-                  onTap: () => reply(ref, TeamInvitationStatus.declied),
-                  text: 'Decline',
-                ),
-              ],
-            ),
-        ],
-      ), */
+      ),
     );
   }
 

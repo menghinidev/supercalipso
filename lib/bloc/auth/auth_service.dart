@@ -53,6 +53,10 @@ class AuthService {
     return await loginResponse.ifSuccessAsync((payload) => teamService.silentloginWithTeam());
   }
 
+  Future hardLogin({required String userId}) async {
+    return authRepository.silentLogin(uid: userId).ifSuccessAsync((payload) => teamService.silentloginWithTeam());
+  }
+
   Future logout() async {
     await firebase.FirebaseAuth.instance.signOut();
     await googleSignIn.disconnect();

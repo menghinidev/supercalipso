@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/bloc/event/event_service.dart';
+import 'package:supercalipso/bloc/note/note_service.dart';
 import 'package:supercalipso/bloc/task/task_service.dart';
 import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/bloc/team/team_service.dart';
@@ -16,12 +17,15 @@ final startupServiceProvider = Provider<StartupService>((ref) {
     teamService: ref.watch(teamServiceProvider),
     eventService: ref.watch(eventServiceProvider),
     taskService: ref.watch(taskServiceProvider),
+    noteService: ref.watch(noteServiceProvider),
   );
 });
 
 class StartupService {
   final AuthRepository authRepository;
   final TeamRepository teamRepository;
+
+  final NoteService noteService;
   final AuthService authService;
   final TeamService teamService;
   final EventService eventService;
@@ -34,6 +38,7 @@ class StartupService {
     required this.teamService,
     required this.eventService,
     required this.taskService,
+    required this.noteService,
   }) {
     authRepository.loggedUserChanges.listen((event) {
       teamService.getTeamsInvitations();
@@ -41,6 +46,7 @@ class StartupService {
     teamRepository.currentTeam.listen((event) {
       eventService.askTeamEvents();
       taskService.askTeamTasks();
+      noteService.askTeamNotes();
     });
   }
 
