@@ -13,7 +13,7 @@ class TextFieldLabel extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: Dimensions.smallSize),
       child: Text(
         label,
-        style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.coolGrey10),
+        style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.grey),
       ),
     );
   }

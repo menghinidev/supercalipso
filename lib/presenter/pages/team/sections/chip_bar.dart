@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/event_generator_sheet.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/note_generator_sheet.dart';
+import 'package:supercalipso/presenter/pages/notes/components/note_generator_sheet.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class TeamPageChipBar extends StatelessWidget {
@@ -22,18 +21,11 @@ class TeamPageChipBar extends StatelessWidget {
           spacing: Dimensions.smallSize,
           children: [
             ActionChip(
-              avatar: const Icon(Icons.event_available_outlined, size: 22),
-              label: const Text('Create Event'),
-              onPressed: () => showBottomSheet(
-                context: context,
-                builder: (context) => EventGeneratorSheet(teamId: team.id),
-              ),
-            ),
-            ActionChip(
               avatar: const Icon(Icons.note_add_outlined, size: 22),
               label: const Text('Create Note'),
-              onPressed: () => showBottomSheet(
+              onPressed: () => showModalBottomSheet(
                 context: context,
+                isScrollControlled: true,
                 builder: (context) => NoteGeneratorBottomSheet(teamId: team.id),
               ),
             ),

@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:supercalipso/data/model/team/invitation/invitation.dart';
-import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 
 part 'team.g.dart';
 part 'team.freezed.dart';

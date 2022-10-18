@@ -1,8 +1,7 @@
 import 'package:supercalipso/data/model/note/note.dart';
-import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/provider/api/note/i_note_data_source.dart';
-import 'package:supercalipso/data/provider/command/note/updateNote/update_note_command.dart';
 import 'package:supercalipso/data/provider/command/note/createNote/create_note_command.dart';
+import 'package:supercalipso/data/provider/command/note/updateNote/update_note_command.dart';
 import 'package:supercalipso/data/provider/mocked.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
@@ -44,14 +43,7 @@ class NoteMockedDataSource extends INoteDataSource with IdentifierFactory {
     if (user == null) return Responses.failure([]);
     var team = mocked.teams.getWhere((element) => element.id == command.teamId);
     if (team == null) return Responses.failure([]);
-    var newNote = Note(
-      id: createID(),
-      title: command.title,
-      description: command.content,
-      lastUpdate: DateTime.now(),
-      modifiedByUserId: user.uid,
-      teamId: team.id,
-    );
+    var newNote = command.createNoteDTO(createID());
     mocked.notes.add(newNote);
     return Future.value(Responses.success(null));
   }
@@ -66,7 +58,7 @@ class NoteMockedDataSource extends INoteDataSource with IdentifierFactory {
       id: note.id,
       title: command.title ?? note.title,
       description: command.content ?? note.description,
-      lastUpdate: DateTime.now(),
+      lastUpdate: DateTime.now().toUtc(),
       modifiedByUserId: user.uid,
       teamId: note.teamId,
     );

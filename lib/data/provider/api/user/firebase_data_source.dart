@@ -17,9 +17,10 @@ class UserFirestoreDataSource extends IUserDataSource {
 
   @override
   Future<Response<User>> registerUser({required RegisterUserCommand command}) async {
-    var user = await firestore.collection(FirestoreCollections.users).add(command.toJson());
-    var data = await user.get();
-    return Responses.success(User.fromJson(data.data()!));
+    var document = firestore.collection(FirestoreCollections.users).doc();
+    var user = command.createUserDTO();
+    await document.set(user.toJson());
+    return Responses.success(user);
   }
 
   @override

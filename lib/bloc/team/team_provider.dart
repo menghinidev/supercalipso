@@ -11,7 +11,7 @@ final teamRepoProvider = Provider<TeamRepository>((ref) => Installer.instance.ge
 /// Collection changes
 
 final teamsChangesProvider = StreamProvider<List<Team>>((ref) {
-  return ref.watch(teamRepoProvider).teamsChanges;
+  return ref.watch(teamRepoProvider).enrolledTeams;
 });
 
 final teamInvitationsChangesProvider = StreamProvider<List<TeamInvitation>>((ref) {
@@ -25,12 +25,6 @@ final pendingTeamInvitationsChangesProvider = StreamProvider<List<TeamInvitation
       .map((event) => event.where((element) => element.status == TeamInvitationStatus.unknown).toList());
 });
 
-/// Item changes
-
-final teamChangesProvider = StreamProviderFamily<Team, String>((ref, id) {
-  return ref.watch(teamRepoProvider).teamChanges(id);
-});
-
 final teamProvider = FutureProvider.family<Team, String>((ref, id) async {
-  return (await ref.read(teamRepoProvider).getTeam(teamId: id)).payload!;
+  return (await ref.read(teamRepoProvider).getTeam(teamId: id));
 });

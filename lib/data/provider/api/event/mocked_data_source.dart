@@ -11,7 +11,7 @@ class EventMockedDataSource extends IEventDataSource with IdentifierFactory {
 
   @override
   Future<Response<List<TeamEvent>>> readTeamEvents({required String teamId}) async {
-    var events = mocked.events.where((element) => element.id == teamId).toList();
+    var events = mocked.events.where((element) => element.teamId == teamId).toList();
     return Future.value(Responses.success(events));
   }
 
@@ -28,33 +28,29 @@ class EventMockedDataSource extends IEventDataSource with IdentifierFactory {
   Future<Response<TeamEvent>> createTeamEvent({required CreateEventCommand command}) async {
     var team = mocked.teams.getWhere((element) => element.id == command.teamId);
     if (team == null) return Responses.failure([]);
-    var event = TeamEvent(
-      id: createID(),
-      name: command.name,
-      startTime: command.startTime,
-      duration: command.duration,
-      description: command.description,
-      teamId: team.id,
-    );
+    var event = command.createEventDTO(createID());
     mocked.events.add(event);
     return Future.value(Responses.success(event));
   }
 
   @override
   Future<Response> deleteTeamEvent({required String eventId}) {
-    // TODO: implement deleteTeamEvent
-    throw UnimplementedError();
+    mocked.events.removeWhere((element) => element.id == eventId);
+    return Future.value(Responses.success(null));
   }
 
   @override
-  Future<Response<TeamEvent>> updateTeamEvent({required UpdateEventCommand command}) {
-    // TODO: implement updateTeamEvent
-    throw UnimplementedError();
+  Future<Response<TeamEvent>> updateTeamEvent({required UpdateEventCommand command}) async {
+    var event = mocked.events.getWhere((element) => element.id == command.eventId);
+    if (event == null) return Responses.failure([]);
+    var updated = command.createEventDTO(event);
+    mocked.events.removeWhere((element) => element.id == command.eventId);
+    mocked.events.add(updated);
+    return Responses.success(updated);
   }
 
   @override
   Future<Response<TeamEvent>> readTeamEvent({required String eventId}) {
-    // TODO: implement readTeamEvent
-    throw UnimplementedError();
+    return Future.value(Responses.success(mocked.events.getWhere((element) => element.id == eventId)));
   }
 }

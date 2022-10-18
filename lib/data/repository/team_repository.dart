@@ -4,7 +4,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
 import 'package:supercalipso/data/provider/command/team/createInvitation/create_team_invitation_command.dart';
 import 'package:supercalipso/data/provider/command/team/createTeam/create_team_command.dart';
@@ -13,19 +12,20 @@ import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
 class TeamRepository {
-  final BehaviorSubject<List<Team>> teamsController;
+  final BehaviorSubject<List<Team>> enrolledTeamsController;
   final BehaviorSubject<List<TeamInvitation>> teamsInvitationsController;
   final teamsDataProvider = Installer.instance.get<ITeamDataSource>();
+  String? loggedTeamId;
 
   TeamRepository()
-      : teamsController = BehaviorSubject<List<Team>>(),
+      : enrolledTeamsController = BehaviorSubject<List<Team>>(),
         teamsInvitationsController = BehaviorSubject<List<TeamInvitation>>();
 
-  Stream<List<Team>> get teamsChanges => teamsController.stream;
+  Stream<List<Team>> get enrolledTeams => enrolledTeamsController.stream;
   Stream<List<TeamInvitation>> get invitationsChanges => teamsInvitationsController.stream;
 
-  Stream<Team> teamChanges(String teamId) =>
-      teamsController.stream.mapNotNull((event) => event.getWhere((element) => element.id == teamId));
+  Stream<Team?> get currentTeam =>
+      enrolledTeamsController.stream.map((event) => event.getWhere((element) => element.id == loggedTeamId)).distinct();
 
   Future<Response<List<Team>>> getUserTeams({required String userId}) async {
     var subs = await teamsDataProvider.readUserTeamsSubscriptions(userId: userId);
@@ -33,16 +33,21 @@ class TeamRepository {
       subs.payload!,
       (source) => teamsDataProvider.readTeam(teamId: source.teamId),
     );
-    teams.ifSuccess((payload) => teamsController.add(payload!));
+    teams.ifSuccess((payload) => enrolledTeamsController.add(payload!));
     return teams;
   }
 
-  Future<Response<Team>> getTeam({required String teamId}) async {
+  Future<Team> getTeam({required String teamId}) async {
     var teams = await teamsDataProvider.readTeam(teamId: teamId);
-    return teams;
+    return teams.isError ? Future.error('error') : Future.value(teams.payload!);
   }
 
-  Future<Response> createTeam({required String name, required String userId}) async {
+  Future loginWithTeam({required String teamId, required String userId}) async {
+    loggedTeamId = teamId;
+    return await getUserTeams(userId: userId);
+  }
+
+  Future<Response<Team>> createTeam({required String name, required String userId}) async {
     var response = await teamsDataProvider.createTeam(command: CreateTeamCommand(name: name, userId: userId));
     return await response.ifSuccessAsync((payload) => getUserTeams(userId: userId));
   }
@@ -74,7 +79,7 @@ class TeamRepository {
       invitedUserId: invitedUserId,
       invitedByUserId: ownerUserId,
       teamId: teamId,
-      createdAt: DateTime.now(),
+      createdAt: DateTime.now().toUtc(),
       status: TeamInvitationStatus.unknown.name,
     );
     return await teamsDataProvider
@@ -84,5 +89,10 @@ class TeamRepository {
 
   Future<Response<List<TeamSubscription>>> getTeamSubscriptions({required String teamId}) async {
     return await teamsDataProvider.readTeamSubscriptions(teamId: teamId);
+  }
+
+  Future<Response> logoutFromTeam() {
+    enrolledTeamsController.add(<Team>[]);
+    return Future.value(Responses.success(null));
   }
 }

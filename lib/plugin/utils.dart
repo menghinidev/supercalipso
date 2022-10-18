@@ -17,3 +17,5 @@ export 'utils/timewrappers/timestamp_interval.dart';
 export 'utils/timewrappers/week_day.dart';
 export 'utils/timewrappers/month.dart';
 export 'utils/timewrappers/month_interval.dart';
+
+export 'utils/memento/memento_state.dart';

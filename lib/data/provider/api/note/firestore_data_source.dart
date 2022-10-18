@@ -15,7 +15,7 @@ class NoteFirestoreDataSource extends INoteDataSource {
     var document = firestore.collection(FirestoreCollections.notes).doc();
     var note = Note(
       id: document.id,
-      lastUpdate: DateTime.now(),
+      lastUpdate: DateTime.now().toUtc(),
       modifiedByUserId: command.modifiedByUserId,
       teamId: command.teamId,
       title: command.title,
@@ -40,7 +40,7 @@ class NoteFirestoreDataSource extends INoteDataSource {
       teamId: command.teamId,
       title: command.title ?? note.title,
       description: command.content ?? note.description,
-      lastUpdate: DateTime.now(),
+      lastUpdate: DateTime.now().toUtc(),
     );
     await document.update(updated.toJson());
     return Responses.success(updated);

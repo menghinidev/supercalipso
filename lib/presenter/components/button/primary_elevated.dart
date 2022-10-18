@@ -15,9 +15,8 @@ class PrimaryElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         textStyle: textStyle,
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
+        backgroundColor: color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       ),
       child: Text(text),
     );

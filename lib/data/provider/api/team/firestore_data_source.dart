@@ -37,7 +37,7 @@ class TeamFirestoreDataSource extends ITeamDataSource {
     var subscriptionDocument = firestore.collection(FirestoreCollections.subscriptions).doc();
     var sub = TeamSubscription(
       id: subscriptionDocument.id,
-      joined: DateTime.now(),
+      joined: DateTime.now().toUtc(),
       subscribedUserId: updatedInvitation.invitedUserId,
       teamId: updatedInvitation.teamId,
     );
@@ -71,7 +71,7 @@ class TeamFirestoreDataSource extends ITeamDataSource {
   }
 
   @override
-  Future<Response> createTeam({required CreateTeamCommand command}) async {
+  Future<Response<Team>> createTeam({required CreateTeamCommand command}) async {
     var document = firestore.collection(FirestoreCollections.teams).doc();
     var team = Team(id: document.id, name: command.name);
     await document.set(team.toJson());
@@ -80,10 +80,10 @@ class TeamFirestoreDataSource extends ITeamDataSource {
       id: teamOwnerSubDocument.id,
       subscribedUserId: command.userId,
       teamId: document.id,
-      joined: DateTime.now(),
+      joined: DateTime.now().toUtc(),
     );
     await teamOwnerSubDocument.set(sub.toJson());
-    return Responses.success(null);
+    return Responses.success(team);
   }
 
   @override

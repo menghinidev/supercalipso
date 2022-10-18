@@ -85,7 +85,7 @@ class _SearchFormFieldState<T> extends State<SearchFormField<T>> with FormFieldP
         elevation: Dimensions.lowElevation,
       ),
       textFieldConfiguration: TextFieldConfiguration(
-        style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.coolGrey11),
+        style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.grey),
         controller: fieldController,
         focusNode: focusNode,
         decoration: decorationFactory.createSearchFieldDecoration(
@@ -116,7 +116,7 @@ class NoResultsPlaceholder extends StatelessWidget {
           child: Icon(
             Icons.sentiment_dissatisfied_outlined,
             size: 40,
-            color: AppColors.coolGrey7,
+            color: AppColors.grey,
           ),
         ),
         Padding(

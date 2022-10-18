@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/event/event_provider.dart';
@@ -14,20 +15,31 @@ import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/data/repository/note_repository.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/routes.dart';
 
 var teamServiceProvider = Provider<TeamService>((ref) => TeamService(
       teamRepository: ref.watch(teamRepoProvider),
       authRepository: ref.watch(authProvider),
       eventRepository: ref.watch(eventRepositoryProvider),
       noteRepository: ref.watch(noteRepoProvider),
+      router: ref.watch(routerProvider),
     ));
 
 final teamInvitationsProvider = FutureProvider<Response<List<TeamInvitation>>>((ref) async {
   return ref.watch(teamServiceProvider).getTeamsInvitations();
 });
 
-final teamMembersProvider = FutureProvider.family<List<User>, String>((ref, id) async {
-  return ref.watch(teamServiceProvider).getTeamMembers(teamId: id);
+final teamMembersProvider = FutureProvider<List<User>>((ref) async {
+  return ref.watch(teamServiceProvider).getTeamMembers();
+});
+
+final currentTeamChangesProvider = StreamProvider<Team?>((ref) {
+  return ref.watch(teamRepoProvider).currentTeam;
+});
+
+final teamProvider = FutureProvider.family<Team, String>((ref, id) async {
+  return ref.watch(teamRepoProvider).getTeam(teamId: id);
 });
 
 class TeamService {
@@ -35,17 +47,23 @@ class TeamService {
   final EventRepository eventRepository;
   final AuthRepository authRepository;
   final NoteRepository noteRepository;
+  final GoRouter router;
 
   TeamService({
     required this.teamRepository,
     required this.authRepository,
     required this.eventRepository,
     required this.noteRepository,
+    required this.router,
   });
 
-  Future<List<User>> getTeamMembers({required String teamId}) async {
+  Future switchToTeamSession({required String teamId}) async {}
+
+  Future<List<User>> getTeamMembers() async {
     var userId = authRepository.loggedUser?.uid;
     if (userId == null) return Future.error('error');
+    var teamId = teamRepository.loggedTeamId;
+    if (teamId == null) return Future.error('error');
     var team = await teamRepository.getTeamSubscriptions(teamId: teamId);
     var users = await team.flatAndCollectAsync<User, TeamSubscription>(
       team.payload!,
@@ -103,6 +121,27 @@ class TeamService {
   Future<Response> createTeam({required String name}) async {
     var userId = authRepository.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
-    return await teamRepository.createTeam(name: name, userId: userId);
+    return await teamRepository
+        .createTeam(name: name, userId: userId)
+        .ifSuccessAsync((payload) => loginWithTeam(teamId: payload!.id))
+        .ifSuccess((payload) => eventRepository.getTeamEvents(teamId: payload!.id))
+        .ifSuccess((payload) => noteRepository.getTeamNotes(teamId: payload!.id))
+        .ifSuccess((payload) => router.go(HomePageRoute.pagePath));
+  }
+
+  Future<Response> loginWithTeam({required String teamId}) async {
+    var userId = authRepository.loggedUser?.uid;
+    if (userId == null) return Responses.failure([]);
+    return await teamRepository.loginWithTeam(teamId: teamId, userId: userId);
+  }
+
+  Future<Response> silentloginWithTeam() async {
+    var userId = authRepository.loggedUser?.uid;
+    if (userId == null) return Responses.failure([]);
+    var teams = await teamRepository.getUserTeams(userId: userId);
+    if (teams.isError || teams.payload!.isEmpty) return await teamRepository.logoutFromTeam();
+    var firstTeamId = teams.payload!.first.id;
+    await teamRepository.loginWithTeam(teamId: firstTeamId, userId: userId);
+    return Responses.success(null);
   }
 }

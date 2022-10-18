@@ -17,3 +17,7 @@ class Note with _$Note {
 
   factory Note.fromJson(Map<String, Object?> json) => _$NoteFromJson(json);
 }
+
+extension NoteFeatures on Note {
+  static bool equalsById(Note one, Note two) => one.id == two.id;
+}

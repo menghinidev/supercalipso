@@ -10,18 +10,13 @@ class NoteRepository {
   var dataProvider = Installer.instance.get<INoteDataSource>();
   var controller = BehaviorSubject<List<Note>>();
 
-  Stream<List<Note>> get notesChanges => controller.stream;
   Stream<List<Note>> getTeamNotesChanges({required String teamId}) =>
-      notesChanges.map((event) => event.where((element) => element.teamId == teamId).toList());
+      controller.stream.map((event) => event.where((element) => element.teamId == teamId).toList());
   Stream<Note> getNoteChanges({required String noteId}) =>
       controller.stream.mapNotNull((event) => event.getWhere((element) => element.id == noteId));
 
   Future<Response<List<Note>>> getTeamNotes({required String teamId}) async {
-    return await dataProvider.readTeamNotes(teamId: teamId);
-  }
-
-  Future<Response<List<Note>>> getUserNotes({required String userId}) async {
-    return await dataProvider.readUserNotes(userId: userId).ifSuccess((payload) => controller.add(payload!));
+    return await dataProvider.readTeamNotes(teamId: teamId).ifSuccess((payload) => controller.add(payload!));
   }
 
   Future<Response> createNote({
@@ -36,7 +31,7 @@ class NoteRepository {
       content: content,
       modifiedByUserId: userId,
     );
-    return await dataProvider.createNote(command: command).ifSuccess((payload) => getUserNotes(userId: userId));
+    return await dataProvider.createNote(command: command).ifSuccess((payload) => getTeamNotes(teamId: teamId));
   }
 
   Future<Response> updateNote({
@@ -53,15 +48,13 @@ class NoteRepository {
       content: content,
       title: title,
     );
-    return await dataProvider.updateNote(command: command).ifSuccess((payload) => getUserNotes(userId: userId));
+    return await dataProvider.updateNote(command: command).ifSuccess((payload) => getTeamNotes(teamId: teamId));
   }
 
   Future<Response> deleteNote({required String noteId}) async {
     var noteResponse = await dataProvider.readNote(noteId: noteId);
     if (noteResponse.isError) return noteResponse;
     var note = noteResponse.payload!;
-    return await dataProvider
-        .deleteNote(noteId: noteId)
-        .ifSuccess((payload) => getUserNotes(userId: note.modifiedByUserId));
+    return await dataProvider.deleteNote(noteId: noteId).ifSuccess((payload) => getTeamNotes(teamId: note.teamId));
   }
 }

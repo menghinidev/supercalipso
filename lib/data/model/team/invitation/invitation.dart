@@ -30,3 +30,11 @@ enum TeamInvitationStatus {
     return TeamInvitationStatus.unknown;
   }
 }
+
+extension TeamInvitationFeature on TeamInvitation {
+  T onStatus<T>(T Function() fallback, {T Function()? onAccepted, T Function()? onDeclied}) {
+    if (status == TeamInvitationStatus.accepted && onAccepted != null) return onAccepted();
+    if (status == TeamInvitationStatus.declied && onDeclied != null) return onDeclied();
+    return fallback();
+  }
+}
