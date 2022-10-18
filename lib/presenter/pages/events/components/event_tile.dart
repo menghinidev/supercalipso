@@ -30,7 +30,7 @@ class EventTile extends HookConsumerWidget {
       trailing: loggedUser.onValue(
         builder: (data) => Padding(
           padding: Dimensions.allSPadding,
-          child: ProfileAvatar(imageURL: data?.imageURL, size: 24),
+          child: ProfileAvatar(imageURL: data?.imageURL),
         ),
       ),
       onTap: () => ref.read(routerProvider).push(EventPageRoute.pagePath, extra: event),
