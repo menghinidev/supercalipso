@@ -6,6 +6,7 @@ import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 import 'package:supercalipso/presenter/pages/profile/sections/enrolled_teams.dart';
 import 'package:supercalipso/presenter/pages/profile/sections/header.dart';
+import 'package:supercalipso/presenter/pages/profile/sections/teams_invitations.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class ProfilePage extends HookConsumerWidget {
@@ -33,6 +34,10 @@ class ProfilePage extends HookConsumerWidget {
             Padding(
               padding: Dimensions.pageInsetsWithTop,
               child: const TeamsList(),
+            ),
+            Padding(
+              padding: Dimensions.pageInsetsWithTop,
+              child: const TeamsInvitationSection(),
             ),
           ],
         ),

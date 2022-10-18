@@ -6,6 +6,8 @@ import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_shee
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/components/common/loading_list.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
 
 class TeamInvitationGeneratorSheet extends HookConsumerWidget {
   final String teamId;
@@ -46,12 +48,15 @@ class TeamInvitationGeneratorSheet extends HookConsumerWidget {
             child: team.when(
               data: (data) => PrimaryElevatedButton(
                 text: 'Invita',
-                onTap: () {
-                  ref.read(teamServiceProvider).inviteUserToTeam(
+                onTap: () async {
+                  var response = await ref.read(teamServiceProvider).inviteUserToTeam(
                         email: controller.text,
                         teamId: data!.id,
                       );
-                  Navigator.pop(context);
+                  response.ifSuccess((payload) => ref.read(routerProvider).pop());
+                  response.ifError((payload) => ref.read(dialogServiceProvider).showErrorDialog(
+                        error: 'User not found',
+                      ));
                 },
               ),
               error: (_, __) => Container(),

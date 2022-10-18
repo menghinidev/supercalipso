@@ -20,7 +20,7 @@ class TaskTile extends HookConsumerWidget with DateFormatter {
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomTile(
       title: task.title,
-      subtitle: task.assignedUserId == null ? null : TaskTileSubtitle(userId: task.assignedUserId!),
+      subtitle: task.assignedUserId == null ? null : UserNameTileSubtitle(userId: task.assignedUserId!),
       leading: Icon(
         EventIconDataFactory.getIcon(task.iconName) ?? Icons.task_alt_outlined,
         color: AppColors.black,
@@ -41,10 +41,10 @@ class TaskTile extends HookConsumerWidget with DateFormatter {
   }
 }
 
-class TaskTileSubtitle extends HookConsumerWidget with DateFormatter {
+class UserNameTileSubtitle extends HookConsumerWidget with DateFormatter {
   final String userId;
 
-  const TaskTileSubtitle({super.key, required this.userId});
+  const UserNameTileSubtitle({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

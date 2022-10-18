@@ -24,7 +24,8 @@ class BaseListSection<T> extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: Dimensions.smallSize),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             children: [
               Expanded(
                 child: Text(

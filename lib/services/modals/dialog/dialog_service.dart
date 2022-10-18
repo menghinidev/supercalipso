@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/presenter/components/dialog/error_dialog.dart';
 
 final dialogServiceProvider = Provider<DialogService>((ref) {
   return DialogService();
@@ -23,6 +24,8 @@ class DialogService {
     }
     return _dialogCompleter!.future;
   }
+
+  Future<DialogResponse> showErrorDialog({String? error}) => showDialog(dialog: ErrorDialog(error: error));
 
   void dialogComplete(DialogResponse response) {
     if (_dialogCompleter != null) _dialogCompleter!.complete(response);
