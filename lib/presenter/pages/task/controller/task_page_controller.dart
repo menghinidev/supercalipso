@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
+import 'package:supercalipso/bloc/task/task_service.dart';
 import 'package:supercalipso/data/model/task/builder/task_builder.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/model/user/user.dart';
@@ -11,6 +12,7 @@ final taskPageControllerProvider =
     StateNotifierProvider.family.autoDispose<TaskPageControllerNotifier, TaskPageState, Task?>((ref, task) {
   return TaskPageControllerNotifier(
     authRepo: ref.watch(authProvider),
+    taskService: ref.watch(taskServiceProvider),
     initialTask: task,
   );
 });
@@ -19,11 +21,13 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
   final Task? initialTask;
   final List<User>? assignedUsers;
   final AuthRepository authRepo;
+  final TaskService taskService;
   late TaskPageMementoStateOriginator originator;
   late TaskPageMementoStateCaretaker caretaker;
 
   TaskPageControllerNotifier({
     required this.authRepo,
+    required this.taskService,
     this.initialTask,
     this.assignedUsers,
   }) : super(TaskPageState.create(initialTask, assignedUsers)) {
@@ -61,6 +65,14 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
     }
   }
 
+  editTaskAssignment(String? userId) {
+    var actualState = state;
+    if (actualState is EditingTaskPageState) {
+      var newState = EditingTaskPageState(builder: actualState.builder.copyWith(assignedUserId: userId));
+      __saveStep(newState);
+    }
+  }
+
   editIcon(String? iconName) {
     var actualState = state;
     if (actualState is EditingTaskPageState) {
@@ -73,6 +85,29 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
     var actualState = state;
     if (actualState is ConsultingTaskPageState) {
       state = actualState.switchToEdit();
+    }
+  }
+
+  Future submit() async {
+    var actualState = state;
+    if (actualState is EditingTaskPageState) {
+      var isNew = initialTask == null;
+      if (isNew) {
+        return taskService.createTask(
+          title: actualState.builder.title!,
+          assignedUserId: actualState.builder.assignedUserId,
+          deadline: actualState.builder.deadline,
+          iconName: actualState.builder.iconName,
+        );
+      } else {
+        return taskService.updateTask(
+          taskId: initialTask!.id,
+          assignedUserId: actualState.builder.assignedUserId,
+          deadline: actualState.builder.deadline,
+          iconName: actualState.builder.iconName,
+          title: actualState.builder.title,
+        );
+      }
     }
   }
 

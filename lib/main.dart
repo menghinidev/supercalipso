@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/bloc/startup/startup_service.dart';
 import 'package:supercalipso/firebase_options.dart';
 import 'package:supercalipso/presenter/theme/theme_builder.dart';

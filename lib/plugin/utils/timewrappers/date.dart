@@ -98,4 +98,6 @@ extension DateProperties on Date {
     }
     return Date.fromDateTime(time);
   }
+
+  Date nextYear() => increase(const Duration(days: 365)) as Date;
 }

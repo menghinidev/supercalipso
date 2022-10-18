@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/bloc/event/event_service.dart';
 import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';

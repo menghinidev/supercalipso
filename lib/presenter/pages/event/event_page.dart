@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/event/event_provider.dart';
-import 'package:supercalipso/bloc/event/event_service.dart';
 import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
-import 'package:supercalipso/presenter/components/button/primary_outlined.dart';
 import 'package:supercalipso/presenter/components/button/primary_text.dart';
 import 'package:supercalipso/presenter/components/form/keyboard_focus_wrapper.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_controller.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_state.dart';
+import 'package:supercalipso/presenter/pages/event/sections/info_section.dart';
 import 'package:supercalipso/presenter/pages/event/sections/name_section.dart';
 import 'package:supercalipso/presenter/pages/event/sections/time_section.dart';
-import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
 
@@ -70,36 +68,7 @@ class EventPage extends HookConsumerWidget with DateFormatter {
                     onEndDateChanged: (end) => getNotifier(ref).editEventEndDate(end),
                   ),
                 ),
-                state.on(
-                  defaultValue: () => Container(),
-                  onReading: (state) => Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.mediumSize),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.grey),
-                            children: [
-                              const TextSpan(text: 'Last Update: '),
-                              TextSpan(text: formatDateAndTime(state.event.lastUpdate)),
-                            ],
-                          ),
-                        ),
-                        if (state.creator != null)
-                          RichText(
-                            text: TextSpan(
-                              style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.grey),
-                              children: [
-                                const TextSpan(text: 'Created by: '),
-                                TextSpan(text: state.creator!.displayName),
-                              ],
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
+                EventInfoSection(state: state),
                 Expanded(
                   child: state.on(
                     defaultValue: () => Container(),

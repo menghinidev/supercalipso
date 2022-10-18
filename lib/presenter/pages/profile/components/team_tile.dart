@@ -6,7 +6,6 @@ import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/presenter/components/icon/custom_icon.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
-import 'package:supercalipso/presenter/pages/notes/components/note_generator_sheet.dart';
 import 'package:supercalipso/presenter/pages/profile/components/team_invitation_generator_sheet.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
@@ -20,7 +19,7 @@ class TeamTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var users = ref.watch(teamMembersProvider(team.id));
+    var users = ref.watch(teamMembersProvider);
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 200),
       child: CustomTile(

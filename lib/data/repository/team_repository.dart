@@ -4,7 +4,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/subscription/subscription.dart';
 import 'package:supercalipso/data/model/team/team.dart';
-import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
 import 'package:supercalipso/data/provider/command/team/createInvitation/create_team_invitation_command.dart';
 import 'package:supercalipso/data/provider/command/team/createTeam/create_team_command.dart';

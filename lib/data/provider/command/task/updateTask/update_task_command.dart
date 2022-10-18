@@ -6,7 +6,6 @@ part 'update_task_command.g.dart';
 
 @freezed
 class UpdateTaskCommand with _$UpdateTaskCommand {
-  const UpdateTaskCommand._();
   factory UpdateTaskCommand({
     required String taskId,
     String? title,

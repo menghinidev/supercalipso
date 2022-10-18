@@ -1,7 +1,6 @@
 import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/user/user.dart';
-import 'package:supercalipso/plugin/utils.dart';
 
 abstract class EventPageState {
   static EventPageState create(TeamEvent? initialEvent, User? creator) {

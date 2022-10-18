@@ -11,7 +11,7 @@ class NotesPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var teams = ref.watch(noteServiceProvider);
     return CustomScaffold(
-      appBar: FlatAppBar(title: 'Notes'),
+      appBar: const FlatAppBar(title: 'Notes'),
       body: SingleChildScrollView(
         child: Column(),
       ),

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/plugin/utils/extensions/list_extensions.dart';
-import 'package:supercalipso/presenter/components/card/custom_card.dart';
 import 'package:supercalipso/presenter/components/form/custom_text_field.dart';
 import 'package:supercalipso/presenter/components/form/validators.dart';
+import 'package:supercalipso/presenter/pages/dashboard/sections/card_section.dart';
+import 'package:supercalipso/presenter/pages/event/components/named_icon.dart';
 import 'package:supercalipso/presenter/pages/event/sections/name_section.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_state.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
@@ -30,46 +31,37 @@ class TaskNameSection extends HookConsumerWidget with EventIconDataFactory {
         onEditing: (state) => state.builder.title,
       ),
     );
-    return CustomCard(
-      child: Padding(
-        padding: Dimensions.allMPadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Choose Icon and Name',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Padding(
-              padding: Dimensions.mVPadding,
-              child: Wrap(
-                spacing: Dimensions.mediumSize,
-                runSpacing: Dimensions.smallSize,
-                children: [
-                  ...TaskIconDataFactory.availableIcons.map(
-                    (e) => NamedIcon(
-                      icon: e,
-                      onSelected: state.on(defaultValue: () => null, onEditing: (state) => onIconNameChanged),
-                      isSelected: state.on(
-                        defaultValue: () => false,
-                        onEditing: (state) => state.builder.iconName == e.name,
-                        onReading: (state) => state.task.iconName == e.name,
-                      ),
-                    ),
+    return CardSection(
+      title: 'Choose Icon and Name',
+      children: [
+        Padding(
+          padding: Dimensions.mVPadding,
+          child: Wrap(
+            spacing: Dimensions.mediumSize,
+            runSpacing: Dimensions.smallSize,
+            children: [
+              ...TaskIconDataFactory.availableIcons.map(
+                (e) => NamedIcon(
+                  icon: e,
+                  onSelected: state.on(defaultValue: () => null, onEditing: (state) => onIconNameChanged),
+                  isSelected: state.on(
+                    defaultValue: () => false,
+                    onEditing: (state) => state.builder.iconName == e.name,
+                    onReading: (state) => state.task.iconName == e.name,
                   ),
-                ],
+                ),
               ),
-            ),
-            CustomTextField(
-              controller: nameController,
-              label: 'Task name',
-              onChanged: onNameChanged,
-              enabled: state.on(defaultValue: () => true, onReading: (_) => false),
-              validator: (value) => FormValidators.nonEmptyValidator(value, context),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+        CustomTextField(
+          controller: nameController,
+          label: 'Task name',
+          onChanged: onNameChanged,
+          enabled: state.on(defaultValue: () => true, onReading: (_) => false),
+          validator: (value) => FormValidators.nonEmptyValidator(value, context),
+        ),
+      ],
     );
   }
 }

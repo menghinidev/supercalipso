@@ -1,8 +1,7 @@
 import 'package:supercalipso/data/model/note/note.dart';
-import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/provider/api/note/i_note_data_source.dart';
-import 'package:supercalipso/data/provider/command/note/updateNote/update_note_command.dart';
 import 'package:supercalipso/data/provider/command/note/createNote/create_note_command.dart';
+import 'package:supercalipso/data/provider/command/note/updateNote/update_note_command.dart';
 import 'package:supercalipso/data/provider/mocked.dart';
 import 'package:supercalipso/plugin/utils.dart';
 

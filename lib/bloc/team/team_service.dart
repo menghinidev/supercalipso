@@ -30,8 +30,8 @@ final teamInvitationsProvider = FutureProvider<Response<List<TeamInvitation>>>((
   return ref.watch(teamServiceProvider).getTeamsInvitations();
 });
 
-final teamMembersProvider = FutureProvider.family<List<User>, String>((ref, id) async {
-  return ref.watch(teamServiceProvider).getTeamMembers(teamId: id);
+final teamMembersProvider = FutureProvider<List<User>>((ref) async {
+  return ref.watch(teamServiceProvider).getTeamMembers();
 });
 
 final currentTeamChangesProvider = StreamProvider<Team?>((ref) {
@@ -59,9 +59,11 @@ class TeamService {
 
   Future switchToTeamSession({required String teamId}) async {}
 
-  Future<List<User>> getTeamMembers({required String teamId}) async {
+  Future<List<User>> getTeamMembers() async {
     var userId = authRepository.loggedUser?.uid;
     if (userId == null) return Future.error('error');
+    var teamId = teamRepository.loggedTeamId;
+    if (teamId == null) return Future.error('error');
     var team = await teamRepository.getTeamSubscriptions(teamId: teamId);
     var users = await team.flatAndCollectAsync<User, TeamSubscription>(
       team.payload!,

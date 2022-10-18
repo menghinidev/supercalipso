@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:supercalipso/bloc/event/event_provider.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
-import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
 import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dart';
 import 'package:supercalipso/presenter/pages/events/components/event_tile.dart';

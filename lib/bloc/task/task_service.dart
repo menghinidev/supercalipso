@@ -44,6 +44,25 @@ class TaskService {
     );
   }
 
+  Future<Response> updateTask({
+    required String taskId,
+    String? title,
+    String? iconName,
+    DateTime? deadline,
+    String? assignedUserId,
+  }) async {
+    var teamId = teamRepository.loggedTeamId;
+    if (teamId == null) return Responses.failure([]);
+    return await taskRepository.updateTask(
+      taskId: taskId,
+      teamId: teamId,
+      title: title,
+      assignedUserId: assignedUserId,
+      iconName: iconName,
+      deadline: deadline,
+    );
+  }
+
   Future<Response> askTeamTasks() async {
     var teamId = teamRepository.loggedTeamId;
     if (teamId == null) return Responses.failure([]);

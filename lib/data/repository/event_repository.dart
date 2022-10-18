@@ -1,6 +1,5 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
-import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/provider/api/event/i_event_data_source.dart';
 import 'package:supercalipso/data/provider/command/event/create/create_event.dart';
 import 'package:supercalipso/data/provider/command/event/update/update_event_command.dart';

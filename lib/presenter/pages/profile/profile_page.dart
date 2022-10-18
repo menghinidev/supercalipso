@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_service.dart';
-import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 import 'package:supercalipso/presenter/pages/profile/sections/enrolled_teams.dart';
 import 'package:supercalipso/presenter/pages/profile/sections/header.dart';
-import 'package:supercalipso/presenter/pages/profile/sections/team_generator_bottom_sheet.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class ProfilePage extends HookConsumerWidget {

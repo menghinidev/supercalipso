@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/data/model/task/task.dart';
-import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
 import 'package:supercalipso/presenter/pages/event/sections/name_section.dart';
-import 'package:supercalipso/presenter/pages/events/components/event_tile.dart';
-import 'package:supercalipso/presenter/pages/profile/components/profile_avatar.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
-import 'package:supercalipso/presenter/theme/dimensions.dart';
 import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,11 +18,14 @@ class TaskTile extends HookConsumerWidget with DateFormatter {
     return CustomTile(
       title: task.title,
       subtitle: task.assignedUserId == null ? null : TaskTileSubtitle(userId: task.assignedUserId!),
-      leading: Icon(EventIconDataFactory.getIcon(task.iconName)),
+      leading: Icon(
+        EventIconDataFactory.getIcon(task.iconName) ?? Icons.task_alt_outlined,
+        color: AppColors.black,
+      ),
       trailing: ActionTileTrailing(
         color: AppColors.green,
         onTap: () => print(task.status.name),
-        child: const Icon(Icons.done),
+        child: const Icon(Icons.done, color: AppColors.white),
       ),
     );
   }

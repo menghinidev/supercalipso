@@ -1,5 +1,4 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 

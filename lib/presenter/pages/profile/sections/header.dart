@@ -3,7 +3,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/data/model/user/user.dart';
-import 'package:supercalipso/presenter/components/avatar/custom_avatar.dart';
 import 'package:supercalipso/presenter/pages/profile/components/profile_avatar.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
