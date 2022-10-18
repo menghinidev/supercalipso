@@ -6,6 +6,25 @@ import 'package:supercalipso/data/provider/command/event/update/update_event_com
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 
+extension CumulativeStream<X> on BehaviorSubject<List<X>> {
+  update(List<X>? values, bool Function(X, X) equals) async {
+    var toAdd = values ?? <X>[];
+    if (!hasValue) {
+      add(toAdd);
+      return;
+    }
+    var latest = valueOrNull!;
+    var asSet = latest.toSet();
+    for (var e in toAdd) {
+      var elementInSet = asSet.getWhere((element) => equals(e, element));
+      if (elementInSet != null) asSet.remove(elementInSet);
+      asSet.add(e);
+    }
+    asSet.addAll(toAdd);
+    add(asSet.toList());
+  }
+}
+
 class EventRepository {
   final controller = BehaviorSubject<List<TeamEvent>>();
   final provider = Installer.instance.get<IEventDataSource>();
@@ -22,11 +41,13 @@ class EventRepository {
 
   Future<Response<List<TeamEvent>>> getTeamEvents({required String teamId}) async {
     var events = await provider.readTeamEvents(teamId: teamId);
-    return events.ifSuccess((payload) => controller.add(payload!));
+    return events.ifSuccess((payload) => controller.update(payload, TeamEventProperties.equalsById));
   }
 
   Future<Response<TeamEvent>> getEvent({required String id}) async {
-    return await provider.readTeamEvent(eventId: id);
+    return await provider
+        .readTeamEvent(eventId: id)
+        .ifSuccess((payload) => controller.update([payload!], TeamEventProperties.equalsById));
   }
 
   Future<Response> createEvent({

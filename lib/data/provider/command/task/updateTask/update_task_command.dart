@@ -8,6 +8,7 @@ part 'update_task_command.g.dart';
 class UpdateTaskCommand with _$UpdateTaskCommand {
   factory UpdateTaskCommand({
     required String taskId,
+    TaskStatus? status,
     String? title,
     DateTime? deadline,
     String? iconName,
@@ -23,5 +24,6 @@ extension UpdateTaskCommandFeature on UpdateTaskCommand {
         iconName: iconName ?? task.iconName,
         assignedUserId: assignedUserId,
         deadline: deadline,
+        status: status ?? task.status,
       );
 }

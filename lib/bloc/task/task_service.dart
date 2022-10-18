@@ -63,6 +63,8 @@ class TaskService {
     );
   }
 
+  Future<Response> completeTask({required String taskId}) => taskRepository.completeTask(taskId: taskId);
+
   Future<Response> askTeamTasks() async {
     var teamId = teamRepository.loggedTeamId;
     if (teamId == null) return Responses.failure([]);

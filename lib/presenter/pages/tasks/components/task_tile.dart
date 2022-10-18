@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supercalipso/bloc/auth/auth_service.dart';
+import 'package:supercalipso/bloc/task/task_service.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
@@ -7,6 +8,8 @@ import 'package:supercalipso/presenter/pages/event/sections/name_section.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/routes.dart';
 
 class TaskTile extends HookConsumerWidget with DateFormatter {
   final Task task;
@@ -22,11 +25,18 @@ class TaskTile extends HookConsumerWidget with DateFormatter {
         EventIconDataFactory.getIcon(task.iconName) ?? Icons.task_alt_outlined,
         color: AppColors.black,
       ),
-      trailing: ActionTileTrailing(
-        color: AppColors.green,
-        onTap: () => print(task.status.name),
-        child: const Icon(Icons.done, color: AppColors.white),
+      trailing: task.onStatus(
+        () => ActionTileTrailing(
+          color: AppColors.green,
+          onTap: () => ref.read(taskServiceProvider).completeTask(taskId: task.id),
+          child: const Icon(Icons.done, color: AppColors.white),
+        ),
+        onDone: () => const ActionTileTrailing(
+          color: AppColors.blueDarker,
+          child: Icon(Icons.done_all_outlined, color: AppColors.white),
+        ),
       ),
+      onTap: () => ref.read(routerProvider).push(TaskPageRoute.pagePath, extra: task),
     );
   }
 }

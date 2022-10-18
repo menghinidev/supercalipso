@@ -4,6 +4,7 @@ import 'package:supercalipso/bloc/task/task_provider.dart';
 import 'package:supercalipso/data/model/task/builder/task_builder.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
+import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/button/primary_text.dart';
 import 'package:supercalipso/presenter/components/form/keyboard_focus_wrapper.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
@@ -25,7 +26,19 @@ class TaskPage extends HookConsumerWidget {
     var state = ref.watch(taskPageControllerProvider(task));
     return KeyboardFocusWrapper(
       child: CustomScaffold(
-        appBar: const FlatAppBar(showProfileAvatar: false, leading: BackButton()),
+        appBar: FlatAppBar(
+          showProfileAvatar: false,
+          leading: const BackButton(),
+          actions: [
+            state.on(
+              defaultValue: () => Container(),
+              onReading: (state) => PrimaryIconButton(
+                icon: const Icon(Icons.edit),
+                onTap: () => getNotifier(ref).switchToEdit(),
+              ),
+            ),
+          ],
+        ),
         resizeOnKeyboard: false,
         body: Padding(
           padding: Dimensions.pageInsets,

@@ -1,5 +1,5 @@
-import 'extensions/list_extensions.dart';
 import 'error/error_details.dart';
+import 'extensions/list_extensions.dart';
 
 class Responses {
   static Response<T> success<T>(T? payload) => _Success(payload: payload);
@@ -11,7 +11,7 @@ class Responses {
   ) {
     var response = Responses.success<List<T>>([]);
     for (var id in source) {
-      response = response.flatMap((tab) => mapper(id).map((t) => tab!.appendInPlace(t!)));
+      response = response.flatMap((tab) => mapper(id).map((t) => tab!.appendInPlace(t)));
     }
     return response;
   }
@@ -22,7 +22,7 @@ class Responses {
   ) async {
     var response = Responses.success<List<T>>([]);
     for (var id in source) {
-      response = await response.flatMapAsync((tab) => mapper(id).mapToResponse((t) => tab!.appendInPlace(t!)));
+      response = await response.flatMapAsync((tab) => mapper(id).mapToResponse((t) => tab!.appendInPlace(t)));
     }
     return response;
   }
@@ -36,7 +36,7 @@ class Responses {
     if (isError(payload)) {
       return Responses.failure([error ?? ErrorDetails(id: 0)]);
     }
-    return Responses.success<T>(payload!);
+    return Responses.success<T>(payload);
   }
 
   static Future<Response<T>> createAsync<T>({
@@ -129,7 +129,7 @@ class _Success<T> extends Response<T> {
   Response<List<B>> flatAndCollect<B, X>(Iterable<X> source, Response<B> Function(X source) mapper) {
     var response = Responses.success<List<B>>([]);
     for (var id in source) {
-      response = response.flatMap((tab) => mapper(id).map((t) => tab!.appendInPlace(t!)));
+      response = response.flatMap((tab) => mapper(id).map((t) => tab!.appendInPlace(t)));
     }
     return response;
   }
@@ -141,7 +141,7 @@ class _Success<T> extends Response<T> {
   ) async {
     var response = Responses.success<List<B>>([]);
     for (var id in source) {
-      response = await response.flatMapAsync((tab) => mapper(id).mapToResponse((t) => tab!.appendInPlace(t!)));
+      response = await response.flatMapAsync((tab) => mapper(id).mapToResponse((t) => tab!.appendInPlace(t)));
     }
     return response;
   }
@@ -253,7 +253,7 @@ extension FutureResponseExtension<B> on Future<Response<B>> {
     if (res.isError) return Responses.failure<List<T>>(res.errors!);
     var response = Responses.success<List<T>>([]);
     for (var id in source) {
-      response = response.flatMap((tab) => mapper(id).map((t) => tab!.appendInPlace(t!)));
+      response = response.flatMap((tab) => mapper(id).map((t) => tab!.appendInPlace(t)));
     }
     return response;
   }
@@ -264,7 +264,7 @@ extension FutureResponseExtension<B> on Future<Response<B>> {
   ) async {
     var response = Responses.success<List<T>>([]);
     for (var id in source) {
-      response = await response.flatMapAsync((tab) => mapper(id).mapToResponse((t) => tab!.appendInPlace(t!)));
+      response = await response.flatMapAsync((tab) => mapper(id).mapToResponse((t) => tab!.appendInPlace(t)));
     }
     return response;
   }

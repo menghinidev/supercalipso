@@ -23,6 +23,7 @@ class EventsPage extends HookConsumerWidget {
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
               padding: Dimensions.pageInsetsWithTop,

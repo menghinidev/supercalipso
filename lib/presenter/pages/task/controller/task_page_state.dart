@@ -5,7 +5,14 @@ import 'package:supercalipso/data/model/user/user.dart';
 abstract class TaskPageState {
   static TaskPageState create(Task? initialTask, List<User>? assignedUsers) {
     if (initialTask != null) return ConsultingTaskPageState(task: initialTask, assignedUsers: assignedUsers);
-    return EditingTaskPageState(builder: TaskBuilder());
+    return EditingTaskPageState(
+      builder: TaskBuilder(
+        assignedUserId: assignedUsers?.first.uid,
+        deadline: initialTask?.deadline,
+        iconName: initialTask?.iconName,
+        title: initialTask?.title,
+      ),
+    );
   }
 }
 
@@ -22,7 +29,12 @@ class ConsultingTaskPageState extends TaskPageState {
   ConsultingTaskPageState({required this.task, this.assignedUsers});
 
   EditingTaskPageState switchToEdit() => EditingTaskPageState(
-        builder: TaskBuilder(),
+        builder: TaskBuilder(
+          assignedUserId: assignedUsers?.first.uid,
+          deadline: task.deadline,
+          iconName: task.iconName,
+          title: task.title,
+        ),
       );
 }
 

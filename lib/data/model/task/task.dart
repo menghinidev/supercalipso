@@ -20,3 +20,12 @@ class Task with _$Task {
 }
 
 enum TaskStatus { todo, done }
+
+extension TaskFeatures on Task {
+  T onStatus<T>(T Function() fallback, {T Function()? onDone}) {
+    if (status == TaskStatus.done && onDone != null) return onDone();
+    return fallback();
+  }
+
+  static bool equalsById(Task one, Task two) => one.id == two.id;
+}

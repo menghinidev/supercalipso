@@ -35,6 +35,9 @@ class StartupService {
     required this.eventService,
     required this.taskService,
   }) {
+    authRepository.loggedUserChanges.listen((event) {
+      teamService.getTeamsInvitations();
+    });
     teamRepository.currentTeam.listen((event) {
       eventService.askTeamEvents();
       taskService.askTeamTasks();

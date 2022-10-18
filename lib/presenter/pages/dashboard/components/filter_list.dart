@@ -9,7 +9,7 @@ class FilterList extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       child: Column(
-        children: [],
+        children: const [],
       ),
     );
   }

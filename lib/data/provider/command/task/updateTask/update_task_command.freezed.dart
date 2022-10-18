@@ -21,6 +21,7 @@ UpdateTaskCommand _$UpdateTaskCommandFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UpdateTaskCommand {
   String get taskId => throw _privateConstructorUsedError;
+  TaskStatus? get status => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   DateTime? get deadline => throw _privateConstructorUsedError;
   String? get iconName => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $UpdateTaskCommandCopyWith<$Res> {
       _$UpdateTaskCommandCopyWithImpl<$Res>;
   $Res call(
       {String taskId,
+      TaskStatus? status,
       String? title,
       DateTime? deadline,
       String? iconName,
@@ -57,6 +59,7 @@ class _$UpdateTaskCommandCopyWithImpl<$Res>
   @override
   $Res call({
     Object? taskId = freezed,
+    Object? status = freezed,
     Object? title = freezed,
     Object? deadline = freezed,
     Object? iconName = freezed,
@@ -67,6 +70,10 @@ class _$UpdateTaskCommandCopyWithImpl<$Res>
           ? _value.taskId
           : taskId // ignore: cast_nullable_to_non_nullable
               as String,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as TaskStatus?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -96,6 +103,7 @@ abstract class _$$_UpdateTaskCommandCopyWith<$Res>
   @override
   $Res call(
       {String taskId,
+      TaskStatus? status,
       String? title,
       DateTime? deadline,
       String? iconName,
@@ -116,6 +124,7 @@ class __$$_UpdateTaskCommandCopyWithImpl<$Res>
   @override
   $Res call({
     Object? taskId = freezed,
+    Object? status = freezed,
     Object? title = freezed,
     Object? deadline = freezed,
     Object? iconName = freezed,
@@ -126,6 +135,10 @@ class __$$_UpdateTaskCommandCopyWithImpl<$Res>
           ? _value.taskId
           : taskId // ignore: cast_nullable_to_non_nullable
               as String,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as TaskStatus?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -151,6 +164,7 @@ class __$$_UpdateTaskCommandCopyWithImpl<$Res>
 class _$_UpdateTaskCommand implements _UpdateTaskCommand {
   _$_UpdateTaskCommand(
       {required this.taskId,
+      this.status,
       this.title,
       this.deadline,
       this.iconName,
@@ -162,6 +176,8 @@ class _$_UpdateTaskCommand implements _UpdateTaskCommand {
   @override
   final String taskId;
   @override
+  final TaskStatus? status;
+  @override
   final String? title;
   @override
   final DateTime? deadline;
@@ -172,7 +188,7 @@ class _$_UpdateTaskCommand implements _UpdateTaskCommand {
 
   @override
   String toString() {
-    return 'UpdateTaskCommand(taskId: $taskId, title: $title, deadline: $deadline, iconName: $iconName, assignedUserId: $assignedUserId)';
+    return 'UpdateTaskCommand(taskId: $taskId, status: $status, title: $title, deadline: $deadline, iconName: $iconName, assignedUserId: $assignedUserId)';
   }
 
   @override
@@ -181,6 +197,7 @@ class _$_UpdateTaskCommand implements _UpdateTaskCommand {
         (other.runtimeType == runtimeType &&
             other is _$_UpdateTaskCommand &&
             const DeepCollectionEquality().equals(other.taskId, taskId) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.deadline, deadline) &&
             const DeepCollectionEquality().equals(other.iconName, iconName) &&
@@ -193,6 +210,7 @@ class _$_UpdateTaskCommand implements _UpdateTaskCommand {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(taskId),
+      const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(deadline),
       const DeepCollectionEquality().hash(iconName),
@@ -215,6 +233,7 @@ class _$_UpdateTaskCommand implements _UpdateTaskCommand {
 abstract class _UpdateTaskCommand implements UpdateTaskCommand {
   factory _UpdateTaskCommand(
       {required final String taskId,
+      final TaskStatus? status,
       final String? title,
       final DateTime? deadline,
       final String? iconName,
@@ -225,6 +244,8 @@ abstract class _UpdateTaskCommand implements UpdateTaskCommand {
 
   @override
   String get taskId;
+  @override
+  TaskStatus? get status;
   @override
   String? get title;
   @override

@@ -13,13 +13,16 @@ class CardSection extends StatelessWidget {
     return CustomCard(
       child: Padding(
         padding: Dimensions.allMPadding,
-        child: Column(children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          ...children,
-        ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            ...children,
+          ],
+        ),
       ),
     );
   }

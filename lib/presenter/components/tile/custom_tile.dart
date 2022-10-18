@@ -121,22 +121,25 @@ class CustomTileLeading extends StatelessWidget {
 class ActionTileTrailing extends StatelessWidget {
   final Color color;
   final Widget child;
-  final Function() onTap;
+  final Function()? onTap;
 
   const ActionTileTrailing({
     super.key,
     required this.color,
     required this.child,
-    required this.onTap,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: Dimensions.allSPadding,
-      decoration: BoxDecoration(color: color, border: Border.all(color: color)),
-      clipBehavior: Clip.hardEdge,
-      child: child,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: Dimensions.allSPadding,
+        decoration: BoxDecoration(color: color, border: Border.all(color: color)),
+        clipBehavior: Clip.hardEdge,
+        child: child,
+      ),
     );
   }
 }

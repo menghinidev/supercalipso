@@ -1,7 +1,9 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
-part 'team_event.g.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'team_event.freezed.dart';
+part 'team_event.g.dart';
 
 @freezed
 class TeamEvent with _$TeamEvent {
@@ -24,6 +26,7 @@ class TeamEvent with _$TeamEvent {
 extension TeamEventProperties on TeamEvent {
   bool get isDayEvent => startTime.hour == 0 && endTime == null;
   DateTime get startDay => DateTime.utc(startTime.year, startTime.month, startTime.day);
+  static bool equalsById(TeamEvent one, TeamEvent two) => one.id == two.id;
 }
 
 extension TeamEventList on List<TeamEvent> {
