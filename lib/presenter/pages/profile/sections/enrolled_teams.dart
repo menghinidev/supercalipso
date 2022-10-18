@@ -21,7 +21,11 @@ class TeamsList extends HookConsumerWidget {
         actions: [
           PrimaryIconButton(
             icon: const Icon(Icons.add),
-            onTap: () => showBottomSheet(context: context, builder: (_) => const TeamGeneratorBottomSheet()),
+            onTap: () => showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (co) => const TeamGeneratorBottomSheet(),
+            ),
           )
         ],
       ),

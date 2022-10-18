@@ -25,10 +25,14 @@ class _DialogManagerState extends State<DialogManager> {
     return widget.child;
   }
 
-  Future _showDialog(BuildContext context, {Widget Function()? customBuilder}) {
+  Future<DialogResponse> _showDialog(BuildContext context, {Widget Function()? customBuilder}) {
     return showDialog<DialogResponse>(
       context: context,
       builder: (context) => customBuilder != null ? customBuilder() : const AboutDialog(),
-    ).then((value) => widget.service.dialogComplete(value ?? DialogResponse()));
+    ).then((value) {
+      var withDefault = value ?? DialogResponse(hasDismissed: true);
+      widget.service.dialogComplete(withDefault);
+      return withDefault;
+    });
   }
 }

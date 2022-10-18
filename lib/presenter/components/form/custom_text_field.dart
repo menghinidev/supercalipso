@@ -51,7 +51,7 @@ class CustomTextField extends StatelessWidget with FormFieldProperties {
         obscureText: isPassword,
         style: Theme.of(context).textTheme.bodyText2?.copyWith(color: enabled ? AppColors.black : AppColors.grey),
         minLines: minLines,
-        maxLines: maxLines,
+        maxLines: maxLines ?? 1,
         enabled: enabled,
         decoration: customDecoration ??
             decorationFactory

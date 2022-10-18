@@ -3,7 +3,6 @@ import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/provider/api/task/i_task_data_source.dart';
 import 'package:supercalipso/data/provider/command/task/createTask/create_task_command.dart';
 import 'package:supercalipso/data/provider/command/task/updateTask/update_task_command.dart';
-import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
 

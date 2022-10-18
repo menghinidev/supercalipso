@@ -23,11 +23,7 @@ class UserMockedDataSource extends IUserDataSource with IdentifierFactory {
 
   @override
   Future<Response<User>> registerUser({required RegisterUserCommand command}) {
-    var user = User(
-      uid: command.uid,
-      displayName: command.displayName,
-      email: command.email,
-    );
+    var user = command.createUserDTO();
     mocked.users.add(user);
     return Future.value(Responses.success(user));
   }

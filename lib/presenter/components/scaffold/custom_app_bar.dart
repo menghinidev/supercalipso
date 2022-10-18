@@ -76,7 +76,7 @@ class FlatAppBar extends HookConsumerWidget with PreferredSizeWidget {
                 padding: const EdgeInsets.only(right: Dimensions.pageInsetsSize),
                 child: GestureDetector(
                   onTap: () => ref.read(routerProvider).push(ProfilePageRoute.pagePath),
-                  child: const ProfileAvatar(),
+                  child: const LoggedUserAvatar(),
                 ),
               )
             : Container(),

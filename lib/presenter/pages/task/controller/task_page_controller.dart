@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/task/task_service.dart';
@@ -5,14 +6,20 @@ import 'package:supercalipso/data/model/task/builder/task_builder.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
+import 'package:supercalipso/plugin/utils.dart';
+import 'package:supercalipso/presenter/components/dialog/confirm_dialog.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_memento.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_state.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
 
 final taskPageControllerProvider =
     StateNotifierProvider.family.autoDispose<TaskPageControllerNotifier, TaskPageState, Task?>((ref, task) {
   return TaskPageControllerNotifier(
     authRepo: ref.watch(authProvider),
     taskService: ref.watch(taskServiceProvider),
+    dialogService: ref.watch(dialogServiceProvider),
+    router: ref.watch(routerProvider),
     initialTask: task,
   );
 });
@@ -22,12 +29,16 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
   final List<User>? assignedUsers;
   final AuthRepository authRepo;
   final TaskService taskService;
+  final DialogService dialogService;
+  final GoRouter router;
   late TaskPageMementoStateOriginator originator;
   late TaskPageMementoStateCaretaker caretaker;
 
   TaskPageControllerNotifier({
     required this.authRepo,
     required this.taskService,
+    required this.dialogService,
+    required this.router,
     this.initialTask,
     this.assignedUsers,
   }) : super(TaskPageState.create(initialTask, assignedUsers)) {
@@ -93,22 +104,53 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
     if (actualState is EditingTaskPageState) {
       var isNew = initialTask == null;
       if (isNew) {
-        return taskService.createTask(
-          title: actualState.builder.title!,
-          assignedUserId: actualState.builder.assignedUserId,
-          deadline: actualState.builder.deadline,
-          iconName: actualState.builder.iconName,
+        return await dialogService.showDialog(
+          dialog: const ConfirmDialog(
+            title: 'Confirm',
+            textBody: 'This task will be available inside your Team',
+          ),
+          onConfirmed: (response) => taskService
+              .createTask(
+                title: actualState.builder.title!,
+                assignedUserId: actualState.builder.assignedUserId,
+                deadline: actualState.builder.deadline,
+                iconName: actualState.builder.iconName,
+              )
+              .ifSuccess((payload) => router.pop()),
         );
       } else {
-        return taskService.updateTask(
-          taskId: initialTask!.id,
-          assignedUserId: actualState.builder.assignedUserId,
-          deadline: actualState.builder.deadline,
-          iconName: actualState.builder.iconName,
-          title: actualState.builder.title,
+        return await dialogService.showDialog(
+          dialog: const ConfirmDialog(
+            title: 'Confirm',
+            textBody: 'This task will be changed',
+          ),
+          onConfirmed: (response) => taskService
+              .updateTask(
+                taskId: initialTask!.id,
+                assignedUserId: actualState.builder.assignedUserId,
+                deadline: actualState.builder.deadline,
+                iconName: actualState.builder.iconName,
+                title: actualState.builder.title,
+              )
+              .ifSuccess((payload) => router.pop()),
         );
       }
     }
+  }
+
+  Future delete() async {
+    var id = state.on(defaultValue: () => null, onReading: (state) => state.task.id);
+    if (id == null) return Future.value();
+    var dialogResponse = await dialogService.showDialog(
+      dialog: const ConfirmDialog(
+        title: 'Are you sure',
+        textBody: 'This task will be deleted',
+      ),
+    );
+    if (dialogResponse.hasConfirmed) {
+      return await taskService.deleteTask(taskId: id).ifSuccess((payload) => router.pop());
+    }
+    return Future.value();
   }
 
   discard() {

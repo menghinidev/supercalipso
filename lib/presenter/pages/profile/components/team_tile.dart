@@ -20,38 +20,40 @@ class TeamTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var users = ref.watch(teamMembersProvider);
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 200),
-      child: CustomTile(
-        leading: CircleAvatar(child: Text(team.name[0])),
-        title: team.name,
-        onTap: () => ref.read(routerProvider).push(TeamPageRoute.createPath(team.id)),
-        subtitle: users.onValue(
-          builder: (data) => Text(
-            users.onDefault(builder: (data) => data.concatNames(), defaultValue: ''),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.grey),
-          ),
+    return CustomTile(
+      leading: CircleAvatar(child: Text(team.name[0])),
+      title: team.name,
+      onTap: () => ref.read(routerProvider).push(TeamPageRoute.createPath(team.id)),
+      subtitle: users.onValue(
+        builder: (data) => Text(
+          users.onDefault(builder: (data) => data.concatNames(), defaultValue: ''),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.grey),
         ),
-        trailing: PopupMenuButton<String>(
-          position: PopupMenuPosition.under,
-          shape: Shapes.lowRoundedBorder,
-          itemBuilder: (context) => [
-            PopupMenuItem(
-              value: 'Invite',
-              onTap: () => showBottomSheet(
-                context: context,
-                builder: (_) => TeamInvitationGeneratorSheet(teamId: team.id),
-              ),
-              child: const BaseTile(
-                title: 'Invite',
-                leading: CustomIcon(icon: Icons.person_add_outlined),
-              ),
+      ),
+      trailing: PopupMenuButton<String>(
+        position: PopupMenuPosition.under,
+        shape: Shapes.lowRoundedBorder,
+        onSelected: (value) {
+          showInvitationSheet(context);
+        },
+        itemBuilder: (menuContext) => [
+          const PopupMenuItem(
+            value: 'Invite',
+            child: BaseTile(
+              title: 'Invite',
+              leading: CustomIcon(icon: Icons.person_add_outlined),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
+
+  void showInvitationSheet(BuildContext context) => showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (_) => TeamInvitationGeneratorSheet(teamId: team.id),
+      );
 }

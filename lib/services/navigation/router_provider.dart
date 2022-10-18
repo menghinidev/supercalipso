@@ -34,11 +34,12 @@ class RouterNotifier extends ChangeNotifier {
   late StreamSubscription loggedTeamChangesSub;
 
   RouterNotifier(this.ref) {
-    var repo = ref.read(authProvider);
-    authChangesSub = repo.loggedUserChanges.listen((event) {
+    var authRepo = ref.read(authProvider);
+    var teamRepo = ref.read(teamRepoProvider);
+    authChangesSub = authRepo.loggedUserChanges.listen((event) {
       if (event == null) notifyListeners();
     });
-    loggedTeamChangesSub = ref.read(teamRepoProvider).currentTeam.listen((event) {
+    loggedTeamChangesSub = teamRepo.currentTeam.listen((event) {
       notifyListeners();
     });
   }
@@ -56,8 +57,20 @@ class RouterNotifier extends ChangeNotifier {
 
     if (isInLoginPage && !hasTeamId) return ProfilePageRoute.pagePath;
 
+    if (state.location == HomePageRoute.pagePath && !hasTeamId) return ProfilePageRoute.pagePath;
+
     if (isInLoginPage && hasTeamId) return '/';
 
     return null;
+  }
+}
+
+extension PopFallback on GoRouter {
+  popOrHome() {
+    if (navigator?.canPop() ?? false) {
+      pop();
+      return;
+    }
+    go(HomePageRoute.pagePath);
   }
 }

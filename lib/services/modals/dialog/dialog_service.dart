@@ -9,17 +9,29 @@ final dialogServiceProvider = Provider<DialogService>((ref) {
 });
 
 class DialogService {
-  Future Function(Widget? child)? _showDialogListener;
+  Future<DialogResponse> Function(Widget? child)? _showDialogListener;
   Completer<DialogResponse>? _dialogCompleter;
 
-  void registerDialogListener(Future Function(Widget? child) showDialogListener) {
+  void registerDialogListener(Future<DialogResponse> Function(Widget? child) showDialogListener) {
     _showDialogListener = showDialogListener;
   }
 
-  Future<DialogResponse> showDialog({Widget? dialog, Function()? onDone}) {
+  Future<DialogResponse> showDialog({
+    Widget? dialog,
+    Function(DialogResponse response)? onConfirmed,
+    Function(DialogResponse response)? onDismissed,
+  }) {
     _dialogCompleter = Completer();
     if (_showDialogListener != null) {
-      _showDialogListener!(dialog).then((value) => onDone != null ? onDone() : null);
+      _showDialogListener!(dialog).then((value) {
+        if (value.hasConfirmed && onConfirmed != null) {
+          onConfirmed(value);
+          return value;
+        } else if (value.hasDismissed && onDismissed != null) {
+          onDismissed(value);
+          return value;
+        }
+      });
       return _dialogCompleter!.future;
     }
     return _dialogCompleter!.future;

@@ -18,13 +18,16 @@ class CustomBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomSheet(
-      onClosing: onClosing ?? () {},
-      enableDrag: false,
-      elevation: elevation ?? 20,
-      backgroundColor: backgroundColor ?? Colors.white,
-      constraints: constraints,
-      builder: builder,
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: BottomSheet(
+        onClosing: onClosing ?? () {},
+        enableDrag: false,
+        elevation: elevation ?? 20,
+        backgroundColor: backgroundColor ?? Colors.white,
+        constraints: constraints,
+        builder: builder,
+      ),
     );
   }
 }

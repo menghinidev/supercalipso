@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
+import 'package:supercalipso/bloc/auth/auth_service.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
@@ -19,7 +19,7 @@ class EventTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var loggedUser = ref.watch(authChanges);
+    var loggedUser = ref.watch(getUserByIdProvider(event.createdByUserId));
     return CustomTile(
       title: event.name,
       subtitle: EventTileSubtitle(event: event),
@@ -30,7 +30,7 @@ class EventTile extends HookConsumerWidget {
       trailing: loggedUser.onValue(
         builder: (data) => Padding(
           padding: Dimensions.allSPadding,
-          child: ProfileAvatar(imageURL: data?.imageURL),
+          child: ProfileAvatar(imageURL: data.imageURL),
         ),
       ),
       onTap: () => ref.read(routerProvider).push(EventPageRoute.pagePath, extra: event),

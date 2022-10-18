@@ -23,8 +23,9 @@ class TeamPageChipBar extends StatelessWidget {
             ActionChip(
               avatar: const Icon(Icons.note_add_outlined, size: 22),
               label: const Text('Create Note'),
-              onPressed: () => showBottomSheet(
+              onPressed: () => showModalBottomSheet(
                 context: context,
+                isScrollControlled: true,
                 builder: (context) => NoteGeneratorBottomSheet(teamId: team.id),
               ),
             ),

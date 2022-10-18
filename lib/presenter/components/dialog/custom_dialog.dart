@@ -14,6 +14,7 @@ class CustomDialog extends StatelessWidget {
       title: Text(title, textAlign: TextAlign.center),
       titleTextStyle: Theme.of(context).textTheme.headline6,
       alignment: Alignment.center,
+      shape: Shapes.highRoundedBorder,
       titlePadding: const EdgeInsets.all(Dimensions.largeSize).copyWith(bottom: 0),
       contentPadding: const EdgeInsets.symmetric(horizontal: Dimensions.largeSize).copyWith(
         bottom: Dimensions.largeSize,

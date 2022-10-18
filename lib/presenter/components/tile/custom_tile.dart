@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:supercalipso/presenter/components/card/custom_card.dart';
-import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class BaseTile extends StatelessWidget {
@@ -37,6 +36,7 @@ class CustomTile extends StatelessWidget {
   final Widget? subtitle;
   final Widget? leading;
   final Widget? trailing;
+  final Color? tileColor;
   final Function()? onTap;
 
   const CustomTile({
@@ -45,6 +45,7 @@ class CustomTile extends StatelessWidget {
     this.subtitle,
     this.leading,
     this.trailing,
+    this.tileColor,
     this.onTap,
   });
 
@@ -53,7 +54,6 @@ class CustomTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: CustomCard(
-        color: AppColors.white,
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 75),
           child: Row(

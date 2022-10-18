@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/task/task_provider.dart';
 import 'package:supercalipso/data/model/task/builder/task_builder.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
@@ -80,9 +79,7 @@ class TaskPage extends HookConsumerWidget {
                         Expanded(
                           child: PrimaryElevatedButton(
                             text: 'Save Task',
-                            onTap: state.builder.canBuild
-                                ? () => getNotifier(ref).submit().then((value) => Navigator.maybePop(context))
-                                : null,
+                            onTap: state.builder.canBuild ? () => getNotifier(ref).submit() : null,
                           ),
                         ),
                       ],
@@ -93,10 +90,7 @@ class TaskPage extends HookConsumerWidget {
                     child: PrimaryElevatedButton(
                       text: 'Delete',
                       color: Colors.red,
-                      onTap: () => ref
-                          .read(taskRepoProvider)
-                          .deleteTask(taskId: state.task.id)
-                          .then((value) => Navigator.maybePop(context)),
+                      onTap: () => getNotifier(ref).delete(),
                     ),
                   ),
                 ),

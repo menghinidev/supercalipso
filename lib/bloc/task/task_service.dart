@@ -63,6 +63,8 @@ class TaskService {
     );
   }
 
+  Future<Response> deleteTask({required String taskId}) => taskRepository.deleteTask(taskId: taskId);
+
   Future<Response> completeTask({required String taskId}) => taskRepository.completeTask(taskId: taskId);
 
   Future<Response> askTeamTasks() async {

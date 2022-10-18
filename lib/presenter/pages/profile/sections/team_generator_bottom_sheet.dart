@@ -33,8 +33,8 @@ class TeamGeneratorBottomSheet extends HookConsumerWidget {
             child: PrimaryElevatedButton(
               text: 'Create',
               onTap: () {
-                ref.read(teamServiceProvider).createTeam(name: nameController.text);
                 Navigator.pop(context);
+                ref.read(teamServiceProvider).createTeam(name: nameController.text);
               },
             ),
           ),
