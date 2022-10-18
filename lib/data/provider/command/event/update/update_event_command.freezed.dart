@@ -24,7 +24,8 @@ mixin _$UpdateEventCommand {
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get startTime => throw _privateConstructorUsedError;
-  Duration? get duration => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  String? get iconName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $UpdateEventCommandCopyWith<$Res> {
       String? title,
       String? description,
       DateTime? startTime,
-      Duration? duration});
+      DateTime? endTime,
+      String? iconName});
 }
 
 /// @nodoc
@@ -60,7 +62,8 @@ class _$UpdateEventCommandCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? startTime = freezed,
-    Object? duration = freezed,
+    Object? endTime = freezed,
+    Object? iconName = freezed,
   }) {
     return _then(_value.copyWith(
       eventId: eventId == freezed
@@ -79,10 +82,14 @@ class _$UpdateEventCommandCopyWithImpl<$Res>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -99,7 +106,8 @@ abstract class _$$_UpdateEventCommandCopyWith<$Res>
       String? title,
       String? description,
       DateTime? startTime,
-      Duration? duration});
+      DateTime? endTime,
+      String? iconName});
 }
 
 /// @nodoc
@@ -119,7 +127,8 @@ class __$$_UpdateEventCommandCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? startTime = freezed,
-    Object? duration = freezed,
+    Object? endTime = freezed,
+    Object? iconName = freezed,
   }) {
     return _then(_$_UpdateEventCommand(
       eventId: eventId == freezed
@@ -138,10 +147,14 @@ class __$$_UpdateEventCommandCopyWithImpl<$Res>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -154,7 +167,8 @@ class _$_UpdateEventCommand implements _UpdateEventCommand {
       this.title,
       this.description,
       this.startTime,
-      this.duration});
+      this.endTime,
+      this.iconName});
 
   factory _$_UpdateEventCommand.fromJson(Map<String, dynamic> json) =>
       _$$_UpdateEventCommandFromJson(json);
@@ -168,11 +182,13 @@ class _$_UpdateEventCommand implements _UpdateEventCommand {
   @override
   final DateTime? startTime;
   @override
-  final Duration? duration;
+  final DateTime? endTime;
+  @override
+  final String? iconName;
 
   @override
   String toString() {
-    return 'UpdateEventCommand(eventId: $eventId, title: $title, description: $description, startTime: $startTime, duration: $duration)';
+    return 'UpdateEventCommand(eventId: $eventId, title: $title, description: $description, startTime: $startTime, endTime: $endTime, iconName: $iconName)';
   }
 
   @override
@@ -185,7 +201,8 @@ class _$_UpdateEventCommand implements _UpdateEventCommand {
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.duration, duration));
+            const DeepCollectionEquality().equals(other.endTime, endTime) &&
+            const DeepCollectionEquality().equals(other.iconName, iconName));
   }
 
   @JsonKey(ignore: true)
@@ -196,7 +213,8 @@ class _$_UpdateEventCommand implements _UpdateEventCommand {
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(duration));
+      const DeepCollectionEquality().hash(endTime),
+      const DeepCollectionEquality().hash(iconName));
 
   @JsonKey(ignore: true)
   @override
@@ -218,7 +236,8 @@ abstract class _UpdateEventCommand implements UpdateEventCommand {
       final String? title,
       final String? description,
       final DateTime? startTime,
-      final Duration? duration}) = _$_UpdateEventCommand;
+      final DateTime? endTime,
+      final String? iconName}) = _$_UpdateEventCommand;
 
   factory _UpdateEventCommand.fromJson(Map<String, dynamic> json) =
       _$_UpdateEventCommand.fromJson;
@@ -232,7 +251,9 @@ abstract class _UpdateEventCommand implements UpdateEventCommand {
   @override
   DateTime? get startTime;
   @override
-  Duration? get duration;
+  DateTime? get endTime;
+  @override
+  String? get iconName;
   @override
   @JsonKey(ignore: true)
   _$$_UpdateEventCommandCopyWith<_$_UpdateEventCommand> get copyWith =>

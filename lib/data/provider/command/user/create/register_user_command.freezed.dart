@@ -23,6 +23,7 @@ mixin _$RegisterUserCommand {
   String get uid => throw _privateConstructorUsedError;
   String get displayName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String? get imageURL => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $RegisterUserCommandCopyWith<$Res> {
   factory $RegisterUserCommandCopyWith(
           RegisterUserCommand value, $Res Function(RegisterUserCommand) then) =
       _$RegisterUserCommandCopyWithImpl<$Res>;
-  $Res call({String uid, String displayName, String email});
+  $Res call({String uid, String displayName, String email, String? imageURL});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$RegisterUserCommandCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? displayName = freezed,
     Object? email = freezed,
+    Object? imageURL = freezed,
   }) {
     return _then(_value.copyWith(
       uid: uid == freezed
@@ -66,6 +68,10 @@ class _$RegisterUserCommandCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      imageURL: imageURL == freezed
+          ? _value.imageURL
+          : imageURL // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -77,7 +83,7 @@ abstract class _$$_RegisterUserCommandCopyWith<$Res>
           $Res Function(_$_RegisterUserCommand) then) =
       __$$_RegisterUserCommandCopyWithImpl<$Res>;
   @override
-  $Res call({String uid, String displayName, String email});
+  $Res call({String uid, String displayName, String email, String? imageURL});
 }
 
 /// @nodoc
@@ -96,6 +102,7 @@ class __$$_RegisterUserCommandCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? displayName = freezed,
     Object? email = freezed,
+    Object? imageURL = freezed,
   }) {
     return _then(_$_RegisterUserCommand(
       uid: uid == freezed
@@ -110,6 +117,10 @@ class __$$_RegisterUserCommandCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      imageURL: imageURL == freezed
+          ? _value.imageURL
+          : imageURL // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -118,7 +129,10 @@ class __$$_RegisterUserCommandCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RegisterUserCommand extends _RegisterUserCommand {
   const _$_RegisterUserCommand(
-      {required this.uid, required this.displayName, required this.email})
+      {required this.uid,
+      required this.displayName,
+      required this.email,
+      this.imageURL})
       : super._();
 
   factory _$_RegisterUserCommand.fromJson(Map<String, dynamic> json) =>
@@ -130,10 +144,12 @@ class _$_RegisterUserCommand extends _RegisterUserCommand {
   final String displayName;
   @override
   final String email;
+  @override
+  final String? imageURL;
 
   @override
   String toString() {
-    return 'RegisterUserCommand(uid: $uid, displayName: $displayName, email: $email)';
+    return 'RegisterUserCommand(uid: $uid, displayName: $displayName, email: $email, imageURL: $imageURL)';
   }
 
   @override
@@ -144,7 +160,8 @@ class _$_RegisterUserCommand extends _RegisterUserCommand {
             const DeepCollectionEquality().equals(other.uid, uid) &&
             const DeepCollectionEquality()
                 .equals(other.displayName, displayName) &&
-            const DeepCollectionEquality().equals(other.email, email));
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.imageURL, imageURL));
   }
 
   @JsonKey(ignore: true)
@@ -153,7 +170,8 @@ class _$_RegisterUserCommand extends _RegisterUserCommand {
       runtimeType,
       const DeepCollectionEquality().hash(uid),
       const DeepCollectionEquality().hash(displayName),
-      const DeepCollectionEquality().hash(email));
+      const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(imageURL));
 
   @JsonKey(ignore: true)
   @override
@@ -173,7 +191,8 @@ abstract class _RegisterUserCommand extends RegisterUserCommand {
   const factory _RegisterUserCommand(
       {required final String uid,
       required final String displayName,
-      required final String email}) = _$_RegisterUserCommand;
+      required final String email,
+      final String? imageURL}) = _$_RegisterUserCommand;
   const _RegisterUserCommand._() : super._();
 
   factory _RegisterUserCommand.fromJson(Map<String, dynamic> json) =
@@ -185,6 +204,8 @@ abstract class _RegisterUserCommand extends RegisterUserCommand {
   String get displayName;
   @override
   String get email;
+  @override
+  String? get imageURL;
   @override
   @JsonKey(ignore: true)
   _$$_RegisterUserCommandCopyWith<_$_RegisterUserCommand> get copyWith =>

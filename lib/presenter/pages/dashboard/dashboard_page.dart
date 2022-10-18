@@ -2,66 +2,61 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/event/event_service.dart';
 import 'package:supercalipso/bloc/note/note_service.dart';
-import 'package:supercalipso/bloc/team/team_service.dart';
+import 'package:supercalipso/bloc/task/task_service.dart';
 import 'package:supercalipso/plugin/utils.dart';
+import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_sheet.dart';
+import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/form/keyboard_focus_wrapper.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
-import 'package:supercalipso/presenter/pages/dashboard/components/team_invitations_icon.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/frequent_teams.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/latest_events.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/pinned_notes.dart';
+import 'package:supercalipso/presenter/pages/events/sections/events_list.dart';
+import 'package:supercalipso/presenter/pages/notifications/notifications_page.dart';
+import 'package:supercalipso/presenter/pages/tasks/section/task_list.dart';
+import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
-class Dashboard extends StatefulHookConsumerWidget {
+class Dashboard extends HookConsumerWidget {
   const Dashboard({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _DashboardState();
-}
-
-class _DashboardState extends ConsumerState<Dashboard> {
-  @override
-  void initState() {
-    super.initState();
-    var teamService = ref.read(teamServiceProvider);
-    var eventsService = ref.read(eventServiceProvider);
-    var notesService = ref.read(noteServiceProvider);
-    teamService.getUserTeams();
-    teamService.getTeamsInvitations();
-    eventsService.getUserEvents();
-    notesService.getUserNotes();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CustomScaffold(
-      appBar: const CustomAppBar(
-        title: 'DASHBOARD',
-        implyLeading: false,
-        actions: [TeamInvitationIcon()],
+      appBar: FlatAppBar(
+        title: 'House Feed',
+        actions: [
+          Builder(
+            builder: (context) => PrimaryIconButton(
+              icon: const Icon(Icons.notifications),
+              onTap: () => showModalBottomSheet(
+                context: context,
+                builder: (context) => CustomBottomSheet(
+                  builder: (context) => const NotificationsPage(),
+                  elevation: Dimensions.lowElevation * 2,
+                  backgroundColor: AppColors.whiteDarker,
+                  constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.75),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: () => Future.wait<Response>([
-          ref.read(teamServiceProvider).getUserTeams(),
-          ref.read(teamServiceProvider).getTeamsInvitations(),
-          ref.read(eventServiceProvider).getUserEvents(),
+          ref.read(eventServiceProvider).askTeamEvents(),
+          ref.read(noteServiceProvider).askTeamNotes(),
+          ref.read(taskServiceProvider).askTeamTasks(),
         ]),
         child: KeyboardFocusWrapper(
           child: CustomScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               SliverPadding(
                 padding: Dimensions.pageInsetsWithTop,
-                sliver: const SliverToBoxAdapter(child: FrequentTeamsList()),
+                sliver: const SliverToBoxAdapter(child: EventsList()),
               ),
               SliverPadding(
                 padding: Dimensions.pageInsetsWithTop,
-                sliver: const SliverToBoxAdapter(child: LatestEvents()),
-              ),
-              const SliverPadding(
-                padding: Dimensions.pageInsets,
-                sliver: SliverToBoxAdapter(child: PinnedNotesSection()),
+                sliver: const SliverToBoxAdapter(child: TaskList()),
               ),
             ],
           ),

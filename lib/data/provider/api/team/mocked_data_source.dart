@@ -10,7 +10,7 @@ import 'package:supercalipso/data/provider/command/team/replyToInvitation/replay
 import 'package:supercalipso/data/provider/mocked.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
-class TeamMockedDataSource extends ITeamDataSource {
+class TeamMockedDataSource extends ITeamDataSource with IdentifierFactory {
   var mocked = MockValues.instance;
 
   @override
@@ -27,20 +27,22 @@ class TeamMockedDataSource extends ITeamDataSource {
 
   @override
   Future<Response> replyTeamInvitation({required ReplyToInvitationCommand command}) {
-    /* var invitation = mocked.teamInvites.getWhere((element) => element.invitationId == command.invitationId);
+    var invitation = mocked.teamInvites.getWhere((element) => element.id == command.invitationId);
     if (invitation == null) return Future.value(Responses.failure([]));
     var status = TeamInvitationStatus.fromString(command.status);
-    var user = invitation.invitedUser;
+    var user = mocked.users.getWhere((element) => element.uid == invitation!.invitedUserId);
+    if (user == null) return Future.value(Responses.failure([]));
     mocked.teamInvites.remove(invitation);
     invitation = invitation.copyWith(status: status);
     mocked.teamInvites.add(invitation);
     if (status == TeamInvitationStatus.accepted) {
       mocked.teamSubs.add(TeamSubscription(
-        subscribedUser: user,
-        team: invitation.team,
-        joined: DateTime.now(),
+        id: createID(),
+        subscribedUserId: user.uid,
+        teamId: invitation.teamId,
+        joined: DateTime.now().toUtc(),
       ));
-    } */
+    }
     return Future.value(Responses.success(null));
   }
 
@@ -62,21 +64,30 @@ class TeamMockedDataSource extends ITeamDataSource {
       id: Random().nextInt(2000).toString(),
       invitedUserId: invitedUser!.uid,
       invitedByUserId: ownerUser!.uid,
-      created: DateTime.now(),
+      created: DateTime.now().toUtc(),
     );
     invitations.add(newInvite);
     return Future.value(Responses.success(null));
   }
 
   @override
-  Future<Response> createTeam({required CreateTeamCommand command}) {
-    // TODO: implement createTeam
-    throw UnimplementedError();
+  Future<Response<Team>> createTeam({required CreateTeamCommand command}) {
+    var team = Team(id: createID(), name: command.name);
+    mocked.teams.add(team);
+    var sub = TeamSubscription(
+      id: createID(),
+      joined: DateTime.now(),
+      subscribedUserId: command.userId,
+      teamId: team.id,
+    );
+    mocked.teamSubs.add(sub);
+    return Future.value(Responses.success(team));
   }
 
   @override
   Future<Response<List<TeamSubscription>>> readTeamSubscriptions({required String teamId}) {
-    // TODO: implement readTeamSubscriptions
-    throw UnimplementedError();
+    return Future.value(Responses.success(
+      mocked.teamSubs.where((element) => element.teamId == teamId).toList(),
+    ));
   }
 }

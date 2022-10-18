@@ -2,11 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:supercalipso/bloc/auth/auth_service.dart';
+import 'package:supercalipso/bloc/startup/startup_service.dart';
 import 'package:supercalipso/firebase_options.dart';
 import 'package:supercalipso/presenter/theme/theme_builder.dart';
 import 'package:supercalipso/services/installer.dart';
+import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
 import 'package:supercalipso/services/navigation/router_provider.dart';
 
 void main() async {
@@ -27,7 +27,7 @@ class _SuperCalipsoState extends ConsumerState<SuperCalipso> {
   @override
   void initState() {
     super.initState();
-    ref.read(authServiceProvider).silentLogin();
+    ref.read(startupServiceProvider).start();
   }
 
   @override
@@ -49,23 +49,4 @@ class _SuperCalipsoState extends ConsumerState<SuperCalipso> {
       routeInformationParser: router.routeInformationParser,
     );
   }
-}
-
-class DateFormatterLocalizationDelegate extends LocalizationsDelegate {
-  final dateFormattingSupportedLocale = const [Locale('it', 'IT'), Locale('en', 'US')];
-
-  @override
-  bool isSupported(Locale locale) {
-    var languages = dateFormattingSupportedLocale.map((e) => e.languageCode);
-    return languages.contains(locale.languageCode);
-  }
-
-  @override
-  Future load(Locale locale) async {
-    Intl.systemLocale = locale.languageCode;
-    return Future.value();
-  }
-
-  @override
-  bool shouldReload(covariant LocalizationsDelegate old) => false;
 }

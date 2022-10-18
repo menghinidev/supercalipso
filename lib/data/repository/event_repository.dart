@@ -1,11 +1,29 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
-import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/data/provider/api/event/i_event_data_source.dart';
 import 'package:supercalipso/data/provider/command/event/create/create_event.dart';
 import 'package:supercalipso/data/provider/command/event/update/update_event_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/services/installer.dart';
+
+extension CumulativeStream<X> on BehaviorSubject<List<X>> {
+  update(List<X>? values, bool Function(X, X) equals) async {
+    var toAdd = values ?? <X>[];
+    if (!hasValue) {
+      add(toAdd);
+      return;
+    }
+    var latest = valueOrNull!;
+    var asSet = latest.toSet();
+    for (var e in toAdd) {
+      var elementInSet = asSet.getWhere((element) => equals(e, element));
+      if (elementInSet != null) asSet.remove(elementInSet);
+      asSet.add(e);
+    }
+    asSet.addAll(toAdd);
+    add(asSet.toList());
+  }
+}
 
 class EventRepository {
   final controller = BehaviorSubject<List<TeamEvent>>();
@@ -26,28 +44,29 @@ class EventRepository {
     return events.ifSuccess((payload) => controller.add(payload!));
   }
 
-  Future<Response<List<TeamEvent>>> getUserEvents({required String userId}) async {
-    var events = await provider.readUserEvents(userId: userId);
-    return events.ifSuccess((payload) => controller.add(payload!));
-  }
-
   Future<Response<TeamEvent>> getEvent({required String id}) async {
-    return await provider.readTeamEvent(eventId: id);
+    return await provider
+        .readTeamEvent(eventId: id)
+        .ifSuccess((payload) => controller.update([payload!], TeamEventProperties.equalsById));
   }
 
   Future<Response> createEvent({
     required String teamId,
     required String name,
     required DateTime startTime,
-    Duration? duration,
+    required String userId,
+    DateTime? endTime,
     String? description,
+    String? iconName,
   }) async {
     var command = CreateEventCommand(
       teamId: teamId,
       name: name,
       startTime: startTime,
-      duration: duration ?? Duration.zero,
+      endTime: endTime,
       description: description,
+      createdByUserId: userId,
+      iconName: iconName,
     );
     var event = await provider.createTeamEvent(command: command);
     return await event.flatMapAsync((t) => getTeamEvents(teamId: teamId));
@@ -57,15 +76,17 @@ class EventRepository {
     required String eventId,
     String? name,
     DateTime? startTime,
-    Duration? duration,
+    DateTime? endTime,
     String? description,
+    String? iconName,
   }) async {
     var command = UpdateEventCommand(
       eventId: eventId,
       title: name,
       startTime: startTime,
-      duration: duration ?? Duration.zero,
+      endTime: endTime,
       description: description,
+      iconName: iconName,
     );
     var event = await provider.updateTeamEvent(command: command);
     return await event.flatMapAsync((t) => getTeamEvents(teamId: t!.teamId));

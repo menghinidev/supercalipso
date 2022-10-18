@@ -15,9 +15,10 @@ _$_UpdateEventCommand _$$_UpdateEventCommandFromJson(
       startTime: json['startTime'] == null
           ? null
           : DateTime.parse(json['startTime'] as String),
-      duration: json['duration'] == null
+      endTime: json['endTime'] == null
           ? null
-          : Duration(microseconds: json['duration'] as int),
+          : DateTime.parse(json['endTime'] as String),
+      iconName: json['iconName'] as String?,
     );
 
 Map<String, dynamic> _$$_UpdateEventCommandToJson(
@@ -27,5 +28,6 @@ Map<String, dynamic> _$$_UpdateEventCommandToJson(
       'title': instance.title,
       'description': instance.description,
       'startTime': instance.startTime?.toIso8601String(),
-      'duration': instance.duration?.inMicroseconds,
+      'endTime': instance.endTime?.toIso8601String(),
+      'iconName': instance.iconName,
     };

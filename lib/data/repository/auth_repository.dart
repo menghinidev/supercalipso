@@ -14,30 +14,31 @@ class AuthRepository {
 
   AuthRepository() : authStreamController = BehaviorSubject<User?>();
 
-  Future silentLogin({required String uid}) async {
+  Future<Response> silentLogin({required String uid}) async {
     var user = await dataSource.getUserByUserId(userId: uid);
     user.ifSuccess((payload) => loggedUser = payload);
     user.ifSuccess((payload) => authStreamController.add(loggedUser));
     user.ifError((payload) => authStreamController.add(null));
-    return Future.value();
+    return user;
   }
 
-  Future firebaseLogin({required firebase.UserCredential credentials}) async {
+  Future<Response> firebaseLogin({required firebase.UserCredential credentials}) async {
     var firebaseUser = credentials.user!;
     var user = await dataSource.getUserByUserId(userId: firebaseUser.uid);
     user.ifSuccess((payload) => loggedUser = payload);
     user.ifSuccess((payload) => authStreamController.add(loggedUser));
-    if (!user.isError) return Future.value();
+    if (!user.isError) return user;
     var createdUser = await dataSource.registerUser(
       command: RegisterUserCommand(
         uid: firebaseUser.uid,
         displayName: firebaseUser.displayName!,
         email: firebaseUser.email!,
+        imageURL: firebaseUser.photoURL,
       ),
     );
     createdUser.ifSuccess((payload) => loggedUser = payload);
     createdUser.ifSuccess((payload) => authStreamController.add(loggedUser));
-    return Future.value();
+    return createdUser;
   }
 
   Future<Response<User>> getUserByEmail({required String email}) async {
@@ -50,9 +51,10 @@ class AuthRepository {
     return user;
   }
 
-  Future logout() async {
+  Future<Response> logout() async {
     loggedUser = null;
     authStreamController.add(null);
+    return Responses.success(null);
   }
 
   Stream<User?> get loggedUserChanges => authStreamController.stream;

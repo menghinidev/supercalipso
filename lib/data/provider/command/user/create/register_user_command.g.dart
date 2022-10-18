@@ -12,6 +12,7 @@ _$_RegisterUserCommand _$$_RegisterUserCommandFromJson(
       uid: json['uid'] as String,
       displayName: json['displayName'] as String,
       email: json['email'] as String,
+      imageURL: json['imageURL'] as String?,
     );
 
 Map<String, dynamic> _$$_RegisterUserCommandToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_RegisterUserCommandToJson(
       'uid': instance.uid,
       'displayName': instance.displayName,
       'email': instance.email,
+      'imageURL': instance.imageURL,
     };

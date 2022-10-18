@@ -23,9 +23,12 @@ mixin _$TeamEvent {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   DateTime get startTime => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
   String get teamId => throw _privateConstructorUsedError;
-  Duration? get duration => throw _privateConstructorUsedError;
+  String get createdByUserId => throw _privateConstructorUsedError;
+  DateTime get lastUpdate => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get iconName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,9 +44,12 @@ abstract class $TeamEventCopyWith<$Res> {
       {String id,
       String name,
       DateTime startTime,
-      String? description,
       String teamId,
-      Duration? duration});
+      String createdByUserId,
+      DateTime lastUpdate,
+      DateTime? endTime,
+      String? description,
+      String? iconName});
 }
 
 /// @nodoc
@@ -59,9 +65,12 @@ class _$TeamEventCopyWithImpl<$Res> implements $TeamEventCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? startTime = freezed,
-    Object? description = freezed,
     Object? teamId = freezed,
-    Object? duration = freezed,
+    Object? createdByUserId = freezed,
+    Object? lastUpdate = freezed,
+    Object? endTime = freezed,
+    Object? description = freezed,
+    Object? iconName = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -76,18 +85,30 @@ class _$TeamEventCopyWithImpl<$Res> implements $TeamEventCopyWith<$Res> {
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       teamId: teamId == freezed
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration?,
+      createdByUserId: createdByUserId == freezed
+          ? _value.createdByUserId
+          : createdByUserId // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastUpdate: lastUpdate == freezed
+          ? _value.lastUpdate
+          : lastUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -102,9 +123,12 @@ abstract class _$$_TeamEventCopyWith<$Res> implements $TeamEventCopyWith<$Res> {
       {String id,
       String name,
       DateTime startTime,
-      String? description,
       String teamId,
-      Duration? duration});
+      String createdByUserId,
+      DateTime lastUpdate,
+      DateTime? endTime,
+      String? description,
+      String? iconName});
 }
 
 /// @nodoc
@@ -122,9 +146,12 @@ class __$$_TeamEventCopyWithImpl<$Res> extends _$TeamEventCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? startTime = freezed,
-    Object? description = freezed,
     Object? teamId = freezed,
-    Object? duration = freezed,
+    Object? createdByUserId = freezed,
+    Object? lastUpdate = freezed,
+    Object? endTime = freezed,
+    Object? description = freezed,
+    Object? iconName = freezed,
   }) {
     return _then(_$_TeamEvent(
       id: id == freezed
@@ -139,18 +166,30 @@ class __$$_TeamEventCopyWithImpl<$Res> extends _$TeamEventCopyWithImpl<$Res>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
       teamId: teamId == freezed
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration?,
+      createdByUserId: createdByUserId == freezed
+          ? _value.createdByUserId
+          : createdByUserId // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastUpdate: lastUpdate == freezed
+          ? _value.lastUpdate
+          : lastUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -162,9 +201,12 @@ class _$_TeamEvent extends _TeamEvent {
       {required this.id,
       required this.name,
       required this.startTime,
-      this.description,
       required this.teamId,
-      this.duration = Duration.zero})
+      required this.createdByUserId,
+      required this.lastUpdate,
+      this.endTime,
+      this.description,
+      this.iconName})
       : super._();
 
   factory _$_TeamEvent.fromJson(Map<String, dynamic> json) =>
@@ -177,16 +219,21 @@ class _$_TeamEvent extends _TeamEvent {
   @override
   final DateTime startTime;
   @override
-  final String? description;
-  @override
   final String teamId;
   @override
-  @JsonKey()
-  final Duration? duration;
+  final String createdByUserId;
+  @override
+  final DateTime lastUpdate;
+  @override
+  final DateTime? endTime;
+  @override
+  final String? description;
+  @override
+  final String? iconName;
 
   @override
   String toString() {
-    return 'TeamEvent(id: $id, name: $name, startTime: $startTime, description: $description, teamId: $teamId, duration: $duration)';
+    return 'TeamEvent(id: $id, name: $name, startTime: $startTime, teamId: $teamId, createdByUserId: $createdByUserId, lastUpdate: $lastUpdate, endTime: $endTime, description: $description, iconName: $iconName)';
   }
 
   @override
@@ -197,10 +244,15 @@ class _$_TeamEvent extends _TeamEvent {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
+            const DeepCollectionEquality().equals(other.teamId, teamId) &&
+            const DeepCollectionEquality()
+                .equals(other.createdByUserId, createdByUserId) &&
+            const DeepCollectionEquality()
+                .equals(other.lastUpdate, lastUpdate) &&
+            const DeepCollectionEquality().equals(other.endTime, endTime) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality().equals(other.duration, duration));
+            const DeepCollectionEquality().equals(other.iconName, iconName));
   }
 
   @JsonKey(ignore: true)
@@ -210,9 +262,12 @@ class _$_TeamEvent extends _TeamEvent {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(duration));
+      const DeepCollectionEquality().hash(createdByUserId),
+      const DeepCollectionEquality().hash(lastUpdate),
+      const DeepCollectionEquality().hash(endTime),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(iconName));
 
   @JsonKey(ignore: true)
   @override
@@ -232,9 +287,12 @@ abstract class _TeamEvent extends TeamEvent {
       {required final String id,
       required final String name,
       required final DateTime startTime,
-      final String? description,
       required final String teamId,
-      final Duration? duration}) = _$_TeamEvent;
+      required final String createdByUserId,
+      required final DateTime lastUpdate,
+      final DateTime? endTime,
+      final String? description,
+      final String? iconName}) = _$_TeamEvent;
   const _TeamEvent._() : super._();
 
   factory _TeamEvent.fromJson(Map<String, dynamic> json) =
@@ -247,11 +305,17 @@ abstract class _TeamEvent extends TeamEvent {
   @override
   DateTime get startTime;
   @override
-  String? get description;
-  @override
   String get teamId;
   @override
-  Duration? get duration;
+  String get createdByUserId;
+  @override
+  DateTime get lastUpdate;
+  @override
+  DateTime? get endTime;
+  @override
+  String? get description;
+  @override
+  String? get iconName;
   @override
   @JsonKey(ignore: true)
   _$$_TeamEventCopyWith<_$_TeamEvent> get copyWith =>

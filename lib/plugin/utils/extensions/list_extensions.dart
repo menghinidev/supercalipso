@@ -1,6 +1,6 @@
 extension ListExtension<X> on List<X> {
-  List<X> appendInPlace(X value) {
-    insert(length, value);
+  List<X> appendInPlace(X? value) {
+    if (value != null) insert(length, value);
     return this;
   }
 }

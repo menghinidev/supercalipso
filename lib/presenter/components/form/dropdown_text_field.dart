@@ -32,7 +32,7 @@ class CustomDropdownTextField<T> extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: Dimensions.smallSize),
           child: Text(
             label,
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.coolGrey11),
+            style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.grey),
           ),
         ),
         DropdownButtonFormField2<T>(
@@ -40,7 +40,7 @@ class CustomDropdownTextField<T> extends StatelessWidget {
           onChanged: onSelected,
           value: currentValue,
           decoration: DecorationFactory.instance.createInputDecoration(),
-          hint: Text(hint ?? '', style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.coolGrey10)),
+          hint: Text(hint ?? '', style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.grey)),
           style: Theme.of(context).textTheme.bodyText1,
           offset: const Offset(0, -5),
           dropdownMaxHeight: 300,
@@ -48,7 +48,7 @@ class CustomDropdownTextField<T> extends StatelessWidget {
           dropdownDecoration: BoxDecoration(
             borderRadius: Shapes.lowRoundedBorder.borderRadius,
             border: Border.all(
-              color: AppColors.coolGrey4,
+              color: AppColors.greyDarker,
               width: 0.5,
             ),
           ),

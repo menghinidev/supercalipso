@@ -12,8 +12,12 @@ _$_CreateEventCommand _$$_CreateEventCommandFromJson(
       teamId: json['teamId'] as String,
       name: json['name'] as String,
       startTime: DateTime.parse(json['startTime'] as String),
-      duration: Duration(microseconds: json['duration'] as int),
+      createdByUserId: json['createdByUserId'] as String,
       description: json['description'] as String?,
+      iconName: json['iconName'] as String?,
+      endTime: json['endTime'] == null
+          ? null
+          : DateTime.parse(json['endTime'] as String),
     );
 
 Map<String, dynamic> _$$_CreateEventCommandToJson(
@@ -22,6 +26,8 @@ Map<String, dynamic> _$$_CreateEventCommandToJson(
       'teamId': instance.teamId,
       'name': instance.name,
       'startTime': instance.startTime.toIso8601String(),
-      'duration': instance.duration.inMicroseconds,
+      'createdByUserId': instance.createdByUserId,
       'description': instance.description,
+      'iconName': instance.iconName,
+      'endTime': instance.endTime?.toIso8601String(),
     };

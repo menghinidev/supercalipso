@@ -12,7 +12,8 @@ class PrimaryIconButton extends StatelessWidget {
     return IconButton(
       onPressed: onTap,
       icon: icon,
-      padding: const EdgeInsets.all(Dimensions.smallSize),
+      splashRadius: Dimensions.largeSize,
+      visualDensity: VisualDensity.compact,
     );
   }
 }

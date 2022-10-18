@@ -129,12 +129,13 @@ class __$$_CreateNoteCommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CreateNoteCommand implements _CreateNoteCommand {
+class _$_CreateNoteCommand extends _CreateNoteCommand {
   const _$_CreateNoteCommand(
       {required this.teamId,
       required this.title,
       required this.content,
-      required this.modifiedByUserId});
+      required this.modifiedByUserId})
+      : super._();
 
   factory _$_CreateNoteCommand.fromJson(Map<String, dynamic> json) =>
       _$$_CreateNoteCommandFromJson(json);
@@ -188,12 +189,13 @@ class _$_CreateNoteCommand implements _CreateNoteCommand {
   }
 }
 
-abstract class _CreateNoteCommand implements CreateNoteCommand {
+abstract class _CreateNoteCommand extends CreateNoteCommand {
   const factory _CreateNoteCommand(
       {required final String teamId,
       required final String title,
       required final String content,
       required final String modifiedByUserId}) = _$_CreateNoteCommand;
+  const _CreateNoteCommand._() : super._();
 
   factory _CreateNoteCommand.fromJson(Map<String, dynamic> json) =
       _$_CreateNoteCommand.fromJson;

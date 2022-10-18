@@ -16,6 +16,8 @@ class CustomTextField extends StatelessWidget with FormFieldProperties {
   final FocusNode? focusNode;
   final int? minLines;
   final int? maxLines;
+  final bool enabled;
+  final TextStyle? customTextStyle;
 
   CustomTextField({
     required this.controller,
@@ -31,6 +33,8 @@ class CustomTextField extends StatelessWidget with FormFieldProperties {
     this.focusNode,
     this.minLines,
     this.maxLines,
+    this.customTextStyle,
+    this.enabled = true,
     Key? key,
   }) : super(key: key);
 
@@ -45,9 +49,10 @@ class CustomTextField extends StatelessWidget with FormFieldProperties {
         keyboardType: keyboardType,
         controller: controller,
         obscureText: isPassword,
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.black),
+        style: Theme.of(context).textTheme.bodyText2?.copyWith(color: enabled ? AppColors.black : AppColors.grey),
         minLines: minLines,
-        maxLines: maxLines,
+        maxLines: maxLines ?? 1,
+        enabled: enabled,
         decoration: customDecoration ??
             decorationFactory
                 .createInputDecoration(
@@ -55,7 +60,7 @@ class CustomTextField extends StatelessWidget with FormFieldProperties {
                   trailing: trailing,
                   leading: leading,
                 )
-                .copyWith(hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.coolGrey10)),
+                .copyWith(hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.grey)),
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class EmptyDataWidgetBuilder extends StatelessWidget {
   final bool Function() emptyCondition;
-  final Widget Function(BuildContext) builder;
+  final Widget Function(BuildContext context) builder;
   final Widget Function(BuildContext)? placeholderBuilder;
   final bool applySliver;
 

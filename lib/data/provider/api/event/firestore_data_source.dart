@@ -7,20 +7,13 @@ import 'package:supercalipso/data/provider/command/event/update/update_event_com
 import 'package:supercalipso/plugin/utils/response.dart';
 import 'package:supercalipso/data/provider/command/event/create/create_event.dart';
 
-class TeamEventFirestoreSource extends IEventDataSource {
+class TeamEventFirestoreDataSource extends IEventDataSource {
   final firestore = FirebaseFirestore.instance;
 
   @override
   Future<Response<TeamEvent>> createTeamEvent({required CreateEventCommand command}) async {
     var document = firestore.collection(FirestoreCollections.events).doc();
-    var event = TeamEvent(
-      id: document.id,
-      name: command.name,
-      startTime: command.startTime,
-      teamId: command.teamId,
-      description: command.description,
-      duration: command.duration,
-    );
+    var event = command.createEventDTO(document.id);
     await document.set(event.toJson());
     return Responses.success(event);
   }
@@ -36,12 +29,7 @@ class TeamEventFirestoreSource extends IEventDataSource {
   Future<Response<TeamEvent>> updateTeamEvent({required UpdateEventCommand command}) async {
     var document = firestore.collection(FirestoreCollections.events).doc(command.eventId);
     var event = TeamEvent.fromJson((await document.get()).data()!);
-    var newEvent = event.copyWith(
-      name: command.title ?? event.name,
-      description: command.description ?? event.description,
-      duration: command.duration ?? event.duration,
-      startTime: command.startTime ?? event.startTime,
-    );
+    var newEvent = command.createEventDTO(event);
     await document.update(newEvent.toJson());
     return Responses.success(newEvent);
   }

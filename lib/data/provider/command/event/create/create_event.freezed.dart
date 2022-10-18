@@ -23,8 +23,10 @@ mixin _$CreateEventCommand {
   String get teamId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   DateTime get startTime => throw _privateConstructorUsedError;
-  Duration get duration => throw _privateConstructorUsedError;
+  String get createdByUserId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get iconName => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,8 +43,10 @@ abstract class $CreateEventCommandCopyWith<$Res> {
       {String teamId,
       String name,
       DateTime startTime,
-      Duration duration,
-      String? description});
+      String createdByUserId,
+      String? description,
+      String? iconName,
+      DateTime? endTime});
 }
 
 /// @nodoc
@@ -59,8 +63,10 @@ class _$CreateEventCommandCopyWithImpl<$Res>
     Object? teamId = freezed,
     Object? name = freezed,
     Object? startTime = freezed,
-    Object? duration = freezed,
+    Object? createdByUserId = freezed,
     Object? description = freezed,
+    Object? iconName = freezed,
+    Object? endTime = freezed,
   }) {
     return _then(_value.copyWith(
       teamId: teamId == freezed
@@ -75,14 +81,22 @@ class _$CreateEventCommandCopyWithImpl<$Res>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration,
+      createdByUserId: createdByUserId == freezed
+          ? _value.createdByUserId
+          : createdByUserId // ignore: cast_nullable_to_non_nullable
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -98,8 +112,10 @@ abstract class _$$_CreateEventCommandCopyWith<$Res>
       {String teamId,
       String name,
       DateTime startTime,
-      Duration duration,
-      String? description});
+      String createdByUserId,
+      String? description,
+      String? iconName,
+      DateTime? endTime});
 }
 
 /// @nodoc
@@ -118,8 +134,10 @@ class __$$_CreateEventCommandCopyWithImpl<$Res>
     Object? teamId = freezed,
     Object? name = freezed,
     Object? startTime = freezed,
-    Object? duration = freezed,
+    Object? createdByUserId = freezed,
     Object? description = freezed,
+    Object? iconName = freezed,
+    Object? endTime = freezed,
   }) {
     return _then(_$_CreateEventCommand(
       teamId: teamId == freezed
@@ -134,14 +152,22 @@ class __$$_CreateEventCommandCopyWithImpl<$Res>
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as Duration,
+      createdByUserId: createdByUserId == freezed
+          ? _value.createdByUserId
+          : createdByUserId // ignore: cast_nullable_to_non_nullable
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      iconName: iconName == freezed
+          ? _value.iconName
+          : iconName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endTime: endTime == freezed
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -154,8 +180,10 @@ class _$_CreateEventCommand extends _CreateEventCommand
       {required this.teamId,
       required this.name,
       required this.startTime,
-      required this.duration,
-      this.description})
+      required this.createdByUserId,
+      this.description,
+      this.iconName,
+      this.endTime})
       : super._();
 
   factory _$_CreateEventCommand.fromJson(Map<String, dynamic> json) =>
@@ -168,13 +196,17 @@ class _$_CreateEventCommand extends _CreateEventCommand
   @override
   final DateTime startTime;
   @override
-  final Duration duration;
+  final String createdByUserId;
   @override
   final String? description;
+  @override
+  final String? iconName;
+  @override
+  final DateTime? endTime;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CreateEventCommand(teamId: $teamId, name: $name, startTime: $startTime, duration: $duration, description: $description)';
+    return 'CreateEventCommand(teamId: $teamId, name: $name, startTime: $startTime, createdByUserId: $createdByUserId, description: $description, iconName: $iconName, endTime: $endTime)';
   }
 
   @override
@@ -185,8 +217,10 @@ class _$_CreateEventCommand extends _CreateEventCommand
       ..add(DiagnosticsProperty('teamId', teamId))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('startTime', startTime))
-      ..add(DiagnosticsProperty('duration', duration))
-      ..add(DiagnosticsProperty('description', description));
+      ..add(DiagnosticsProperty('createdByUserId', createdByUserId))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('iconName', iconName))
+      ..add(DiagnosticsProperty('endTime', endTime));
   }
 
   @override
@@ -197,9 +231,12 @@ class _$_CreateEventCommand extends _CreateEventCommand
             const DeepCollectionEquality().equals(other.teamId, teamId) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.duration, duration) &&
             const DeepCollectionEquality()
-                .equals(other.description, description));
+                .equals(other.createdByUserId, createdByUserId) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.iconName, iconName) &&
+            const DeepCollectionEquality().equals(other.endTime, endTime));
   }
 
   @JsonKey(ignore: true)
@@ -209,8 +246,10 @@ class _$_CreateEventCommand extends _CreateEventCommand
       const DeepCollectionEquality().hash(teamId),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(duration),
-      const DeepCollectionEquality().hash(description));
+      const DeepCollectionEquality().hash(createdByUserId),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(iconName),
+      const DeepCollectionEquality().hash(endTime));
 
   @JsonKey(ignore: true)
   @override
@@ -231,8 +270,10 @@ abstract class _CreateEventCommand extends CreateEventCommand {
       {required final String teamId,
       required final String name,
       required final DateTime startTime,
-      required final Duration duration,
-      final String? description}) = _$_CreateEventCommand;
+      required final String createdByUserId,
+      final String? description,
+      final String? iconName,
+      final DateTime? endTime}) = _$_CreateEventCommand;
   const _CreateEventCommand._() : super._();
 
   factory _CreateEventCommand.fromJson(Map<String, dynamic> json) =
@@ -245,9 +286,13 @@ abstract class _CreateEventCommand extends CreateEventCommand {
   @override
   DateTime get startTime;
   @override
-  Duration get duration;
+  String get createdByUserId;
   @override
   String? get description;
+  @override
+  String? get iconName;
+  @override
+  DateTime? get endTime;
   @override
   @JsonKey(ignore: true)
   _$$_CreateEventCommandCopyWith<_$_CreateEventCommand> get copyWith =>
