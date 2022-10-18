@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
 
 final dialogServiceProvider = Provider<DialogService>((ref) {
   return DialogService();
@@ -11,13 +9,13 @@ final dialogServiceProvider = Provider<DialogService>((ref) {
 
 class DialogService {
   Future Function(Widget? child)? _showDialogListener;
-  Completer? _dialogCompleter;
+  Completer<DialogResponse>? _dialogCompleter;
 
   void registerDialogListener(Future Function(Widget? child) showDialogListener) {
     _showDialogListener = showDialogListener;
   }
 
-  Future showDialog({Widget? dialog, Function()? onDone}) {
+  Future<DialogResponse> showDialog({Widget? dialog, Function()? onDone}) {
     _dialogCompleter = Completer();
     if (_showDialogListener != null) {
       _showDialogListener!(dialog).then((value) => onDone != null ? onDone() : null);
@@ -26,8 +24,16 @@ class DialogService {
     return _dialogCompleter!.future;
   }
 
-  void dialogComplete() {
-    if (_dialogCompleter != null) _dialogCompleter!.complete();
+  void dialogComplete(DialogResponse response) {
+    if (_dialogCompleter != null) _dialogCompleter!.complete(response);
     _dialogCompleter = null;
   }
+}
+
+class DialogResponse {
+  final dynamic value;
+  final bool hasConfirmed;
+  final bool hasDismissed;
+
+  DialogResponse({this.value, this.hasConfirmed = false, this.hasDismissed = false});
 }

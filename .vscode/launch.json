@@ -17,7 +17,11 @@
             "name": "supercalipso (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--dart-define",
+                "USE_MOCKED_DATA_SOURCE=false"
+            ]
         },
         {
             "name": "supercalipso (release mode)",

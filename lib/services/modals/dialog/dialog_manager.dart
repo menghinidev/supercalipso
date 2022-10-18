@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
 
 class DialogManager extends StatefulWidget {
@@ -27,11 +26,9 @@ class _DialogManagerState extends State<DialogManager> {
   }
 
   Future _showDialog(BuildContext context, {Widget Function()? customBuilder}) {
-    return showDialog(
+    return showDialog<DialogResponse>(
       context: context,
       builder: (context) => customBuilder != null ? customBuilder() : const AboutDialog(),
-    ).then(
-      (value) => widget.service.dialogComplete(),
-    );
+    ).then((value) => widget.service.dialogComplete(value ?? DialogResponse()));
   }
 }

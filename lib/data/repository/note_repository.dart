@@ -17,9 +17,7 @@ class NoteRepository {
       controller.stream.mapNotNull((event) => event.getWhere((element) => element.id == noteId));
 
   Future<Response<List<Note>>> getTeamNotes({required String teamId}) async {
-    return await dataProvider
-        .readTeamNotes(teamId: teamId)
-        .ifSuccess((payload) => controller.update(payload, NoteFeatures.equalsById));
+    return await dataProvider.readTeamNotes(teamId: teamId).ifSuccess((payload) => controller.add(payload!));
   }
 
   Future<Response> createNote({

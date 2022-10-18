@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
@@ -9,7 +8,6 @@ import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/presenter/components/dialog/confirm_dialog.dart';
-import 'package:supercalipso/presenter/components/dialog/custom_dialog.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_memento.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_state.dart';
 import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
@@ -132,6 +130,13 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
     var actualState = state;
     if (actualState is EditingEventPageState) {
       var isNew = initialEvent == null;
+      var confirm = await dialogService.showDialog(
+        dialog: const ConfirmDialog(
+          title: 'Confirm',
+          textBody: 'This event will be available inside your Team',
+        ),
+      );
+      if (confirm.hasDismissed) return Future.value();
       if (isNew) {
         return eventService
             .createEvent(
@@ -141,15 +146,7 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
               endTime: actualState.builder.endTime,
               iconName: actualState.builder.iconName,
             )
-            .ifSuccess(
-              (payload) => dialogService.showDialog(
-                dialog: const ConfirmDialog(
-                  title: 'Confirm',
-                  textBody: 'This event will be available inside your Team',
-                ),
-                onDone: () => router.pop(),
-              ),
-            );
+            .ifSuccess((payload) => router.pop());
       } else {
         return eventService
             .updateEvent(
@@ -160,7 +157,7 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
               endTime: actualState.builder.endTime,
               iconName: actualState.builder.iconName,
             )
-            .ifSuccess((payload) => dialogService.showDialog());
+            .ifSuccess((payload) => router.pop());
       }
     }
   }
@@ -168,16 +165,16 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
   Future delete() async {
     var id = state.on(defaultValue: () => null, onReading: (state) => state.event.id);
     if (id == null) return Future.value();
-    var response = await eventService.deleteEvent(eventId: id);
-    response.ifSuccess(
-      (payload) => dialogService.showDialog(
-        dialog: const ConfirmDialog(
-          title: 'Are you sure',
-          textBody: 'This event will be deleted',
-        ),
-        onDone: () => router.pop(),
+    var dialogResponse = await dialogService.showDialog(
+      dialog: const ConfirmDialog(
+        title: 'Are you sure',
+        textBody: 'This event will be deleted',
       ),
     );
+    if (dialogResponse.hasConfirmed) {
+      return await eventService.deleteEvent(eventId: id).ifSuccess((payload) => router.pop());
+    }
+    return Future.value();
   }
 
   __saveStep(EventPageState newState) {

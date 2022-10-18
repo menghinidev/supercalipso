@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/event/event_provider.dart';
 import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';

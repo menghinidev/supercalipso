@@ -3,6 +3,7 @@ import 'package:supercalipso/presenter/components/button/primary_outlined.dart';
 import 'package:supercalipso/presenter/components/dialog/custom_dialog.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 import 'package:flutter/material.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final String title;
@@ -35,7 +36,7 @@ class ConfirmDialog extends StatelessWidget {
             Expanded(
               child: PrimaryOutlinedButton(
                 text: noButtonText ?? 'Back',
-                onTap: () => Navigator.pop(context, false),
+                onTap: () => Navigator.pop(context, DialogResponse(hasDismissed: true)),
               ),
             ),
             Expanded(
@@ -43,7 +44,7 @@ class ConfirmDialog extends StatelessWidget {
                 padding: const EdgeInsets.only(left: Dimensions.mediumSize / 2.0),
                 child: PrimaryElevatedButton(
                   text: okButtonText ?? 'Confirm',
-                  onTap: () => Navigator.pop(context, true),
+                  onTap: () => Navigator.pop(context, DialogResponse(hasConfirmed: true)),
                 ),
               ),
             )

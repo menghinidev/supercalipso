@@ -17,9 +17,7 @@ class TaskRepository {
       controller.stream.mapNotNull((event) => event.getWhere((element) => element.id == taskId));
 
   Future<Response<List<Task>>> getTeamTasks({required String teamId}) async {
-    return await dataProvider
-        .readTeamTasks(teamId: teamId)
-        .ifSuccess((payload) => controller.update(payload, TaskFeatures.equalsById));
+    return await dataProvider.readTeamTasks(teamId: teamId).ifSuccess((payload) => controller.add(payload!));
   }
 
   Future<Response> createTask({
