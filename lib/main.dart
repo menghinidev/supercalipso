@@ -7,6 +7,8 @@ import 'package:supercalipso/firebase_options.dart';
 import 'package:supercalipso/presenter/theme/theme_builder.dart';
 import 'package:supercalipso/services/installer.dart';
 import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_manager.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
 import 'package:supercalipso/services/navigation/router_provider.dart';
 
 void main() async {
@@ -47,6 +49,10 @@ class _SuperCalipsoState extends ConsumerState<SuperCalipso> {
       debugShowCheckedModeBanner: false,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
+      builder: (context, child) => DialogManager(
+        service: ref.watch(dialogServiceProvider),
+        child: child!,
+      ),
     );
   }
 }
