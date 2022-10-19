@@ -12,7 +12,7 @@ import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
 import 'package:supercalipso/services/navigation/router_provider.dart';
 
 final notePageControllerProvider =
-    StateNotifierProvider.family.autoDispose<NotePageNotifier, NotePageState, Note>((ref, note) {
+    StateNotifierProvider.family.autoDispose<NotePageNotifier, NotePageState, Note?>((ref, note) {
   return NotePageNotifier(
     noteService: ref.watch(noteServiceProvider),
     authRepo: ref.watch(authProvider),
@@ -23,7 +23,7 @@ final notePageControllerProvider =
 });
 
 class NotePageNotifier extends StateNotifier<NotePageState> {
-  final Note initialNote;
+  final Note? initialNote;
   final NoteService noteService;
   final DialogService dialogService;
   final GoRouter router;
@@ -37,12 +37,12 @@ class NotePageNotifier extends StateNotifier<NotePageState> {
     required this.dialogService,
     required this.router,
     required this.authRepo,
-  }) : super(ConsultingNotePageState(note: initialNote)) {
+  }) : super(NotePageState.create(initialNote)) {
     originator = NotePageMementoStateOriginator(state);
     caretaker = NotePageMementoStateCaretaker(originator.saveToMemento());
   }
 
-  editTitle(String title) {
+  editTitle(String? title) {
     var actualState = state;
     if (actualState is EditingNotePageState) {
       state = EditingNotePageState(title: title, content: actualState.content);
@@ -65,8 +65,8 @@ class NotePageNotifier extends StateNotifier<NotePageState> {
 
   discard() {
     var actualState = state;
-    if (actualState is EditingNotePageState) {
-      state = ConsultingNotePageState(note: initialNote);
+    if (actualState is EditingNotePageState && initialNote != null) {
+      state = ConsultingNotePageState(note: initialNote!);
     }
   }
 
@@ -87,7 +87,7 @@ class NotePageNotifier extends StateNotifier<NotePageState> {
             .ifSuccess((payload) => router.pop());
       } else {
         return noteService
-            .updateNote(noteId: initialNote.id, content: actualState.content, title: actualState.title)
+            .updateNote(noteId: initialNote!.id, content: actualState.content, title: actualState.title)
             .ifSuccess((payload) => router.pop());
       }
     }

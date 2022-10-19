@@ -149,7 +149,7 @@ class NotePageRoute extends GoRoute {
       : super(
           path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
-            child: NotePage(note: state.extra as Note),
+            child: NotePage(note: state.extra as Note?),
           ),
         );
 }

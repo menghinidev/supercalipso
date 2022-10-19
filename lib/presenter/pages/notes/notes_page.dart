@@ -11,6 +11,8 @@ import 'package:supercalipso/presenter/pages/notes/components/note_generator_she
 import 'package:supercalipso/presenter/pages/notes/components/note_tile.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/routes.dart';
 
 class NotesPage extends HookConsumerWidget {
   const NotesPage({super.key});
@@ -61,11 +63,7 @@ class NotesPageFAB extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return FloatingActionButton(
       backgroundColor: AppColors.greyDarker,
-      onPressed: () => showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        builder: (context) => const NoteGeneratorBottomSheet(),
-      ),
+      onPressed: () => ref.read(routerProvider).push(NotePageRoute.pagePath),
       child: const Icon(Icons.add),
     );
   }

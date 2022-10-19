@@ -23,6 +23,7 @@ class Dimensions {
   static EdgeInsets get sVPadding => const EdgeInsets.symmetric(vertical: Dimensions.smallSize);
   static EdgeInsets get allMPadding => const EdgeInsets.all(Dimensions.mediumSize);
   static EdgeInsets get allSPadding => const EdgeInsets.all(Dimensions.smallSize);
+  static EdgeInsets get allTPadding => const EdgeInsets.all(Dimensions.tinySize);
   static const lowElevation = 2.0;
 }
 
