@@ -4,7 +4,6 @@ import 'package:supercalipso/bloc/team/team_service.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 import 'package:supercalipso/presenter/components/scaffold/page_header.dart';
-import 'package:supercalipso/presenter/pages/team/sections/chip_bar.dart';
 
 class TeamPage extends HookConsumerWidget {
   final String teamId;
@@ -20,7 +19,6 @@ class TeamPage extends HookConsumerWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             SliverToBoxAdapter(child: PageHeader(text: data.name)),
-            SliverToBoxAdapter(child: TeamPageChipBar(team: data)),
           ],
         ),
       ),
