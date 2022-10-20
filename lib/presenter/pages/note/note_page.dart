@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/form/basic_text_field.dart';
+import 'package:supercalipso/presenter/components/form/custom_text_field.dart';
 import 'package:supercalipso/presenter/components/form/keyboard_focus_wrapper.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
@@ -20,14 +22,17 @@ class NotePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.watch(notePageControllerProvider(note));
+    var controller = useTextEditingController(
+      text: state.on(
+        defaultValue: () => null,
+        onEditing: (state) => state.title,
+        onReading: (state) => state.note.title,
+      ),
+    );
     return KeyboardFocusWrapper(
       child: CustomScaffold(
         appBar: FlatAppBar(
-          title: state.on(
-            defaultValue: () => null,
-            onEditing: (state) => state.title,
-            onReading: (state) => state.note.title,
-          ),
+          title: 'Nota',
           showProfileAvatar: false,
           leading: const BackButton(),
           actions: [
@@ -57,9 +62,10 @@ class NotePage extends HookConsumerWidget {
           children: [
             Padding(
               padding: Dimensions.pageInsetsWithTop,
-              child: BasicTextField(
+              child: CustomTextField(
                 label: 'Title',
                 onChanged: (title) => getNotifier(ref).editTitle(title),
+                controller: controller,
               ),
             ),
             Expanded(

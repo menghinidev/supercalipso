@@ -64,67 +64,11 @@ class _HtmlEditorState extends State<HtmlEditor> {
   @override
   Widget build(BuildContext context) {
     if (!widget.showToolBar) {
-      return QuillEditor(
-        controller: controller,
-        scrollController: ScrollController(),
-        scrollable: true,
-        focusNode: _focusNode,
-        autoFocus: false,
-        readOnly: widget.isReadOnly,
-        placeholder: widget.placeholder,
-        expands: false,
-        padding: EdgeInsets.zero,
-        textCapitalization: TextCapitalization.sentences,
-        textSelectionControls: MaterialTextSelectionControls(),
-        embedBuilders: [
-          ...FlutterQuillEmbeds.builders(),
-          ImageEmbedBuilder(),
-        ],
-        onImagePaste: (imageBytes) async {
-          var file = File.fromRawPath(imageBytes);
-          if (await file.exists()) {
-            return file.path;
-          }
-          return Future.value(null);
-        },
-        customStyles: DefaultStyles(
-          sizeSmall: Theme.of(context).textTheme.labelLarge,
-          sizeLarge: Theme.of(context).textTheme.headlineMedium,
-        ),
-      );
+      return buildEditor(context);
     }
     return Column(
       children: <Widget>[
-        Expanded(
-          child: QuillEditor(
-            controller: controller,
-            scrollController: ScrollController(),
-            scrollable: true,
-            focusNode: _focusNode,
-            autoFocus: false,
-            readOnly: widget.isReadOnly,
-            placeholder: widget.placeholder,
-            expands: false,
-            padding: EdgeInsets.zero,
-            textCapitalization: TextCapitalization.sentences,
-            textSelectionControls: MaterialTextSelectionControls(),
-            embedBuilders: [
-              ...FlutterQuillEmbeds.builders(),
-              ImageEmbedBuilder(),
-            ],
-            onImagePaste: (imageBytes) async {
-              var file = File.fromRawPath(imageBytes);
-              if (await file.exists()) {
-                return file.path;
-              }
-              return Future.value(null);
-            },
-            customStyles: DefaultStyles(
-              sizeSmall: Theme.of(context).textTheme.labelLarge,
-              sizeLarge: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ),
-        ),
+        Expanded(child: buildEditor(context)),
         if (widget.showToolBar)
           AnimatedOpacity(
             opacity: widget.isReadOnly ? 0 : 1,
@@ -176,4 +120,34 @@ class _HtmlEditorState extends State<HtmlEditor> {
       ],
     );
   }
+
+  Widget buildEditor(BuildContext context) => QuillEditor(
+        controller: controller,
+        scrollController: ScrollController(),
+        scrollable: true,
+        focusNode: _focusNode,
+        autoFocus: false,
+        readOnly: widget.isReadOnly,
+        showCursor: !widget.isReadOnly,
+        placeholder: widget.placeholder,
+        expands: false,
+        padding: EdgeInsets.zero,
+        textCapitalization: TextCapitalization.sentences,
+        textSelectionControls: MaterialTextSelectionControls(),
+        embedBuilders: [
+          ...FlutterQuillEmbeds.builders(),
+          ImageEmbedBuilder(),
+        ],
+        onImagePaste: (imageBytes) async {
+          var file = File.fromRawPath(imageBytes);
+          if (await file.exists()) {
+            return file.path;
+          }
+          return Future.value(null);
+        },
+        customStyles: DefaultStyles(
+          sizeSmall: Theme.of(context).textTheme.labelLarge,
+          sizeLarge: Theme.of(context).textTheme.headlineMedium,
+        ),
+      );
 }

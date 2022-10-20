@@ -34,6 +34,7 @@ class NoteTile extends HookConsumerWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: Dimensions.smallSize),
                     child: HtmlEditor(
+                      key: ValueKey(note.description),
                       isReadOnly: true,
                       showToolBar: false,
                       initialValue: note.description,
