@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/note/note_provider.dart';
 import 'package:supercalipso/data/model/note/note.dart';
-import 'package:supercalipso/presenter/components/button/simple_icon.dart';
-import 'package:supercalipso/presenter/theme/colors.dart';
+import 'package:supercalipso/presenter/components/card/custom_card.dart';
+import 'package:supercalipso/presenter/pages/note/sections/editor.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/routes.dart';
 
 class NoteTile extends HookConsumerWidget {
   final Note note;
@@ -13,39 +14,37 @@ class NoteTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      constraints: const BoxConstraints(maxHeight: 200),
-      padding: Dimensions.mHsBPadding,
-      decoration: BoxDecoration(
-        borderRadius: Shapes.containerRadius,
-        color: AppColors.blue,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return CustomCard(
+      child: InkWell(
+        onTap: () => ref.read(routerProvider).push(NotePageRoute.pagePath, extra: note),
+        child: Padding(
+          padding: Dimensions.allMPadding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: Text(
-                  note.title,
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
+              Text(
+                note.title,
+                style: Theme.of(context).textTheme.headlineSmall,
+                softWrap: false,
+                overflow: TextOverflow.fade,
               ),
-              SimpleIconButton(
-                onTap: () => ref.read(noteRepoProvider).deleteNote(noteId: note.id),
-                icon: const Icon(Icons.delete),
+              Flexible(
+                child: AbsorbPointer(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: Dimensions.smallSize),
+                    child: HtmlEditor(
+                      key: ValueKey(note.description),
+                      isReadOnly: true,
+                      showToolBar: false,
+                      initialValue: note.description,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
-          Text(
-            note.description ?? 'No',
-            softWrap: true,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+        ),
       ),
     );
   }

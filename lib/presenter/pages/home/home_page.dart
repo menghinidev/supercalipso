@@ -27,7 +27,7 @@ class HomePage extends HookConsumerWidget {
             BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: ''),
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
             BottomNavigationBarItem(icon: Icon(Icons.done), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.note_add_outlined), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.notes_rounded), label: ''),
           ],
         ),
       ],

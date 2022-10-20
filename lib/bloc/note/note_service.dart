@@ -29,13 +29,11 @@ class NoteService {
     return await noteRepo.getTeamNotes(teamId: teamId);
   }
 
-  Future<Response> createNote({
-    required String teamId,
-    required String title,
-    String? content,
-  }) async {
+  Future<Response> createNote({required String title, String? content}) async {
     var userId = authRepo.loggedUser?.uid;
     if (userId == null) return Responses.failure([]);
+    var teamId = teamRepo.loggedTeamId;
+    if (teamId == null) return Responses.failure([]);
     return await noteRepo.createNote(
       teamId: teamId,
       userId: userId,
@@ -43,6 +41,22 @@ class NoteService {
       content: content ?? '',
     );
   }
+
+  Future<Response> updateNote({required String noteId, String? title, String? content}) async {
+    var userId = authRepo.loggedUser?.uid;
+    if (userId == null) return Responses.failure([]);
+    var teamId = teamRepo.loggedTeamId;
+    if (teamId == null) return Responses.failure([]);
+    return await noteRepo.updateNote(
+      noteId: noteId,
+      teamId: teamId,
+      userId: userId,
+      title: title,
+      content: content,
+    );
+  }
+
+  Future<Response> deleteNote({required String noteId}) => noteRepo.deleteNote(noteId: noteId);
 
   Stream<List<Note>> get loggedTeamNotes {
     var currentTeamId = teamRepo.loggedTeamId;

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
+import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/presenter/pages/event/event_page.dart';
 import 'package:supercalipso/presenter/pages/home/home_page.dart';
 import 'package:supercalipso/presenter/pages/login/login_page.dart';
+import 'package:supercalipso/presenter/pages/note/note_page.dart';
 import 'package:supercalipso/presenter/pages/profile/profile_page.dart';
 import 'package:supercalipso/presenter/pages/task/task_page.dart';
 import 'package:supercalipso/presenter/pages/team/team_page.dart';
@@ -21,6 +23,7 @@ class AppRoutes {
   static final tasks = TasksPageRoute();
   static final task = TaskPageRoute();
   static final notes = NotesPageRoute();
+  static final note = NotePageRoute();
   static final expenses = ExpensesPageRoute();
   static final event = EventPageRoute();
 
@@ -134,6 +137,19 @@ class NotesPageRoute extends GoRoute {
           path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: const HomePage(),
+          ),
+        );
+}
+
+class NotePageRoute extends GoRoute {
+  static const String pageName = 'note';
+  static const String pagePath = '/$pageName';
+
+  NotePageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => BasePageTransitionBuilder(
+            child: NotePage(note: state.extra as Note?),
           ),
         );
 }
