@@ -21,6 +21,7 @@ var routerProvider = Provider<GoRouter>((ref) {
       AppRoutes.team,
       AppRoutes.event,
       AppRoutes.task,
+      AppRoutes.note,
     ],
     refreshListenable: routerNotifer,
     debugLogDiagnostics: kDebugMode,

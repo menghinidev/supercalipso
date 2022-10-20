@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/note/note_service.dart';
@@ -10,9 +10,7 @@ import 'package:supercalipso/presenter/components/form/validators.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class NoteGeneratorBottomSheet extends HookConsumerWidget {
-  final String teamId;
-
-  const NoteGeneratorBottomSheet({super.key, required this.teamId});
+  const NoteGeneratorBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,11 +55,7 @@ class NoteGeneratorBottomSheet extends HookConsumerWidget {
                 text: 'Create Note',
                 onTap: () => ref
                     .read(noteServiceProvider)
-                    .createNote(
-                      teamId: teamId,
-                      title: titleController.text,
-                      content: contentController.text,
-                    )
+                    .createNote(title: titleController.text, content: contentController.text)
                     .then((value) => Navigator.pop(context)),
               ),
             ),
@@ -71,3 +65,4 @@ class NoteGeneratorBottomSheet extends HookConsumerWidget {
     );
   }
 }
+ */

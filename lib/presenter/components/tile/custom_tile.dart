@@ -37,6 +37,7 @@ class CustomTile extends StatelessWidget {
   final Widget? leading;
   final Widget? trailing;
   final Color? tileColor;
+  final double maxHeight;
   final Function()? onTap;
 
   const CustomTile({
@@ -47,6 +48,7 @@ class CustomTile extends StatelessWidget {
     this.trailing,
     this.tileColor,
     this.onTap,
+    this.maxHeight = 75.0,
   });
 
   @override
@@ -55,7 +57,7 @@ class CustomTile extends StatelessWidget {
       onTap: onTap,
       child: CustomCard(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 75),
+          constraints: BoxConstraints(maxHeight: maxHeight),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
