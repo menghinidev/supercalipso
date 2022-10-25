@@ -1,78 +1,79 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/model/task/task.dart';
+import 'package:supercalipso/presenter/components/scaffold/bottom_navigator_shell.dart';
+import 'package:supercalipso/presenter/pages/dashboard/dashboard_page.dart';
 import 'package:supercalipso/presenter/pages/event/event_page.dart';
-import 'package:supercalipso/presenter/pages/home/home_page.dart';
+import 'package:supercalipso/presenter/pages/events/events_page.dart';
+import 'package:supercalipso/presenter/pages/expenses/expenses_page.dart';
 import 'package:supercalipso/presenter/pages/login/login_page.dart';
 import 'package:supercalipso/presenter/pages/note/note_page.dart';
+import 'package:supercalipso/presenter/pages/notes/notes_page.dart';
 import 'package:supercalipso/presenter/pages/profile/profile_page.dart';
 import 'package:supercalipso/presenter/pages/task/task_page.dart';
+import 'package:supercalipso/presenter/pages/tasks/tasks_page.dart';
 import 'package:supercalipso/presenter/pages/team/team_page.dart';
-import 'package:supercalipso/services/modals/dialog/dialog_manager.dart';
-import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
+import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/transitions.dart';
 
 class AppRoutes {
-  static final home = HomePageRoute();
+  static final home = HomeShellRoute();
   static final login = LoginPageRoute();
-  static final profile = ProfilePageRoute();
-  static final events = EventsPageRoute();
   static final team = TeamPageRoute();
-  static final tasks = TasksPageRoute();
-  static final task = TaskPageRoute();
-  static final notes = NotesPageRoute();
-  static final note = NotePageRoute();
-  static final expenses = ExpensesPageRoute();
-  static final event = EventPageRoute();
+  static final profile = ProfilePageRoute();
 
   static final unprotectedRoutes = [login.path];
+
+  static get routes => [
+        home,
+        profile,
+        login,
+        team,
+      ];
 }
 
-class BasePageTransitionBuilder<T> extends CustomTransitionPage<T> {
-  BasePageTransitionBuilder({required super.child, super.key})
+class HomeShellRoute extends ShellRoute {
+  HomeShellRoute()
       : super(
-          transitionsBuilder: (context, primary, secondary, child) => FadeTransition(
-            opacity: primary,
-            child: Consumer(
-              builder: (context, ref, _) => DialogManager(
-                service: ref.watch(dialogServiceProvider),
-                child: child,
-              ),
-            ),
-          ),
+          navigatorKey: RouterNotifier.mainNavigatorKey,
+          builder: (context, state, child) => BottomNavigatorShell(child: child),
+          routes: [
+            ExpensesPageRoute(),
+            EventsPageRoute(),
+            DashboardPageRoute(),
+            TasksPageRoute(),
+            NotePageRoute(),
+          ],
         );
+
+  static int getHomeBottomBarIndex(String location) {
+    if (location == ExpensesPageRoute.pagePath) return 0;
+    if (location == EventsPageRoute.pagePath) return 1;
+    if (location == DashboardPageRoute.pagePath) return 2;
+    if (location == TasksPageRoute.pagePath) return 3;
+    if (location == NotesPageRoute.pagePath) return 4;
+    return 0;
+  }
+
+  static String getHomeBottomLocation(int index) {
+    if (index == 0) return ExpensesPageRoute.pagePath;
+    if (index == 1) return EventsPageRoute.pagePath;
+    if (index == 2) return DashboardPageRoute.pagePath;
+    if (index == 3) return TasksPageRoute.pagePath;
+    if (index == 4) return NotesPageRoute.pagePath;
+    return DashboardPageRoute.pageName;
+  }
 }
 
-class HomePageRoute extends GoRoute {
-  static const String pagePath = '/';
-
-  HomePageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const HomePage()),
-        );
-}
-
-class LoginPageRoute extends GoRoute {
-  static const String pagePath = '/login';
-
-  LoginPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const LoginPage()),
-        );
-}
-
-class ProfilePageRoute extends GoRoute {
-  static const String pageName = 'profile';
+class ExpensesPageRoute extends GoRoute {
+  static const String pageName = 'expenses';
   static const String pagePath = '/$pageName';
 
-  ProfilePageRoute()
+  ExpensesPageRoute()
       : super(
           path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const ProfilePage()),
+          pageBuilder: (context, state) => const NoTransitionPage(child: ExpensesPage()),
         );
 }
 
@@ -83,9 +84,43 @@ class EventsPageRoute extends GoRoute {
   EventsPageRoute()
       : super(
           path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(
-            child: const HomePage(),
-          ),
+          pageBuilder: (context, state) => const NoTransitionPage(child: EventsPage()),
+          routes: [EventPageRoute()],
+        );
+}
+
+class DashboardPageRoute extends GoRoute {
+  static const String pageName = 'dashboard';
+  static const String pagePath = '/$pageName';
+
+  DashboardPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => const NoTransitionPage(child: Dashboard()),
+        );
+}
+
+class TasksPageRoute extends GoRoute {
+  static const String pageName = 'tasks';
+  static const String pagePath = '/$pageName';
+
+  TasksPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => const NoTransitionPage(child: TasksPage()),
+          routes: [TaskPageRoute()],
+        );
+}
+
+class NotesPageRoute extends GoRoute {
+  static const String pageName = 'notes';
+  static const String pagePath = '/$pageName';
+
+  NotesPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => const NoTransitionPage(child: NotesPage()),
+          routes: [NotePageRoute()],
         );
 }
 
@@ -98,19 +133,6 @@ class EventPageRoute extends GoRoute {
           path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: EventPage(event: state.extra as TeamEvent?),
-          ),
-        );
-}
-
-class TasksPageRoute extends GoRoute {
-  static const String pageName = 'tasks';
-  static const String pagePath = '/$pageName';
-
-  TasksPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(
-            child: const HomePage(),
           ),
         );
 }
@@ -128,19 +150,6 @@ class TaskPageRoute extends GoRoute {
         );
 }
 
-class NotesPageRoute extends GoRoute {
-  static const String pageName = 'notes';
-  static const String pagePath = '/$pageName';
-
-  NotesPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(
-            child: const HomePage(),
-          ),
-        );
-}
-
 class NotePageRoute extends GoRoute {
   static const String pageName = 'note';
   static const String pagePath = '/$pageName';
@@ -154,16 +163,14 @@ class NotePageRoute extends GoRoute {
         );
 }
 
-class ExpensesPageRoute extends GoRoute {
-  static const String pageName = 'expenses';
+class ProfilePageRoute extends GoRoute {
+  static const String pageName = 'profile';
   static const String pagePath = '/$pageName';
 
-  ExpensesPageRoute()
+  ProfilePageRoute()
       : super(
           path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(
-            child: const HomePage(),
-          ),
+          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const ProfilePage()),
         );
 }
 
@@ -179,5 +186,15 @@ class TeamPageRoute extends GoRoute {
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: TeamPage(teamId: state.params['id'] as String),
           ),
+        );
+}
+
+class LoginPageRoute extends GoRoute {
+  static const String pagePath = '/login';
+
+  LoginPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const LoginPage()),
         );
 }

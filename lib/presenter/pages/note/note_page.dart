@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
-import 'package:supercalipso/presenter/components/form/basic_text_field.dart';
 import 'package:supercalipso/presenter/components/form/custom_text_field.dart';
 import 'package:supercalipso/presenter/components/form/keyboard_focus_wrapper.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';

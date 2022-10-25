@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
@@ -10,19 +11,7 @@ var routerProvider = Provider<GoRouter>((ref) {
   var routerNotifer = RouterNotifier(ref);
 
   return GoRouter(
-    routes: [
-      AppRoutes.home,
-      AppRoutes.login,
-      AppRoutes.events,
-      AppRoutes.expenses,
-      AppRoutes.notes,
-      AppRoutes.profile,
-      AppRoutes.tasks,
-      AppRoutes.team,
-      AppRoutes.event,
-      AppRoutes.task,
-      AppRoutes.note,
-    ],
+    routes: AppRoutes.routes,
     refreshListenable: routerNotifer,
     debugLogDiagnostics: kDebugMode,
     redirect: routerNotifer.redirectLogic,
@@ -33,6 +22,7 @@ class RouterNotifier extends ChangeNotifier {
   final Ref ref;
   late StreamSubscription authChangesSub;
   late StreamSubscription loggedTeamChangesSub;
+  static final mainNavigatorKey = GlobalKey<NavigatorState>();
 
   RouterNotifier(this.ref) {
     var authRepo = ref.read(authProvider);
@@ -45,7 +35,7 @@ class RouterNotifier extends ChangeNotifier {
     });
   }
 
-  String? redirectLogic(GoRouterState state) {
+  String? redirectLogic(BuildContext context, GoRouterState state) {
     final user = ref.read(authProvider).loggedUser;
     final hasTeamId = ref.read(teamRepoProvider).loggedTeamId != null;
 
@@ -58,7 +48,7 @@ class RouterNotifier extends ChangeNotifier {
 
     if (isInLoginPage && !hasTeamId) return ProfilePageRoute.pagePath;
 
-    if (state.location == HomePageRoute.pagePath && !hasTeamId) return ProfilePageRoute.pagePath;
+    if (state.location == DashboardPageRoute.pagePath && !hasTeamId) return ProfilePageRoute.pagePath;
 
     if (isInLoginPage && hasTeamId) return '/';
 
@@ -72,6 +62,6 @@ extension PopFallback on GoRouter {
       pop();
       return;
     }
-    go(HomePageRoute.pagePath);
+    go(DashboardPageRoute.pagePath);
   }
 }

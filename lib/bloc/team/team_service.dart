@@ -126,7 +126,7 @@ class TeamService {
         .ifSuccessAsync((payload) => loginWithTeam(teamId: payload!.id))
         .ifSuccess((payload) => eventRepository.getTeamEvents(teamId: payload!.id))
         .ifSuccess((payload) => noteRepository.getTeamNotes(teamId: payload!.id))
-        .ifSuccess((payload) => router.go(HomePageRoute.pagePath));
+        .ifSuccess((payload) => router.go(DashboardPageRoute.pagePath));
   }
 
   Future<Response> loginWithTeam({required String teamId}) async {

@@ -18,7 +18,7 @@ class TeamInvitationGeneratorSheet extends HookConsumerWidget {
     var team = ref.watch(currentTeamChangesProvider);
     var controller = useTextEditingController();
     return CustomBottomSheet(
-      constraints: BoxConstraints(maxHeight: 300),
+      constraints: const BoxConstraints(maxHeight: 300),
       builder: (context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,

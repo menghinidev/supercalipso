@@ -7,7 +7,6 @@ import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dart';
-import 'package:supercalipso/presenter/pages/notes/components/note_generator_sheet.dart';
 import 'package:supercalipso/presenter/pages/notes/components/note_tile.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
