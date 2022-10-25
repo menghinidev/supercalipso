@@ -9,7 +9,7 @@ import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dar
 import 'package:supercalipso/presenter/pages/events/components/event_tile.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
-class EventsList extends HookConsumerWidget {
+class EventsList extends ConsumerWidget {
   const EventsList({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {

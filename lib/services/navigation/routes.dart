@@ -11,6 +11,7 @@ import 'package:supercalipso/presenter/pages/login/login_page.dart';
 import 'package:supercalipso/presenter/pages/note/note_page.dart';
 import 'package:supercalipso/presenter/pages/notes/notes_page.dart';
 import 'package:supercalipso/presenter/pages/profile/profile_page.dart';
+import 'package:supercalipso/presenter/pages/splash/splash_page.dart';
 import 'package:supercalipso/presenter/pages/task/task_page.dart';
 import 'package:supercalipso/presenter/pages/tasks/tasks_page.dart';
 import 'package:supercalipso/presenter/pages/team/team_page.dart';
@@ -18,14 +19,16 @@ import 'package:supercalipso/services/navigation/router_provider.dart';
 import 'package:supercalipso/services/navigation/transitions.dart';
 
 class AppRoutes {
+  static final splash = SplashPageRoute();
   static final home = HomeShellRoute();
   static final login = LoginPageRoute();
   static final team = TeamPageRoute();
   static final profile = ProfilePageRoute();
 
-  static final unprotectedRoutes = [login.path];
+  static final unprotectedRoutes = [login.path, splash.path];
 
   static get routes => [
+        splash,
         home,
         profile,
         login,
@@ -36,14 +39,14 @@ class AppRoutes {
 class HomeShellRoute extends ShellRoute {
   HomeShellRoute()
       : super(
-          navigatorKey: RouterNotifier.mainNavigatorKey,
+          navigatorKey: RouterNotifier.homePageNavigatorKey,
           builder: (context, state, child) => BottomNavigatorShell(child: child),
           routes: [
             ExpensesPageRoute(),
             EventsPageRoute(),
             DashboardPageRoute(),
             TasksPageRoute(),
-            NotePageRoute(),
+            NotesPageRoute(),
           ],
         );
 
@@ -130,7 +133,8 @@ class EventPageRoute extends GoRoute {
 
   EventPageRoute()
       : super(
-          path: pagePath,
+          path: pageName,
+          parentNavigatorKey: RouterNotifier.mainNavigatorKey,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: EventPage(event: state.extra as TeamEvent?),
           ),
@@ -143,7 +147,8 @@ class TaskPageRoute extends GoRoute {
 
   TaskPageRoute()
       : super(
-          path: pagePath,
+          path: pageName,
+          parentNavigatorKey: RouterNotifier.mainNavigatorKey,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: TaskPage(task: state.extra as Task?),
           ),
@@ -156,7 +161,8 @@ class NotePageRoute extends GoRoute {
 
   NotePageRoute()
       : super(
-          path: pagePath,
+          path: pageName,
+          parentNavigatorKey: RouterNotifier.mainNavigatorKey,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: NotePage(note: state.extra as Note?),
           ),
@@ -196,5 +202,15 @@ class LoginPageRoute extends GoRoute {
       : super(
           path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(child: const LoginPage()),
+        );
+}
+
+class SplashPageRoute extends GoRoute {
+  static const String pagePath = '/';
+
+  SplashPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const SplashPage()),
         );
 }

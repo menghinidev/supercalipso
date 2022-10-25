@@ -13,14 +13,7 @@ class NoteFirestoreDataSource extends INoteDataSource {
   @override
   Future<Response<Note>> createNote({required CreateNoteCommand command}) async {
     var document = firestore.collection(FirestoreCollections.notes).doc();
-    var note = Note(
-      id: document.id,
-      lastUpdate: DateTime.now().toUtc(),
-      modifiedByUserId: command.modifiedByUserId,
-      teamId: command.teamId,
-      title: command.title,
-      description: command.content,
-    );
+    var note = command.createNoteDTO(document.id);
     await document.set(note.toJson());
     return Responses.success(note);
   }

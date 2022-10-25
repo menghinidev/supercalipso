@@ -11,6 +11,7 @@ var routerProvider = Provider<GoRouter>((ref) {
   var routerNotifer = RouterNotifier(ref);
 
   return GoRouter(
+    navigatorKey: RouterNotifier.mainNavigatorKey,
     routes: AppRoutes.routes,
     refreshListenable: routerNotifer,
     debugLogDiagnostics: kDebugMode,
@@ -23,17 +24,9 @@ class RouterNotifier extends ChangeNotifier {
   late StreamSubscription authChangesSub;
   late StreamSubscription loggedTeamChangesSub;
   static final mainNavigatorKey = GlobalKey<NavigatorState>();
+  static final homePageNavigatorKey = GlobalKey<NavigatorState>();
 
-  RouterNotifier(this.ref) {
-    var authRepo = ref.read(authProvider);
-    var teamRepo = ref.read(teamRepoProvider);
-    authChangesSub = authRepo.loggedUserChanges.listen((event) {
-      if (event == null) notifyListeners();
-    });
-    loggedTeamChangesSub = teamRepo.currentTeam.listen((event) {
-      notifyListeners();
-    });
-  }
+  RouterNotifier(this.ref);
 
   String? redirectLogic(BuildContext context, GoRouterState state) {
     final user = ref.read(authProvider).loggedUser;
@@ -50,7 +43,7 @@ class RouterNotifier extends ChangeNotifier {
 
     if (state.location == DashboardPageRoute.pagePath && !hasTeamId) return ProfilePageRoute.pagePath;
 
-    if (isInLoginPage && hasTeamId) return '/';
+    if (isInLoginPage && hasTeamId) return DashboardPageRoute.pagePath;
 
     return null;
   }

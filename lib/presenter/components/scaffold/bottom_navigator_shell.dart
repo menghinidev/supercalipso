@@ -29,11 +29,31 @@ class BottomNavigatorShell extends HookConsumerWidget {
           currentIndex: ref.watch(homeLocationIndexProvider),
           onTap: (index) => onBottomBarItemTap(index, ref),
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.done), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.notes_rounded), label: ''),
+            BottomNestedNavigationBarItem(
+              initialLocation: ExpensesPageRoute.pagePath,
+              icon: Icon(Icons.attach_money),
+              label: '',
+            ),
+            BottomNestedNavigationBarItem(
+              initialLocation: EventsPageRoute.pagePath,
+              icon: Icon(Icons.calendar_month_outlined),
+              label: '',
+            ),
+            BottomNestedNavigationBarItem(
+              initialLocation: DashboardPageRoute.pagePath,
+              icon: Icon(Icons.home),
+              label: '',
+            ),
+            BottomNestedNavigationBarItem(
+              initialLocation: TasksPageRoute.pagePath,
+              icon: Icon(Icons.done),
+              label: '',
+            ),
+            BottomNestedNavigationBarItem(
+              initialLocation: NotesPageRoute.pagePath,
+              icon: Icon(Icons.notes_rounded),
+              label: '',
+            ),
           ],
         ),
       ],
@@ -43,4 +63,15 @@ class BottomNavigatorShell extends HookConsumerWidget {
   setState(WidgetRef ref, String state) => ref.read(homeNavigationStateProvider.notifier).state = state;
 
   onBottomBarItemTap(int index, WidgetRef ref) => setState(ref, HomeShellRoute.getHomeBottomLocation(index));
+}
+
+class BottomNestedNavigationBarItem extends BottomNavigationBarItem {
+  const BottomNestedNavigationBarItem({
+    required this.initialLocation,
+    required Widget icon,
+    String? label,
+  }) : super(icon: icon, label: label);
+
+  /// The initial location/path
+  final String initialLocation;
 }
