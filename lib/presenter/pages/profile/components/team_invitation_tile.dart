@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/team/team_service.dart';
-import 'package:supercalipso/bloc/utils.dart';
+import 'package:supercalipso/application/team/team_service.dart';
+import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
 import 'package:supercalipso/presenter/pages/tasks/components/task_tile.dart';

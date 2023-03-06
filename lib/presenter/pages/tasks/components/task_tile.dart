@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:supercalipso/bloc/auth/auth_notifier.dart';
-import 'package:supercalipso/bloc/task/task_service.dart';
-import 'package:supercalipso/bloc/utils.dart';
+import 'package:supercalipso/application/auth/auth_notifier.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/task/task_service.dart';
+import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
 import 'package:supercalipso/presenter/pages/event/sections/name_section.dart';

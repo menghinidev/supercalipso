@@ -1,27 +1,28 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/auth/authstate.dart';
-import 'package:supercalipso/bloc/event/event_provider.dart';
-import 'package:supercalipso/bloc/team/team_provider.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/auth/authstate.dart';
+import 'package:supercalipso/application/event/event_provider.dart';
+import 'package:supercalipso/application/team/team_service.dart';
+import 'package:supercalipso/application/team/teamsessionstate.dart';
 import 'package:supercalipso/data/repository/event_repository.dart';
-import 'package:supercalipso/data/repository/team_repository.dart';
 import 'package:supercalipso/plugin/utils/response.dart';
 
 final eventServiceProvider = Provider<EventService>((ref) {
   var auth = ref.watch(authStateProvider);
+  var session = ref.watch(teamSessionStateProvider);
   return EventService(
     authState: auth,
-    teamRepository: ref.watch(teamRepoProvider),
+    teamState: session,
     eventRepository: ref.watch(eventRepositoryProvider),
   );
 });
 
 class EventService {
   final AuthState authState;
-  final TeamRepository teamRepository;
+  final TeamSessionState teamState;
   final EventRepository eventRepository;
 
-  EventService({required this.authState, required this.eventRepository, required this.teamRepository});
+  EventService({required this.authState, required this.eventRepository, required this.teamState});
 
   Future<Response> createEvent({
     required String name,
@@ -30,9 +31,9 @@ class EventService {
     String? description,
     String? iconName,
   }) async {
-    var userId = authRepository.loggedUser?.uid;
+    var userId = authState.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
-    var teamId = teamRepository.loggedTeamId;
+    var teamId = teamState.whenOrNull(logged: (team) => team.id);
     if (teamId == null) return Responses.failure([]);
     return await eventRepository.createEvent(
       teamId: teamId,
@@ -53,9 +54,9 @@ class EventService {
     String? description,
     String? iconName,
   }) async {
-    var userId = authRepository.loggedUser?.uid;
+    var userId = authState.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
-    var teamId = teamRepository.loggedTeamId;
+    var teamId = teamState.whenOrNull(logged: (team) => team.id);
     if (teamId == null) return Responses.failure([]);
     return await eventRepository.updateEvent(
       eventId: eventId,
@@ -70,7 +71,7 @@ class EventService {
   Future<Response> deleteEvent({required String eventId}) => eventRepository.deleteEvent(eventId: eventId);
 
   Future<Response> askTeamEvents() async {
-    var teamId = teamRepository.loggedTeamId;
+    var teamId = teamState.whenOrNull(logged: (team) => team.id);
     if (teamId == null) return Responses.failure([]);
     return await eventRepository.getTeamEvents(teamId: teamId);
   }

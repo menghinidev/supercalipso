@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/team/team_service.dart';
+import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_sheet.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/components/common/loading_list.dart';
@@ -50,7 +50,7 @@ class TeamInvitationGeneratorSheet extends HookConsumerWidget {
               data: (data) => PrimaryElevatedButton(
                 text: 'Invita',
                 onTap: () async {
-                  var response = await ref.read(teamServiceProvider).inviteUserToTeam(
+                  var response = await ref.read(teamSessionStateProvider.notifier).inviteUserToTeam(
                         email: controller.text,
                         teamId: data!.id,
                       );

@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/note/note_service.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/note/note_service.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';

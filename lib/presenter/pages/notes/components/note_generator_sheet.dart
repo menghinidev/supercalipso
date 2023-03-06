@@ -1,7 +1,7 @@
 /* import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/note/note_service.dart';
+import 'package:supercalipso/application/note/note_service.dart';
 import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_sheet.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';

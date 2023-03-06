@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/note/note_provider.dart';
-import 'package:supercalipso/bloc/note/note_service.dart';
-import 'package:supercalipso/bloc/utils.dart';
+import 'package:supercalipso/application/note/note_provider.dart';
+import 'package:supercalipso/application/note/note_service.dart';
+import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';

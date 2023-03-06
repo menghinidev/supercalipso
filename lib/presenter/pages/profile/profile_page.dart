@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_notifier.dart';
-import 'package:supercalipso/bloc/team/team_service.dart';
+import 'package:supercalipso/application/auth/auth_notifier.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
@@ -24,14 +25,12 @@ class ProfilePage extends HookConsumerWidget {
         actions: [
           PrimaryIconButton(
             icon: const Icon(Icons.logout),
-            onTap: () => ref.read(authServiceProvider).logout(),
+            onTap: () => ref.read(authStateProvider.notifier).logout(),
           ),
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: () => Future.wait([
-          ref.read(teamServiceProvider).getTeamsInvitations(),
-        ]),
+        onRefresh: () => ref.refresh(teamInvitationsProvider.future),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           slivers: [

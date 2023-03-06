@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/authstate.dart';
+import 'package:supercalipso/application/auth/authstate.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
 

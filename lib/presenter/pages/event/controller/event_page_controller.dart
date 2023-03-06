@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/event/event_service.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/event/event_service.dart';
 import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/user/user.dart';

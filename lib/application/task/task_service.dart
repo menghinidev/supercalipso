@@ -1,7 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/task/task_provider.dart';
-import 'package:supercalipso/bloc/team/team_provider.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/auth/authstate.dart';
+import 'package:supercalipso/application/task/task_provider.dart';
+import 'package:supercalipso/application/team/team_provider.dart';
+import 'package:supercalipso/application/team/team_service.dart';
+import 'package:supercalipso/application/team/teamsessionstate.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/task_repository.dart';
@@ -10,21 +13,21 @@ import 'package:supercalipso/plugin/utils.dart';
 
 final taskServiceProvider = Provider<TaskService>((ref) {
   return TaskService(
-    authRepository: ref.watch(authProvider),
+    authState: ref.watch(authStateProvider),
+    sessionState: ref.watch(teamSessionStateProvider),
     taskRepository: ref.watch(taskRepoProvider),
-    teamRepository: ref.watch(teamRepoProvider),
   );
 });
 
 class TaskService {
-  final AuthRepository authRepository;
-  final TeamRepository teamRepository;
+  final AuthState authState;
+  final TeamSessionState sessionState;
   final TaskRepository taskRepository;
 
   TaskService({
-    required this.authRepository,
+    required this.authState,
     required this.taskRepository,
-    required this.teamRepository,
+    required this.sessionState,
   });
 
   Future<Response> createTask({
@@ -33,7 +36,7 @@ class TaskService {
     DateTime? deadline,
     String? assignedUserId,
   }) async {
-    var teamId = teamRepository.loggedTeamId;
+    var teamId = sessionState.whenOrNull(logged: (team) => team.id);
     if (teamId == null) return Responses.failure([]);
     return await taskRepository.createTask(
       teamId: teamId,
@@ -51,7 +54,7 @@ class TaskService {
     DateTime? deadline,
     String? assignedUserId,
   }) async {
-    var teamId = teamRepository.loggedTeamId;
+    var teamId = sessionState.whenOrNull(logged: (team) => team.id);
     if (teamId == null) return Responses.failure([]);
     return await taskRepository.updateTask(
       taskId: taskId,
@@ -68,14 +71,8 @@ class TaskService {
   Future<Response> completeTask({required String taskId}) => taskRepository.completeTask(taskId: taskId);
 
   Future<Response> askTeamTasks() async {
-    var teamId = teamRepository.loggedTeamId;
+    var teamId = sessionState.whenOrNull(logged: (team) => team.id);
     if (teamId == null) return Responses.failure([]);
     return await taskRepository.getTeamTasks(teamId: teamId);
-  }
-
-  Stream<List<Task>> get loggedTeamTasks {
-    var currentTeamId = teamRepository.loggedTeamId;
-    if (currentTeamId == null) return Stream.value(<Task>[]);
-    return taskRepository.getTeamTasksChanges(teamId: currentTeamId);
   }
 }

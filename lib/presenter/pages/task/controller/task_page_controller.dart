@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/task/task_service.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/task/task_service.dart';
 import 'package:supercalipso/data/model/task/builder/task_builder.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/model/user/user.dart';
@@ -16,7 +16,7 @@ import 'package:supercalipso/services/navigation/router_provider.dart';
 final taskPageControllerProvider =
     StateNotifierProvider.family.autoDispose<TaskPageControllerNotifier, TaskPageState, Task?>((ref, task) {
   return TaskPageControllerNotifier(
-    authRepo: ref.watch(authProvider),
+    authRepo: ref.watch(authRepoProvider),
     taskService: ref.watch(taskServiceProvider),
     dialogService: ref.watch(dialogServiceProvider),
     router: ref.watch(routerProvider),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:supercalipso/bloc/event/event_provider.dart';
-import 'package:supercalipso/bloc/utils.dart';
+import 'package:supercalipso/application/event/event_provider.dart';
+import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
 import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dart';
@@ -11,6 +11,7 @@ import 'package:supercalipso/presenter/theme/dimensions.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var events = ref.watch(teamEventsChangesProvider);
@@ -26,6 +27,7 @@ class EventsList extends ConsumerWidget {
 
 class GroupdByDayEventsList extends HookConsumerWidget {
   const GroupdByDayEventsList({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var events = ref.watch(teamEventsChangesProvider);
