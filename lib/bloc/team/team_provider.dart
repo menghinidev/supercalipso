@@ -1,14 +1,20 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/bloc/env.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/model/team/team.dart';
+import 'package:supercalipso/data/provider/api/team/firestore_data_source.dart';
+import 'package:supercalipso/data/provider/api/team/i_team_data_source.dart';
+import 'package:supercalipso/data/provider/api/team/mocked_data_source.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
-import 'package:supercalipso/services/installer.dart';
 
-/// Repo
+final teamDataSourceProvider = Provider<ITeamDataSource>((ref) {
+  if (EnvVariables.isMocked) return TeamMockedDataSource();
+  return TeamFirestoreDataSource();
+});
 
-final teamRepoProvider = Provider<TeamRepository>((ref) => Installer.instance.get<TeamRepository>());
-
-/// Collection changes
+final teamRepoProvider = Provider<TeamRepository>(
+  (ref) => TeamRepository(teamsDataProvider: ref.watch(teamDataSourceProvider)),
+);
 
 final teamsChangesProvider = StreamProvider<List<Team>>((ref) {
   return ref.watch(teamRepoProvider).enrolledTeams;

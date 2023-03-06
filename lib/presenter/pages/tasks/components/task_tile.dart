@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:supercalipso/bloc/auth/auth_service.dart';
+import 'package:supercalipso/bloc/auth/auth_notifier.dart';
 import 'package:supercalipso/bloc/task/task_service.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/data/model/task/task.dart';

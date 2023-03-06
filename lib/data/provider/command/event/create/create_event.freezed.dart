@@ -174,8 +174,7 @@ class __$$_CreateEventCommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CreateEventCommand extends _CreateEventCommand
-    with DiagnosticableTreeMixin {
+class _$_CreateEventCommand extends _CreateEventCommand {
   const _$_CreateEventCommand(
       {required this.teamId,
       required this.name,
@@ -205,22 +204,8 @@ class _$_CreateEventCommand extends _CreateEventCommand
   final DateTime? endTime;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CreateEventCommand(teamId: $teamId, name: $name, startTime: $startTime, createdByUserId: $createdByUserId, description: $description, iconName: $iconName, endTime: $endTime)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CreateEventCommand'))
-      ..add(DiagnosticsProperty('teamId', teamId))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('startTime', startTime))
-      ..add(DiagnosticsProperty('createdByUserId', createdByUserId))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('iconName', iconName))
-      ..add(DiagnosticsProperty('endTime', endTime));
   }
 
   @override

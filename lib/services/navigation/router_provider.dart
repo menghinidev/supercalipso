@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
 import 'package:supercalipso/bloc/team/team_provider.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 

@@ -1,27 +1,27 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
+import 'package:supercalipso/bloc/auth/authstate.dart';
 import 'package:supercalipso/bloc/event/event_provider.dart';
 import 'package:supercalipso/bloc/team/team_provider.dart';
-import 'package:supercalipso/data/model/event/team_event.dart';
-import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
 import 'package:supercalipso/plugin/utils/response.dart';
 
 final eventServiceProvider = Provider<EventService>((ref) {
+  var auth = ref.watch(authStateProvider);
   return EventService(
-    authRepository: ref.watch(authProvider),
+    authState: auth,
     teamRepository: ref.watch(teamRepoProvider),
     eventRepository: ref.watch(eventRepositoryProvider),
   );
 });
 
 class EventService {
-  final AuthRepository authRepository;
+  final AuthState authState;
   final TeamRepository teamRepository;
   final EventRepository eventRepository;
 
-  EventService({required this.authRepository, required this.eventRepository, required this.teamRepository});
+  EventService({required this.authState, required this.eventRepository, required this.teamRepository});
 
   Future<Response> createEvent({
     required String name,
@@ -73,11 +73,5 @@ class EventService {
     var teamId = teamRepository.loggedTeamId;
     if (teamId == null) return Responses.failure([]);
     return await eventRepository.getTeamEvents(teamId: teamId);
-  }
-
-  Stream<List<TeamEvent>> get loggedTeamEvents {
-    var currentTeamId = teamRepository.loggedTeamId;
-    if (currentTeamId == null) return Stream.value(<TeamEvent>[]);
-    return eventRepository.getTeamEventsChanges(teamId: currentTeamId);
   }
 }

@@ -37,7 +37,6 @@ dependencies:
   duration: ^3.0.11
   go_router: ^5.1.1
   google_fonts: ^3.0.1
-  get_it: ^7.2.0
   hooks_riverpod: ^2.0.1
   shared_preferences: ^2.0.15
   flutter_hooks: ^0.18.5+1
@@ -47,12 +46,9 @@ dependencies:
   build_runner: ^2.2.0
   json_annotation: ^4.7.0
   sliver_tools: ^0.2.8
-  rxdart: ^0.27.5
   uuid: ^3.0.6
   dropdown_button2: ^1.4.0
   flutter_typeahead: ^4.0.0
-  flutter_launcher_icons: ^0.10.0
-  flutter_native_splash: ^2.2.11
   firebase_core: ^1.24.0
   flutter_signin_button: ^2.0.0
   firebase_auth: ^3.11.2
@@ -64,16 +60,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+  flutter_launcher_icons: ^0.10.0
+  flutter_native_splash: ^2.2.11
 
 flutter_icons:
   android: "supercalipso"

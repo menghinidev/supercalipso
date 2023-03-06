@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/auth/auth_service.dart';
+import 'package:supercalipso/bloc/auth/auth_notifier.dart';
 import 'package:supercalipso/bloc/utils.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
 import 'package:supercalipso/presenter/components/supercalipso_brand.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_service.dart';
+import 'package:supercalipso/bloc/auth/auth_notifier.dart';
 import 'package:supercalipso/bloc/team/team_service.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
