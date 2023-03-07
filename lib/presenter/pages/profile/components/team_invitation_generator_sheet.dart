@@ -4,10 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_sheet.dart';
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
-import 'package:supercalipso/presenter/components/common/loading_list.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/router.dart';
 
 class TeamInvitationGeneratorSheet extends HookConsumerWidget {
   final String teamId;
