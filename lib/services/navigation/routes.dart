@@ -36,7 +36,7 @@ class AppRoutes {
       ];
 }
 
-class HomeShellRoute extends ShellRoute {
+/* class HomeShellRoute extends ShellRoute {
   HomeShellRoute()
       : super(
           navigatorKey: RouterNotifier.homePageNavigatorKey,
@@ -214,3 +214,4 @@ class SplashPageRoute extends GoRoute {
           pageBuilder: (context, state) => BasePageTransitionBuilder(child: const SplashPage()),
         );
 }
+ */
