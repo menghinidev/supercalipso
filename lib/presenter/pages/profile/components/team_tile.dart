@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:supercalipso/application/team/team_provider.dart';
 import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/team/team.dart';
@@ -19,7 +20,7 @@ class TeamTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var users = ref.watch(teamMembersProvider);
+    var users = ref.watch(loggedTeamMembersProvider);
     return CustomTile(
       leading: CircleAvatar(child: Text(team.name[0])),
       title: team.name,

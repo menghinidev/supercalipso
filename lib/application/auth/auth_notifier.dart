@@ -5,7 +5,7 @@ import 'package:supercalipso/application/auth/authstate.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
-class AuthStateNotifier extends StateNotifier<AuthState> {
+class AuthStateNotifier extends StateNotifier<AsyncValue<AuthState>> {
   final AuthRepository authRepository;
 
   final GoogleSignIn googleSignIn = GoogleSignIn(
@@ -15,13 +15,13 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     ],
   );
 
-  AuthStateNotifier({required this.authRepository}) : super(const AuthState.unauth());
+  AuthStateNotifier({required this.authRepository}) : super(const AsyncData(AuthState.unauth()));
 
   Future<Response> silentLogin() async {
     var uid = firebase.FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return Responses.failure([]);
     var user = await authRepository.getUserById(id: uid);
-    user.ifSuccess((payload) => state = AuthState.auth(user: payload!));
+    user.ifSuccess((payload) => state = AsyncData(AuthState.auth(user: payload!)));
     return user;
   }
 
@@ -34,7 +34,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     );
     var firebaseUser = await firebase.FirebaseAuth.instance.signInWithCredential(credential);
     var user = await authRepository.getUserById(id: firebaseUser.user!.uid);
-    user.ifSuccess((payload) => state = AuthState.auth(user: payload!));
+    user.ifSuccess((payload) => state = AsyncData(AuthState.auth(user: payload!)));
     return Future.value();
   }
 

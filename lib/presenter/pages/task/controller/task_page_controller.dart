@@ -17,7 +17,7 @@ final taskPageControllerProvider =
     StateNotifierProvider.family.autoDispose<TaskPageControllerNotifier, TaskPageState, Task?>((ref, task) {
   return TaskPageControllerNotifier(
     authRepo: ref.watch(authRepoProvider),
-    taskService: ref.watch(taskServiceProvider),
+    taskService: ref.watch(teamTaskStateProvider.notifier),
     dialogService: ref.watch(dialogServiceProvider),
     router: ref.watch(routerProvider),
     initialTask: task,
@@ -28,7 +28,7 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
   final Task? initialTask;
   final List<User>? assignedUsers;
   final AuthRepository authRepo;
-  final TaskService taskService;
+  final TeamTaskController taskService;
   final DialogService dialogService;
   final GoRouter router;
   late TaskPageMementoStateOriginator originator;

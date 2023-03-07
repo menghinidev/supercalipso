@@ -16,8 +16,8 @@ import 'package:supercalipso/services/navigation/router_provider.dart';
 final eventPageControllerProvider =
     StateNotifierProvider.family.autoDispose<EventPageNotifier, EventPageState, TeamEvent?>((ref, event) {
   return EventPageNotifier(
-    eventService: ref.watch(eventServiceProvider),
-    authRepo: ref.watch(authProvider),
+    eventService: ref.watch(teamEventControllerProvider.notifier),
+    authRepo: ref.watch(authRepoProvider),
     dialogService: ref.watch(dialogServiceProvider),
     router: ref.watch(routerProvider),
     initialEvent: event,
@@ -27,7 +27,7 @@ final eventPageControllerProvider =
 class EventPageNotifier extends StateNotifier<EventPageState> {
   final TeamEvent? initialEvent;
   final User? creator;
-  final EventService eventService;
+  final TeamEventController eventService;
   final DialogService dialogService;
   final GoRouter router;
   final AuthRepository authRepo;

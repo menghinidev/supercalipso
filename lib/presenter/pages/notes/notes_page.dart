@@ -18,12 +18,12 @@ class NotesPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var notes = ref.watch(notesProvider);
+    var notes = ref.watch(loggedTeamNotesProvider);
     return CustomScaffold(
       appBar: const FlatAppBar(title: 'Notes'),
       fab: const NotesPageFAB(),
       body: RefreshIndicator(
-        onRefresh: () => ref.read(noteServiceProvider).askTeamNotes(),
+        onRefresh: () => ref.read(loggedTeamNotesProvider.notifier).askTeamNotes(),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           slivers: [

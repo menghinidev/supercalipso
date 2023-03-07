@@ -42,9 +42,9 @@ class Dashboard extends HookConsumerWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () => Future.wait<Response>([
-          ref.read(eventServiceProvider).askTeamEvents(),
-          ref.read(noteServiceProvider).askTeamNotes(),
-          ref.read(taskServiceProvider).askTeamTasks(),
+          ref.read(teamEventControllerProvider.notifier).askTeamEvents(),
+          ref.read(loggedTeamNotesProvider.notifier).askTeamNotes(),
+          ref.read(teamTaskStateProvider.notifier).askTeamTasks(),
         ]),
         child: KeyboardFocusWrapper(
           child: CustomScrollView(

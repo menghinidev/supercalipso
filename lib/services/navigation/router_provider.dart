@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/auth/auth_provider.dart';
 import 'package:supercalipso/application/team/team_provider.dart';
+import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 
 var routerProvider = Provider<GoRouter>((ref) {
@@ -29,13 +30,16 @@ class RouterNotifier extends ChangeNotifier {
   RouterNotifier(this.ref);
 
   String? redirectLogic(BuildContext context, GoRouterState state) {
-    final user = ref.read(authStateProvider);
-    final hasTeamId = ref.read(teamRepoProvider).loggedTeamId != null;
+    final isLogged = ref.read(authStateProvider).whenOrNull(
+              data: (value) => value.map(auth: (value) => true, unauth: (value) => false),
+            ) ??
+        false;
+    final hasTeamId = ref.read(teamSessionStateProvider).mapOrNull(logged: (value) => true) ?? false;
 
     // From here we can use the state and implement our custom logic
     final isInLoginPage = state.location == LoginPageRoute.pagePath;
 
-    if (user.map(auth: (value) => false, unauth: (value) => true)) {
+    if (!isLogged) {
       return isInLoginPage ? null : LoginPageRoute.pagePath;
     }
 

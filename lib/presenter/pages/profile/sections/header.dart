@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/presenter/pages/profile/components/profile_avatar.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
@@ -12,9 +13,11 @@ class ProfileHeader extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var auth = ref.watch(authStateProvider);
-    return auth.when(
-      auth: (data) => ProfileInfoHeader(profile: data),
-      unauth: () => const CircularProgressIndicator(),
+    return auth.onValue(
+      builder: (data) => data.when(
+        auth: (data) => ProfileInfoHeader(profile: data),
+        unauth: () => const CircularProgressIndicator(),
+      ),
     );
   }
 }

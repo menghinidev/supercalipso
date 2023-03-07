@@ -29,7 +29,7 @@ class TaskTile extends HookConsumerWidget with DateFormatter {
       trailing: task.onStatus(
         () => ActionTileTrailing(
           color: AppColors.green,
-          onTap: () => ref.read(taskServiceProvider).completeTask(taskId: task.id),
+          onTap: () => ref.read(teamTaskStateProvider.notifier).completeTask(taskId: task.id),
           child: const Icon(Icons.done, color: AppColors.white),
         ),
         onDone: () => const ActionTileTrailing(

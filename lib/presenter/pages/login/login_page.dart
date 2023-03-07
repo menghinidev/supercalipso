@@ -13,7 +13,7 @@ class LoginPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var loggingState = ref.watch(authChanges);
+    var loggingState = ref.watch(authStateProvider);
     return CustomScaffold(
       body: Center(
         child: loggingState.onValue(
@@ -28,7 +28,7 @@ class LoginPage extends HookConsumerWidget {
               SignInButton(
                 Buttons.Google,
                 shape: Shapes.lowRoundedBorder,
-                onPressed: () => ref.read(authServiceProvider).loginWithGoogle(),
+                onPressed: () => ref.read(authStateProvider.notifier).loginWithGoogle(),
               ),
             ],
           ),

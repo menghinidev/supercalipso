@@ -14,8 +14,8 @@ import 'package:supercalipso/services/navigation/router_provider.dart';
 final notePageControllerProvider =
     StateNotifierProvider.family.autoDispose<NotePageNotifier, NotePageState, Note?>((ref, note) {
   return NotePageNotifier(
-    noteService: ref.watch(noteServiceProvider),
-    authRepo: ref.watch(authProvider),
+    noteService: ref.watch(loggedTeamNotesProvider.notifier),
+    authRepo: ref.watch(authRepoProvider),
     dialogService: ref.watch(dialogServiceProvider),
     router: ref.watch(routerProvider),
     initialNote: note,
@@ -24,7 +24,7 @@ final notePageControllerProvider =
 
 class NotePageNotifier extends StateNotifier<NotePageState> {
   final Note? initialNote;
-  final NoteService noteService;
+  final TeamNotesController noteService;
   final DialogService dialogService;
   final GoRouter router;
   final AuthRepository authRepo;

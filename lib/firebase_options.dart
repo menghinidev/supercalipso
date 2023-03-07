@@ -70,6 +70,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '445953411314',
     projectId: 'supercalipso-8ac63',
     storageBucket: 'supercalipso-8ac63.appspot.com',
+    androidClientId: '445953411314-2s42qfrnmtgb4nvejsv9dr7es118hipd.apps.googleusercontent.com',
     iosClientId: '445953411314-n4j7nln3d3c8f3on8elr286v5d8up8ls.apps.googleusercontent.com',
     iosBundleId: 'dev.menghini.supercalipso',
   );

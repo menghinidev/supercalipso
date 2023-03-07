@@ -2,33 +2,32 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/auth/auth_provider.dart';
 import 'package:supercalipso/application/auth/authstate.dart';
 import 'package:supercalipso/application/task/task_provider.dart';
-import 'package:supercalipso/application/team/team_provider.dart';
 import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/application/team/teamsessionstate.dart';
 import 'package:supercalipso/data/model/task/task.dart';
-import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/task_repository.dart';
-import 'package:supercalipso/data/repository/team_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
-final taskServiceProvider = Provider<TaskService>((ref) {
-  return TaskService(
-    authState: ref.watch(authStateProvider),
-    sessionState: ref.watch(teamSessionStateProvider),
+final teamTaskStateProvider = StateNotifierProvider<TeamTaskController, AsyncValue<List<Task>>>((ref) {
+  var auth = ref.watch(authStateProvider.select((value) => value.valueOrNull));
+  var session = ref.watch(teamSessionStateProvider);
+  return TeamTaskController(
+    authState: auth,
     taskRepository: ref.watch(taskRepoProvider),
+    sessionState: session,
   );
 });
 
-class TaskService {
-  final AuthState authState;
+class TeamTaskController extends StateNotifier<AsyncValue<List<Task>>> {
+  final AuthState? authState;
   final TeamSessionState sessionState;
   final TaskRepository taskRepository;
 
-  TaskService({
+  TeamTaskController({
     required this.authState,
     required this.taskRepository,
     required this.sessionState,
-  });
+  }) : super(const AsyncData(<Task>[]));
 
   Future<Response> createTask({
     required String title,

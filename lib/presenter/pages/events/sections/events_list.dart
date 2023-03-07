@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:supercalipso/application/event/event_provider.dart';
+import 'package:supercalipso/application/event/event_service.dart';
 import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
@@ -14,7 +15,7 @@ class EventsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var events = ref.watch(teamEventsChangesProvider);
+    var events = ref.watch(teamEventControllerProvider);
     return events.onValue(
       builder: (data) => BaseListSection<TeamEvent>(
         title: 'Events',
@@ -30,7 +31,7 @@ class GroupdByDayEventsList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var events = ref.watch(teamEventsChangesProvider);
+    var events = ref.watch(teamEventControllerProvider);
     return events.onValue(
       builder: (data) => EmptyDataWidgetBuilder(
         emptyCondition: () => data.isEmpty,

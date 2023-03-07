@@ -4,25 +4,30 @@ import 'package:supercalipso/application/auth/authstate.dart';
 import 'package:supercalipso/application/event/event_provider.dart';
 import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/application/team/teamsessionstate.dart';
+import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/plugin/utils/response.dart';
 
-final eventServiceProvider = Provider<EventService>((ref) {
-  var auth = ref.watch(authStateProvider);
+final teamEventControllerProvider = StateNotifierProvider<TeamEventController, AsyncValue<List<TeamEvent>>>((ref) {
+  var auth = ref.watch(authStateProvider.select((value) => value.value));
   var session = ref.watch(teamSessionStateProvider);
-  return EventService(
+  return TeamEventController(
     authState: auth,
     teamState: session,
     eventRepository: ref.watch(eventRepositoryProvider),
   );
 });
 
-class EventService {
-  final AuthState authState;
+class TeamEventController extends StateNotifier<AsyncValue<List<TeamEvent>>> {
+  final AuthState? authState;
   final TeamSessionState teamState;
   final EventRepository eventRepository;
 
-  EventService({required this.authState, required this.eventRepository, required this.teamState});
+  TeamEventController({
+    required this.authState,
+    required this.eventRepository,
+    required this.teamState,
+  }) : super(const AsyncData(<TeamEvent>[]));
 
   Future<Response> createEvent({
     required String name,
@@ -31,7 +36,7 @@ class EventService {
     String? description,
     String? iconName,
   }) async {
-    var userId = authState.whenOrNull(auth: (user) => user.uid);
+    var userId = authState?.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
     var teamId = teamState.whenOrNull(logged: (team) => team.id);
     if (teamId == null) return Responses.failure([]);
@@ -54,7 +59,7 @@ class EventService {
     String? description,
     String? iconName,
   }) async {
-    var userId = authState.whenOrNull(auth: (user) => user.uid);
+    var userId = authState?.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
     var teamId = teamState.whenOrNull(logged: (team) => team.id);
     if (teamId == null) return Responses.failure([]);

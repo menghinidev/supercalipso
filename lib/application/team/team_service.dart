@@ -13,7 +13,7 @@ import 'package:supercalipso/services/navigation/routes.dart';
 
 final teamInvitationsProvider = FutureProvider<Response<List<TeamInvitation>>>((ref) async {
   var authState = ref.watch(authStateProvider);
-  var uid = authState.whenOrNull(auth: (user) => user.uid);
+  var uid = authState.whenOrNull(data: (user) => user.whenOrNull(auth: (user) => user.uid));
   if (uid == null) return Responses.success(<TeamInvitation>[]);
   return ref.watch(teamRepoProvider).getUserTeamInvitations(userId: uid);
 });
@@ -31,24 +31,23 @@ final teamProvider = FutureProvider.family<Team, String>((ref, id) async {
 }); */
 
 final teamSessionStateProvider = StateNotifierProvider<TeamSessionNotifier, TeamSessionState>((ref) {
+  var auth = ref.watch(authStateProvider);
+  var value = auth.whenOrNull(data: (data) => data);
   return TeamSessionNotifier(
     teamRepository: ref.watch(teamRepoProvider),
     authRepository: ref.watch(authRepoProvider),
-    router: ref.watch(routerProvider),
-    authState: ref.watch(authStateProvider),
+    authState: value,
   );
 });
 
 class TeamSessionNotifier extends StateNotifier<TeamSessionState> {
   final TeamRepository teamRepository;
   final AuthRepository authRepository;
-  final GoRouter router;
-  final AuthState authState;
+  final AuthState? authState;
 
   TeamSessionNotifier({
     required this.teamRepository,
     required this.authRepository,
-    required this.router,
     required this.authState,
   }) : super(const TeamSessionState.homeless()) {
     silentloginWithTeam();
@@ -57,7 +56,7 @@ class TeamSessionNotifier extends StateNotifier<TeamSessionState> {
   Future switchToTeamSession({required String teamId}) async {}
 
   Future<Response> replyTeamInvitation({required TeamInvitationStatus status, required String teamInvitationId}) async {
-    var userId = authState.whenOrNull(auth: (user) => user.uid);
+    var userId = authState?.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
     return await teamRepository.replyToTeamInvitation(
       status: status,
@@ -67,7 +66,7 @@ class TeamSessionNotifier extends StateNotifier<TeamSessionState> {
   }
 
   Future<Response> inviteUserToTeam({required String email, required String teamId}) async {
-    var userId = authState.whenOrNull(auth: (user) => user.uid);
+    var userId = authState?.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
     var toInvite = await authRepository.getUserByEmail(email: email);
     var response = await toInvite.flatMapAsync((t) => teamRepository.createTeamInvitation(
@@ -79,23 +78,22 @@ class TeamSessionNotifier extends StateNotifier<TeamSessionState> {
   }
 
   Future<Response> createTeam({required String name}) async {
-    var userId = authState.whenOrNull(auth: (user) => user.uid);
+    var userId = authState?.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
     return await teamRepository
         .createTeam(name: name, userId: userId)
-        .ifSuccessAsync((payload) => loginWithTeam(teamId: payload!.id))
-        .ifSuccess((payload) => router.go(DashboardPageRoute.pagePath));
+        .ifSuccessAsync((payload) => loginWithTeam(teamId: payload!.id));
   }
 
   loginWithTeam({required String teamId}) async {
-    var userId = authState.whenOrNull(auth: (user) => user.uid);
+    var userId = authState?.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
     var team = await teamRepository.getTeam(teamId: teamId);
     state = TeamSessionState.logged(team: team);
   }
 
   silentloginWithTeam() async {
-    var userId = authState.whenOrNull(auth: (user) => user.uid);
+    var userId = authState?.whenOrNull(auth: (user) => user.uid);
     if (userId == null) return Responses.failure([]);
     var teams = await teamRepository.getUserTeams(userId: userId);
     if (teams.isError) return state = TeamSessionState.signedOut(teams: teams.payload!);
