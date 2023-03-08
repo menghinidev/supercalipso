@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/firebase_options.dart';
 import 'package:supercalipso/presenter/theme/theme_builder.dart';
 import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
+import 'package:supercalipso/services/navigation/router/router.dart';
 import 'package:supercalipso/services/navigation/router_provider.dart';
 
 void main() async {

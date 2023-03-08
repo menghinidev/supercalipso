@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'update_task_command.dart';
 
@@ -37,7 +37,8 @@ mixin _$UpdateTaskCommand {
 abstract class $UpdateTaskCommandCopyWith<$Res> {
   factory $UpdateTaskCommandCopyWith(
           UpdateTaskCommand value, $Res Function(UpdateTaskCommand) then) =
-      _$UpdateTaskCommandCopyWithImpl<$Res>;
+      _$UpdateTaskCommandCopyWithImpl<$Res, UpdateTaskCommand>;
+  @useResult
   $Res call(
       {String taskId,
       TaskStatus? status,
@@ -48,17 +49,19 @@ abstract class $UpdateTaskCommandCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UpdateTaskCommandCopyWithImpl<$Res>
+class _$UpdateTaskCommandCopyWithImpl<$Res, $Val extends UpdateTaskCommand>
     implements $UpdateTaskCommandCopyWith<$Res> {
   _$UpdateTaskCommandCopyWithImpl(this._value, this._then);
 
-  final UpdateTaskCommand _value;
   // ignore: unused_field
-  final $Res Function(UpdateTaskCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taskId = freezed,
+    Object? taskId = null,
     Object? status = freezed,
     Object? title = freezed,
     Object? deadline = freezed,
@@ -66,31 +69,31 @@ class _$UpdateTaskCommandCopyWithImpl<$Res>
     Object? assignedUserId = freezed,
   }) {
     return _then(_value.copyWith(
-      taskId: taskId == freezed
+      taskId: null == taskId
           ? _value.taskId
           : taskId // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TaskStatus?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      deadline: deadline == freezed
+      deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-      assignedUserId: assignedUserId == freezed
+      assignedUserId: freezed == assignedUserId
           ? _value.assignedUserId
           : assignedUserId // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -101,6 +104,7 @@ abstract class _$$_UpdateTaskCommandCopyWith<$Res>
           $Res Function(_$_UpdateTaskCommand) then) =
       __$$_UpdateTaskCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String taskId,
       TaskStatus? status,
@@ -112,18 +116,16 @@ abstract class _$$_UpdateTaskCommandCopyWith<$Res>
 
 /// @nodoc
 class __$$_UpdateTaskCommandCopyWithImpl<$Res>
-    extends _$UpdateTaskCommandCopyWithImpl<$Res>
+    extends _$UpdateTaskCommandCopyWithImpl<$Res, _$_UpdateTaskCommand>
     implements _$$_UpdateTaskCommandCopyWith<$Res> {
   __$$_UpdateTaskCommandCopyWithImpl(
       _$_UpdateTaskCommand _value, $Res Function(_$_UpdateTaskCommand) _then)
-      : super(_value, (v) => _then(v as _$_UpdateTaskCommand));
+      : super(_value, _then);
 
-  @override
-  _$_UpdateTaskCommand get _value => super._value as _$_UpdateTaskCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taskId = freezed,
+    Object? taskId = null,
     Object? status = freezed,
     Object? title = freezed,
     Object? deadline = freezed,
@@ -131,27 +133,27 @@ class __$$_UpdateTaskCommandCopyWithImpl<$Res>
     Object? assignedUserId = freezed,
   }) {
     return _then(_$_UpdateTaskCommand(
-      taskId: taskId == freezed
+      taskId: null == taskId
           ? _value.taskId
           : taskId // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TaskStatus?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      deadline: deadline == freezed
+      deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-      assignedUserId: assignedUserId == freezed
+      assignedUserId: freezed == assignedUserId
           ? _value.assignedUserId
           : assignedUserId // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -196,28 +198,25 @@ class _$_UpdateTaskCommand implements _UpdateTaskCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateTaskCommand &&
-            const DeepCollectionEquality().equals(other.taskId, taskId) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.deadline, deadline) &&
-            const DeepCollectionEquality().equals(other.iconName, iconName) &&
-            const DeepCollectionEquality()
-                .equals(other.assignedUserId, assignedUserId));
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.deadline, deadline) ||
+                other.deadline == deadline) &&
+            (identical(other.iconName, iconName) ||
+                other.iconName == iconName) &&
+            (identical(other.assignedUserId, assignedUserId) ||
+                other.assignedUserId == assignedUserId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(taskId),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(deadline),
-      const DeepCollectionEquality().hash(iconName),
-      const DeepCollectionEquality().hash(assignedUserId));
+      runtimeType, taskId, status, title, deadline, iconName, assignedUserId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UpdateTaskCommandCopyWith<_$_UpdateTaskCommand> get copyWith =>
       __$$_UpdateTaskCommandCopyWithImpl<_$_UpdateTaskCommand>(
           this, _$identity);

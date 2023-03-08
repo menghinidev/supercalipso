@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'update_note_command.dart';
 
@@ -36,7 +36,8 @@ mixin _$UpdateNoteCommand {
 abstract class $UpdateNoteCommandCopyWith<$Res> {
   factory $UpdateNoteCommandCopyWith(
           UpdateNoteCommand value, $Res Function(UpdateNoteCommand) then) =
-      _$UpdateNoteCommandCopyWithImpl<$Res>;
+      _$UpdateNoteCommandCopyWithImpl<$Res, UpdateNoteCommand>;
+  @useResult
   $Res call(
       {String noteId,
       String modifiedByUserId,
@@ -46,44 +47,46 @@ abstract class $UpdateNoteCommandCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UpdateNoteCommandCopyWithImpl<$Res>
+class _$UpdateNoteCommandCopyWithImpl<$Res, $Val extends UpdateNoteCommand>
     implements $UpdateNoteCommandCopyWith<$Res> {
   _$UpdateNoteCommandCopyWithImpl(this._value, this._then);
 
-  final UpdateNoteCommand _value;
   // ignore: unused_field
-  final $Res Function(UpdateNoteCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? noteId = freezed,
-    Object? modifiedByUserId = freezed,
-    Object? teamId = freezed,
+    Object? noteId = null,
+    Object? modifiedByUserId = null,
+    Object? teamId = null,
     Object? title = freezed,
     Object? content = freezed,
   }) {
     return _then(_value.copyWith(
-      noteId: noteId == freezed
+      noteId: null == noteId
           ? _value.noteId
           : noteId // ignore: cast_nullable_to_non_nullable
               as String,
-      modifiedByUserId: modifiedByUserId == freezed
+      modifiedByUserId: null == modifiedByUserId
           ? _value.modifiedByUserId
           : modifiedByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      content: content == freezed
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -94,6 +97,7 @@ abstract class _$$_UpdateNoteCommandCopyWith<$Res>
           $Res Function(_$_UpdateNoteCommand) then) =
       __$$_UpdateNoteCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String noteId,
       String modifiedByUserId,
@@ -104,41 +108,39 @@ abstract class _$$_UpdateNoteCommandCopyWith<$Res>
 
 /// @nodoc
 class __$$_UpdateNoteCommandCopyWithImpl<$Res>
-    extends _$UpdateNoteCommandCopyWithImpl<$Res>
+    extends _$UpdateNoteCommandCopyWithImpl<$Res, _$_UpdateNoteCommand>
     implements _$$_UpdateNoteCommandCopyWith<$Res> {
   __$$_UpdateNoteCommandCopyWithImpl(
       _$_UpdateNoteCommand _value, $Res Function(_$_UpdateNoteCommand) _then)
-      : super(_value, (v) => _then(v as _$_UpdateNoteCommand));
+      : super(_value, _then);
 
-  @override
-  _$_UpdateNoteCommand get _value => super._value as _$_UpdateNoteCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? noteId = freezed,
-    Object? modifiedByUserId = freezed,
-    Object? teamId = freezed,
+    Object? noteId = null,
+    Object? modifiedByUserId = null,
+    Object? teamId = null,
     Object? title = freezed,
     Object? content = freezed,
   }) {
     return _then(_$_UpdateNoteCommand(
-      noteId: noteId == freezed
+      noteId: null == noteId
           ? _value.noteId
           : noteId // ignore: cast_nullable_to_non_nullable
               as String,
-      modifiedByUserId: modifiedByUserId == freezed
+      modifiedByUserId: null == modifiedByUserId
           ? _value.modifiedByUserId
           : modifiedByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      content: content == freezed
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -180,26 +182,22 @@ class _$_UpdateNoteCommand implements _UpdateNoteCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateNoteCommand &&
-            const DeepCollectionEquality().equals(other.noteId, noteId) &&
-            const DeepCollectionEquality()
-                .equals(other.modifiedByUserId, modifiedByUserId) &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.content, content));
+            (identical(other.noteId, noteId) || other.noteId == noteId) &&
+            (identical(other.modifiedByUserId, modifiedByUserId) ||
+                other.modifiedByUserId == modifiedByUserId) &&
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.content, content) || other.content == content));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(noteId),
-      const DeepCollectionEquality().hash(modifiedByUserId),
-      const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(content));
+      runtimeType, noteId, modifiedByUserId, teamId, title, content);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UpdateNoteCommandCopyWith<_$_UpdateNoteCommand> get copyWith =>
       __$$_UpdateNoteCommandCopyWithImpl<_$_UpdateNoteCommand>(
           this, _$identity);

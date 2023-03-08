@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'subscription.dart';
 
@@ -35,45 +35,48 @@ mixin _$TeamSubscription {
 abstract class $TeamSubscriptionCopyWith<$Res> {
   factory $TeamSubscriptionCopyWith(
           TeamSubscription value, $Res Function(TeamSubscription) then) =
-      _$TeamSubscriptionCopyWithImpl<$Res>;
+      _$TeamSubscriptionCopyWithImpl<$Res, TeamSubscription>;
+  @useResult
   $Res call(
       {String id, String subscribedUserId, String teamId, DateTime joined});
 }
 
 /// @nodoc
-class _$TeamSubscriptionCopyWithImpl<$Res>
+class _$TeamSubscriptionCopyWithImpl<$Res, $Val extends TeamSubscription>
     implements $TeamSubscriptionCopyWith<$Res> {
   _$TeamSubscriptionCopyWithImpl(this._value, this._then);
 
-  final TeamSubscription _value;
   // ignore: unused_field
-  final $Res Function(TeamSubscription) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? subscribedUserId = freezed,
-    Object? teamId = freezed,
-    Object? joined = freezed,
+    Object? id = null,
+    Object? subscribedUserId = null,
+    Object? teamId = null,
+    Object? joined = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      subscribedUserId: subscribedUserId == freezed
+      subscribedUserId: null == subscribedUserId
           ? _value.subscribedUserId
           : subscribedUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      joined: joined == freezed
+      joined: null == joined
           ? _value.joined
           : joined // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 }
 
@@ -84,42 +87,41 @@ abstract class _$$_TeamSubscriptionCopyWith<$Res>
           _$_TeamSubscription value, $Res Function(_$_TeamSubscription) then) =
       __$$_TeamSubscriptionCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id, String subscribedUserId, String teamId, DateTime joined});
 }
 
 /// @nodoc
 class __$$_TeamSubscriptionCopyWithImpl<$Res>
-    extends _$TeamSubscriptionCopyWithImpl<$Res>
+    extends _$TeamSubscriptionCopyWithImpl<$Res, _$_TeamSubscription>
     implements _$$_TeamSubscriptionCopyWith<$Res> {
   __$$_TeamSubscriptionCopyWithImpl(
       _$_TeamSubscription _value, $Res Function(_$_TeamSubscription) _then)
-      : super(_value, (v) => _then(v as _$_TeamSubscription));
+      : super(_value, _then);
 
-  @override
-  _$_TeamSubscription get _value => super._value as _$_TeamSubscription;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? subscribedUserId = freezed,
-    Object? teamId = freezed,
-    Object? joined = freezed,
+    Object? id = null,
+    Object? subscribedUserId = null,
+    Object? teamId = null,
+    Object? joined = null,
   }) {
     return _then(_$_TeamSubscription(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      subscribedUserId: subscribedUserId == freezed
+      subscribedUserId: null == subscribedUserId
           ? _value.subscribedUserId
           : subscribedUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      joined: joined == freezed
+      joined: null == joined
           ? _value.joined
           : joined // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -158,24 +160,21 @@ class _$_TeamSubscription implements _TeamSubscription {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TeamSubscription &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.subscribedUserId, subscribedUserId) &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality().equals(other.joined, joined));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.subscribedUserId, subscribedUserId) ||
+                other.subscribedUserId == subscribedUserId) &&
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
+            (identical(other.joined, joined) || other.joined == joined));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(subscribedUserId),
-      const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(joined));
+  int get hashCode =>
+      Object.hash(runtimeType, id, subscribedUserId, teamId, joined);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TeamSubscriptionCopyWith<_$_TeamSubscription> get copyWith =>
       __$$_TeamSubscriptionCopyWithImpl<_$_TeamSubscription>(this, _$identity);
 

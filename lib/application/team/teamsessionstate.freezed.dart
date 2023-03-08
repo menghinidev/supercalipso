@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'teamsessionstate.dart';
 
@@ -25,9 +25,9 @@ mixin _$TeamSessionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Team team)? logged,
-    TResult Function()? homeless,
-    TResult Function(List<Team> teams)? signedOut,
+    TResult? Function(Team team)? logged,
+    TResult? Function()? homeless,
+    TResult? Function(List<Team> teams)? signedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$TeamSessionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Logged value)? logged,
-    TResult Function(Homeless value)? homeless,
-    TResult Function(SignedOut value)? signedOut,
+    TResult? Function(Logged value)? logged,
+    TResult? Function(Homeless value)? homeless,
+    TResult? Function(SignedOut value)? signedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,43 +66,44 @@ mixin _$TeamSessionState {
 abstract class $TeamSessionStateCopyWith<$Res> {
   factory $TeamSessionStateCopyWith(
           TeamSessionState value, $Res Function(TeamSessionState) then) =
-      _$TeamSessionStateCopyWithImpl<$Res>;
+      _$TeamSessionStateCopyWithImpl<$Res, TeamSessionState>;
 }
 
 /// @nodoc
-class _$TeamSessionStateCopyWithImpl<$Res>
+class _$TeamSessionStateCopyWithImpl<$Res, $Val extends TeamSessionState>
     implements $TeamSessionStateCopyWith<$Res> {
   _$TeamSessionStateCopyWithImpl(this._value, this._then);
 
-  final TeamSessionState _value;
   // ignore: unused_field
-  final $Res Function(TeamSessionState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
 abstract class _$$LoggedCopyWith<$Res> {
   factory _$$LoggedCopyWith(_$Logged value, $Res Function(_$Logged) then) =
       __$$LoggedCopyWithImpl<$Res>;
+  @useResult
   $Res call({Team team});
 
   $TeamCopyWith<$Res> get team;
 }
 
 /// @nodoc
-class __$$LoggedCopyWithImpl<$Res> extends _$TeamSessionStateCopyWithImpl<$Res>
+class __$$LoggedCopyWithImpl<$Res>
+    extends _$TeamSessionStateCopyWithImpl<$Res, _$Logged>
     implements _$$LoggedCopyWith<$Res> {
   __$$LoggedCopyWithImpl(_$Logged _value, $Res Function(_$Logged) _then)
-      : super(_value, (v) => _then(v as _$Logged));
+      : super(_value, _then);
 
-  @override
-  _$Logged get _value => super._value as _$Logged;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? team = freezed,
+    Object? team = null,
   }) {
     return _then(_$Logged(
-      team: team == freezed
+      team: null == team
           ? _value.team
           : team // ignore: cast_nullable_to_non_nullable
               as Team,
@@ -110,6 +111,7 @@ class __$$LoggedCopyWithImpl<$Res> extends _$TeamSessionStateCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $TeamCopyWith<$Res> get team {
     return $TeamCopyWith<$Res>(_value.team, (value) {
       return _then(_value.copyWith(team: value));
@@ -135,15 +137,15 @@ class _$Logged implements Logged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Logged &&
-            const DeepCollectionEquality().equals(other.team, team));
+            (identical(other.team, team) || other.team == team));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(team));
+  int get hashCode => Object.hash(runtimeType, team);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LoggedCopyWith<_$Logged> get copyWith =>
       __$$LoggedCopyWithImpl<_$Logged>(this, _$identity);
 
@@ -160,9 +162,9 @@ class _$Logged implements Logged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Team team)? logged,
-    TResult Function()? homeless,
-    TResult Function(List<Team> teams)? signedOut,
+    TResult? Function(Team team)? logged,
+    TResult? Function()? homeless,
+    TResult? Function(List<Team> teams)? signedOut,
   }) {
     return logged?.call(team);
   }
@@ -194,9 +196,9 @@ class _$Logged implements Logged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Logged value)? logged,
-    TResult Function(Homeless value)? homeless,
-    TResult Function(SignedOut value)? signedOut,
+    TResult? Function(Logged value)? logged,
+    TResult? Function(Homeless value)? homeless,
+    TResult? Function(SignedOut value)? signedOut,
   }) {
     return logged?.call(this);
   }
@@ -234,13 +236,10 @@ abstract class _$$HomelessCopyWith<$Res> {
 
 /// @nodoc
 class __$$HomelessCopyWithImpl<$Res>
-    extends _$TeamSessionStateCopyWithImpl<$Res>
+    extends _$TeamSessionStateCopyWithImpl<$Res, _$Homeless>
     implements _$$HomelessCopyWith<$Res> {
   __$$HomelessCopyWithImpl(_$Homeless _value, $Res Function(_$Homeless) _then)
-      : super(_value, (v) => _then(v as _$Homeless));
-
-  @override
-  _$Homeless get _value => super._value as _$Homeless;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -275,9 +274,9 @@ class _$Homeless implements Homeless {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Team team)? logged,
-    TResult Function()? homeless,
-    TResult Function(List<Team> teams)? signedOut,
+    TResult? Function(Team team)? logged,
+    TResult? Function()? homeless,
+    TResult? Function(List<Team> teams)? signedOut,
   }) {
     return homeless?.call();
   }
@@ -309,9 +308,9 @@ class _$Homeless implements Homeless {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Logged value)? logged,
-    TResult Function(Homeless value)? homeless,
-    TResult Function(SignedOut value)? signedOut,
+    TResult? Function(Logged value)? logged,
+    TResult? Function(Homeless value)? homeless,
+    TResult? Function(SignedOut value)? signedOut,
   }) {
     return homeless?.call(this);
   }
@@ -340,26 +339,25 @@ abstract class _$$SignedOutCopyWith<$Res> {
   factory _$$SignedOutCopyWith(
           _$SignedOut value, $Res Function(_$SignedOut) then) =
       __$$SignedOutCopyWithImpl<$Res>;
+  @useResult
   $Res call({List<Team> teams});
 }
 
 /// @nodoc
 class __$$SignedOutCopyWithImpl<$Res>
-    extends _$TeamSessionStateCopyWithImpl<$Res>
+    extends _$TeamSessionStateCopyWithImpl<$Res, _$SignedOut>
     implements _$$SignedOutCopyWith<$Res> {
   __$$SignedOutCopyWithImpl(
       _$SignedOut _value, $Res Function(_$SignedOut) _then)
-      : super(_value, (v) => _then(v as _$SignedOut));
+      : super(_value, _then);
 
-  @override
-  _$SignedOut get _value => super._value as _$SignedOut;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? teams = freezed,
+    Object? teams = null,
   }) {
     return _then(_$SignedOut(
-      teams: teams == freezed
+      teams: null == teams
           ? _value._teams
           : teams // ignore: cast_nullable_to_non_nullable
               as List<Team>,
@@ -375,6 +373,7 @@ class _$SignedOut implements SignedOut {
   final List<Team> _teams;
   @override
   List<Team> get teams {
+    if (_teams is EqualUnmodifiableListView) return _teams;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_teams);
   }
@@ -398,6 +397,7 @@ class _$SignedOut implements SignedOut {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SignedOutCopyWith<_$SignedOut> get copyWith =>
       __$$SignedOutCopyWithImpl<_$SignedOut>(this, _$identity);
 
@@ -414,9 +414,9 @@ class _$SignedOut implements SignedOut {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Team team)? logged,
-    TResult Function()? homeless,
-    TResult Function(List<Team> teams)? signedOut,
+    TResult? Function(Team team)? logged,
+    TResult? Function()? homeless,
+    TResult? Function(List<Team> teams)? signedOut,
   }) {
     return signedOut?.call(teams);
   }
@@ -448,9 +448,9 @@ class _$SignedOut implements SignedOut {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Logged value)? logged,
-    TResult Function(Homeless value)? homeless,
-    TResult Function(SignedOut value)? signedOut,
+    TResult? Function(Logged value)? logged,
+    TResult? Function(Homeless value)? homeless,
+    TResult? Function(SignedOut value)? signedOut,
   }) {
     return signedOut?.call(this);
   }

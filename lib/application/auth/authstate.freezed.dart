@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'authstate.dart';
 
@@ -24,8 +24,8 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? auth,
-    TResult Function()? unauth,
+    TResult? Function(User user)? auth,
+    TResult? Function()? unauth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Auth value)? auth,
-    TResult Function(Unauth value)? unauth,
+    TResult? Function(Auth value)? auth,
+    TResult? Function(Unauth value)? unauth,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,42 +59,43 @@ mixin _$AuthState {
 /// @nodoc
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
-      _$AuthStateCopyWithImpl<$Res>;
+      _$AuthStateCopyWithImpl<$Res, AuthState>;
 }
 
 /// @nodoc
-class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
+class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
+    implements $AuthStateCopyWith<$Res> {
   _$AuthStateCopyWithImpl(this._value, this._then);
 
-  final AuthState _value;
   // ignore: unused_field
-  final $Res Function(AuthState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
 abstract class _$$AuthCopyWith<$Res> {
   factory _$$AuthCopyWith(_$Auth value, $Res Function(_$Auth) then) =
       __$$AuthCopyWithImpl<$Res>;
+  @useResult
   $Res call({User user});
 
   $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$AuthCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$$AuthCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res, _$Auth>
     implements _$$AuthCopyWith<$Res> {
   __$$AuthCopyWithImpl(_$Auth _value, $Res Function(_$Auth) _then)
-      : super(_value, (v) => _then(v as _$Auth));
+      : super(_value, _then);
 
-  @override
-  _$Auth get _value => super._value as _$Auth;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_$Auth(
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -102,6 +103,7 @@ class __$$AuthCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -127,15 +129,15 @@ class _$Auth implements Auth {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Auth &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$AuthCopyWith<_$Auth> get copyWith =>
       __$$AuthCopyWithImpl<_$Auth>(this, _$identity);
 
@@ -151,8 +153,8 @@ class _$Auth implements Auth {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? auth,
-    TResult Function()? unauth,
+    TResult? Function(User user)? auth,
+    TResult? Function()? unauth,
   }) {
     return auth?.call(user);
   }
@@ -182,8 +184,8 @@ class _$Auth implements Auth {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Auth value)? auth,
-    TResult Function(Unauth value)? unauth,
+    TResult? Function(Auth value)? auth,
+    TResult? Function(Unauth value)? unauth,
   }) {
     return auth?.call(this);
   }
@@ -217,13 +219,11 @@ abstract class _$$UnauthCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UnauthCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class __$$UnauthCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$Unauth>
     implements _$$UnauthCopyWith<$Res> {
   __$$UnauthCopyWithImpl(_$Unauth _value, $Res Function(_$Unauth) _then)
-      : super(_value, (v) => _then(v as _$Unauth));
-
-  @override
-  _$Unauth get _value => super._value as _$Unauth;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -257,8 +257,8 @@ class _$Unauth implements Unauth {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? auth,
-    TResult Function()? unauth,
+    TResult? Function(User user)? auth,
+    TResult? Function()? unauth,
   }) {
     return unauth?.call();
   }
@@ -288,8 +288,8 @@ class _$Unauth implements Unauth {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Auth value)? auth,
-    TResult Function(Unauth value)? unauth,
+    TResult? Function(Auth value)? auth,
+    TResult? Function(Unauth value)? unauth,
   }) {
     return unauth?.call(this);
   }

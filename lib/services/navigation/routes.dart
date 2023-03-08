@@ -215,3 +215,24 @@ class SplashPageRoute extends GoRoute {
         );
 }
  */
+
+class DashboardPageRoute extends GoRoute {
+  static const String pageName = 'dashboard';
+  static const String pagePath = '/$pageName';
+
+  DashboardPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => const NoTransitionPage(child: Dashboard()),
+        );
+}
+
+class LoginPageRoute extends GoRoute {
+  static const String pagePath = '/login';
+
+  LoginPageRoute()
+      : super(
+          path: pagePath,
+          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const LoginPage()),
+        );
+}

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'note.dart';
 
@@ -35,7 +35,8 @@ mixin _$Note {
 /// @nodoc
 abstract class $NoteCopyWith<$Res> {
   factory $NoteCopyWith(Note value, $Res Function(Note) then) =
-      _$NoteCopyWithImpl<$Res>;
+      _$NoteCopyWithImpl<$Res, Note>;
+  @useResult
   $Res call(
       {String id,
       String title,
@@ -46,48 +47,51 @@ abstract class $NoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
+class _$NoteCopyWithImpl<$Res, $Val extends Note>
+    implements $NoteCopyWith<$Res> {
   _$NoteCopyWithImpl(this._value, this._then);
 
-  final Note _value;
   // ignore: unused_field
-  final $Res Function(Note) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
+    Object? id = null,
+    Object? title = null,
     Object? description = freezed,
-    Object? modifiedByUserId = freezed,
-    Object? lastUpdate = freezed,
-    Object? teamId = freezed,
+    Object? modifiedByUserId = null,
+    Object? lastUpdate = null,
+    Object? teamId = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      modifiedByUserId: modifiedByUserId == freezed
+      modifiedByUserId: null == modifiedByUserId
           ? _value.modifiedByUserId
           : modifiedByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      lastUpdate: lastUpdate == freezed
+      lastUpdate: null == lastUpdate
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,6 +100,7 @@ abstract class _$$_NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
   factory _$$_NoteCopyWith(_$_Note value, $Res Function(_$_Note) then) =
       __$$_NoteCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String title,
@@ -106,45 +111,43 @@ abstract class _$$_NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
+class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res, _$_Note>
     implements _$$_NoteCopyWith<$Res> {
   __$$_NoteCopyWithImpl(_$_Note _value, $Res Function(_$_Note) _then)
-      : super(_value, (v) => _then(v as _$_Note));
+      : super(_value, _then);
 
-  @override
-  _$_Note get _value => super._value as _$_Note;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
+    Object? id = null,
+    Object? title = null,
     Object? description = freezed,
-    Object? modifiedByUserId = freezed,
-    Object? lastUpdate = freezed,
-    Object? teamId = freezed,
+    Object? modifiedByUserId = null,
+    Object? lastUpdate = null,
+    Object? teamId = null,
   }) {
     return _then(_$_Note(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      modifiedByUserId: modifiedByUserId == freezed
+      modifiedByUserId: null == modifiedByUserId
           ? _value.modifiedByUserId
           : modifiedByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      lastUpdate: lastUpdate == freezed
+      lastUpdate: null == lastUpdate
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -189,30 +192,25 @@ class _$_Note extends _Note {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Note &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality()
-                .equals(other.modifiedByUserId, modifiedByUserId) &&
-            const DeepCollectionEquality()
-                .equals(other.lastUpdate, lastUpdate) &&
-            const DeepCollectionEquality().equals(other.teamId, teamId));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.modifiedByUserId, modifiedByUserId) ||
+                other.modifiedByUserId == modifiedByUserId) &&
+            (identical(other.lastUpdate, lastUpdate) ||
+                other.lastUpdate == lastUpdate) &&
+            (identical(other.teamId, teamId) || other.teamId == teamId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(modifiedByUserId),
-      const DeepCollectionEquality().hash(lastUpdate),
-      const DeepCollectionEquality().hash(teamId));
+  int get hashCode => Object.hash(runtimeType, id, title, description,
+      modifiedByUserId, lastUpdate, teamId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_NoteCopyWith<_$_Note> get copyWith =>
       __$$_NoteCopyWithImpl<_$_Note>(this, _$identity);
 

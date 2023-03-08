@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'create_event.dart';
 
@@ -38,7 +38,8 @@ mixin _$CreateEventCommand {
 abstract class $CreateEventCommandCopyWith<$Res> {
   factory $CreateEventCommandCopyWith(
           CreateEventCommand value, $Res Function(CreateEventCommand) then) =
-      _$CreateEventCommandCopyWithImpl<$Res>;
+      _$CreateEventCommandCopyWithImpl<$Res, CreateEventCommand>;
+  @useResult
   $Res call(
       {String teamId,
       String name,
@@ -50,54 +51,56 @@ abstract class $CreateEventCommandCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CreateEventCommandCopyWithImpl<$Res>
+class _$CreateEventCommandCopyWithImpl<$Res, $Val extends CreateEventCommand>
     implements $CreateEventCommandCopyWith<$Res> {
   _$CreateEventCommandCopyWithImpl(this._value, this._then);
 
-  final CreateEventCommand _value;
   // ignore: unused_field
-  final $Res Function(CreateEventCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? teamId = freezed,
-    Object? name = freezed,
-    Object? startTime = freezed,
-    Object? createdByUserId = freezed,
+    Object? teamId = null,
+    Object? name = null,
+    Object? startTime = null,
+    Object? createdByUserId = null,
     Object? description = freezed,
     Object? iconName = freezed,
     Object? endTime = freezed,
   }) {
     return _then(_value.copyWith(
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      createdByUserId: createdByUserId == freezed
+      createdByUserId: null == createdByUserId
           ? _value.createdByUserId
           : createdByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-      endTime: endTime == freezed
+      endTime: freezed == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -108,6 +111,7 @@ abstract class _$$_CreateEventCommandCopyWith<$Res>
           $Res Function(_$_CreateEventCommand) then) =
       __$$_CreateEventCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String teamId,
       String name,
@@ -120,51 +124,49 @@ abstract class _$$_CreateEventCommandCopyWith<$Res>
 
 /// @nodoc
 class __$$_CreateEventCommandCopyWithImpl<$Res>
-    extends _$CreateEventCommandCopyWithImpl<$Res>
+    extends _$CreateEventCommandCopyWithImpl<$Res, _$_CreateEventCommand>
     implements _$$_CreateEventCommandCopyWith<$Res> {
   __$$_CreateEventCommandCopyWithImpl(
       _$_CreateEventCommand _value, $Res Function(_$_CreateEventCommand) _then)
-      : super(_value, (v) => _then(v as _$_CreateEventCommand));
+      : super(_value, _then);
 
-  @override
-  _$_CreateEventCommand get _value => super._value as _$_CreateEventCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? teamId = freezed,
-    Object? name = freezed,
-    Object? startTime = freezed,
-    Object? createdByUserId = freezed,
+    Object? teamId = null,
+    Object? name = null,
+    Object? startTime = null,
+    Object? createdByUserId = null,
     Object? description = freezed,
     Object? iconName = freezed,
     Object? endTime = freezed,
   }) {
     return _then(_$_CreateEventCommand(
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      createdByUserId: createdByUserId == freezed
+      createdByUserId: null == createdByUserId
           ? _value.createdByUserId
           : createdByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-      endTime: endTime == freezed
+      endTime: freezed == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -174,7 +176,8 @@ class __$$_CreateEventCommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CreateEventCommand extends _CreateEventCommand {
+class _$_CreateEventCommand extends _CreateEventCommand
+    with DiagnosticableTreeMixin {
   const _$_CreateEventCommand(
       {required this.teamId,
       required this.name,
@@ -204,8 +207,22 @@ class _$_CreateEventCommand extends _CreateEventCommand {
   final DateTime? endTime;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'CreateEventCommand(teamId: $teamId, name: $name, startTime: $startTime, createdByUserId: $createdByUserId, description: $description, iconName: $iconName, endTime: $endTime)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CreateEventCommand'))
+      ..add(DiagnosticsProperty('teamId', teamId))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('startTime', startTime))
+      ..add(DiagnosticsProperty('createdByUserId', createdByUserId))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('iconName', iconName))
+      ..add(DiagnosticsProperty('endTime', endTime));
   }
 
   @override
@@ -213,31 +230,27 @@ class _$_CreateEventCommand extends _CreateEventCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CreateEventCommand &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality()
-                .equals(other.createdByUserId, createdByUserId) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.iconName, iconName) &&
-            const DeepCollectionEquality().equals(other.endTime, endTime));
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.createdByUserId, createdByUserId) ||
+                other.createdByUserId == createdByUserId) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.iconName, iconName) ||
+                other.iconName == iconName) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(createdByUserId),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(iconName),
-      const DeepCollectionEquality().hash(endTime));
+  int get hashCode => Object.hash(runtimeType, teamId, name, startTime,
+      createdByUserId, description, iconName, endTime);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CreateEventCommandCopyWith<_$_CreateEventCommand> get copyWith =>
       __$$_CreateEventCommandCopyWithImpl<_$_CreateEventCommand>(
           this, _$identity);

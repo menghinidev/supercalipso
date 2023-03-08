@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'create_team_invitation_command.dart';
 
@@ -38,7 +38,9 @@ abstract class $CreateTeamInvitationCommandCopyWith<$Res> {
   factory $CreateTeamInvitationCommandCopyWith(
           CreateTeamInvitationCommand value,
           $Res Function(CreateTeamInvitationCommand) then) =
-      _$CreateTeamInvitationCommandCopyWithImpl<$Res>;
+      _$CreateTeamInvitationCommandCopyWithImpl<$Res,
+          CreateTeamInvitationCommand>;
+  @useResult
   $Res call(
       {String invitedUserId,
       String invitedByUserId,
@@ -48,44 +50,47 @@ abstract class $CreateTeamInvitationCommandCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CreateTeamInvitationCommandCopyWithImpl<$Res>
+class _$CreateTeamInvitationCommandCopyWithImpl<$Res,
+        $Val extends CreateTeamInvitationCommand>
     implements $CreateTeamInvitationCommandCopyWith<$Res> {
   _$CreateTeamInvitationCommandCopyWithImpl(this._value, this._then);
 
-  final CreateTeamInvitationCommand _value;
   // ignore: unused_field
-  final $Res Function(CreateTeamInvitationCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invitedUserId = freezed,
-    Object? invitedByUserId = freezed,
-    Object? teamId = freezed,
-    Object? createdAt = freezed,
-    Object? status = freezed,
+    Object? invitedUserId = null,
+    Object? invitedByUserId = null,
+    Object? teamId = null,
+    Object? createdAt = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
-      invitedUserId: invitedUserId == freezed
+      invitedUserId: null == invitedUserId
           ? _value.invitedUserId
           : invitedUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      invitedByUserId: invitedByUserId == freezed
+      invitedByUserId: null == invitedByUserId
           ? _value.invitedByUserId
           : invitedByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -97,6 +102,7 @@ abstract class _$$_CreateTeamInvitationCommandCopyWith<$Res>
           $Res Function(_$_CreateTeamInvitationCommand) then) =
       __$$_CreateTeamInvitationCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String invitedUserId,
       String invitedByUserId,
@@ -107,43 +113,41 @@ abstract class _$$_CreateTeamInvitationCommandCopyWith<$Res>
 
 /// @nodoc
 class __$$_CreateTeamInvitationCommandCopyWithImpl<$Res>
-    extends _$CreateTeamInvitationCommandCopyWithImpl<$Res>
+    extends _$CreateTeamInvitationCommandCopyWithImpl<$Res,
+        _$_CreateTeamInvitationCommand>
     implements _$$_CreateTeamInvitationCommandCopyWith<$Res> {
   __$$_CreateTeamInvitationCommandCopyWithImpl(
       _$_CreateTeamInvitationCommand _value,
       $Res Function(_$_CreateTeamInvitationCommand) _then)
-      : super(_value, (v) => _then(v as _$_CreateTeamInvitationCommand));
+      : super(_value, _then);
 
-  @override
-  _$_CreateTeamInvitationCommand get _value =>
-      super._value as _$_CreateTeamInvitationCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invitedUserId = freezed,
-    Object? invitedByUserId = freezed,
-    Object? teamId = freezed,
-    Object? createdAt = freezed,
-    Object? status = freezed,
+    Object? invitedUserId = null,
+    Object? invitedByUserId = null,
+    Object? teamId = null,
+    Object? createdAt = null,
+    Object? status = null,
   }) {
     return _then(_$_CreateTeamInvitationCommand(
-      invitedUserId: invitedUserId == freezed
+      invitedUserId: null == invitedUserId
           ? _value.invitedUserId
           : invitedUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      invitedByUserId: invitedByUserId == freezed
+      invitedByUserId: null == invitedByUserId
           ? _value.invitedByUserId
           : invitedByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
@@ -186,27 +190,24 @@ class _$_CreateTeamInvitationCommand extends _CreateTeamInvitationCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CreateTeamInvitationCommand &&
-            const DeepCollectionEquality()
-                .equals(other.invitedUserId, invitedUserId) &&
-            const DeepCollectionEquality()
-                .equals(other.invitedByUserId, invitedByUserId) &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.status, status));
+            (identical(other.invitedUserId, invitedUserId) ||
+                other.invitedUserId == invitedUserId) &&
+            (identical(other.invitedByUserId, invitedByUserId) ||
+                other.invitedByUserId == invitedByUserId) &&
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(invitedUserId),
-      const DeepCollectionEquality().hash(invitedByUserId),
-      const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(status));
+      runtimeType, invitedUserId, invitedByUserId, teamId, createdAt, status);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CreateTeamInvitationCommandCopyWith<_$_CreateTeamInvitationCommand>
       get copyWith => __$$_CreateTeamInvitationCommandCopyWithImpl<
           _$_CreateTeamInvitationCommand>(this, _$identity);

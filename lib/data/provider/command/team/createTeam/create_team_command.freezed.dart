@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'create_team_command.dart';
 
@@ -33,34 +33,37 @@ mixin _$CreateTeamCommand {
 abstract class $CreateTeamCommandCopyWith<$Res> {
   factory $CreateTeamCommandCopyWith(
           CreateTeamCommand value, $Res Function(CreateTeamCommand) then) =
-      _$CreateTeamCommandCopyWithImpl<$Res>;
+      _$CreateTeamCommandCopyWithImpl<$Res, CreateTeamCommand>;
+  @useResult
   $Res call({String name, String userId});
 }
 
 /// @nodoc
-class _$CreateTeamCommandCopyWithImpl<$Res>
+class _$CreateTeamCommandCopyWithImpl<$Res, $Val extends CreateTeamCommand>
     implements $CreateTeamCommandCopyWith<$Res> {
   _$CreateTeamCommandCopyWithImpl(this._value, this._then);
 
-  final CreateTeamCommand _value;
   // ignore: unused_field
-  final $Res Function(CreateTeamCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? userId = freezed,
+    Object? name = null,
+    Object? userId = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: userId == freezed
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -71,31 +74,30 @@ abstract class _$$_CreateTeamCommandCopyWith<$Res>
           $Res Function(_$_CreateTeamCommand) then) =
       __$$_CreateTeamCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String name, String userId});
 }
 
 /// @nodoc
 class __$$_CreateTeamCommandCopyWithImpl<$Res>
-    extends _$CreateTeamCommandCopyWithImpl<$Res>
+    extends _$CreateTeamCommandCopyWithImpl<$Res, _$_CreateTeamCommand>
     implements _$$_CreateTeamCommandCopyWith<$Res> {
   __$$_CreateTeamCommandCopyWithImpl(
       _$_CreateTeamCommand _value, $Res Function(_$_CreateTeamCommand) _then)
-      : super(_value, (v) => _then(v as _$_CreateTeamCommand));
+      : super(_value, _then);
 
-  @override
-  _$_CreateTeamCommand get _value => super._value as _$_CreateTeamCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? userId = freezed,
+    Object? name = null,
+    Object? userId = null,
   }) {
     return _then(_$_CreateTeamCommand(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: userId == freezed
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -127,19 +129,17 @@ class _$_CreateTeamCommand extends _CreateTeamCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CreateTeamCommand &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.userId, userId));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(userId));
+  int get hashCode => Object.hash(runtimeType, name, userId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CreateTeamCommandCopyWith<_$_CreateTeamCommand> get copyWith =>
       __$$_CreateTeamCommandCopyWithImpl<_$_CreateTeamCommand>(
           this, _$identity);

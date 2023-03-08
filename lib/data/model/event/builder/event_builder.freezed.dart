@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'event_builder.dart';
 
@@ -32,7 +32,8 @@ mixin _$EventBuilder {
 abstract class $EventBuilderCopyWith<$Res> {
   factory $EventBuilderCopyWith(
           EventBuilder value, $Res Function(EventBuilder) then) =
-      _$EventBuilderCopyWithImpl<$Res>;
+      _$EventBuilderCopyWithImpl<$Res, EventBuilder>;
+  @useResult
   $Res call(
       {String? teamId,
       String? name,
@@ -43,13 +44,16 @@ abstract class $EventBuilderCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$EventBuilderCopyWithImpl<$Res> implements $EventBuilderCopyWith<$Res> {
+class _$EventBuilderCopyWithImpl<$Res, $Val extends EventBuilder>
+    implements $EventBuilderCopyWith<$Res> {
   _$EventBuilderCopyWithImpl(this._value, this._then);
 
-  final EventBuilder _value;
   // ignore: unused_field
-  final $Res Function(EventBuilder) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? teamId = freezed,
@@ -60,31 +64,31 @@ class _$EventBuilderCopyWithImpl<$Res> implements $EventBuilderCopyWith<$Res> {
     Object? iconName = freezed,
   }) {
     return _then(_value.copyWith(
-      teamId: teamId == freezed
+      teamId: freezed == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      startTime: startTime == freezed
+      startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endTime: endTime == freezed
+      endTime: freezed == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -95,6 +99,7 @@ abstract class _$$_EventBuilderCopyWith<$Res>
           _$_EventBuilder value, $Res Function(_$_EventBuilder) then) =
       __$$_EventBuilderCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? teamId,
       String? name,
@@ -106,15 +111,13 @@ abstract class _$$_EventBuilderCopyWith<$Res>
 
 /// @nodoc
 class __$$_EventBuilderCopyWithImpl<$Res>
-    extends _$EventBuilderCopyWithImpl<$Res>
+    extends _$EventBuilderCopyWithImpl<$Res, _$_EventBuilder>
     implements _$$_EventBuilderCopyWith<$Res> {
   __$$_EventBuilderCopyWithImpl(
       _$_EventBuilder _value, $Res Function(_$_EventBuilder) _then)
-      : super(_value, (v) => _then(v as _$_EventBuilder));
+      : super(_value, _then);
 
-  @override
-  _$_EventBuilder get _value => super._value as _$_EventBuilder;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? teamId = freezed,
@@ -125,27 +128,27 @@ class __$$_EventBuilderCopyWithImpl<$Res>
     Object? iconName = freezed,
   }) {
     return _then(_$_EventBuilder(
-      teamId: teamId == freezed
+      teamId: freezed == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      startTime: startTime == freezed
+      startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endTime: endTime == freezed
+      endTime: freezed == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -187,27 +190,24 @@ class _$_EventBuilder implements _EventBuilder {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EventBuilder &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.endTime, endTime) &&
-            const DeepCollectionEquality().equals(other.iconName, iconName));
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.iconName, iconName) ||
+                other.iconName == iconName));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(endTime),
-      const DeepCollectionEquality().hash(iconName));
+      runtimeType, teamId, name, description, startTime, endTime, iconName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_EventBuilderCopyWith<_$_EventBuilder> get copyWith =>
       __$$_EventBuilderCopyWithImpl<_$_EventBuilder>(this, _$identity);
 }

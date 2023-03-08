@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'update_event_command.dart';
 
@@ -37,7 +37,8 @@ mixin _$UpdateEventCommand {
 abstract class $UpdateEventCommandCopyWith<$Res> {
   factory $UpdateEventCommandCopyWith(
           UpdateEventCommand value, $Res Function(UpdateEventCommand) then) =
-      _$UpdateEventCommandCopyWithImpl<$Res>;
+      _$UpdateEventCommandCopyWithImpl<$Res, UpdateEventCommand>;
+  @useResult
   $Res call(
       {String eventId,
       String? title,
@@ -48,17 +49,19 @@ abstract class $UpdateEventCommandCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UpdateEventCommandCopyWithImpl<$Res>
+class _$UpdateEventCommandCopyWithImpl<$Res, $Val extends UpdateEventCommand>
     implements $UpdateEventCommandCopyWith<$Res> {
   _$UpdateEventCommandCopyWithImpl(this._value, this._then);
 
-  final UpdateEventCommand _value;
   // ignore: unused_field
-  final $Res Function(UpdateEventCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? eventId = freezed,
+    Object? eventId = null,
     Object? title = freezed,
     Object? description = freezed,
     Object? startTime = freezed,
@@ -66,31 +69,31 @@ class _$UpdateEventCommandCopyWithImpl<$Res>
     Object? iconName = freezed,
   }) {
     return _then(_value.copyWith(
-      eventId: eventId == freezed
+      eventId: null == eventId
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      startTime: startTime == freezed
+      startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endTime: endTime == freezed
+      endTime: freezed == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -101,6 +104,7 @@ abstract class _$$_UpdateEventCommandCopyWith<$Res>
           $Res Function(_$_UpdateEventCommand) then) =
       __$$_UpdateEventCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String eventId,
       String? title,
@@ -112,18 +116,16 @@ abstract class _$$_UpdateEventCommandCopyWith<$Res>
 
 /// @nodoc
 class __$$_UpdateEventCommandCopyWithImpl<$Res>
-    extends _$UpdateEventCommandCopyWithImpl<$Res>
+    extends _$UpdateEventCommandCopyWithImpl<$Res, _$_UpdateEventCommand>
     implements _$$_UpdateEventCommandCopyWith<$Res> {
   __$$_UpdateEventCommandCopyWithImpl(
       _$_UpdateEventCommand _value, $Res Function(_$_UpdateEventCommand) _then)
-      : super(_value, (v) => _then(v as _$_UpdateEventCommand));
+      : super(_value, _then);
 
-  @override
-  _$_UpdateEventCommand get _value => super._value as _$_UpdateEventCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? eventId = freezed,
+    Object? eventId = null,
     Object? title = freezed,
     Object? description = freezed,
     Object? startTime = freezed,
@@ -131,27 +133,27 @@ class __$$_UpdateEventCommandCopyWithImpl<$Res>
     Object? iconName = freezed,
   }) {
     return _then(_$_UpdateEventCommand(
-      eventId: eventId == freezed
+      eventId: null == eventId
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      startTime: startTime == freezed
+      startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endTime: endTime == freezed
+      endTime: freezed == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -196,28 +198,25 @@ class _$_UpdateEventCommand implements _UpdateEventCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateEventCommand &&
-            const DeepCollectionEquality().equals(other.eventId, eventId) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.endTime, endTime) &&
-            const DeepCollectionEquality().equals(other.iconName, iconName));
+            (identical(other.eventId, eventId) || other.eventId == eventId) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.iconName, iconName) ||
+                other.iconName == iconName));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(eventId),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(endTime),
-      const DeepCollectionEquality().hash(iconName));
+      runtimeType, eventId, title, description, startTime, endTime, iconName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UpdateEventCommandCopyWith<_$_UpdateEventCommand> get copyWith =>
       __$$_UpdateEventCommandCopyWithImpl<_$_UpdateEventCommand>(
           this, _$identity);
