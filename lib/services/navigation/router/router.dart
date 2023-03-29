@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/presenter/pages/splash/splash_page.dart';
 import 'package:supercalipso/services/navigation/router/router_notifier.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 
@@ -15,23 +17,21 @@ GlobalKey<NavigatorState> navigatorKey(NavigatorKeyRef ref) {
 @riverpod
 GoRouter router(RouterRef ref) {
   var key = ref.watch(navigatorKeyProvider);
-  final sub = ref.listen(routerNotifierProvider, (_, __) {});
-  ref.onDispose(sub.close);
-
-  final notifier = ref.read(routerNotifierProvider.notifier);
+  var notifier = ref.watch(routerNotifierProvider.notifier);
   return GoRouter(
     navigatorKey: key,
     debugLogDiagnostics: kDebugMode,
-    initialLocation: LoginPageRoute.pagePath,
-    refreshListenable: notifier,
     redirect: notifier.redirect,
+    refreshListenable: notifier,
     routes: [
+      SplashPageRoute(),
       LoginPageRoute(),
-      DashboardPageRoute(),
-      SpeakerPageRoute(),
+      HomePageRoute(),
+      ProfilePageRoute(),
+      NotePageRoute(),
+      TaskPageRoute(),
+      TeamPageRoute(),
       EventPageRoute(),
-      SpeakerPageRoute(),
-      QAPageRoute(),
     ],
   );
 }

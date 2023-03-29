@@ -5,7 +5,7 @@ import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/team/team.dart';
 import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/pages/profile/components/team_tile.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/sections/list_section.dart';
 import 'package:supercalipso/presenter/pages/profile/sections/team_generator_bottom_sheet.dart';
 
 class TeamsList extends HookConsumerWidget {

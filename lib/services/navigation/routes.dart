@@ -2,25 +2,23 @@ import 'package:go_router/go_router.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/model/task/task.dart';
-import 'package:supercalipso/presenter/components/scaffold/bottom_navigator_shell.dart';
-import 'package:supercalipso/presenter/pages/dashboard/dashboard_page.dart';
 import 'package:supercalipso/presenter/pages/event/event_page.dart';
-import 'package:supercalipso/presenter/pages/events/events_page.dart';
-import 'package:supercalipso/presenter/pages/expenses/expenses_page.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/dashboard_page.dart';
+import 'package:supercalipso/presenter/pages/home/events/events_page.dart';
+import 'package:supercalipso/presenter/pages/home/expenses/expenses_page.dart';
+import 'package:supercalipso/presenter/pages/home/home_page.dart';
+import 'package:supercalipso/presenter/pages/home/notes/notes_page.dart';
+import 'package:supercalipso/presenter/pages/home/tasks/tasks_page.dart';
 import 'package:supercalipso/presenter/pages/login/login_page.dart';
 import 'package:supercalipso/presenter/pages/note/note_page.dart';
-import 'package:supercalipso/presenter/pages/notes/notes_page.dart';
 import 'package:supercalipso/presenter/pages/profile/profile_page.dart';
 import 'package:supercalipso/presenter/pages/splash/splash_page.dart';
 import 'package:supercalipso/presenter/pages/task/task_page.dart';
-import 'package:supercalipso/presenter/pages/tasks/tasks_page.dart';
 import 'package:supercalipso/presenter/pages/team/team_page.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
 import 'package:supercalipso/services/navigation/transitions.dart';
 
 class AppRoutes {
   static final splash = SplashPageRoute();
-  static final home = HomeShellRoute();
   static final login = LoginPageRoute();
   static final team = TeamPageRoute();
   static final profile = ProfilePageRoute();
@@ -29,7 +27,6 @@ class AppRoutes {
 
   static get routes => [
         splash,
-        home,
         profile,
         login,
         team,
@@ -67,63 +64,16 @@ class AppRoutes {
     if (index == 4) return NotesPageRoute.pagePath;
     return DashboardPageRoute.pageName;
   }
-}
+} */
 
-class ExpensesPageRoute extends GoRoute {
-  static const String pageName = 'expenses';
-  static const String pagePath = '/$pageName';
-
-  ExpensesPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => const NoTransitionPage(child: ExpensesPage()),
-        );
-}
-
-class EventsPageRoute extends GoRoute {
-  static const String pageName = 'events';
-  static const String pagePath = '/$pageName';
-
-  EventsPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => const NoTransitionPage(child: EventsPage()),
-          routes: [EventPageRoute()],
-        );
-}
-
-class DashboardPageRoute extends GoRoute {
+class HomePageRoute extends GoRoute {
   static const String pageName = 'dashboard';
   static const String pagePath = '/$pageName';
 
-  DashboardPageRoute()
+  HomePageRoute()
       : super(
           path: pagePath,
-          pageBuilder: (context, state) => const NoTransitionPage(child: Dashboard()),
-        );
-}
-
-class TasksPageRoute extends GoRoute {
-  static const String pageName = 'tasks';
-  static const String pagePath = '/$pageName';
-
-  TasksPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => const NoTransitionPage(child: TasksPage()),
-          routes: [TaskPageRoute()],
-        );
-}
-
-class NotesPageRoute extends GoRoute {
-  static const String pageName = 'notes';
-  static const String pagePath = '/$pageName';
-
-  NotesPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => const NoTransitionPage(child: NotesPage()),
-          routes: [NotePageRoute()],
+          pageBuilder: (context, state) => const NoTransitionPage(child: HomePage()),
         );
 }
 
@@ -133,8 +83,7 @@ class EventPageRoute extends GoRoute {
 
   EventPageRoute()
       : super(
-          path: pageName,
-          parentNavigatorKey: RouterNotifier.mainNavigatorKey,
+          path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: EventPage(event: state.extra as TeamEvent?),
           ),
@@ -147,8 +96,7 @@ class TaskPageRoute extends GoRoute {
 
   TaskPageRoute()
       : super(
-          path: pageName,
-          parentNavigatorKey: RouterNotifier.mainNavigatorKey,
+          path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: TaskPage(task: state.extra as Task?),
           ),
@@ -161,8 +109,7 @@ class NotePageRoute extends GoRoute {
 
   NotePageRoute()
       : super(
-          path: pageName,
-          parentNavigatorKey: RouterNotifier.mainNavigatorKey,
+          path: pagePath,
           pageBuilder: (context, state) => BasePageTransitionBuilder(
             child: NotePage(note: state.extra as Note?),
           ),
@@ -211,28 +158,6 @@ class SplashPageRoute extends GoRoute {
   SplashPageRoute()
       : super(
           path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const SplashPage()),
-        );
-}
- */
-
-class DashboardPageRoute extends GoRoute {
-  static const String pageName = 'dashboard';
-  static const String pagePath = '/$pageName';
-
-  DashboardPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => const NoTransitionPage(child: Dashboard()),
-        );
-}
-
-class LoginPageRoute extends GoRoute {
-  static const String pagePath = '/login';
-
-  LoginPageRoute()
-      : super(
-          path: pagePath,
-          pageBuilder: (context, state) => BasePageTransitionBuilder(child: const LoginPage()),
+          builder: (context, state) => const SplashPage(),
         );
 }

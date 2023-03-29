@@ -10,7 +10,7 @@ import 'package:supercalipso/plugin/utils.dart';
 
 final loggedTeamNotesProvider = StateNotifierProvider<TeamNotesController, AsyncValue<List<Note>>>((ref) {
   var session = ref.watch(teamSessionStateProvider);
-  var auth = ref.watch(authStateProvider.select((value) => value.valueOrNull));
+  var auth = ref.watch(authStateProvider);
   return TeamNotesController(
     noteRepo: ref.watch(noteRepoProvider),
     authState: auth,

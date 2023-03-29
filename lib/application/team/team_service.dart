@@ -1,4 +1,3 @@
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/auth/auth_provider.dart';
 import 'package:supercalipso/application/auth/authstate.dart';
@@ -8,31 +7,17 @@ import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/data/repository/team_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
-import 'package:supercalipso/services/navigation/routes.dart';
 
 final teamInvitationsProvider = FutureProvider<Response<List<TeamInvitation>>>((ref) async {
   var authState = ref.watch(authStateProvider);
-  var uid = authState.whenOrNull(data: (user) => user.whenOrNull(auth: (user) => user.uid));
+  var uid = authState.whenOrNull(auth: (user) => user.uid);
   if (uid == null) return Responses.success(<TeamInvitation>[]);
   return ref.watch(teamRepoProvider).getUserTeamInvitations(userId: uid);
 });
 
-/* final teamMembersProvider = FutureProvider<List<User>>((ref) async {
-  return ref.watch(teamServiceProvider).getTeamMembers();
-});
-
-final currentTeamChangesProvider = StreamProvider<Team?>((ref) {
-  return ref.watch(teamRepoProvider).currentTeam;
-});
-
-final teamProvider = FutureProvider.family<Team, String>((ref, id) async {
-  return ref.watch(teamRepoProvider).getTeam(teamId: id);
-}); */
-
 final teamSessionStateProvider = StateNotifierProvider<TeamSessionNotifier, TeamSessionState>((ref) {
   var auth = ref.watch(authStateProvider);
-  var value = auth.whenOrNull(data: (data) => data);
+  var value = auth.whenOrNull(auth: (user) => auth);
   return TeamSessionNotifier(
     teamRepository: ref.watch(teamRepoProvider),
     authRepository: ref.watch(authRepoProvider),

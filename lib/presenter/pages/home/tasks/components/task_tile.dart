@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:supercalipso/application/auth/auth_notifier.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/auth/auth_provider.dart';
 import 'package:supercalipso/application/task/task_service.dart';
 import 'package:supercalipso/application/utils.dart';
@@ -8,8 +8,7 @@ import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
 import 'package:supercalipso/presenter/pages/event/sections/name_section.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/router/router.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 
 class TaskTile extends HookConsumerWidget with DateFormatter {

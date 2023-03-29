@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/plugin/utils/extensions/list_extensions.dart';
 import 'package:supercalipso/presenter/components/form/custom_text_field.dart';
 import 'package:supercalipso/presenter/components/form/validators.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/card_section.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/sections/card_section.dart';
 import 'package:supercalipso/presenter/pages/event/components/named_icon.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_state.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';

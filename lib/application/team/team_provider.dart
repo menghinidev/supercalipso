@@ -21,11 +21,7 @@ final teamRepoProvider = Provider<TeamRepository>(
 );
 
 final teamsChangesProvider = StreamProvider<List<Team>>((ref) async* {
-  var uid = ref.watch(authStateProvider).whenOrNull(
-        data: (data) => data.mapOrNull(
-          auth: (value) => value.user.uid,
-        ),
-      );
+  var uid = ref.watch(authStateProvider).mapOrNull(auth: (value) => value.user.uid);
   var teamSession = ref.watch(teamSessionStateProvider.select((value) => value.mapOrNull(logged: (value) => value)));
   if (teamSession != null && uid != null) {
     var repo = ref.watch(teamRepoProvider);
@@ -35,11 +31,7 @@ final teamsChangesProvider = StreamProvider<List<Team>>((ref) async* {
 });
 
 final teamInvitationsChangesProvider = StreamProvider<List<TeamInvitation>>((ref) async* {
-  var uid = ref.watch(authStateProvider).whenOrNull(
-        data: (data) => data.mapOrNull(
-          auth: (value) => value.user.uid,
-        ),
-      );
+  var uid = ref.watch(authStateProvider).mapOrNull(auth: (value) => value.user.uid);
   var teamSession = ref.watch(teamSessionStateProvider.select((value) => value.mapOrNull(logged: (value) => value)));
   if (teamSession != null && uid != null) {
     var repo = ref.watch(teamRepoProvider);
@@ -49,11 +41,7 @@ final teamInvitationsChangesProvider = StreamProvider<List<TeamInvitation>>((ref
 });
 
 final pendingTeamInvitationsChangesProvider = StreamProvider<List<TeamInvitation>>((ref) async* {
-  var uid = ref.watch(authStateProvider).whenOrNull(
-        data: (data) => data.mapOrNull(
-          auth: (value) => value.user.uid,
-        ),
-      );
+  var uid = ref.watch(authStateProvider).mapOrNull(auth: (value) => value.user.uid);
   var teamSession = ref.watch(teamSessionStateProvider.select((value) => value.mapOrNull(logged: (value) => value)));
   if (teamSession != null && uid != null) {
     var repo = ref.watch(teamRepoProvider);

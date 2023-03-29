@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/team/team_provider.dart';
 import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/sections/list_section.dart';
 import 'package:supercalipso/presenter/pages/profile/components/team_invitation_tile.dart';
 
 class TeamsInvitationSection extends HookConsumerWidget {

@@ -25,10 +25,6 @@ class LoggedUserAvatar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var user = ref.watch(authStateProvider);
-    return ProfileAvatar(
-      imageURL: user.whenOrNull<String?>(
-        data: (data) => data.whenOrNull<String?>(auth: (user) => user.imageURL),
-      ),
-    );
+    return ProfileAvatar(imageURL: user.whenOrNull<String?>(auth: (user) => user.imageURL));
   }
 }

@@ -42,16 +42,7 @@ class CustomDropdownTextField<T> extends StatelessWidget {
           decoration: DecorationFactory.instance.createInputDecoration(),
           hint: Text(hint ?? '', style: Theme.of(context).textTheme.bodyText1?.copyWith(color: AppColors.grey)),
           style: Theme.of(context).textTheme.bodyText1,
-          offset: const Offset(0, -5),
-          dropdownMaxHeight: 300,
           isExpanded: true,
-          dropdownDecoration: BoxDecoration(
-            borderRadius: Shapes.lowRoundedBorder.borderRadius,
-            border: Border.all(
-              color: AppColors.greyDarker,
-              width: 0.5,
-            ),
-          ),
         ),
       ],
     );

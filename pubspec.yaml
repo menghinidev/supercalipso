@@ -52,11 +52,10 @@ dependencies:
   firebase_core: ^2.7.1
   flutter_signin_button: ^2.0.0
   firebase_auth: ^4.2.10
-  google_sign_in: ^6.0.2
   cloud_firestore: ^4.4.4
   flutter_quill: ^6.0.8+1
   flutter_quill_extensions: ^0.1.0
-  riverpod_annotation: ^1.1.1
+  riverpod_annotation: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +63,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.12.0
   flutter_native_splash: ^2.2.11
-  riverpod_generator: ^1.1.1
+  riverpod_generator: ^2.0.0
 
 flutter_icons:
   android: "supercalipso"

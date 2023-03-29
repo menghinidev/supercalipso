@@ -5,7 +5,7 @@ import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/team/invitation/invitation.dart';
 import 'package:supercalipso/presenter/components/tile/custom_tile.dart';
-import 'package:supercalipso/presenter/pages/tasks/components/task_tile.dart';
+import 'package:supercalipso/presenter/pages/home/tasks/components/task_tile.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 
 class TeamInvitationTile extends HookConsumerWidget {

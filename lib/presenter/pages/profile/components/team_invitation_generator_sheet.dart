@@ -6,7 +6,7 @@ import 'package:supercalipso/presenter/components/bottomsheet/custom_bottom_shee
 import 'package:supercalipso/presenter/components/button/primary_elevated.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
-import 'package:supercalipso/services/navigation/router.dart';
+import 'package:supercalipso/services/navigation/router/router.dart';
 
 class TeamInvitationGeneratorSheet extends HookConsumerWidget {
   final String teamId;

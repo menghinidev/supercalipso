@@ -4,6 +4,7 @@ import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/presenter/components/card/custom_card.dart';
 import 'package:supercalipso/presenter/pages/note/sections/editor.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
+import 'package:supercalipso/services/navigation/router/router.dart';
 import 'package:supercalipso/services/navigation/router_provider.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 

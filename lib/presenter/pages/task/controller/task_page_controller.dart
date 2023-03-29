@@ -1,4 +1,3 @@
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/auth/auth_provider.dart';
 import 'package:supercalipso/application/task/task_service.dart';
@@ -6,12 +5,10 @@ import 'package:supercalipso/data/model/task/builder/task_builder.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
-import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/presenter/components/dialog/confirm_dialog.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_memento.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_state.dart';
 import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
 
 final taskPageControllerProvider =
     StateNotifierProvider.family.autoDispose<TaskPageControllerNotifier, TaskPageState, Task?>((ref, task) {
@@ -19,7 +16,6 @@ final taskPageControllerProvider =
     authRepo: ref.watch(authRepoProvider),
     taskService: ref.watch(teamTaskStateProvider.notifier),
     dialogService: ref.watch(dialogServiceProvider),
-    router: ref.watch(routerProvider),
     initialTask: task,
   );
 });
@@ -30,7 +26,6 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
   final AuthRepository authRepo;
   final TeamTaskController taskService;
   final DialogService dialogService;
-  final GoRouter router;
   late TaskPageMementoStateOriginator originator;
   late TaskPageMementoStateCaretaker caretaker;
 
@@ -38,7 +33,6 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
     required this.authRepo,
     required this.taskService,
     required this.dialogService,
-    required this.router,
     this.initialTask,
     this.assignedUsers,
   }) : super(TaskPageState.create(initialTask, assignedUsers)) {
@@ -109,14 +103,12 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
             title: 'Confirm',
             textBody: 'This task will be available inside your Team',
           ),
-          onConfirmed: (response) => taskService
-              .createTask(
-                title: actualState.builder.title!,
-                assignedUserId: actualState.builder.assignedUserId,
-                deadline: actualState.builder.deadline,
-                iconName: actualState.builder.iconName,
-              )
-              .ifSuccess((payload) => router.pop()),
+          onConfirmed: (response) => taskService.createTask(
+            title: actualState.builder.title!,
+            assignedUserId: actualState.builder.assignedUserId,
+            deadline: actualState.builder.deadline,
+            iconName: actualState.builder.iconName,
+          ),
         );
       } else {
         return await dialogService.showDialog(
@@ -124,15 +116,13 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
             title: 'Confirm',
             textBody: 'This task will be changed',
           ),
-          onConfirmed: (response) => taskService
-              .updateTask(
-                taskId: initialTask!.id,
-                assignedUserId: actualState.builder.assignedUserId,
-                deadline: actualState.builder.deadline,
-                iconName: actualState.builder.iconName,
-                title: actualState.builder.title,
-              )
-              .ifSuccess((payload) => router.pop()),
+          onConfirmed: (response) => taskService.updateTask(
+            taskId: initialTask!.id,
+            assignedUserId: actualState.builder.assignedUserId,
+            deadline: actualState.builder.deadline,
+            iconName: actualState.builder.iconName,
+            title: actualState.builder.title,
+          ),
         );
       }
     }
@@ -148,7 +138,7 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
       ),
     );
     if (dialogResponse.hasConfirmed) {
-      return await taskService.deleteTask(taskId: id).ifSuccess((payload) => router.pop());
+      return await taskService.deleteTask(taskId: id);
     }
     return Future.value();
   }

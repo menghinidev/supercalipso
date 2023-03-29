@@ -9,9 +9,9 @@ import 'package:supercalipso/presenter/components/button/primary_icon.dart';
 import 'package:supercalipso/presenter/components/form/keyboard_focus_wrapper.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
-import 'package:supercalipso/presenter/pages/events/sections/events_list.dart';
+import 'package:supercalipso/presenter/pages/home/events/sections/events_list.dart';
 import 'package:supercalipso/presenter/pages/notifications/notifications_page.dart';
-import 'package:supercalipso/presenter/pages/tasks/section/task_list.dart';
+import 'package:supercalipso/presenter/pages/home/tasks/section/task_list.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 

@@ -13,11 +13,9 @@ class ProfileHeader extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var auth = ref.watch(authStateProvider);
-    return auth.onValue(
-      builder: (data) => data.when(
-        auth: (data) => ProfileInfoHeader(profile: data),
-        unauth: () => const CircularProgressIndicator(),
-      ),
+    return auth.when(
+      auth: (data) => ProfileInfoHeader(profile: data),
+      unauth: () => const CircularProgressIndicator(),
     );
   }
 }

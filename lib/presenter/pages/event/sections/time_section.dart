@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supercalipso/presenter/components/picker/date_and_time_picker.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/card_section.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/sections/card_section.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_state.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 

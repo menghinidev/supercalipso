@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/application/note/note_provider.dart';
 import 'package:supercalipso/application/note/note_service.dart';
 import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_app_bar.dart';
 import 'package:supercalipso/presenter/components/scaffold/custom_scaffold.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dart';
-import 'package:supercalipso/presenter/pages/notes/components/note_tile.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/sections/list_section.dart';
+import 'package:supercalipso/presenter/pages/home/notes/components/note_tile.dart';
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/router/router.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 
 class NotesPage extends HookConsumerWidget {

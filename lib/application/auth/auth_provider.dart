@@ -14,7 +14,7 @@ final userDataSouceProvider = Provider<IUserDataSource>((ref) {
 
 var authRepoProvider = Provider<AuthRepository>((ref) => AuthRepository(dataSource: ref.watch(userDataSouceProvider)));
 
-final authStateProvider = StateNotifierProvider<AuthStateNotifier, AsyncValue<AuthState>>((ref) {
+final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
   return AuthStateNotifier(authRepository: ref.watch(authRepoProvider));
 });
 

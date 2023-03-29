@@ -1,56 +1,36 @@
-/* import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/services/navigation/routes.dart';
+import 'package:flutter/material.dart';
 
-final homeNavigationStateProvider = StateProvider<String>((ref) {
-  return DashboardPageRoute.pagePath;
-});
+class BottomNavigatorBar extends StatelessWidget {
+  final int index;
+  final Function(int index) onTap;
 
-final homeLocationIndexProvider = Provider<int>((ref) {
-  var location = ref.watch(homeNavigationStateProvider);
-  if (location == ExpensesPageRoute.pagePath) return 0;
-  if (location == EventsPageRoute.pagePath) return 1;
-  if (location == DashboardPageRoute.pagePath) return 2;
-  if (location == TasksPageRoute.pagePath) return 3;
-  if (location == NotesPageRoute.pagePath) return 4;
-  return 0;
-});
-
-class BottomNavigatorShell extends HookConsumerWidget {
-  final Widget child;
-  const BottomNavigatorShell({required this.child, Key? key}) : super(key: key);
+  const BottomNavigatorBar({required this.index, required this.onTap, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: child),
         BottomNavigationBar(
-          currentIndex: ref.watch(homeLocationIndexProvider),
-          onTap: (index) => onBottomBarItemTap(index, ref),
+          currentIndex: index,
+          onTap: onTap,
           items: const [
-            BottomNestedNavigationBarItem(
-              initialLocation: ExpensesPageRoute.pagePath,
+            BottomNavigationBarItem(
               icon: Icon(Icons.attach_money),
-              label: '',
+              label: 'Expenses',
             ),
-            BottomNestedNavigationBarItem(
-              initialLocation: EventsPageRoute.pagePath,
+            BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month_outlined),
               label: '',
             ),
-            BottomNestedNavigationBarItem(
-              initialLocation: DashboardPageRoute.pagePath,
+            BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: '',
             ),
-            BottomNestedNavigationBarItem(
-              initialLocation: TasksPageRoute.pagePath,
+            BottomNavigationBarItem(
               icon: Icon(Icons.done),
               label: '',
             ),
-            BottomNestedNavigationBarItem(
-              initialLocation: NotesPageRoute.pagePath,
+            BottomNavigationBarItem(
               icon: Icon(Icons.notes_rounded),
               label: '',
             ),
@@ -59,10 +39,6 @@ class BottomNavigatorShell extends HookConsumerWidget {
       ],
     );
   }
-
-  setState(WidgetRef ref, String state) => ref.read(homeNavigationStateProvider.notifier).state = state;
-
-  onBottomBarItemTap(int index, WidgetRef ref) => setState(ref, HomeShellRoute.getHomeBottomLocation(index));
 }
 
 class BottomNestedNavigationBarItem extends BottomNavigationBarItem {
@@ -75,4 +51,3 @@ class BottomNestedNavigationBarItem extends BottomNavigationBarItem {
   /// The initial location/path
   final String initialLocation;
 }
- */

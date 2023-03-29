@@ -9,7 +9,7 @@ import 'package:supercalipso/data/repository/event_repository.dart';
 import 'package:supercalipso/plugin/utils/response.dart';
 
 final teamEventControllerProvider = StateNotifierProvider<TeamEventController, AsyncValue<List<TeamEvent>>>((ref) {
-  var auth = ref.watch(authStateProvider.select((value) => value.value));
+  var auth = ref.watch(authStateProvider);
   var session = ref.watch(teamSessionStateProvider);
   return TeamEventController(
     authState: auth,

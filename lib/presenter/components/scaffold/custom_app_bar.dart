@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/presenter/pages/profile/components/profile_avatar.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/router/router.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 
 /* class CustomAppBar extends StatelessWidget with PreferredSizeWidget {

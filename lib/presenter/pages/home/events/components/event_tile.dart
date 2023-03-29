@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/application/auth/auth_notifier.dart';
 import 'package:supercalipso/application/auth/auth_provider.dart';
 import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
@@ -10,7 +9,7 @@ import 'package:supercalipso/presenter/pages/profile/components/profile_avatar.d
 import 'package:supercalipso/presenter/theme/colors.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 import 'package:supercalipso/services/localization/date_formatter_delegate.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
+import 'package:supercalipso/services/navigation/router/router.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 
 class EventTile extends HookConsumerWidget {

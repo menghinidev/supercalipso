@@ -1,4 +1,3 @@
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/auth/auth_provider.dart';
 import 'package:supercalipso/application/event/event_service.dart';
@@ -6,12 +5,10 @@ import 'package:supercalipso/data/model/event/builder/event_builder.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/model/user/user.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
-import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/presenter/components/dialog/confirm_dialog.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_memento.dart';
 import 'package:supercalipso/presenter/pages/event/controller/event_page_state.dart';
 import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
 
 final eventPageControllerProvider =
     StateNotifierProvider.family.autoDispose<EventPageNotifier, EventPageState, TeamEvent?>((ref, event) {
@@ -19,7 +16,6 @@ final eventPageControllerProvider =
     eventService: ref.watch(teamEventControllerProvider.notifier),
     authRepo: ref.watch(authRepoProvider),
     dialogService: ref.watch(dialogServiceProvider),
-    router: ref.watch(routerProvider),
     initialEvent: event,
   );
 });
@@ -29,7 +25,6 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
   final User? creator;
   final TeamEventController eventService;
   final DialogService dialogService;
-  final GoRouter router;
   final AuthRepository authRepo;
   late EventPageMementoStateOriginator originator;
   late EventPageMementoStateCaretaker caretaker;
@@ -37,7 +32,6 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
   EventPageNotifier({
     required this.eventService,
     required this.dialogService,
-    required this.router,
     required this.authRepo,
     this.creator,
     this.initialEvent,
@@ -138,26 +132,22 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
       );
       if (confirm.hasDismissed) return Future.value();
       if (isNew) {
-        return eventService
-            .createEvent(
-              name: actualState.builder.name!,
-              startTime: actualState.builder.startTime!,
-              description: actualState.builder.description,
-              endTime: actualState.builder.endTime,
-              iconName: actualState.builder.iconName,
-            )
-            .ifSuccess((payload) => router.pop());
+        return eventService.createEvent(
+          name: actualState.builder.name!,
+          startTime: actualState.builder.startTime!,
+          description: actualState.builder.description,
+          endTime: actualState.builder.endTime,
+          iconName: actualState.builder.iconName,
+        ) /* .ifSuccess((payload) => router.pop()) */;
       } else {
-        return eventService
-            .updateEvent(
-              eventId: initialEvent!.id,
-              name: actualState.builder.name,
-              startTime: actualState.builder.startTime,
-              description: actualState.builder.description,
-              endTime: actualState.builder.endTime,
-              iconName: actualState.builder.iconName,
-            )
-            .ifSuccess((payload) => router.pop());
+        return eventService.updateEvent(
+          eventId: initialEvent!.id,
+          name: actualState.builder.name,
+          startTime: actualState.builder.startTime,
+          description: actualState.builder.description,
+          endTime: actualState.builder.endTime,
+          iconName: actualState.builder.iconName,
+        ) /* .ifSuccess((payload) => router.pop()) */;
       }
     }
   }
@@ -172,7 +162,7 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
       ),
     );
     if (dialogResponse.hasConfirmed) {
-      return await eventService.deleteEvent(eventId: id).ifSuccess((payload) => router.pop());
+      return await eventService.deleteEvent(eventId: id) /* .ifSuccess((payload) => router.pop()) */;
     }
     return Future.value();
   }

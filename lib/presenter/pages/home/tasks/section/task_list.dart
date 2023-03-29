@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/application/task/task_provider.dart';
 import 'package:supercalipso/application/task/task_service.dart';
 import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/data/model/task/task.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/list_section.dart';
-import 'package:supercalipso/presenter/pages/tasks/components/task_tile.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/sections/list_section.dart';
+import 'package:supercalipso/presenter/pages/home/tasks/components/task_tile.dart';
 
 class TaskList extends HookConsumerWidget {
   const TaskList({super.key});

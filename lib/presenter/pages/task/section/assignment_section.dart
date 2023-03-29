@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/team/team_provider.dart';
-import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/application/utils.dart';
 import 'package:supercalipso/presenter/components/common/empty_data_widget.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/card_section.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/sections/card_section.dart';
 import 'package:supercalipso/presenter/pages/event/components/user_assegnee_avatar.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_state.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';

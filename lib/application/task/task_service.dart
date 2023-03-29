@@ -9,7 +9,7 @@ import 'package:supercalipso/data/repository/task_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
 
 final teamTaskStateProvider = StateNotifierProvider<TeamTaskController, AsyncValue<List<Task>>>((ref) {
-  var auth = ref.watch(authStateProvider.select((value) => value.valueOrNull));
+  var auth = ref.watch(authStateProvider);
   var session = ref.watch(teamSessionStateProvider);
   return TeamTaskController(
     authState: auth,
