@@ -1,4 +1,4 @@
 class EnvVariables {
   static const String isMockedKey = "USE_MOCKED_DATA_SOURCE";
-  static const isMocked = String.fromEnvironment(isMockedKey, defaultValue: 'true') == 'true';
+  static const isMocked = bool.hasEnvironment(isMockedKey) ? bool.fromEnvironment(isMockedKey) : true;
 }

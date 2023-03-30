@@ -8,6 +8,8 @@
             "name": "supercalipso",
             "request": "launch",
             "type": "dart",
+            "flutterMode": "debug",
+            "console": "debugConsole",
             "toolArgs": [
                 "--dart-define",
                 "USE_MOCKED_DATA_SOURCE=false"
