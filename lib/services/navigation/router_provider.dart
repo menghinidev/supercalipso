@@ -1,28 +1,19 @@
-import 'dart:async';
+/* import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/team/team_provider.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/team/team_provider.dart';
+import 'package:supercalipso/application/team/team_service.dart';
 import 'package:supercalipso/services/navigation/routes.dart';
 
 var routerProvider = Provider<GoRouter>((ref) {
   var routerNotifer = RouterNotifier(ref);
 
   return GoRouter(
-    routes: [
-      AppRoutes.home,
-      AppRoutes.login,
-      AppRoutes.events,
-      AppRoutes.expenses,
-      AppRoutes.notes,
-      AppRoutes.profile,
-      AppRoutes.tasks,
-      AppRoutes.team,
-      AppRoutes.event,
-      AppRoutes.task,
-      AppRoutes.note,
-    ],
+    navigatorKey: RouterNotifier.mainNavigatorKey,
+    routes: AppRoutes.routes,
     refreshListenable: routerNotifer,
     debugLogDiagnostics: kDebugMode,
     redirect: routerNotifer.redirectLogic,
@@ -33,34 +24,30 @@ class RouterNotifier extends ChangeNotifier {
   final Ref ref;
   late StreamSubscription authChangesSub;
   late StreamSubscription loggedTeamChangesSub;
+  static final mainNavigatorKey = GlobalKey<NavigatorState>();
+  static final homePageNavigatorKey = GlobalKey<NavigatorState>();
 
-  RouterNotifier(this.ref) {
-    var authRepo = ref.read(authProvider);
-    var teamRepo = ref.read(teamRepoProvider);
-    authChangesSub = authRepo.loggedUserChanges.listen((event) {
-      if (event == null) notifyListeners();
-    });
-    loggedTeamChangesSub = teamRepo.currentTeam.listen((event) {
-      notifyListeners();
-    });
-  }
+  RouterNotifier(this.ref);
 
-  String? redirectLogic(GoRouterState state) {
-    final user = ref.read(authProvider).loggedUser;
-    final hasTeamId = ref.read(teamRepoProvider).loggedTeamId != null;
+  String? redirectLogic(BuildContext context, GoRouterState state) {
+    final isLogged = ref.read(authStateProvider).whenOrNull(
+              data: (value) => value.map(auth: (value) => true, unauth: (value) => false),
+            ) ??
+        false;
+    final hasTeamId = ref.read(teamSessionStateProvider).mapOrNull(logged: (value) => true) ?? false;
 
     // From here we can use the state and implement our custom logic
     final isInLoginPage = state.location == LoginPageRoute.pagePath;
 
-    if (user == null) {
+    if (!isLogged) {
       return isInLoginPage ? null : LoginPageRoute.pagePath;
     }
 
     if (isInLoginPage && !hasTeamId) return ProfilePageRoute.pagePath;
 
-    if (state.location == HomePageRoute.pagePath && !hasTeamId) return ProfilePageRoute.pagePath;
+    if (state.location == DashboardPageRoute.pagePath && !hasTeamId) return ProfilePageRoute.pagePath;
 
-    if (isInLoginPage && hasTeamId) return '/';
+    if (isInLoginPage && hasTeamId) return DashboardPageRoute.pagePath;
 
     return null;
   }
@@ -72,6 +59,7 @@ extension PopFallback on GoRouter {
       pop();
       return;
     }
-    go(HomePageRoute.pagePath);
+    go(DashboardPageRoute.pagePath);
   }
 }
+ */

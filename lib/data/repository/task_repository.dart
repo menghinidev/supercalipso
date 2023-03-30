@@ -1,22 +1,16 @@
-import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/task/task.dart';
 import 'package:supercalipso/data/provider/api/task/i_task_data_source.dart';
 import 'package:supercalipso/data/provider/command/task/createTask/create_task_command.dart';
 import 'package:supercalipso/data/provider/command/task/updateTask/update_task_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
-import 'package:supercalipso/services/installer.dart';
 
 class TaskRepository {
-  var dataProvider = Installer.instance.get<ITaskDataSource>();
-  var controller = BehaviorSubject<List<Task>>();
+  final ITaskDataSource dataProvider;
 
-  Stream<List<Task>> getTeamTasksChanges({required String teamId}) =>
-      controller.stream.map((event) => event.where((element) => element.teamId == teamId).toList());
-  Stream<Task> getTaskChanges({required String taskId}) =>
-      controller.stream.mapNotNull((event) => event.getWhere((element) => element.id == taskId));
+  TaskRepository({required this.dataProvider});
 
   Future<Response<List<Task>>> getTeamTasks({required String teamId}) async {
-    return await dataProvider.readTeamTasks(teamId: teamId).ifSuccess((payload) => controller.add(payload!));
+    return await dataProvider.readTeamTasks(teamId: teamId);
   }
 
   Future<Response> createTask({

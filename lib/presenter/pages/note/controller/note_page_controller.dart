@@ -1,32 +1,27 @@
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:supercalipso/bloc/auth/auth_provider.dart';
-import 'package:supercalipso/bloc/note/note_service.dart';
+import 'package:supercalipso/application/auth/auth_provider.dart';
+import 'package:supercalipso/application/note/note_service.dart';
 import 'package:supercalipso/data/model/note/note.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
-import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/presenter/components/dialog/confirm_dialog.dart';
 import 'package:supercalipso/presenter/pages/note/controller/note_page_memento.dart';
 import 'package:supercalipso/presenter/pages/note/controller/note_page_state.dart';
 import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
-import 'package:supercalipso/services/navigation/router_provider.dart';
 
 final notePageControllerProvider =
     StateNotifierProvider.family.autoDispose<NotePageNotifier, NotePageState, Note?>((ref, note) {
   return NotePageNotifier(
-    noteService: ref.watch(noteServiceProvider),
-    authRepo: ref.watch(authProvider),
+    noteService: ref.watch(loggedTeamNotesProvider.notifier),
+    authRepo: ref.watch(authRepoProvider),
     dialogService: ref.watch(dialogServiceProvider),
-    router: ref.watch(routerProvider),
     initialNote: note,
   );
 });
 
 class NotePageNotifier extends StateNotifier<NotePageState> {
   final Note? initialNote;
-  final NoteService noteService;
+  final TeamNotesController noteService;
   final DialogService dialogService;
-  final GoRouter router;
   final AuthRepository authRepo;
   late NotePageMementoStateOriginator originator;
   late NotePageMementoStateCaretaker caretaker;
@@ -35,7 +30,6 @@ class NotePageNotifier extends StateNotifier<NotePageState> {
     required this.initialNote,
     required this.noteService,
     required this.dialogService,
-    required this.router,
     required this.authRepo,
   }) : super(NotePageState.create(initialNote)) {
     originator = NotePageMementoStateOriginator(state);
@@ -82,13 +76,13 @@ class NotePageNotifier extends StateNotifier<NotePageState> {
       );
       if (confirm.hasDismissed) return Future.value();
       if (isNew) {
-        return noteService
-            .createNote(title: actualState.title!, content: actualState.content)
-            .ifSuccess((payload) => router.pop());
+        return noteService.createNote(
+            title: actualState.title!, content: actualState.content) /* .ifSuccess((payload) => router.pop()) */;
       } else {
-        return noteService
-            .updateNote(noteId: initialNote!.id, content: actualState.content, title: actualState.title)
-            .ifSuccess((payload) => router.pop());
+        return noteService.updateNote(
+            noteId: initialNote!.id,
+            content: actualState.content,
+            title: actualState.title) /* .ifSuccess((payload) => router.pop()) */;
       }
     }
   }
@@ -103,7 +97,7 @@ class NotePageNotifier extends StateNotifier<NotePageState> {
       ),
     );
     if (dialogResponse.hasConfirmed) {
-      return await noteService.deleteNote(noteId: id).ifSuccess((payload) => router.pop());
+      return await noteService.deleteNote(noteId: id) /* .ifSuccess((payload) => router.pop()) */;
     }
     return Future.value();
   }

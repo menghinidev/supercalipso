@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "445953411314-2s42qfrnmtgb4nvejsv9dr7es118hipd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.menghini.supercalipso",
+            "certificate_hash": "81a9b627962684e490f75c87a51ffbf76506265a"
+          }
+        },
+        {
           "client_id": "445953411314-6sp6b746i6a60st2thteafj1pt263nls.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

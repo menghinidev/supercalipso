@@ -1,53 +1,20 @@
-import 'package:rxdart/rxdart.dart';
 import 'package:supercalipso/data/model/event/team_event.dart';
 import 'package:supercalipso/data/provider/api/event/i_event_data_source.dart';
 import 'package:supercalipso/data/provider/command/event/create/create_event.dart';
 import 'package:supercalipso/data/provider/command/event/update/update_event_command.dart';
 import 'package:supercalipso/plugin/utils.dart';
-import 'package:supercalipso/services/installer.dart';
-
-extension CumulativeStream<X> on BehaviorSubject<List<X>> {
-  update(List<X>? values, bool Function(X, X) equals) async {
-    var toAdd = values ?? <X>[];
-    if (!hasValue) {
-      add(toAdd);
-      return;
-    }
-    var latest = valueOrNull!;
-    var asSet = latest.toSet();
-    for (var e in toAdd) {
-      var elementInSet = asSet.getWhere((element) => equals(e, element));
-      if (elementInSet != null) asSet.remove(elementInSet);
-      asSet.add(e);
-    }
-    asSet.addAll(toAdd);
-    add(asSet.toList());
-  }
-}
 
 class EventRepository {
-  final controller = BehaviorSubject<List<TeamEvent>>();
-  final provider = Installer.instance.get<IEventDataSource>();
+  final IEventDataSource provider;
 
-  Stream<List<TeamEvent>> get eventsChanges => controller.stream;
-
-  Stream<List<TeamEvent>> getTeamEventsChanges({required String teamId}) {
-    return controller.stream.map((event) => event.where((element) => element.teamId == teamId).toList());
-  }
-
-  Stream<TeamEvent> getEventChanges({required String eventId}) {
-    return controller.stream.mapNotNull((event) => event.getWhere((element) => element.id == eventId));
-  }
+  EventRepository({required this.provider});
 
   Future<Response<List<TeamEvent>>> getTeamEvents({required String teamId}) async {
-    var events = await provider.readTeamEvents(teamId: teamId);
-    return events.ifSuccess((payload) => controller.add(payload!));
+    return await provider.readTeamEvents(teamId: teamId);
   }
 
   Future<Response<TeamEvent>> getEvent({required String id}) async {
-    return await provider
-        .readTeamEvent(eventId: id)
-        .ifSuccess((payload) => controller.update([payload!], TeamEventProperties.equalsById));
+    return await provider.readTeamEvent(eventId: id);
   }
 
   Future<Response> createEvent({

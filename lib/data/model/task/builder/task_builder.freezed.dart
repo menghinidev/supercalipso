@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'task_builder.dart';
 
@@ -30,7 +30,8 @@ mixin _$TaskBuilder {
 abstract class $TaskBuilderCopyWith<$Res> {
   factory $TaskBuilderCopyWith(
           TaskBuilder value, $Res Function(TaskBuilder) then) =
-      _$TaskBuilderCopyWithImpl<$Res>;
+      _$TaskBuilderCopyWithImpl<$Res, TaskBuilder>;
+  @useResult
   $Res call(
       {String? title,
       DateTime? deadline,
@@ -39,13 +40,16 @@ abstract class $TaskBuilderCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TaskBuilderCopyWithImpl<$Res> implements $TaskBuilderCopyWith<$Res> {
+class _$TaskBuilderCopyWithImpl<$Res, $Val extends TaskBuilder>
+    implements $TaskBuilderCopyWith<$Res> {
   _$TaskBuilderCopyWithImpl(this._value, this._then);
 
-  final TaskBuilder _value;
   // ignore: unused_field
-  final $Res Function(TaskBuilder) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? title = freezed,
@@ -54,23 +58,23 @@ class _$TaskBuilderCopyWithImpl<$Res> implements $TaskBuilderCopyWith<$Res> {
     Object? iconName = freezed,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      deadline: deadline == freezed
+      deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      assignedUserId: assignedUserId == freezed
+      assignedUserId: freezed == assignedUserId
           ? _value.assignedUserId
           : assignedUserId // ignore: cast_nullable_to_non_nullable
               as String?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -81,6 +85,7 @@ abstract class _$$_TaskBuilderCopyWith<$Res>
           _$_TaskBuilder value, $Res Function(_$_TaskBuilder) then) =
       __$$_TaskBuilderCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? title,
       DateTime? deadline,
@@ -89,15 +94,14 @@ abstract class _$$_TaskBuilderCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TaskBuilderCopyWithImpl<$Res> extends _$TaskBuilderCopyWithImpl<$Res>
+class __$$_TaskBuilderCopyWithImpl<$Res>
+    extends _$TaskBuilderCopyWithImpl<$Res, _$_TaskBuilder>
     implements _$$_TaskBuilderCopyWith<$Res> {
   __$$_TaskBuilderCopyWithImpl(
       _$_TaskBuilder _value, $Res Function(_$_TaskBuilder) _then)
-      : super(_value, (v) => _then(v as _$_TaskBuilder));
+      : super(_value, _then);
 
-  @override
-  _$_TaskBuilder get _value => super._value as _$_TaskBuilder;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? title = freezed,
@@ -106,19 +110,19 @@ class __$$_TaskBuilderCopyWithImpl<$Res> extends _$TaskBuilderCopyWithImpl<$Res>
     Object? iconName = freezed,
   }) {
     return _then(_$_TaskBuilder(
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      deadline: deadline == freezed
+      deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      assignedUserId: assignedUserId == freezed
+      assignedUserId: freezed == assignedUserId
           ? _value.assignedUserId
           : assignedUserId // ignore: cast_nullable_to_non_nullable
               as String?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -152,23 +156,22 @@ class _$_TaskBuilder extends _TaskBuilder {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TaskBuilder &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.deadline, deadline) &&
-            const DeepCollectionEquality()
-                .equals(other.assignedUserId, assignedUserId) &&
-            const DeepCollectionEquality().equals(other.iconName, iconName));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.deadline, deadline) ||
+                other.deadline == deadline) &&
+            (identical(other.assignedUserId, assignedUserId) ||
+                other.assignedUserId == assignedUserId) &&
+            (identical(other.iconName, iconName) ||
+                other.iconName == iconName));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(deadline),
-      const DeepCollectionEquality().hash(assignedUserId),
-      const DeepCollectionEquality().hash(iconName));
+  int get hashCode =>
+      Object.hash(runtimeType, title, deadline, assignedUserId, iconName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TaskBuilderCopyWith<_$_TaskBuilder> get copyWith =>
       __$$_TaskBuilderCopyWithImpl<_$_TaskBuilder>(this, _$identity);
 }

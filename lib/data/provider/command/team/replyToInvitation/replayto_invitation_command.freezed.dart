@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'replayto_invitation_command.dart';
 
@@ -34,34 +34,38 @@ mixin _$ReplyToInvitationCommand {
 abstract class $ReplyToInvitationCommandCopyWith<$Res> {
   factory $ReplyToInvitationCommandCopyWith(ReplyToInvitationCommand value,
           $Res Function(ReplyToInvitationCommand) then) =
-      _$ReplyToInvitationCommandCopyWithImpl<$Res>;
+      _$ReplyToInvitationCommandCopyWithImpl<$Res, ReplyToInvitationCommand>;
+  @useResult
   $Res call({String invitationId, String status});
 }
 
 /// @nodoc
-class _$ReplyToInvitationCommandCopyWithImpl<$Res>
+class _$ReplyToInvitationCommandCopyWithImpl<$Res,
+        $Val extends ReplyToInvitationCommand>
     implements $ReplyToInvitationCommandCopyWith<$Res> {
   _$ReplyToInvitationCommandCopyWithImpl(this._value, this._then);
 
-  final ReplyToInvitationCommand _value;
   // ignore: unused_field
-  final $Res Function(ReplyToInvitationCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invitationId = freezed,
-    Object? status = freezed,
+    Object? invitationId = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
-      invitationId: invitationId == freezed
+      invitationId: null == invitationId
           ? _value.invitationId
           : invitationId // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -73,32 +77,31 @@ abstract class _$$_ReplyToInvitationCommandCopyWith<$Res>
           $Res Function(_$_ReplyToInvitationCommand) then) =
       __$$_ReplyToInvitationCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String invitationId, String status});
 }
 
 /// @nodoc
 class __$$_ReplyToInvitationCommandCopyWithImpl<$Res>
-    extends _$ReplyToInvitationCommandCopyWithImpl<$Res>
+    extends _$ReplyToInvitationCommandCopyWithImpl<$Res,
+        _$_ReplyToInvitationCommand>
     implements _$$_ReplyToInvitationCommandCopyWith<$Res> {
   __$$_ReplyToInvitationCommandCopyWithImpl(_$_ReplyToInvitationCommand _value,
       $Res Function(_$_ReplyToInvitationCommand) _then)
-      : super(_value, (v) => _then(v as _$_ReplyToInvitationCommand));
+      : super(_value, _then);
 
-  @override
-  _$_ReplyToInvitationCommand get _value =>
-      super._value as _$_ReplyToInvitationCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invitationId = freezed,
-    Object? status = freezed,
+    Object? invitationId = null,
+    Object? status = null,
   }) {
     return _then(_$_ReplyToInvitationCommand(
-      invitationId: invitationId == freezed
+      invitationId: null == invitationId
           ? _value.invitationId
           : invitationId // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
@@ -131,20 +134,18 @@ class _$_ReplyToInvitationCommand extends _ReplyToInvitationCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReplyToInvitationCommand &&
-            const DeepCollectionEquality()
-                .equals(other.invitationId, invitationId) &&
-            const DeepCollectionEquality().equals(other.status, status));
+            (identical(other.invitationId, invitationId) ||
+                other.invitationId == invitationId) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(invitationId),
-      const DeepCollectionEquality().hash(status));
+  int get hashCode => Object.hash(runtimeType, invitationId, status);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ReplyToInvitationCommandCopyWith<_$_ReplyToInvitationCommand>
       get copyWith => __$$_ReplyToInvitationCommandCopyWithImpl<
           _$_ReplyToInvitationCommand>(this, _$identity);

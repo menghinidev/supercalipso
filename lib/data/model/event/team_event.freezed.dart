@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'team_event.dart';
 
@@ -39,7 +39,8 @@ mixin _$TeamEvent {
 /// @nodoc
 abstract class $TeamEventCopyWith<$Res> {
   factory $TeamEventCopyWith(TeamEvent value, $Res Function(TeamEvent) then) =
-      _$TeamEventCopyWithImpl<$Res>;
+      _$TeamEventCopyWithImpl<$Res, TeamEvent>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -53,63 +54,66 @@ abstract class $TeamEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TeamEventCopyWithImpl<$Res> implements $TeamEventCopyWith<$Res> {
+class _$TeamEventCopyWithImpl<$Res, $Val extends TeamEvent>
+    implements $TeamEventCopyWith<$Res> {
   _$TeamEventCopyWithImpl(this._value, this._then);
 
-  final TeamEvent _value;
   // ignore: unused_field
-  final $Res Function(TeamEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? startTime = freezed,
-    Object? teamId = freezed,
-    Object? createdByUserId = freezed,
-    Object? lastUpdate = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? startTime = null,
+    Object? teamId = null,
+    Object? createdByUserId = null,
+    Object? lastUpdate = null,
     Object? endTime = freezed,
     Object? description = freezed,
     Object? iconName = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      createdByUserId: createdByUserId == freezed
+      createdByUserId: null == createdByUserId
           ? _value.createdByUserId
           : createdByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      lastUpdate: lastUpdate == freezed
+      lastUpdate: null == lastUpdate
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      endTime: endTime == freezed
+      endTime: freezed == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -119,6 +123,7 @@ abstract class _$$_TeamEventCopyWith<$Res> implements $TeamEventCopyWith<$Res> {
           _$_TeamEvent value, $Res Function(_$_TeamEvent) then) =
       __$$_TeamEventCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -132,61 +137,60 @@ abstract class _$$_TeamEventCopyWith<$Res> implements $TeamEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TeamEventCopyWithImpl<$Res> extends _$TeamEventCopyWithImpl<$Res>
+class __$$_TeamEventCopyWithImpl<$Res>
+    extends _$TeamEventCopyWithImpl<$Res, _$_TeamEvent>
     implements _$$_TeamEventCopyWith<$Res> {
   __$$_TeamEventCopyWithImpl(
       _$_TeamEvent _value, $Res Function(_$_TeamEvent) _then)
-      : super(_value, (v) => _then(v as _$_TeamEvent));
+      : super(_value, _then);
 
-  @override
-  _$_TeamEvent get _value => super._value as _$_TeamEvent;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? startTime = freezed,
-    Object? teamId = freezed,
-    Object? createdByUserId = freezed,
-    Object? lastUpdate = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? startTime = null,
+    Object? teamId = null,
+    Object? createdByUserId = null,
+    Object? lastUpdate = null,
     Object? endTime = freezed,
     Object? description = freezed,
     Object? iconName = freezed,
   }) {
     return _then(_$_TeamEvent(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      startTime: startTime == freezed
+      startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      createdByUserId: createdByUserId == freezed
+      createdByUserId: null == createdByUserId
           ? _value.createdByUserId
           : createdByUserId // ignore: cast_nullable_to_non_nullable
               as String,
-      lastUpdate: lastUpdate == freezed
+      lastUpdate: null == lastUpdate
           ? _value.lastUpdate
           : lastUpdate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      endTime: endTime == freezed
+      endTime: freezed == endTime
           ? _value.endTime
           : endTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -241,36 +245,30 @@ class _$_TeamEvent extends _TeamEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TeamEvent &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.startTime, startTime) &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality()
-                .equals(other.createdByUserId, createdByUserId) &&
-            const DeepCollectionEquality()
-                .equals(other.lastUpdate, lastUpdate) &&
-            const DeepCollectionEquality().equals(other.endTime, endTime) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.iconName, iconName));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
+            (identical(other.createdByUserId, createdByUserId) ||
+                other.createdByUserId == createdByUserId) &&
+            (identical(other.lastUpdate, lastUpdate) ||
+                other.lastUpdate == lastUpdate) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.iconName, iconName) ||
+                other.iconName == iconName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(startTime),
-      const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(createdByUserId),
-      const DeepCollectionEquality().hash(lastUpdate),
-      const DeepCollectionEquality().hash(endTime),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(iconName));
+  int get hashCode => Object.hash(runtimeType, id, name, startTime, teamId,
+      createdByUserId, lastUpdate, endTime, description, iconName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TeamEventCopyWith<_$_TeamEvent> get copyWith =>
       __$$_TeamEventCopyWithImpl<_$_TeamEvent>(this, _$identity);
 

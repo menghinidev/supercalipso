@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'create_task_command.dart';
 
@@ -36,7 +36,8 @@ mixin _$CreateTaskCommand {
 abstract class $CreateTaskCommandCopyWith<$Res> {
   factory $CreateTaskCommandCopyWith(
           CreateTaskCommand value, $Res Function(CreateTaskCommand) then) =
-      _$CreateTaskCommandCopyWithImpl<$Res>;
+      _$CreateTaskCommandCopyWithImpl<$Res, CreateTaskCommand>;
+  @useResult
   $Res call(
       {String teamId,
       String title,
@@ -46,44 +47,46 @@ abstract class $CreateTaskCommandCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CreateTaskCommandCopyWithImpl<$Res>
+class _$CreateTaskCommandCopyWithImpl<$Res, $Val extends CreateTaskCommand>
     implements $CreateTaskCommandCopyWith<$Res> {
   _$CreateTaskCommandCopyWithImpl(this._value, this._then);
 
-  final CreateTaskCommand _value;
   // ignore: unused_field
-  final $Res Function(CreateTaskCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? teamId = freezed,
-    Object? title = freezed,
+    Object? teamId = null,
+    Object? title = null,
     Object? deadline = freezed,
     Object? iconName = freezed,
     Object? assignedUserId = freezed,
   }) {
     return _then(_value.copyWith(
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      deadline: deadline == freezed
+      deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-      assignedUserId: assignedUserId == freezed
+      assignedUserId: freezed == assignedUserId
           ? _value.assignedUserId
           : assignedUserId // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -94,6 +97,7 @@ abstract class _$$_CreateTaskCommandCopyWith<$Res>
           $Res Function(_$_CreateTaskCommand) then) =
       __$$_CreateTaskCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String teamId,
       String title,
@@ -104,41 +108,39 @@ abstract class _$$_CreateTaskCommandCopyWith<$Res>
 
 /// @nodoc
 class __$$_CreateTaskCommandCopyWithImpl<$Res>
-    extends _$CreateTaskCommandCopyWithImpl<$Res>
+    extends _$CreateTaskCommandCopyWithImpl<$Res, _$_CreateTaskCommand>
     implements _$$_CreateTaskCommandCopyWith<$Res> {
   __$$_CreateTaskCommandCopyWithImpl(
       _$_CreateTaskCommand _value, $Res Function(_$_CreateTaskCommand) _then)
-      : super(_value, (v) => _then(v as _$_CreateTaskCommand));
+      : super(_value, _then);
 
-  @override
-  _$_CreateTaskCommand get _value => super._value as _$_CreateTaskCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? teamId = freezed,
-    Object? title = freezed,
+    Object? teamId = null,
+    Object? title = null,
     Object? deadline = freezed,
     Object? iconName = freezed,
     Object? assignedUserId = freezed,
   }) {
     return _then(_$_CreateTaskCommand(
-      teamId: teamId == freezed
+      teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      deadline: deadline == freezed
+      deadline: freezed == deadline
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      iconName: iconName == freezed
+      iconName: freezed == iconName
           ? _value.iconName
           : iconName // ignore: cast_nullable_to_non_nullable
               as String?,
-      assignedUserId: assignedUserId == freezed
+      assignedUserId: freezed == assignedUserId
           ? _value.assignedUserId
           : assignedUserId // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -181,26 +183,24 @@ class _$_CreateTaskCommand extends _CreateTaskCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CreateTaskCommand &&
-            const DeepCollectionEquality().equals(other.teamId, teamId) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.deadline, deadline) &&
-            const DeepCollectionEquality().equals(other.iconName, iconName) &&
-            const DeepCollectionEquality()
-                .equals(other.assignedUserId, assignedUserId));
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.deadline, deadline) ||
+                other.deadline == deadline) &&
+            (identical(other.iconName, iconName) ||
+                other.iconName == iconName) &&
+            (identical(other.assignedUserId, assignedUserId) ||
+                other.assignedUserId == assignedUserId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(teamId),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(deadline),
-      const DeepCollectionEquality().hash(iconName),
-      const DeepCollectionEquality().hash(assignedUserId));
+      runtimeType, teamId, title, deadline, iconName, assignedUserId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CreateTaskCommandCopyWith<_$_CreateTaskCommand> get copyWith =>
       __$$_CreateTaskCommandCopyWithImpl<_$_CreateTaskCommand>(
           this, _$identity);

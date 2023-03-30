@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'register_user_command.dart';
 
@@ -35,44 +35,47 @@ mixin _$RegisterUserCommand {
 abstract class $RegisterUserCommandCopyWith<$Res> {
   factory $RegisterUserCommandCopyWith(
           RegisterUserCommand value, $Res Function(RegisterUserCommand) then) =
-      _$RegisterUserCommandCopyWithImpl<$Res>;
+      _$RegisterUserCommandCopyWithImpl<$Res, RegisterUserCommand>;
+  @useResult
   $Res call({String uid, String displayName, String email, String? imageURL});
 }
 
 /// @nodoc
-class _$RegisterUserCommandCopyWithImpl<$Res>
+class _$RegisterUserCommandCopyWithImpl<$Res, $Val extends RegisterUserCommand>
     implements $RegisterUserCommandCopyWith<$Res> {
   _$RegisterUserCommandCopyWithImpl(this._value, this._then);
 
-  final RegisterUserCommand _value;
   // ignore: unused_field
-  final $Res Function(RegisterUserCommand) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? displayName = freezed,
-    Object? email = freezed,
+    Object? uid = null,
+    Object? displayName = null,
+    Object? email = null,
     Object? imageURL = freezed,
   }) {
     return _then(_value.copyWith(
-      uid: uid == freezed
+      uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: displayName == freezed
+      displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      imageURL: imageURL == freezed
+      imageURL: freezed == imageURL
           ? _value.imageURL
           : imageURL // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -83,41 +86,40 @@ abstract class _$$_RegisterUserCommandCopyWith<$Res>
           $Res Function(_$_RegisterUserCommand) then) =
       __$$_RegisterUserCommandCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String uid, String displayName, String email, String? imageURL});
 }
 
 /// @nodoc
 class __$$_RegisterUserCommandCopyWithImpl<$Res>
-    extends _$RegisterUserCommandCopyWithImpl<$Res>
+    extends _$RegisterUserCommandCopyWithImpl<$Res, _$_RegisterUserCommand>
     implements _$$_RegisterUserCommandCopyWith<$Res> {
   __$$_RegisterUserCommandCopyWithImpl(_$_RegisterUserCommand _value,
       $Res Function(_$_RegisterUserCommand) _then)
-      : super(_value, (v) => _then(v as _$_RegisterUserCommand));
+      : super(_value, _then);
 
-  @override
-  _$_RegisterUserCommand get _value => super._value as _$_RegisterUserCommand;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? displayName = freezed,
-    Object? email = freezed,
+    Object? uid = null,
+    Object? displayName = null,
+    Object? email = null,
     Object? imageURL = freezed,
   }) {
     return _then(_$_RegisterUserCommand(
-      uid: uid == freezed
+      uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: displayName == freezed
+      displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      imageURL: imageURL == freezed
+      imageURL: freezed == imageURL
           ? _value.imageURL
           : imageURL // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -157,24 +159,22 @@ class _$_RegisterUserCommand extends _RegisterUserCommand {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RegisterUserCommand &&
-            const DeepCollectionEquality().equals(other.uid, uid) &&
-            const DeepCollectionEquality()
-                .equals(other.displayName, displayName) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.imageURL, imageURL));
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.imageURL, imageURL) ||
+                other.imageURL == imageURL));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uid),
-      const DeepCollectionEquality().hash(displayName),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(imageURL));
+  int get hashCode =>
+      Object.hash(runtimeType, uid, displayName, email, imageURL);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_RegisterUserCommandCopyWith<_$_RegisterUserCommand> get copyWith =>
       __$$_RegisterUserCommandCopyWithImpl<_$_RegisterUserCommand>(
           this, _$identity);

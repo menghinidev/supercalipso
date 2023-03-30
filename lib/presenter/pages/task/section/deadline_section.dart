@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supercalipso/plugin/utils.dart';
 import 'package:supercalipso/presenter/components/picker/date_formfield_picker.dart';
-import 'package:supercalipso/presenter/pages/dashboard/sections/card_section.dart';
+import 'package:supercalipso/presenter/pages/home/dashboard/sections/card_section.dart';
 import 'package:supercalipso/presenter/pages/task/controller/task_page_state.dart';
 import 'package:supercalipso/presenter/theme/dimensions.dart';
 
