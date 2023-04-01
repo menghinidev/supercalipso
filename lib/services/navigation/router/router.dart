@@ -9,10 +9,9 @@ import 'package:supercalipso/services/navigation/routes.dart';
 
 part 'router.g.dart';
 
-@riverpod
-GlobalKey<NavigatorState> navigatorKey(NavigatorKeyRef ref) {
+final navigatorKeyProvider = Provider<GlobalKey<NavigatorState>>((ref) {
   return GlobalKey<NavigatorState>(debugLabel: 'routerKey');
-}
+});
 
 @riverpod
 GoRouter router(RouterRef ref) {

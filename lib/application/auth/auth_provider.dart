@@ -7,6 +7,7 @@ import 'package:supercalipso/data/provider/api/user/firebase_data_source.dart';
 import 'package:supercalipso/data/provider/api/user/i_user_data_source.dart';
 import 'package:supercalipso/data/provider/api/user/mocked_data_souce.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
 
 final userDataSouceProvider = Provider<IUserDataSource>((ref) {
   return EnvVariables.isMocked ? UserMockedDataSource() : UserFirestoreDataSource();
@@ -15,7 +16,8 @@ final userDataSouceProvider = Provider<IUserDataSource>((ref) {
 var authRepoProvider = Provider<AuthRepository>((ref) => AuthRepository(dataSource: ref.watch(userDataSouceProvider)));
 
 final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
-  return AuthStateNotifier(authRepository: ref.watch(authRepoProvider));
+  var dialogService = ref.watch(dialogServiceProvider);
+  return AuthStateNotifier(authRepository: ref.watch(authRepoProvider), dialogService: dialogService);
 });
 
 final getUserByIdProvider = FutureProvider.family<User, String>((ref, id) async {

@@ -6,46 +6,18 @@ part of 'router.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// ignore_for_file: avoid_private_typedef_functions, non_constant_identifier_names, subtype_of_sealed_class, invalid_use_of_internal_member, unused_element, constant_identifier_names, unnecessary_raw_strings, library_private_types_in_public_api
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-String _$navigatorKeyHash() => r'7bd1f55943f18110817c2bab36beb25190828e42';
-
-/// See also [navigatorKey].
-final navigatorKeyProvider = AutoDisposeProvider<GlobalKey<NavigatorState>>(
-  navigatorKey,
-  name: r'navigatorKeyProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$navigatorKeyHash,
-);
-typedef NavigatorKeyRef = AutoDisposeProviderRef<GlobalKey<NavigatorState>>;
-String _$routerHash() => r'f3e69dddb8e7805509cd15788319a498a928735a';
+String _$routerHash() => r'3f93b39ad35fc8776a9a0b24f6f4fa72170bb299';
 
 /// See also [router].
-final routerProvider = AutoDisposeProvider<GoRouter>(
+@ProviderFor(router)
+final routerProvider = AutoDisposeProvider<GoRouter>.internal(
   router,
   name: r'routerProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$routerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
 );
+
 typedef RouterRef = AutoDisposeProviderRef<GoRouter>;
+// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

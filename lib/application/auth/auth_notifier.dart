@@ -4,11 +4,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supercalipso/application/auth/authstate.dart';
 import 'package:supercalipso/data/repository/auth_repository.dart';
 import 'package:supercalipso/plugin/utils.dart';
+import 'package:supercalipso/services/modals/dialog/dialog_service.dart';
 
 class AuthStateNotifier extends StateNotifier<AuthState> {
   final AuthRepository authRepository;
+  final DialogService dialogService;
 
-  AuthStateNotifier({required this.authRepository}) : super(const AuthState.unauth());
+  AuthStateNotifier({
+    required this.authRepository,
+    required this.dialogService,
+  }) : super(const AuthState.unauth());
 
   Future<Response> silentLogin() async {
     var uid = firebase.FirebaseAuth.instance.currentUser?.uid;

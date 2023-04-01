@@ -36,7 +36,7 @@ class ConfirmDialog extends StatelessWidget {
             Expanded(
               child: PrimaryOutlinedButton(
                 text: noButtonText ?? 'Back',
-                onTap: () => Navigator.pop(context, DialogResponse(hasDismissed: true)),
+                onTap: () => Navigator.pop(context, false),
               ),
             ),
             Expanded(
@@ -44,7 +44,7 @@ class ConfirmDialog extends StatelessWidget {
                 padding: const EdgeInsets.only(left: Dimensions.mediumSize / 2.0),
                 child: PrimaryElevatedButton(
                   text: okButtonText ?? 'Confirm',
-                  onTap: () => Navigator.pop(context, DialogResponse(hasConfirmed: true)),
+                  onTap: () => Navigator.pop(context, true),
                 ),
               ),
             )
