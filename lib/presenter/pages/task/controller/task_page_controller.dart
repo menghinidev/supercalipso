@@ -98,12 +98,12 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
     if (actualState is EditingTaskPageState) {
       var isNew = initialTask == null;
       if (isNew) {
-        return await dialogService.showDialog(
-          dialog: const ConfirmDialog(
+        return await dialogService.showConfirmDialog(
+          dialogBuilder: (_) => const ConfirmDialog(
             title: 'Confirm',
             textBody: 'This task will be available inside your Team',
           ),
-          onConfirmed: (response) => taskService.createTask(
+          onConfirmed: () => taskService.createTask(
             title: actualState.builder.title!,
             assignedUserId: actualState.builder.assignedUserId,
             deadline: actualState.builder.deadline,
@@ -111,12 +111,12 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
           ),
         );
       } else {
-        return await dialogService.showDialog(
-          dialog: const ConfirmDialog(
+        return await dialogService.showConfirmDialog(
+          dialogBuilder: (_) => const ConfirmDialog(
             title: 'Confirm',
             textBody: 'This task will be changed',
           ),
-          onConfirmed: (response) => taskService.updateTask(
+          onConfirmed: () => taskService.updateTask(
             taskId: initialTask!.id,
             assignedUserId: actualState.builder.assignedUserId,
             deadline: actualState.builder.deadline,
@@ -131,8 +131,8 @@ class TaskPageControllerNotifier extends StateNotifier<TaskPageState> {
   Future delete() async {
     var id = state.on(defaultValue: () => null, onReading: (state) => state.task.id);
     if (id == null) return Future.value();
-    var dialogResponse = await dialogService.showDialog(
-      dialog: const ConfirmDialog(
+    var dialogResponse = await dialogService.showConfirmDialog(
+      dialogBuilder: (_) => const ConfirmDialog(
         title: 'Are you sure',
         textBody: 'This task will be deleted',
       ),

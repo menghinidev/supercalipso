@@ -14,10 +14,22 @@ class DialogService {
 
   DialogService(this.navKey);
 
-  Future showCustomDialog({required Widget Function(BuildContext context) dialogBuilder}) {
+  Future<T?> showCustomDialog<T>({required Widget Function(BuildContext context) dialogBuilder}) {
     var context = navKey.currentContext;
     if (context == null) return Future.value();
-    return showDialog(context: context, builder: dialogBuilder);
+    return showDialog<T>(context: context, builder: dialogBuilder);
+  }
+
+  Future showConfirmDialog({
+    required Widget Function(BuildContext context) dialogBuilder,
+    FutureOr Function()? onConfirmed,
+  }) async {
+    var context = navKey.currentContext;
+    if (context == null) return Future.value();
+    var confirm = await showDialog<bool>(context: context, builder: dialogBuilder);
+    if (confirm == null || !confirm) return null;
+    if (onConfirmed != null) await onConfirmed();
+    return confirm;
   }
 
   Future showErrorDialog({String? error}) => showCustomDialog(

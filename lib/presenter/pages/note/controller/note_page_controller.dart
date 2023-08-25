@@ -68,8 +68,8 @@ class NotePageNotifier extends StateNotifier<NotePageState> {
     var actualState = state;
     if (actualState is EditingNotePageState) {
       var isNew = initialNote == null;
-      var confirm = await dialogService.showDialog(
-        dialog: const ConfirmDialog(
+      var confirm = await dialogService.showCustomDialog(
+        dialogBuilder: (_) => const ConfirmDialog(
           title: 'Confirm',
           textBody: 'This note will be available inside your Team',
         ),
@@ -90,8 +90,8 @@ class NotePageNotifier extends StateNotifier<NotePageState> {
   Future delete() async {
     var id = state.on(defaultValue: () => null, onReading: (state) => state.note.id);
     if (id == null) return Future.value();
-    var dialogResponse = await dialogService.showDialog(
-      dialog: const ConfirmDialog(
+    var dialogResponse = await dialogService.showCustomDialog(
+      dialogBuilder: (_) => const ConfirmDialog(
         title: 'Are you sure',
         textBody: 'This note will be deleted',
       ),

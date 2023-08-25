@@ -124,8 +124,8 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
     var actualState = state;
     if (actualState is EditingEventPageState) {
       var isNew = initialEvent == null;
-      var confirm = await dialogService.showDialog(
-        dialog: const ConfirmDialog(
+      var confirm = await dialogService.showCustomDialog(
+        dialogBuilder: (_) => const ConfirmDialog(
           title: 'Confirm',
           textBody: 'This event will be available inside your Team',
         ),
@@ -155,8 +155,8 @@ class EventPageNotifier extends StateNotifier<EventPageState> {
   Future delete() async {
     var id = state.on(defaultValue: () => null, onReading: (state) => state.event.id);
     if (id == null) return Future.value();
-    var dialogResponse = await dialogService.showDialog(
-      dialog: const ConfirmDialog(
+    var dialogResponse = await dialogService.showCustomDialog(
+      dialogBuilder: (_) => const ConfirmDialog(
         title: 'Are you sure',
         textBody: 'This event will be deleted',
       ),
